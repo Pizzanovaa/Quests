@@ -1,24 +1,16 @@
 package net.botwithus.debug;
 
 
-
 import net.botwithus.internal.scripts.ScriptDefinition;
 import net.botwithus.rs3.events.impl.ServerTickedEvent;
 import net.botwithus.rs3.game.Client;
 import net.botwithus.rs3.game.Coordinate;
-import net.botwithus.rs3.game.js5.types.QuestType;
-import net.botwithus.rs3.game.js5.types.configs.ConfigManager;
-import net.botwithus.rs3.game.login.LoginManager;
 import net.botwithus.rs3.game.movement.Movement;
 import net.botwithus.rs3.game.movement.NavPath;
 import net.botwithus.rs3.game.movement.TraverseEvent;
-import net.botwithus.rs3.game.quest.Quest;
 import net.botwithus.rs3.game.scene.entities.characters.player.LocalPlayer;
-import net.botwithus.rs3.game.vars.VarManager;
 import net.botwithus.rs3.script.LoopingScript;
 import net.botwithus.rs3.script.config.ScriptConfig;
-
-import java.lang.foreign.VaList;
 
 import static net.botwithus.debug.Dialogs.pressDialog;
 
@@ -36,12 +28,6 @@ public class DebugScript extends LoopingScript {
         this.sgc = new DebugGraphicsContext(getConsole(), this);
         loopDelay = 200;
 
-       subscribe(ServerTickedEvent.class, ServerTickedEvent -> {
-           if(running) {
-               pressDialog();
-           }
-       });
-
         return super.initialize();
     }
 
@@ -55,46 +41,13 @@ public class DebugScript extends LoopingScript {
 
     }
 
-    public static Quest currentQuest = Quest.VIOLET_IS_BLUE;
+    public static Quest currentQuest = Quest.NECROMANCY_INTRO;
     public static boolean running = false;
 
 
     public void onDeactivation(){
         unsubscribeAll();
-        uninitialize();
     }
-
-    public void onActivation(){
-        initialize();
-    }
-
-
-
-    @Override
-    public void onLoop() {
-
-
-
-
-        if(!running){
-            return;
-
-        }
-
-        switch (currentQuest){
-            case VIOLET_IS_BLUE -> VioletIsBlue.quest2();
-            case COOKS_ASSITANT -> CooksAssitant.quest();
-            case NECROMANCY_INTRO -> Necromancy1.quest2();
-            case BLOOD_PACT -> BloodPact.quest();
-            case RESTLESS_GHOST -> RestlessGhost.quest();
-            default -> delay(100);
-        }
-
-
-
-    }
-
-
 
     static boolean moveTo(Coordinate location) {
         Dialogs.println("moveTo");
@@ -134,7 +87,41 @@ public class DebugScript extends LoopingScript {
                 return false;
             }
         }
-    }https://github.com/Pizzanovaa/Pizza_Quests.git
+    }
+
+
+
+    @Override
+    public void onLoop() {
+
+
+
+
+        if(!running){
+            return;
+
+        }
+
+        switch (currentQuest){
+            case VIOLET_IS_BLUE -> VioletIsBlue.quest2();
+            case COOKS_ASSITANT -> CooksAssitant.quest();
+            case NECROMANCY_INTRO -> Necromancy1.quest2();
+            case BLOOD_PACT -> BloodPact.quest();
+            case RESTLESS_GHOST -> RestlessGhost.quest();
+            default -> delay(100);
+        }
+
+
+
+    }
+
+    public void onActivation() {
+        subscribe(ServerTickedEvent.class, ServerTickedEvent -> {
+            if (running) {
+                pressDialog();
+            }
+        });
+    }
 
 
 

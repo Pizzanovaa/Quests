@@ -1,35 +1,24 @@
 package net.botwithus.debug;
 
-import net.botwithus.api.game.hud.Dialog;
 import net.botwithus.api.game.hud.inventories.Backpack;
 import net.botwithus.rs3.game.Area;
 import net.botwithus.rs3.game.Client;
 import net.botwithus.rs3.game.Coordinate;
-import net.botwithus.rs3.game.hud.interfaces.Interfaces;
 import net.botwithus.rs3.game.minimenu.MiniMenu;
-import net.botwithus.rs3.game.minimenu.actions.ComponentAction;
-import net.botwithus.rs3.game.minimenu.actions.WalkAction;
 import net.botwithus.rs3.game.movement.Movement;
-import net.botwithus.rs3.game.queries.builders.animations.SpotAnimationQuery;
 import net.botwithus.rs3.game.queries.builders.characters.NpcQuery;
-import net.botwithus.rs3.game.queries.builders.items.GroundItemQuery;
 import net.botwithus.rs3.game.queries.builders.objects.SceneObjectQuery;
-import net.botwithus.rs3.game.queries.results.EntityResultSet;
-import net.botwithus.rs3.game.scene.entities.animation.SpotAnimation;
 import net.botwithus.rs3.game.scene.entities.characters.npc.Npc;
-import net.botwithus.rs3.game.scene.entities.item.GroundItem;
 import net.botwithus.rs3.game.scene.entities.object.SceneObject;
 import net.botwithus.rs3.game.vars.VarManager;
 import net.botwithus.rs3.script.ScriptConsole;
 import net.botwithus.rs3.util.RandomGenerator;
 import net.botwithus.rs3.util.Regex;
 
-import java.sql.ResultSet;
 import java.util.regex.Pattern;
 
-import static net.botwithus.debug.Dialogs.*;
-import static net.botwithus.rs3.game.minimenu.actions.SelectableAction.SELECTABLE_COMPONENT;
-import static net.botwithus.rs3.game.minimenu.actions.SelectableAction.SELECT_OBJECT;
+import static net.botwithus.debug.Dialogs.isDialogOpen;
+import static net.botwithus.debug.Dialogs.println;
 import static net.botwithus.rs3.game.minimenu.actions.WalkAction.WALK;
 import static net.botwithus.rs3.script.Execution.delay;
 
@@ -156,7 +145,7 @@ public class VioletIsBlue {
                 SceneObject bed = SceneObjectQuery.newQuery().name("Bed").results().nearest();
                 if (bed != null) {
                     bed.interact("Look under");
-                    delay(3000);
+                    delay(RandomGenerator.nextInt(3000, 3800));
                 }
                 break;
             case 5: // toy lion
@@ -167,7 +156,7 @@ public class VioletIsBlue {
                 SceneObject drobe = SceneObjectQuery.newQuery().name("Wardrobe").results().nearest();
                 if (drobe != null) {
                     drobe.interact("Search");
-                    delay(3000);
+                    delay(RandomGenerator.nextInt(3000, 3800));
                 }
                 break;
             case 9: // Wood carving
@@ -177,7 +166,7 @@ public class VioletIsBlue {
                 SceneObject toybox = SceneObjectQuery.newQuery().name("Toybox").results().nearest();
                 if (toybox != null) {
                     toybox.interact("Search");
-                    delay(3000);
+                    delay(RandomGenerator.nextInt(3000, 3800));
 
                 }
                 break;
@@ -363,7 +352,7 @@ public class VioletIsBlue {
                 SceneObject bed = SceneObjectQuery.newQuery().name("Bed").results().nearest();
                 if (bed != null) {
                     bed.interact("Look under");
-                    delay(3000);
+                    delay(RandomGenerator.nextInt(3000, 3800));
                 }
                 break;
             case 5: // toy lion
@@ -374,7 +363,7 @@ public class VioletIsBlue {
                 SceneObject drobe = SceneObjectQuery.newQuery().name("Wardrobe").results().nearest();
                 if (drobe != null) {
                     drobe.interact("Search");
-                    delay(3000);
+                    delay(RandomGenerator.nextInt(3000, 3800));
                 }
                 break;
             case 9: // Wood carving
@@ -384,7 +373,7 @@ public class VioletIsBlue {
                 SceneObject toybox = SceneObjectQuery.newQuery().name("Toybox").results().nearest();
                 if (toybox != null) {
                     toybox.interact("Search");
-                    delay(3000);
+                    delay(RandomGenerator.nextInt(3000, 3800));
 
                 }
                 break;
