@@ -37,7 +37,8 @@ public class DebugScript extends LoopingScript {
         VIOLET_IS_BLUE,
         BLOOD_PACT,
         NECROMANCY_INTRO,
-        RESTLESS_GHOST;
+        RESTLESS_GHOST,
+        WHAT_LIES_BELOW;
 
     }
 
@@ -108,6 +109,7 @@ public class DebugScript extends LoopingScript {
             case NECROMANCY_INTRO -> Necromancy1.quest2();
             case BLOOD_PACT -> BloodPact.quest();
             case RESTLESS_GHOST -> RestlessGhost.quest();
+            case WHAT_LIES_BELOW -> WhatLiesBelow.quest();
             default -> delay(100);
         }
 

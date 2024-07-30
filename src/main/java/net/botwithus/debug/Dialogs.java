@@ -54,7 +54,7 @@ public class Dialogs {
                 Interfaces.isOpen(1251) ||
                 Interfaces.isOpen(847)/* ||
                 Interfaces.isOpen(955)*/){
-            println("interface open");
+            //println("interface open");
             return true;
         }
         return false;
@@ -127,10 +127,16 @@ public class Dialogs {
         FATHER_AERECK_SENT_ME(2, "Father Aereck sent me to talk to you."),
         A_GHOST_IS_HAUNTING(1, "A ghost is haunting his graveyard."),
         YEP_NOW_TELL_ME(1, "Yep. Now, tell me what the problem is."),
-        SKULL(1,"Put the skull in the coffin.");
+        SKULL(1,"Put the skull in the coffin."),
 
-
-
+        //WHAT LIES BELOW
+        HELLO_THERE(2,"Hello there!"),
+        SHALL_I_GET_THEM_BACK(3,"Shall I get them back for you?"),
+        BRING_IT_ON(1,"Bring it on!"),
+        GO_ON_THEN(1,"Go on, then!"),
+        YES_I_HAVE_A_LETTER_FOR_YOU(1,"Yes! I have a letter for you."),
+        RAT_BURGISS_SENT_ME(4,"Rat Burgiss sent me."),
+        I_HAVE_THE_THINGS_YOU_WANTED(1,"I have the things you wanted!");
         //8180
 
 

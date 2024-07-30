@@ -124,6 +124,8 @@ public class RestlessGhost {
         }
     }
 
+
+
     public static void talkToPriest() {
         Npc priest = NpcQuery.newQuery().name("Father Aereck").results().nearest();
         if (priest != null) {
