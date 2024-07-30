@@ -1,8 +1,10 @@
 package net.botwithus.debug;
 
 import net.botwithus.api.game.hud.inventories.Backpack;
-import net.botwithus.api.game.hud.inventories.BackpackInventory;
-import net.botwithus.rs3.game.*;
+import net.botwithus.rs3.game.Area;
+import net.botwithus.rs3.game.Client;
+import net.botwithus.rs3.game.Coordinate;
+import net.botwithus.rs3.game.Item;
 import net.botwithus.rs3.game.hud.interfaces.Component;
 import net.botwithus.rs3.game.hud.interfaces.Interfaces;
 import net.botwithus.rs3.game.minimenu.MiniMenu;
@@ -16,8 +18,6 @@ import net.botwithus.rs3.game.queries.builders.items.GroundItemQuery;
 import net.botwithus.rs3.game.queries.builders.items.InventoryItemQuery;
 import net.botwithus.rs3.game.queries.builders.objects.SceneObjectQuery;
 import net.botwithus.rs3.game.queries.results.EntityResultSet;
-import net.botwithus.rs3.game.queries.results.ResultSet;
-import net.botwithus.rs3.game.scene.entities.Entity;
 import net.botwithus.rs3.game.scene.entities.characters.npc.Npc;
 import net.botwithus.rs3.game.scene.entities.item.GroundItem;
 import net.botwithus.rs3.game.scene.entities.object.SceneObject;
@@ -97,8 +97,7 @@ public class WhatLiesBelow {
 
             switch (QuestVarp) {
                 case 10:
-                    if(Backpack.contains(11007))
-                    {
+                    if (Backpack.contains(11007)) {
                         if (startarea.contains(player)) {
                             talktoratburgiss();
 
@@ -106,39 +105,42 @@ public class WhatLiesBelow {
                             DebugScript.moveTo(startcord);
                         }
                     }
-                    if(!Backpack.contains(11007)) {
+                    if (!Backpack.contains(11007)) {
                         if (!outlawarea.contains(player)) {
                             DebugScript.moveTo(outlaw);
                         } else {
-                            if (!Client.getLocalPlayer().inCombat()) {
-                                Npc outlaw = NpcQuery.newQuery().name("Outlaw").results().first();
-                                GroundItem item = GroundItemQuery.newQuery().ids(11008).results().nearest();
-                                if (outlaw != null) {
-                                    if (!Client.getLocalPlayer().hasTarget() && outlawkiill < 7)
-                                        outlaw.interact("Attack");
-                                    delay(RandomGenerator.nextInt(600, 800));
-                                    outlawkiill++;
-                                }
-                                if (item != null && paperpick < 6) {
-                                    println(" Taking item" + item.interact("Take"));
-                                    delay(2000);
-                                    Item items = InventoryItemQuery.newQuery(773).ids(11008).results().stream().findFirst().orElse(null);
-                                    MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1, items.getSlot(), 106299403);
-                                    delay(RandomGenerator.nextInt(600, 800));
-                                    paperpick++;
-                                }
-                                if (paperpick == 5) {
-                                    Item backpackitem = InventoryItemQuery.newQuery(93).ids(11008).results().stream().findFirst().orElse(null);
-                                    Item targetitem = InventoryItemQuery.newQuery(93).name("Used folder").results().stream().findFirst().orElse(null);
-                                    if (backpackitem.getStackSize() >= 5) {
-                                        boolean itemselected = MiniMenu.interact(SelectableAction.SELECTABLE_COMPONENT.getType(), 0, backpackitem.getSlot(), 96534533);
-                                        if (itemselected)
-                                            MiniMenu.interact(SelectableAction.SELECTABLE_COMPONENT.getType(), 0, targetitem.getSlot(), 96534533);
+                            if (VarManager.getVarbitValue(10941) != 5) {//Amount of paper in folder.
+                                Npc outlaw = NpcQuery.newQuery().name("Outlaw").results().nearest();
+                                GroundItem item = GroundItemQuery.newQuery().ids(11008).results().nearest(); // Paper
+                                Item backpackitem = InventoryItemQuery.newQuery(93).ids(11008).results().first(); // Paper
+                                Item targetitem = InventoryItemQuery.newQuery(93).name("Used folder", "An empty folder").results().first();
 
+                                if (backpackitem != null && targetitem != null) { // Place paper into folder.
+                                    if (MiniMenu.interact(SelectableAction.SELECTABLE_COMPONENT.getType(), 0, backpackitem.getSlot(), 96534533)) {
+                                        delay(RandomGenerator.nextInt(200, 400));
+                                        MiniMenu.interact(SelectableAction.SELECT_COMPONENT_ITEM.getType(), 0, targetitem.getSlot(), 96534533);
+                                        delay(RandomGenerator.nextInt(200, 400));
+                                    }
+                                } else if (item != null) { // Take item off the ground.
+                                    println(" Taking item" + item.interact("Take"));
+                                    delay(RandomGenerator.nextInt(600, 1200));
+                                    if (Interfaces.isOpen(1622)) {
+                                        Item items = InventoryItemQuery.newQuery(773).ids(11008).results().first();
+                                        if (items != null) {
+                                            MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1, items.getSlot(), 106299403);
+                                            delay(RandomGenerator.nextInt(200, 400));
+                                            return;
+                                        }
+                                    }
+                                } else if (item == null) { // If no items on the ground kill outlaw.
+                                    if (outlaw != null) {
+                                        if (!Client.getLocalPlayer().hasTarget() || Client.getLocalPlayer().getTarget().getCurrentHealth() <= 1) {
+                                            outlaw.interact("Attack");
+                                            delay(RandomGenerator.nextInt(600, 800));
+                                            return;
+                                        }
                                     }
                                 }
-
-
                             }
                         }
                     }
@@ -155,90 +157,64 @@ public class WhatLiesBelow {
                 case 50:
                     if (!chaosalterarea.contains(player) && !(Client.getLocalPlayer().getCoordinate().getRegionId() == 9035)) {
                         DebugScript.moveTo(chaosalter);
-                    }
-                    else {
+                    } else {
                         SceneObject chaosruins = SceneObjectQuery.newQuery().name("Chaos ruins").option("Enter").results().first();
                         if (chaosruins != null) {
                             chaosruins.interact("Enter");
                             delay(RandomGenerator.nextInt(600, 800));
                         }
+                        ScriptConsole.println(player.getRegionId());
                         if (Client.getLocalPlayer().getCoordinate().getRegionId() == 9035 && !buttomladderarea.contains(player)) {
-                            SceneObject laddertop = SceneObjectQuery.newQuery().name("Ladder").hidden(false).option("Climb-down").results().first();
-                            if(laddertop !=null && player.getCoordinate().getZ() == 3)
-                            {
+                            SceneObject laddertop = SceneObjectQuery.newQuery().name("Ladder").hidden(false).option("Climb-down").results().nearest();
+                            if (laddertop != null && player.getCoordinate().getZ() == 3) {
                                 println(" 3 floor Climb down");
                                 laddertop.interact("Climb-down");
                                 Execution.delayUntil(3000, () -> !Client.getLocalPlayer().isMoving());
                                 delay(RandomGenerator.nextInt(1200, 2000));
-                            }
-                            if(laddertop !=null && player.getCoordinate().getZ() == 2)
-                            {
+                                return;
+                            } else if (laddertop != null && player.getCoordinate().getZ() == 2) {
                                 println(" 2 floor Climb down");
-                                //laddertop.interact("Climb-down ");
-                                laddertop.interact(ObjectAction.valueOf("Climb-down"));
-                                println("Options" + laddertop.getOptions());
-                                //laddertop.interact(ObjectAction.OBJECT1);
+                                laddertop.interact(ObjectAction.OBJECT1);
                                 Execution.delayUntil(3000, () -> !Client.getLocalPlayer().isMoving());
                                 delay(RandomGenerator.nextInt(1200, 2000));
-                            }
-                            if(laddertop !=null && player.getCoordinate().getZ() == 1)
-                            {
+                                return;
+                            } else if (laddertop != null && player.getCoordinate().getZ() == 1) {
                                 println(" 1 floor Climb down");
                                 laddertop.interact(ObjectAction.OBJECT1);
-                                //laddertop.interact("Climb-down");
                                 Execution.delayUntil(3000, () -> !Client.getLocalPlayer().isMoving());
                                 delay(RandomGenerator.nextInt(1200, 2000));
+                                return;
                             }
-                             /*if(!secondladderarea.contains(player) && topladderclimbdownarea.contains(player))
-                             {
-                                 DebugScript.moveTo(secondladder);
-                             }
-
-                             if(secondladderarea.contains(player))
-                             {
-                                 SceneObject secondfloor = SceneObjectQuery.newQuery().name("Ladder").id(38222).hidden(false).option("Climb-down").results().first();
-                                 if(secondfloor !=null)
-                                 {
-
-                                     secondfloor.interact("Climb-down");
-                                     Execution.delayUntil(3000, () -> !Client.getLocalPlayer().isMoving());
-                                     delay(RandomGenerator.nextInt(1200, 2000));
-                                 }
-                             }*/
                         }
-                            if(player.getCoordinate().getZ() ==0  && !chaosalterneararea.contains(player))
-                            {
-                                DebugScript.moveTo(chaosalternear);
-                            }
+                        if (player.getCoordinate().getZ() == 0 && !chaosalterneararea.contains(player)) {
+                            DebugScript.moveTo(chaosalternear);
+                        }
 
-                            if (Backpack.contains(11012) && chaosalterneararea.contains(player)) {
-                                SceneObject chaosatar = SceneObjectQuery.newQuery().name("Chaos altar").results().first();
-                                Item backpackitem = InventoryItemQuery.newQuery(93).ids(11012).results().stream().findFirst().orElse(null);
+                        if (Backpack.contains(11012) && chaosalterneararea.contains(player)) {
+                            SceneObject chaosatar = SceneObjectQuery.newQuery().name("Chaos altar").results().first();
+                            Item backpackitem = InventoryItemQuery.newQuery(93).ids(11012).results().stream().findFirst().orElse(null);
 
-                                boolean itemselected = MiniMenu.interact(SelectableAction.SELECTABLE_COMPONENT.getType(), 0, backpackitem.getSlot(), 96534533);
-                                if (itemselected) {
-                                    //MiniMenu.interact(SelectableAction.SELECT_TILE.getType(), 0, chaosatar.getCoordinate().getX(), chaosatar.getCoordinate().getY());
-                                    MiniMenu.interact(SelectableAction.SELECT_OBJECT.getType(),2487,chaosatar.getCoordinate().getX(), chaosatar.getCoordinate().getY());
-                                    delay(RandomGenerator.nextInt(800, 1200));
-                                }
+                            boolean itemselected = MiniMenu.interact(SelectableAction.SELECTABLE_COMPONENT.getType(), 0, backpackitem.getSlot(), 96534533);
+                            if (itemselected) {
+                                //MiniMenu.interact(SelectableAction.SELECT_TILE.getType(), 0, chaosatar.getCoordinate().getX(), chaosatar.getCoordinate().getY());
+                                MiniMenu.interact(SelectableAction.SELECT_OBJECT.getType(), 2487, chaosatar.getCoordinate().getX(), chaosatar.getCoordinate().getY());
+                                delay(RandomGenerator.nextInt(800, 1200));
                             }
+                        }
 
                     }
                     break;
                 case 55:
-                    if(Backpack.contains(11013))
-                    {
+                    if (Backpack.contains(11013)) {
                         if (surokmagisarea.contains(player)) {
                             surokmagis();
-
                         } else {
                             DebugScript.moveTo(surokmagis);
                         }
                     }
                     break;
                 case 60:
-                    if(Backpack.contains(11010))
-                    {
+                    if (Backpack.contains(11010)) {
                         if (startarea.contains(player)) {
                             talktoratburgiss();
 
@@ -248,12 +224,10 @@ public class WhatLiesBelow {
                     }
                     break;
                 case 80:
-                    if(zaffarea.contains(player))
-                    {
+                    if (zaffarea.contains(player)) {
                         talktozaff();
                         println("Varp" + QuestVarp);
-                    }else
-                    {
+                    } else {
                         DebugScript.moveTo(zaff);
                     }
                     break;
@@ -267,18 +241,15 @@ public class WhatLiesBelow {
                     break;
                 case 120:
                     Npc kingRoald = NpcQuery.newQuery().name("King Roald").results().first();
-                    if(kingRoald != null)
-                    {
+                    if (kingRoald != null) {
                         kingRoald.interact("Attack");
                         delay(RandomGenerator.nextInt(600, 800));
 
-                        if(kingRoald.getCurrentHealth() ==1)
-                        {
+                        if (kingRoald.getCurrentHealth() == 1) {
                             Item backpackitem = InventoryItemQuery.newQuery(93).ids(11014).results().stream().findFirst().orElse(null);
                             Component ratring = ComponentQuery.newQuery(1473).item(11014).results().stream().findFirst().orElse(null);
 
-                            if(ratring != null)
-                            {
+                            if (ratring != null) {
                                 ratring.interact("Summon");
                             }
                         }
@@ -291,17 +262,21 @@ public class WhatLiesBelow {
                     } else {
                         DebugScript.moveTo(startcord);
                     }
-                }
+                    break;
+                case 150:
+                    println("Quest complete!");
+                    break;
             }
         }
+    }
 
-        public static void talktoratburgiss () {
-            Npc npc = NpcQuery.newQuery().name("Rat Burgiss").results().first();
-            if (npc != null) {
-                println("Talk to" + npc.interact(NPCAction.NPC1));
-                delay(RandomGenerator.nextInt(1200, 1500));
-            }
+    public static void talktoratburgiss() {
+        Npc npc = NpcQuery.newQuery().name("Rat Burgiss").results().first();
+        if (npc != null) {
+            println("Talk to" + npc.interact(NPCAction.NPC1));
+            delay(RandomGenerator.nextInt(1200, 1500));
         }
+    }
 
     public static void surokmagis() {
         Npc npc = NpcQuery.newQuery().name("Surok Magis").results().first();
@@ -320,26 +295,23 @@ public class WhatLiesBelow {
     }
 
 
-        public void grounditem()
-        {
-            EntityResultSet<GroundItem> paper = GroundItemQuery.newQuery().results();
+    public void grounditem() {
+        EntityResultSet<GroundItem> paper = GroundItemQuery.newQuery().results();
 
-            if(!paper.isEmpty())
-            {
-                GroundItem papers = paper.random();
-                if(papers !=null)
-                {
-                    papers.interact("Take");
-                    Execution.delayUntil(2000, () -> Client.getLocalPlayer().isMoving());
+        if (!paper.isEmpty()) {
+            GroundItem papers = paper.random();
+            if (papers != null) {
+                papers.interact("Take");
+                Execution.delayUntil(2000, () -> Client.getLocalPlayer().isMoving());
 
 
-                }
             }
-
         }
 
-
     }
+
+
+}
 
 
 
