@@ -96,9 +96,6 @@ public class DebugScript extends LoopingScript {
     @Override
     public void onLoop() {
 
-
-
-
         if(!running){
             return;
 
