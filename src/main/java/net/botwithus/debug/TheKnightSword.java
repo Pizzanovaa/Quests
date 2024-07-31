@@ -3,20 +3,16 @@ package net.botwithus.debug;
 import net.botwithus.rs3.game.Area;
 import net.botwithus.rs3.game.Client;
 import net.botwithus.rs3.game.Coordinate;
-import net.botwithus.rs3.game.Item;
-import net.botwithus.rs3.game.hud.interfaces.Component;
 import net.botwithus.rs3.game.inventories.Backpack;
 import net.botwithus.rs3.game.minimenu.actions.NPCAction;
 import net.botwithus.rs3.game.movement.Movement;
 import net.botwithus.rs3.game.queries.builders.characters.NpcQuery;
-import net.botwithus.rs3.game.queries.builders.components.ComponentQuery;
 import net.botwithus.rs3.game.queries.builders.items.InventoryItemQuery;
 import net.botwithus.rs3.game.queries.builders.objects.SceneObjectQuery;
 import net.botwithus.rs3.game.quest.Quest;
 import net.botwithus.rs3.game.scene.entities.characters.npc.Npc;
 import net.botwithus.rs3.game.scene.entities.object.SceneObject;
 import net.botwithus.rs3.game.vars.VarManager;
-import net.botwithus.rs3.script.Execution;
 import net.botwithus.rs3.script.ScriptConsole;
 import net.botwithus.rs3.util.RandomGenerator;
 
@@ -74,29 +70,24 @@ public class TheKnightSword {
             switch (QuestVarp)
             {
 
-                case 2:
+                case 1:
                     if (!reldosarea.contains(player) && !Quest.byId(288).get().isComplete()) {
                         DebugScript.moveTo(reldo);
-                    }
-                    if(reladoconvo == 0 && reldosarea.contains(player) && !Quest.byId(288).get().isComplete())
-                    {
+                    } else if (reldosarea.contains(player)) {
                         reldo();
                     }
-                    else {
-                        if(!thurgosarea.contains(player))
-                        {
-                            DebugScript.moveTo(thurgo);
+                    break;
+                case 2:
 
-                        }
-                        else
-                        {
-                            thurgo();
-                        }
+                    if (!thurgosarea.contains(player)) {
+                        DebugScript.moveTo(thurgo);
+
+                    } else {
+                        thurgo();
                     }
                     break;
                 case 3:
-                    if(!thurgosarea.contains(player))
-                    {
+                    if (!thurgosarea.contains(player)) {
                         DebugScript.moveTo(thurgo);
                     }
                     else

@@ -72,6 +72,68 @@ public class Dialogs {
         }
     }
 
+    public static void pressDialog() {
+
+        if (Interfaces.isOpen(1188)) {
+            //Violetisblue dialog
+            if (VarManager.getVarbitValue(5326) == 25) {
+                int num = VarManager.getVarbitValue(5327);
+                switch (num) {
+                    case 1, 5, 9:
+                        dialog1188pick(1);
+                        break;
+                    case 2, 6, 10: // weapongizmo
+                        dialog1188pick(2);
+                        break;
+                    case 3, 11, 7: // empty jar
+                        dialog1188pick(3);
+                        break;
+                    case 4, 8, 12: // Yo-yo
+                        dialog1188pick(4);
+                        break;
+                }
+            }
+            dialog1188();
+        } else if (Interfaces.isOpen(1184)) {
+            if (Dialog.getText().contains("redberry pie. They REALLY like redberry pie.")) { // Knights sword endless chat from reldo
+                println("Found redberry pie msg..");
+                click1188.invokeExact(13, -1); // closes chat without the X option :D
+            }
+            MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 77594639);
+        } else if (Interfaces.isOpen(1191)) {
+            MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 78053391);
+        } else if (Interfaces.isOpen(1193)) {
+            click1193.invokeExact(16, -1);
+        } else if (Interfaces.isOpen(1500)) {
+            MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1, -1, 98304409); // accept
+        } else if (Interfaces.isOpen(1189)) {
+            MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 77922323);
+        } else if (Interfaces.isOpen(1186)) {
+            MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 77725704);
+        } else if (Interfaces.isOpen(720)) {
+            MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 47185921);
+        } else if (Interfaces.isOpen(1224)) {
+            MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1, -1, 80216108);
+        } else if (Interfaces.isOpen(1370)) {
+            MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 89784350);
+        } else if (Interfaces.isOpen(847)) {
+            MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 55509014);
+        } else if (isCLick()) {
+        }
+    }
+
+    public static Integer getDialogueNumber() {
+        List<String> options = Dialog.getOptions();
+        if (!options.isEmpty()) {
+            for (Dialogue dialogue : Dialogue.values()) {
+                if (options.contains(dialogue.getText())) {
+                    return dialogue.getNumber();
+                }
+            }
+        }
+        return -1;
+    }
+
     public static enum Dialogue {
 
         //LOST CITY
@@ -122,18 +184,19 @@ public class Dialogs {
         FATHER_AERECK_SENT_ME(2, "Father Aereck sent me to talk to you."),
         A_GHOST_IS_HAUNTING(1, "A ghost is haunting his graveyard."),
         YEP_NOW_TELL_ME(1, "Yep. Now, tell me what the problem is."),
-        SKULL(1,"Put the skull in the coffin."),
+        SKULL(1, "Put the skull in the coffin."),
 
         //WHAT LIES BELOW
-        HELLO_THERE(2,"Hello there!"),
-        SHALL_I_GET_THEM_BACK(3,"Shall I get them back for you?"),
-        BRING_IT_ON(1,"Bring it on!"),
-        GO_ON_THEN(1,"Go on, then!"),
-        YES_I_HAVE_A_LETTER_FOR_YOU(1,"Yes! I have a letter for you."),
-        RAT_BURGISS_SENT_ME(4,"Rat Burgiss sent me."),
-        I_HAVE_THE_THINGS_YOU_WANTED(1,"I have the things you wanted!"),
+        HELLO_THERE(2, "Hello there!"),
+        SHALL_I_GET_THEM_BACK(3, "Shall I get them back for you?"),
+        BRING_IT_ON(1, "Bring it on!"),
+        GO_ON_THEN(1, "Go on, then!"),
+        YES_I_HAVE_A_LETTER_FOR_YOU(1, "Yes! I have a letter for you."),
+        RAT_BURGISS_SENT_ME(4, "Rat Burgiss sent me."),
+        I_HAVE_THE_THINGS_YOU_WANTED(1, "I have the things you wanted!"),
 
         //The Knight's Sword
+        CLOSE(6, "redberry pie. They REALLY like redberry pie."),
         CHAT(1, "Chat"),
         ASK_LIFE(1, "And how is life as a squire?"),
         OFFER_SWORD(2, "I can make a new sword if you like..."),
@@ -159,64 +222,6 @@ public class Dialogs {
 
         public String getText() {
             return text;
-        }
-    }
-
-    public static Integer getDialogueNumber() {
-        List<String> options = Dialog.getOptions();
-        if (!options.isEmpty()) {
-            for (Dialogue dialogue : Dialogue.values()) {
-                if (options.contains(dialogue.getText())) {
-                    return dialogue.getNumber();
-                }
-            }
-        }
-        return -1;
-    }
-
-    public static void pressDialog() {
-
-        if (Interfaces.isOpen(1188)) {
-            //Violetisblue dialog
-            if (VarManager.getVarbitValue(5326) == 25) {
-                int num = VarManager.getVarbitValue(5327);
-                switch (num) {
-                    case 1, 5, 9:
-                        dialog1188pick(1);
-                        break;
-                    case 2, 6, 10: // weapongizmo
-                        dialog1188pick(2);
-                        break;
-                    case 3, 11, 7: // empty jar
-                        dialog1188pick(3);
-                        break;
-                    case 4, 8, 12: // Yo-yo
-                        dialog1188pick(4);
-                        break;
-                }
-            }
-            dialog1188();
-        } else if (Interfaces.isOpen(1184)) {
-            MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 77594639);
-        } else if (Interfaces.isOpen(1191)) {
-            MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 78053391);
-        } else if (Interfaces.isOpen(1193)) {
-            click1193.invokeExact(16, -1);
-        } else if (Interfaces.isOpen(1500)) {
-            MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1, -1, 98304409); // accept
-        } else if (Interfaces.isOpen(1189)) {
-            MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 77922323);
-        } else if (Interfaces.isOpen(1186)) {
-            MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 77725704);
-        } else if (Interfaces.isOpen(720)) {
-            MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 47185921);
-        } else if (Interfaces.isOpen(1224)) {
-            MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1, -1, 80216108);
-        } else if (Interfaces.isOpen(1370)) {
-            MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 89784350);
-        } else if(Interfaces.isOpen(847)){
-            MiniMenu.interact(ComponentAction.DIALOGUE.getType(),  0, -1, 55509014);
-        }else if(isCLick()){
         }
     }
 
