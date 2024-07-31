@@ -38,7 +38,8 @@ public class DebugScript extends LoopingScript {
         BLOOD_PACT,
         NECROMANCY_INTRO,
         RESTLESS_GHOST,
-        WHAT_LIES_BELOW;
+        WHAT_LIES_BELOW,
+        The_KNIIGHT_SWORD;
 
     }
 
@@ -110,6 +111,7 @@ public class DebugScript extends LoopingScript {
             case BLOOD_PACT -> BloodPact.quest();
             case RESTLESS_GHOST -> RestlessGhost.quest();
             case WHAT_LIES_BELOW -> WhatLiesBelow.quest();
+            case The_KNIIGHT_SWORD -> TheKnightSword.quest();
             default -> delay(100);
         }
 
