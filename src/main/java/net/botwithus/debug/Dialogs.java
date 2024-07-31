@@ -8,16 +8,12 @@ import net.botwithus.rs3.game.hud.interfaces.Interfaces;
 import net.botwithus.rs3.game.minimenu.MiniMenu;
 import net.botwithus.rs3.game.minimenu.actions.ComponentAction;
 import net.botwithus.rs3.game.queries.builders.components.ComponentQuery;
-import net.botwithus.rs3.game.queries.builders.objects.SceneObjectQuery;
-import net.botwithus.rs3.game.queries.builders.worlds.WorldQuery;
-import net.botwithus.rs3.game.scene.entities.object.SceneObject;
 import net.botwithus.rs3.game.vars.VarManager;
 import net.botwithus.rs3.script.ScriptConsole;
 
 import java.util.List;
 
 import static net.botwithus.rs3.game.cs2.layouts.Layout.INT;
-import static net.botwithus.rs3.script.Execution.delay;
 
 public class Dialogs {
 
@@ -54,7 +50,6 @@ public class Dialogs {
                 Interfaces.isOpen(1251) ||
                 Interfaces.isOpen(847)/* ||
                 Interfaces.isOpen(955)*/){
-            //println("interface open");
             return true;
         }
         return false;
@@ -147,6 +142,7 @@ public class Dialogs {
         OFFER_PIE(2, "Would you like some redberry pie?"),
         IMCANDO_DWARVES(3, "What do you know about the Imcando dwarves?");
         //8180
+
 
 
         private final int number;
