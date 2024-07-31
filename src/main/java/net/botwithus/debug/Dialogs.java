@@ -100,7 +100,21 @@ public class Dialogs {
                 click1188.invokeExact(13, -1); // closes chat without the X option :D
             }
             MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 77594639);
-        } else if (Interfaces.isOpen(1191)) {
+        }
+        else if (Interfaces.isOpen(1184)) {
+            if (Dialog.getText().contains("If I were you I would talk to Baraek, the fur trader in the ")) {
+                println("Baraek into Located"); // Shield of Arrav
+                click1188.invokeExact(13, -1); // closes chat without the X option :D
+            }
+            MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 77594639);
+        }
+        else if (Interfaces.isOpen(1184)) {
+            if (Dialog.getText().contains("The ruthless and notorious Black Arm ")) {
+                println("Talk to Charlie"); // Shield of Arrav
+                click1188.invokeExact(13, -1); // closes chat without the X option :D
+            }
+            MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 77594639);
+        }else if (Interfaces.isOpen(1191)) {
             MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 78053391);
         } else if (Interfaces.isOpen(1193)) {
             click1193.invokeExact(16, -1);
@@ -118,7 +132,11 @@ public class Dialogs {
             MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 89784350);
         } else if (Interfaces.isOpen(847)) {
             MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 55509014);
-        } else if (isCLick()) {
+        }else if (Interfaces.isOpen(960)) {
+            MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 62914638);}  // read Book
+        else if (Interfaces.isOpen(960)) {
+            MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1, -1, 62914639);}  // Close Open Book
+        else if (isCLick()) {
         }
     }
 
@@ -203,8 +221,30 @@ public class Dialogs {
         ASK_DWARVES(1, "So would these dwarves make another one?"),
         SOMETHING_ELSE(2, "Something else."),
         OFFER_PIE(2, "Would you like some redberry pie?"),
-        IMCANDO_DWARVES(3, "What do you know about the Imcando dwarves?");
+        IMCANDO_DWARVES(3, "What do you know about the Imcando dwarves?"),
         //8180
+
+        ///Shield of Arrav
+        SEARCH_QUEST(1, "I'm in search of a quest."),
+        FIND_PHOENIX_GANG(1, "Do you know where I can find the Phoenix Gang?"),
+        PHOENIX_GANG_LOCATION(1, "Can you tell me where I can find the Phoenix Gang?"),
+        OFFER_GOLD(1, "Alright. Have 10 gold coins."),
+        THANKS(2, "Thanks!"),
+        IDENTIFY(1, "I know who you are!"),
+        OFFER_SERVICES(1, "I'd like to offer you my services."),
+        FIND_BLACK_ARM_GANG(3, "Do you know where I can find the Black Arm Gang hideout?"),
+        FAIR_PAYMENT(1, "That sounds fair. (Pay 10 gold.)"),
+        HEARD_BLACK_ARM_GANG(1, "I've heard you're the Black Arm Gang."),
+        HEARD_BLACK_ARM_GANG1(5, "Get a job!"),
+        ANY_OPTION(1, "I'd rather not reveal my sources."),
+        BECOME_MEMBER(1, "I want to become a member of your gang."),
+        GIVE_TRY(1, "Well, you can give me a try, can't you?"),
+        GET_CROSSBOWS(1, "No problem. I'll get you two phoenix crossbows."),
+        //TALK_SHIELD_OF_ARRAV(1, "Talk about the Shield of Arrav."),
+        TALK_SHIELD_OF_ARRAV_2(2, "Talk about the Shield of Arrav."),
+        FAREWELL(3, "Farewell.");
+
+        ///Family Crest
 
 
 
