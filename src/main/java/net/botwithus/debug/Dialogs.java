@@ -131,7 +131,18 @@ public class Dialogs {
         GO_ON_THEN(1,"Go on, then!"),
         YES_I_HAVE_A_LETTER_FOR_YOU(1,"Yes! I have a letter for you."),
         RAT_BURGISS_SENT_ME(4,"Rat Burgiss sent me."),
-        I_HAVE_THE_THINGS_YOU_WANTED(1,"I have the things you wanted!");
+        I_HAVE_THE_THINGS_YOU_WANTED(1,"I have the things you wanted!"),
+
+        //The Knight's Sword
+        CHAT(1, "Chat"),
+        ASK_LIFE(1, "And how is life as a squire?"),
+        OFFER_SWORD(2, "I can make a new sword if you like..."),
+        ASK_DWARVES(1, "So would these dwarves make another one?"),
+        SOMETHING_ELSE(2, "Something else."),
+        OFFER_PIE(2, "Would you like some redberry pie?"),
+        IMCANDO_DWARVES(3, "What do you know about the Imcando dwarves?");
+        //8180
+
 
 
         private final int number;
