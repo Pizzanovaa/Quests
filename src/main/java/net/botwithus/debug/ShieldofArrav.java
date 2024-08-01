@@ -159,8 +159,7 @@ public class ShieldofArrav {
                         }
                         else if(Backpack.contains(761))
                         {
-                            if(!phoneixgangarea.contains(player))
-                            {
+                            if (!phoneixgangarea.contains(player)) {
                                 DebugScript.moveTo(phoneixgang);
                             } else {
                                 Straven();
@@ -223,13 +222,11 @@ public class ShieldofArrav {
                             SceneObject cuboard = SceneObjectQuery.newQuery().name("Cupboard").hidden(false).results().nearest();
                             if (cuboard != null) {
                                 cuboard.interact("Open");
-                            delay(RandomGenerator.nextInt(600, 800));
-                            cuboard.interact("Search");
-                            delay(RandomGenerator.nextInt(600, 800));
-                        }
-                        }
-                        else if( Backpack.contains(765) && Backpack.contains(763))
-                        {
+                                delay(RandomGenerator.nextInt(600, 800));
+                                cuboard.interact("Search");
+                                delay(RandomGenerator.nextInt(600, 800));
+                            }
+                        } else if (Backpack.contains(765) && Backpack.contains(763)) {
                             Item backpackitem = InventoryItemQuery.newQuery(93).ids(763).results().first(); // Paper
                             Item targetitem = InventoryItemQuery.newQuery(93).ids(765).results().first();
 

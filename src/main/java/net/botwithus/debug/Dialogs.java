@@ -137,11 +137,23 @@ public class Dialogs {
     }
 
     public static Integer getDialogueNumber() {
+        ScriptConsole.println(Dialog.getOptions());
         List<String> options = Dialog.getOptions();
         if (!options.isEmpty()) {
             for (Dialogue dialogue : Dialogue.values()) {
                 if (options.contains(dialogue.getText())) {
-                    return dialogue.getNumber();
+                    int size = options.size();
+                    int option = 0;
+
+                    for (int i = 0; i < size; ++i) {
+                        if (((String) options.get(i)).contains(dialogue.getText())) {
+                            ScriptConsole.println("Interacting with option: " + dialogue.getText());
+                            option = i;
+                            break;
+                        }
+                    }
+
+                    return option;
                 }
             }
         }
