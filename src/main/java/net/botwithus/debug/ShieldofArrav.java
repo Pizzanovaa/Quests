@@ -162,16 +162,15 @@ public class ShieldofArrav {
                             if(!phoneixgangarea.contains(player))
                             {
                                 DebugScript.moveTo(phoneixgang);
-                            }
-                            else
-                            {
+                            } else {
                                 Straven();
                             }
                         }
                     }
                     break;
                 case 6:
-                    if(charlietalk ==0) {
+                    int QuestVarp2 = VarManager.getVarpValue(2739);
+                    if (QuestVarp2 == 0) {
                         if (!weaponrackpharea.contains(player) && !Backpack.contains(763) && khatrinetalk == 0) {
                             DebugScript.moveTo(weaponrackph);
                         } else if (!Backpack.contains(763) && weaponrackpharea.contains(player)) {
@@ -207,33 +206,23 @@ public class ShieldofArrav {
                             } else if (resultbow.size() >= 2 && charlietalk < 1) {
                                 if (!charliearea.contains(player)) {
                                     DebugScript.moveTo(charlie);
-                                } else if (charlietalk < 1) {
-                                    charlietalk = 1;
+                                } else {
                                     charlie();
                                 }
                             }
                         }
-                    } else if (charlietalk >= 1 && khatrinetalk ==0 && !Backpack.contains(11164)) {
-                            if (!Katrinearea.contains(player)) {
-                                DebugScript.moveTo(Katrine);
-                            } else {
-
-                                khatrinetalk = 1;
-                                Katrine();
-                            }
-                        }
-
-                    else if(khatrinetalk >=1 && !Backpack.contains(11164))
-                    {
-                        if (!Katrinecuparea.contains(player))
-                        {
+                    } else if ((QuestVarp2 == 1 || QuestVarp2 == 2) && !Backpack.contains(11164)) {
+                        if (!Katrinearea.contains(player)) {
+                            DebugScript.moveTo(Katrine);
+                        } else
+                            Katrine();
+                    } else if (QuestVarp2 == 3 && !Backpack.contains(11164)) {
+                        if (!Katrinecuparea.contains(player)) {
                             DebugScript.moveTo(Katrinecup);
-                        }
-                        else if(!Backpack.contains(765)) {
-                        SceneObject cuboard = SceneObjectQuery.newQuery().name("Cupboard").hidden(false).results().nearest();
-                        if(cuboard !=null)
-                        {
-                            cuboard.interact("Open");
+                        } else if (!Backpack.contains(765)) {
+                            SceneObject cuboard = SceneObjectQuery.newQuery().name("Cupboard").hidden(false).results().nearest();
+                            if (cuboard != null) {
+                                cuboard.interact("Open");
                             delay(RandomGenerator.nextInt(600, 800));
                             cuboard.interact("Search");
                             delay(RandomGenerator.nextInt(600, 800));

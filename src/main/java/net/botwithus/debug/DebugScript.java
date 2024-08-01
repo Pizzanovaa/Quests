@@ -112,7 +112,7 @@ public class DebugScript extends LoopingScript {
             case WHAT_LIES_BELOW -> WhatLiesBelow.quest();
             case The_KNIIGHT_SWORD -> TheKnightSword.quest();
             case SHIELD_OF_ARRAV -> ShieldofArrav.quest();
-            case FAMILY_CREST -> FamilyCrest.quest();
+            //case FAMILY_CREST -> FamilyCrest.quest();
             default -> delay(100);
         }
 
