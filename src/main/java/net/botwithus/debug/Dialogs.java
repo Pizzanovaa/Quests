@@ -92,29 +92,24 @@ public class Dialogs {
                         dialog1188pick(4);
                         break;
                 }
+            } else {
+                dialog1188();
             }
-            dialog1188();
         } else if (Interfaces.isOpen(1184)) {
+            ScriptConsole.println(Dialog.getText());
             if (Dialog.getText().contains("redberry pie. They REALLY like redberry pie.")) { // Knights sword endless chat from reldo
                 println("Found redberry pie msg..");
                 click1188.invokeExact(13, -1); // closes chat without the X option :D
-            }
-            MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 77594639);
-        }
-        else if (Interfaces.isOpen(1184)) {
-            if (Dialog.getText().contains("If I were you I would talk to Baraek, the fur trader in the ")) {
+            } else if (Dialog.getText().contains("If I were you I would talk to Baraek,")) {
                 println("Baraek into Located"); // Shield of Arrav
                 click1188.invokeExact(13, -1); // closes chat without the X option :D
-            }
-            MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 77594639);
-        }
-        else if (Interfaces.isOpen(1184)) {
-            if (Dialog.getText().contains("The ruthless and notorious Black Arm ")) {
+            } else if (Dialog.getText().contains("The ruthless and notorious Black Arm ")) {
                 println("Talk to Charlie"); // Shield of Arrav
                 click1188.invokeExact(13, -1); // closes chat without the X option :D
+            } else {
+                MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 77594639);
             }
-            MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 77594639);
-        }else if (Interfaces.isOpen(1191)) {
+        } else if (Interfaces.isOpen(1191)) {
             MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 78053391);
         } else if (Interfaces.isOpen(1193)) {
             click1193.invokeExact(16, -1);
@@ -133,19 +128,32 @@ public class Dialogs {
         } else if (Interfaces.isOpen(847)) {
             MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 55509014);
         }else if (Interfaces.isOpen(960)) {
-            MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 62914638);}  // read Book
-        else if (Interfaces.isOpen(960)) {
-            MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1, -1, 62914639);}  // Close Open Book
+            MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 62914638);
+        }  // read Book
+        /*else if (Interfaces.isOpen(960)) { // Unreachable and worked without anyway :P
+            MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1, -1, 62914639);} */ // Close Open Book
         else if (isCLick()) {
         }
     }
 
     public static Integer getDialogueNumber() {
+        ScriptConsole.println(Dialog.getOptions());
         List<String> options = Dialog.getOptions();
         if (!options.isEmpty()) {
             for (Dialogue dialogue : Dialogue.values()) {
                 if (options.contains(dialogue.getText())) {
-                    return dialogue.getNumber();
+                    int size = options.size();
+                    int option = 0;
+
+                    for (int i = 0; i < size; ++i) {
+                        if (((String) options.get(i)).contains(dialogue.getText())) {
+                            ScriptConsole.println("Interacting with option: " + dialogue.getText());
+                            option = i;
+                            break;
+                        }
+                    }
+
+                    return option;
                 }
             }
         }
@@ -241,11 +249,10 @@ public class Dialogs {
         GIVE_TRY(1, "Well, you can give me a try, can't you?"),
         GET_CROSSBOWS(1, "No problem. I'll get you two phoenix crossbows."),
         //TALK_SHIELD_OF_ARRAV(1, "Talk about the Shield of Arrav."),
-        TALK_SHIELD_OF_ARRAV_2(2, "Talk about the Shield of Arrav."),
+        TALK_SHIELD_OF_ARRAV_2(1, "Talk about the Shield of Arrav."),
         FAREWELL(3, "Farewell.");
 
         ///Family Crest
-
 
 
         private final int number;
