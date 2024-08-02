@@ -2,6 +2,8 @@ package net.botwithus.debug;
 
 
 import net.botwithus.internal.scripts.ScriptDefinition;
+import net.botwithus.rs3.events.EventBus;
+import net.botwithus.rs3.events.Subscription;
 import net.botwithus.rs3.events.impl.ServerTickedEvent;
 import net.botwithus.rs3.game.Client;
 import net.botwithus.rs3.game.Coordinate;
@@ -31,39 +33,12 @@ public class DebugScript extends LoopingScript {
         return super.initialize();
     }
 
-    @Override
-    public void onLoop() {
-
-        if(!running){
-            return;
-
-        }
-
-        switch (currentQuest){
-            case VIOLET_IS_BLUE -> VioletIsBlue.quest2();
-            case COOKS_ASSITANT -> CooksAssitant.quest();
-            case NECROMANCY_INTRO -> Necromancy1.quest2();
-            case BLOOD_PACT -> BloodPact.quest();
-            case RESTLESS_GHOST -> RestlessGhost.quest();
-            case WHAT_LIES_BELOW -> WhatLiesBelow.quest();
-            case The_KNIIGHT_SWORD -> TheKnightSword.quest();
-            case SHIELD_OF_ARRAV -> ShieldofArrav.quest();
-            case STOLEN_HEARTS -> StolenHearts.quest2();
-            //case FAMILY_CREST -> FamilyCrest.quest();
-            default -> delay(100);
-        }
-
-
-
-    }
+    private Subscription<ServerTickedEvent> subscription;
 
     public static Quest currentQuest = Quest.NECROMANCY_INTRO;
     public static boolean running = false;
 
 
-    public void onDeactivation(){
-        unsubscribeAll();
-    }
 
     static boolean moveTo(Coordinate location) {
         Dialogs.println("moveTo");
@@ -105,32 +80,76 @@ public class DebugScript extends LoopingScript {
         }
     }
 
+    @Override
+    public void onLoop() {
 
 
-    public static enum Quest {
+        if(!running){
+            return;
 
-        COOKS_ASSITANT,
-        VIOLET_IS_BLUE,
-        BLOOD_PACT,
-        NECROMANCY_INTRO,
-        RESTLESS_GHOST,
-        WHAT_LIES_BELOW,
-        The_KNIIGHT_SWORD,
-        SHIELD_OF_ARRAV,
-        FAMILY_CREST,
-        STOLEN_HEARTS;
+        }
+
+
+        switch (currentQuest){
+            case VIOLET_IS_BLUE -> VioletIsBlue.quest2();
+            case COOKS_ASSISTANT -> CooksAssitant.quest();
+            case NECROMANCY_INTRO -> Necromancy1.quest2();
+            case BLOOD_PACT -> BloodPact.quest();
+            case RESTLESS_GHOST -> RestlessGhost.quest();
+            case WHAT_LIES_BELOW -> WhatLiesBelow.quest();
+            case THE_KNIGHT_SWORD -> TheKnightSword.quest();
+            case SHIELD_OF_ARRAV -> ShieldofArrav.quest();
+            case STOLEN_HEARTS -> StolenHearts.quest2();
+            //case FAMILY_CREST -> FamilyCrest.quest();
+            default -> delay(100);
+        }
+
+
 
     }
-
 
     public void onActivation() {
-        subscribe(ServerTickedEvent.class, ServerTickedEvent -> {
-            if (running) {
-                pressDialog();
-            }
-        });
+
+        subscription = EventBus.EVENT_BUS.subscribe(this, ServerTickedEvent.class, this::onServerTickedEvent);
+
     }
 
+    private void onServerTickedEvent(ServerTickedEvent event) {
+        if (running) {
+            pressDialog();
+        }
+    }
+
+    public void onDeactivation() {
+        if (subscription != null) {
+            EventBus.EVENT_BUS.unsubscribe(subscription);
+            subscription = null;
+        }
+    }
+
+    public enum Quest {
+        COOKS_ASSISTANT(257),
+        VIOLET_IS_BLUE(400),
+        BLOOD_PACT(335),
+        NECROMANCY_INTRO(493),
+        RESTLESS_GHOST(27),
+        WHAT_LIES_BELOW(144),
+        THE_KNIGHT_SWORD(261),
+        SHIELD_OF_ARRAV(63),
+        FAMILY_CREST(116),
+        STOLEN_HEARTS(355),
+        TEST(135);
+
+        private final int questId;
+
+        Quest(int questId) {
+            this.questId = questId;
+        }
+
+        public int getQuestId() {
+            return questId;
+        }
+    }
 
 
 }
