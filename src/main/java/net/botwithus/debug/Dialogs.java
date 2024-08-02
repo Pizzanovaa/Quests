@@ -49,7 +49,8 @@ public class Dialogs {
                 Interfaces.isOpen(1370) ||
                 Interfaces.isOpen(1251) ||
                 Interfaces.isOpen(847) ||
-                Interfaces.isOpen(1187)/* ||
+                Interfaces.isOpen(1187) ||
+                VarManager.getVarbitValue(21222) == 1/* ||
                 Interfaces.isOpen(955)*/) {
             return true;
         }
@@ -61,15 +62,15 @@ public class Dialogs {
         int number = num;
         int option = 1;
         switch (number) {
-            case 1 -> option = 16;
-            case 2 -> option = 17;
-            case 3 -> option = 18;
-            case 4 -> option = 19;
-            case 5 -> option = 20;
+            case 1 -> option = 77856776;
+            case 2 -> option = 77856781;
+            case 3 -> option = 77856786;
+            case 4 -> option = 77856791;
+            case 5 -> option = 77856796;
             default -> option = -1; // Optional: handle cases not covered above
         }
         if (option != -1) {
-            click1188.invokeExact(option, -1);
+            MiniMenu.interact(16, 0, -1, option);
         }
     }
 
@@ -130,7 +131,7 @@ public class Dialogs {
             MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 89784350);
         } else if (Interfaces.isOpen(847)) {
             MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 55509014);
-        }else if (Interfaces.isOpen(960)) {
+        } else if (Interfaces.isOpen(960)) {
             MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 62914638);
         }  // read Book
         /*else if (Interfaces.isOpen(960)) { // Unreachable and worked without anyway :P
@@ -164,6 +165,16 @@ public class Dialogs {
         return -1;
     }
 
+    public static boolean isCLick() {
+        Component thing = ComponentQuery.newQuery(955).componentIndex(18).subComponentIndex(-1).results().first();
+        if (thing != null) {
+
+            return true;
+        }
+        println("null");
+        return false;
+    }
+
     public static enum Dialogue {
 
         //LOST CITY
@@ -193,17 +204,16 @@ public class Dialogs {
         BREAK_THE_DOOR_DOWN(3, "Break the door down."),
         TO_GO_ON_AN_ADVENTURE(1, "To go on an adventure."),
         YOUVE_CAPTURED_A_HUMAN_GIRL(1, "YOU'VE CAPTURED A HUMAN GIRL!"),
-        CRAFT_LOGS(1, "Craft the logs?"),
         USEFUL(1, "Do you have anything useful?"),
-        HEAD(1, "Pick a head!"),
+        HEAD(1, "Happy face."),
         YES(1, "Yes!"),
 
         //BLOODPACT
-        HANDLE(4,"I can handle this."),
-        YES_NOW_DIE(3,"Yes. Now die!"),
-        TIME_DIE(2,"Time for you to die!"),
-        GOANYWAY(1,"Go downstairs anyway."),
-        NIGHTMARE(4,"I'm your worst nightmare, Zamorakian scum!"),
+        HANDLE(4, "I can handle this."),
+        YES_NOW_DIE(3, "Yes. Now die!"),
+        TIME_DIE(2, "Time for you to die!"),
+        GOANYWAY(1, "Go downstairs anyway."),
+        NIGHTMARE(4, "I'm your worst nightmare, Zamorakian scum!"),
         WHAT_HELP_DO_YOU_NEED(1, "What help do you need?"),
         ILL_HELP_YOU(1, "I'll help you."),
         YES_RESCUE_ILONA(1, "Yes, rescue Ilona."),
@@ -288,16 +298,6 @@ public class Dialogs {
         public String getText() {
             return text;
         }
-    }
-
-    public static boolean isCLick(){
-        Component thing = ComponentQuery.newQuery(955).componentIndex(18).subComponentIndex(-1).results().first();
-        if(thing != null){
-
-            return true;
-        }
-        println("null");
-        return false;
     }
 
 

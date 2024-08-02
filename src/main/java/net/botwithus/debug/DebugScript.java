@@ -99,7 +99,8 @@ public class DebugScript extends LoopingScript {
             case WHAT_LIES_BELOW -> WhatLiesBelow.quest();
             case THE_KNIGHT_SWORD -> TheKnightSword.quest(); // Nav stuck on agilty req
             case SHIELD_OF_ARRAV -> ShieldofArrav.quest(); //Nav stuck on stairs down after collecting shield.
-            case STOLEN_HEARTS -> StolenHearts.quest2(); //Requires manual play for last steps and seems to be crashy...
+            case STOLEN_HEARTS ->
+                    StolenHearts.quest2(); //Requires manual play for diamond idol and seems to be crashy...
             //case FAMILY_CREST -> FamilyCrest.quest();
             default -> delay(100);
         }

@@ -52,6 +52,7 @@ public class ShieldofArrav {
     static Coordinate Katrinecup = new Coordinate(3186, 3389, 1);
     static Area.Circular Katrinecuparea = new Area.Circular(Katrinecup, 10);
     static Coordinate kingroald = new Coordinate(3221, 3474, 0);
+    static Coordinate VarrockLoad = new Coordinate(3213, 3376, 0);
     static Area.Circular kingroaldarea = new Area.Circular(kingroald, 10);
 
     static Coordinate bookcasecord = new Coordinate(3212,3493,0);
@@ -239,17 +240,19 @@ public class ShieldofArrav {
                         }
                         }
                     }
-                        else if( Backpack.contains(11164))
-                        {
-                            if (!kingroaldarea.contains(player))
-                            {
+                        else if( Backpack.contains(11164)) {
+                        if (Katrinecuparea.contains(player)) {
+                            DebugScript.moveTo(VarrockLoad);
+                            return;
+                        } else {
+                            if (!kingroaldarea.contains(player)) {
                                 DebugScript.moveTo(kingroald);
-                            }else
-                            {
+                            } else {
                                 kingRoald();
                             }
-
                         }
+
+                    }
 
                     println("Varp" + QuestVarp);
                     break;

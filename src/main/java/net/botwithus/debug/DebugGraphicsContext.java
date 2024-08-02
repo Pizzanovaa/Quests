@@ -32,6 +32,10 @@ public class DebugGraphicsContext extends ScriptGraphicsContext {
     }
 
     NativeInteger quest = new NativeInteger(0);
+    private Quest previousQuest;
+    private String requiredItemsText = "";
+    private String skillRequirementsText = "";
+    private String progressVarbitsText = "";
 
     @Override
     public void drawSettings() {
@@ -43,115 +47,128 @@ public class DebugGraphicsContext extends ScriptGraphicsContext {
             ImGui.SetItemWidth(200);
             ImGui.Combo("Quest", quest, questNames);
             currentQuest = Quest.values()[quest.get()];
-
-
-            ImGui.Separator();
-            QuestType questType = ConfigManager.getQuestType(currentQuest.getQuestId());
-
-
-            // Display required items
-            ImGui.Text("Required Items:");
-            if (questType != null) {
-                String param = (String) questType.params().get(7815);
-                if (param != null) {
-                    ImGui.Text(param);
-                } else {
-                    ImGui.Text("None.");
-                }
+            if (ImGui.Button("Refresh Info")) {
+                previousQuest = Quest.TEST;
             }
-            ImGui.Separator();
-            // Retrieve and display skill requirements
-            ImGui.Text("Skill Requirements:");
-            if (questType != null) {
-                int[][] requirements = questType.skillRequirments();
-                if (requirements != null && requirements.length > 0) {
-                    for (int[] skill : requirements) {
-                        if (skill.length == 2) {
-                            int skillId = skill[0];
-                            int level = skill[1];
-                            String skillString = String.valueOf(Skills.byId(skillId));
-                            ImGui.Text("Skill: " + skillString + ", Level: " + level);
-                        } else {
-                            ImGui.Text("Invalid skill requirement format.");
-                        }
+            // Check if the selected quest has changed
+            if (previousQuest != currentQuest) {
+                previousQuest = currentQuest; // Update the previous quest
+
+                QuestType questType = ConfigManager.getQuestType(currentQuest.getQuestId());
+
+                // Update required items text
+                StringBuilder requiredItemsBuilder = new StringBuilder("Required Items:\n");
+                if (questType != null) {
+                    String param = (String) questType.params().get(7815);
+                    if (param != null) {
+                        requiredItemsBuilder.append(param);
+                    } else {
+                        requiredItemsBuilder.append("None.");
                     }
                 } else {
-                    ImGui.Text("None.");
+                    requiredItemsBuilder.append("N/A");
                 }
-                ImGui.Separator();
+                requiredItemsText = requiredItemsBuilder.toString();
 
-                // Retrieve and display progress varbits
-                int[][] varbits = questType.progressVarbits();
-                if (varbits != null && varbits.length > 0) {
-                    for (int[] varbit : varbits) {
-                        if (varbit.length == 3) {
-                            int varbitId = varbit[0];
-                            int value = varbit[1];
-                            int value2 = varbit[2];
-
-                            int currentVarbitValue = VarManager.getVarbitValue(varbitId);
-                            String progressStatus;
-                            if (currentVarbitValue < value) {
-                                ImGui.PushStyleColor(0, 1.0f, 0.0f, 0.0f, 1.0f);
-                                progressStatus = "Uncompleted";
-                            } else if (currentVarbitValue < value2) {
-                                ImGui.PushStyleColor(0, 0.0f, 0.5f, 0.0f, 1.0f);
-                                progressStatus = "In progress";
+                // Update skill requirements text
+                StringBuilder skillRequirementsBuilder = new StringBuilder("Skill Requirements:\n");
+                if (questType != null) {
+                    int[][] requirements = questType.skillRequirments();
+                    if (requirements != null && requirements.length > 0) {
+                        for (int[] skill : requirements) {
+                            if (skill.length == 2) {
+                                int skillId = skill[0];
+                                int level = skill[1];
+                                String skillString = String.valueOf(Skills.byId(skillId));
+                                skillRequirementsBuilder.append("Skill: ").append(skillString).append(", Level: ").append(level).append("\n");
                             } else {
-                                ImGui.PushStyleColor(0, 0.0f, 1.0f, 0.0f, 1.0f);
-                                progressStatus = "Completed";
-                            }
-
-                            ImGui.Text(progressStatus);
-                            ImGui.PopStyleColor(1);
-
-                            ImGui.Text("Varbit ID: " + varbitId + ", Start: " + value + ", Finish: " + value2);
-                            ImGui.Text("Quest Step: " + currentVarbitValue);
-                        } else {
-                            ImGui.Text("Invalid progress varbit format.");
-                        }
-                    }
-                } else {
-                    int[][] Varps = questType.progressVarps();
-                    if (Varps != null && Varps.length > 0) {
-                        for (int[] varp : Varps) {
-                            if (varp.length == 3) {
-                                int varpId = varp[0];
-                                int value = varp[1];
-                                int value2 = varp[2];
-
-                                int currentvarpValue = VarManager.getVarpValue(varpId);
-                                String progressStatus;
-                                if (currentvarpValue < value) {
-                                    ImGui.PushStyleColor(0, 1.0f, 0.0f, 0.0f, 1.0f);
-                                    progressStatus = "Uncompleted";
-                                } else if (currentvarpValue < value2) {
-                                    ImGui.PushStyleColor(0, 0.0f, 0.5f, 0.0f, 1.0f);
-                                    progressStatus = "In progress";
-                                } else {
-                                    ImGui.PushStyleColor(0, 0.0f, 1.0f, 0.0f, 1.0f);
-                                    progressStatus = "Completed";
-                                }
-
-
-                                ImGui.Text(progressStatus);
-                                ImGui.PopStyleColor(1);
-
-                                ImGui.Text("Varp ID: " + varpId + ", Start: " + value + ", Finish: " + value2);
-                                ImGui.Text("Quest Step: " + currentvarpValue);
-                            } else {
-                                ImGui.Text("Invalid progress varp format.");
+                                skillRequirementsBuilder.append("Invalid skill requirement format.\n");
                             }
                         }
                     } else {
-                        ImGui.Text("N/A");
+                        skillRequirementsBuilder.append("None.");
                     }
+                } else {
+                    skillRequirementsBuilder.append("N/A");
                 }
-            } else {
-                ImGui.Text("N/A");
-            }
-            ImGui.Separator();
+                skillRequirementsText = skillRequirementsBuilder.toString();
 
+                // Update progress varbits text
+                StringBuilder progressVarbitsBuilder = new StringBuilder("Progress Varbits:\n");
+                if (questType != null) {
+                    int[][] varbits = questType.progressVarbits();
+                    if (varbits != null && varbits.length > 0) {
+                        for (int[] varbit : varbits) {
+                            if (varbit.length == 3) {
+                                int varbitId = varbit[0];
+                                int value = varbit[1];
+                                int value2 = varbit[2];
+
+                                int currentVarbitValue = VarManager.getVarbitValue(varbitId);
+                                String progressStatus;
+                                if (currentVarbitValue < value) {
+                                    progressStatus = "Uncompleted";
+                                } else if (currentVarbitValue < value2) {
+                                    progressStatus = "In progress";
+                                } else {
+                                    progressStatus = "Completed";
+                                }
+
+                                progressVarbitsBuilder.append("Status: ").append(progressStatus)
+                                        .append(", Varbit ID: ").append(varbitId)
+                                        .append(", Start: ").append(value)
+                                        .append(", Finish: ").append(value2)
+                                        .append(", Current: ").append(currentVarbitValue).append("\n");
+                            } else {
+                                progressVarbitsBuilder.append("Invalid progress varbit format.\n");
+                            }
+                        }
+                    } else {
+                        int[][] Varps = questType.progressVarps();
+                        if (Varps != null && Varps.length > 0) {
+                            for (int[] varp : Varps) {
+                                if (varp.length == 3) {
+                                    int varpId = varp[0];
+                                    int value = varp[1];
+                                    int value2 = varp[2];
+
+                                    int currentvarpValue = VarManager.getVarpValue(varpId);
+                                    String progressStatus;
+                                    if (currentvarpValue < value) {
+                                        progressStatus = "Uncompleted";
+                                    } else if (currentvarpValue < value2) {
+                                        progressStatus = "In progress";
+                                    } else {
+                                        progressStatus = "Completed";
+                                    }
+
+                                    progressVarbitsBuilder.append("Status: ").append(progressStatus)
+                                            .append(", Varp ID: ").append(varpId)
+                                            .append(", Start: ").append(value)
+                                            .append(", Finish: ").append(value2)
+                                            .append(", Current: ").append(currentvarpValue).append("\n");
+                                } else {
+                                    progressVarbitsBuilder.append("Invalid progress varp format.\n");
+                                }
+                            }
+                        } else {
+                            progressVarbitsBuilder.append("N/A");
+                        }
+                    }
+                } else {
+                    progressVarbitsBuilder.append("N/A");
+                }
+                progressVarbitsText = progressVarbitsBuilder.toString();
+            }
+
+            // Display texts
+            ImGui.Separator();
+            ImGui.Text(requiredItemsText);
+            ImGui.Separator();
+            ImGui.Text(skillRequirementsText);
+            ImGui.Separator();
+            ImGui.Text(progressVarbitsText);
+            ImGui.Separator();
 
             ImGui.EndTabItem();
         }

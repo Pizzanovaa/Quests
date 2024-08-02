@@ -383,7 +383,7 @@ public class StolenHearts {
                             bricks.interact("Climb up");
                             delay(RandomGenerator.nextInt(600, 800));
                         }
-                    } else if (step16area.contains(player)) {
+                    } else {
                         SceneObject skylight = SceneObjectQuery.newQuery().name("Skylight").results().nearest();
                         if (skylight != null) {
                             skylight.interact("Break in");
