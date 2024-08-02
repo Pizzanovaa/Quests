@@ -31,17 +31,29 @@ public class DebugScript extends LoopingScript {
         return super.initialize();
     }
 
-    public static enum Quest {
+    @Override
+    public void onLoop() {
 
-        COOKS_ASSITANT,
-        VIOLET_IS_BLUE,
-        BLOOD_PACT,
-        NECROMANCY_INTRO,
-        RESTLESS_GHOST,
-        WHAT_LIES_BELOW,
-        The_KNIIGHT_SWORD,
-        SHIELD_OF_ARRAV,
-        FAMILY_CREST;
+        if(!running){
+            return;
+
+        }
+
+        switch (currentQuest){
+            case VIOLET_IS_BLUE -> VioletIsBlue.quest2();
+            case COOKS_ASSITANT -> CooksAssitant.quest();
+            case NECROMANCY_INTRO -> Necromancy1.quest2();
+            case BLOOD_PACT -> BloodPact.quest();
+            case RESTLESS_GHOST -> RestlessGhost.quest();
+            case WHAT_LIES_BELOW -> WhatLiesBelow.quest();
+            case The_KNIIGHT_SWORD -> TheKnightSword.quest();
+            case SHIELD_OF_ARRAV -> ShieldofArrav.quest();
+            case STOLEN_HEARTS -> StolenHearts.quest2();
+            //case FAMILY_CREST -> FamilyCrest.quest();
+            default -> delay(100);
+        }
+
+
 
     }
 
@@ -95,30 +107,21 @@ public class DebugScript extends LoopingScript {
 
 
 
-    @Override
-    public void onLoop() {
+    public static enum Quest {
 
-        if(!running){
-            return;
-
-        }
-
-        switch (currentQuest){
-            case VIOLET_IS_BLUE -> VioletIsBlue.quest2();
-            case COOKS_ASSITANT -> CooksAssitant.quest();
-            case NECROMANCY_INTRO -> Necromancy1.quest2();
-            case BLOOD_PACT -> BloodPact.quest();
-            case RESTLESS_GHOST -> RestlessGhost.quest();
-            case WHAT_LIES_BELOW -> WhatLiesBelow.quest();
-            case The_KNIIGHT_SWORD -> TheKnightSword.quest();
-            case SHIELD_OF_ARRAV -> ShieldofArrav.quest();
-            //case FAMILY_CREST -> FamilyCrest.quest();
-            default -> delay(100);
-        }
-
-
+        COOKS_ASSITANT,
+        VIOLET_IS_BLUE,
+        BLOOD_PACT,
+        NECROMANCY_INTRO,
+        RESTLESS_GHOST,
+        WHAT_LIES_BELOW,
+        The_KNIIGHT_SWORD,
+        SHIELD_OF_ARRAV,
+        FAMILY_CREST,
+        STOLEN_HEARTS;
 
     }
+
 
     public void onActivation() {
         subscribe(ServerTickedEvent.class, ServerTickedEvent -> {

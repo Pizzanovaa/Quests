@@ -48,8 +48,9 @@ public class Dialogs {
                 Interfaces.isOpen(720) ||
                 Interfaces.isOpen(1370) ||
                 Interfaces.isOpen(1251) ||
-                Interfaces.isOpen(847)/* ||
-                Interfaces.isOpen(955)*/){
+                Interfaces.isOpen(847) ||
+                Interfaces.isOpen(1187)/* ||
+                Interfaces.isOpen(955)*/) {
             return true;
         }
         return false;
@@ -109,6 +110,8 @@ public class Dialogs {
             } else {
                 MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 77594639);
             }
+        } else if (Interfaces.isOpen(1187)) {
+            MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 77791252);
         } else if (Interfaces.isOpen(1191)) {
             MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 78053391);
         } else if (Interfaces.isOpen(1193)) {
@@ -147,11 +150,12 @@ public class Dialogs {
 
                     for (int i = 0; i < size; ++i) {
                         if (((String) options.get(i)).contains(dialogue.getText())) {
-                            ScriptConsole.println("Interacting with option: " + dialogue.getText());
+                            ScriptConsole.println("Interacting with option: " + dialogue.getText() + " Option: " + i);
                             option = i;
                             break;
                         }
                     }
+
 
                     return option;
                 }
@@ -250,8 +254,22 @@ public class Dialogs {
         GET_CROSSBOWS(1, "No problem. I'll get you two phoenix crossbows."),
         //TALK_SHIELD_OF_ARRAV(1, "Talk about the Shield of Arrav."),
         TALK_SHIELD_OF_ARRAV_2(1, "Talk about the Shield of Arrav."),
-        FAREWELL(3, "Farewell.");
+        FAREWELL(3, "Farewell."),
 
+        /// Stolen Hearts
+        LET_ME_IN(3, "Let me in or I'll poke your eyes out!"),
+        TELL_ME_JOBS(1, "Tell me what jobs you have in the works."),
+        HOW_FIND_HQ(1, "How do we find the HQ?"),
+        LOCK_UP(4, "I'll lock you up and throw away the key."),
+        FIND_EASILY(3, "We'll find them easily enough ourselves."),
+        TAKE_PRIDE(3, "What will you take pride in while locked up?"),
+        CLEAR(1, "Crystal clear."),
+        CARRY(1, "Carry their goods home and case the joint."),
+        DIG(1, "Dig a tunnel."),
+        LACKEY(1, "Have my lackeys work them over..."),
+        YESSR(1, "Yes."),
+        BACK(1, "I'll be back soon."),
+        PASSCODE(1, "Scheherazade.");
         ///Family Crest
 
 
