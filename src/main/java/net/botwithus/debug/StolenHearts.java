@@ -73,6 +73,10 @@ public class StolenHearts {
         int QuestVarp = VarManager.getVarbitValue(11870);
         player = Client.getLocalPlayer().getServerCoordinate();
 
+        if (VarManager.getVarbitValue(21222) == 1) {
+            ScriptConsole.println("Cutscene");
+            return;
+        }
         if (isDialogOpen()) {
             return;
         }
@@ -180,7 +184,11 @@ public class StolenHearts {
                     }
                     break;
                 case 35, 40:
-                    talkToOzan();
+                    Npc Khrum = NpcQuery.newQuery().name("Khnum").results().nearest();
+                    if (Khrum != null) {
+                        Khrum.interact("Talk to");
+                        delay(RandomGenerator.nextInt(600, 800));
+                    }
                     break;
                 case 45:
                     Npc nerc = NpcQuery.newQuery().name("Mercenary Joe").results().nearest();
