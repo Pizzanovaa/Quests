@@ -1,11 +1,11 @@
 package net.botwithus.debug;
 
-import net.botwithus.rs3.game.vars.VarManager;
 import net.botwithus.rs3.imgui.ImGui;
 import net.botwithus.rs3.imgui.ImGuiWindowFlag;
 import net.botwithus.rs3.imgui.NativeInteger;
 import net.botwithus.rs3.script.ScriptConsole;
 import net.botwithus.rs3.script.ScriptGraphicsContext;
+
 import static net.botwithus.debug.DebugScript.*;
 
 
