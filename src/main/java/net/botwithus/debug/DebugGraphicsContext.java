@@ -6,7 +6,6 @@ import net.botwithus.rs3.game.skills.Skills;
 import net.botwithus.rs3.game.vars.VarManager;
 import net.botwithus.rs3.imgui.ImGui;
 import net.botwithus.rs3.imgui.ImGuiWindowFlag;
-import net.botwithus.rs3.imgui.NativeInteger;
 import net.botwithus.rs3.script.ScriptConsole;
 import net.botwithus.rs3.script.ScriptGraphicsContext;
 
@@ -31,7 +30,7 @@ public class DebugGraphicsContext extends ScriptGraphicsContext {
         }
     }
 
-    NativeInteger quest = new NativeInteger(0);
+    int quest = 0;
     private Quest previousQuest;
     private String requiredItemsText = "";
     private String skillRequirementsText = "";
@@ -46,7 +45,7 @@ public class DebugGraphicsContext extends ScriptGraphicsContext {
             ImGui.SameLine();
             ImGui.SetItemWidth(200);
             ImGui.Combo("Quest", quest, questNames);
-            currentQuest = Quest.values()[quest.get()];
+            currentQuest = Quest.values()[quest];
             if (ImGui.Button("Refresh Info")) {
                 previousQuest = Quest.TEST;
             }
