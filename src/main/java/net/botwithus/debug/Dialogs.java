@@ -13,6 +13,7 @@ import net.botwithus.rs3.script.ScriptConsole;
 
 import java.util.List;
 
+import static net.botwithus.debug.DebugScript.currentQuest;
 import static net.botwithus.rs3.game.cs2.layouts.Layout.INT;
 
 public class Dialogs {
@@ -46,10 +47,12 @@ public class Dialogs {
                 Interfaces.isOpen(1189) ||
                 Interfaces.isOpen(1186) ||
                 Interfaces.isOpen(720) ||
-                Interfaces.isOpen(1370) ||
+                (Interfaces.isOpen(1370) && currentQuest == DebugScript.Quest.NECROMANCY_INTRO) ||
                 Interfaces.isOpen(1251) ||
-                Interfaces.isOpen(847)/* ||
-                Interfaces.isOpen(955)*/){
+                Interfaces.isOpen(847) ||
+                Interfaces.isOpen(1187) ||
+                VarManager.getVarbitValue(21222) == 1/* ||
+                Interfaces.isOpen(955)*/) {
             return true;
         }
         return false;
@@ -60,15 +63,15 @@ public class Dialogs {
         int number = num;
         int option = 1;
         switch (number) {
-            case 1 -> option = 16;
-            case 2 -> option = 17;
-            case 3 -> option = 18;
-            case 4 -> option = 19;
-            case 5 -> option = 20;
+            case 1 -> option = 77856776;
+            case 2 -> option = 77856781;
+            case 3 -> option = 77856786;
+            case 4 -> option = 77856791;
+            case 5 -> option = 77856796;
             default -> option = -1; // Optional: handle cases not covered above
         }
         if (option != -1) {
-            click1188.invokeExact(option, -1);
+            MiniMenu.interact(16, 0, -1, option);
         }
     }
 
@@ -109,6 +112,8 @@ public class Dialogs {
             } else {
                 MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 77594639);
             }
+        } else if (Interfaces.isOpen(1187)) {
+            MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 77791252);
         } else if (Interfaces.isOpen(1191)) {
             MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 78053391);
         } else if (Interfaces.isOpen(1193)) {
@@ -123,11 +128,11 @@ public class Dialogs {
             MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 47185921);
         } else if (Interfaces.isOpen(1224)) {
             MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1, -1, 80216108);
-        } else if (Interfaces.isOpen(1370)) {
+        } else if (Interfaces.isOpen(1370) && currentQuest == DebugScript.Quest.NECROMANCY_INTRO) {
             MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 89784350);
         } else if (Interfaces.isOpen(847)) {
             MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 55509014);
-        }else if (Interfaces.isOpen(960)) {
+        } else if (Interfaces.isOpen(960)) {
             MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 62914638);
         }  // read Book
         /*else if (Interfaces.isOpen(960)) { // Unreachable and worked without anyway :P
@@ -147,17 +152,28 @@ public class Dialogs {
 
                     for (int i = 0; i < size; ++i) {
                         if (((String) options.get(i)).contains(dialogue.getText())) {
-                            ScriptConsole.println("Interacting with option: " + dialogue.getText());
+                            ScriptConsole.println("Interacting with option: " + dialogue.getText() + " Option: " + i);
                             option = i;
                             break;
                         }
                     }
+
 
                     return option;
                 }
             }
         }
         return -1;
+    }
+
+    public static boolean isCLick() {
+        Component thing = ComponentQuery.newQuery(955).componentIndex(18).subComponentIndex(-1).results().first();
+        if (thing != null) {
+
+            return true;
+        }
+        println("null");
+        return false;
     }
 
     public static enum Dialogue {
@@ -189,17 +205,16 @@ public class Dialogs {
         BREAK_THE_DOOR_DOWN(3, "Break the door down."),
         TO_GO_ON_AN_ADVENTURE(1, "To go on an adventure."),
         YOUVE_CAPTURED_A_HUMAN_GIRL(1, "YOU'VE CAPTURED A HUMAN GIRL!"),
-        CRAFT_LOGS(1, "Craft the logs?"),
         USEFUL(1, "Do you have anything useful?"),
-        HEAD(1, "Pick a head!"),
+        HEAD(1, "Happy face."),
         YES(1, "Yes!"),
 
         //BLOODPACT
-        HANDLE(4,"I can handle this."),
-        YES_NOW_DIE(3,"Yes. Now die!"),
-        TIME_DIE(2,"Time for you to die!"),
-        GOANYWAY(1,"Go downstairs anyway."),
-        NIGHTMARE(4,"I'm your worst nightmare, Zamorakian scum!"),
+        HANDLE(4, "I can handle this."),
+        YES_NOW_DIE(3, "Yes. Now die!"),
+        TIME_DIE(2, "Time for you to die!"),
+        GOANYWAY(1, "Go downstairs anyway."),
+        NIGHTMARE(4, "I'm your worst nightmare, Zamorakian scum!"),
         WHAT_HELP_DO_YOU_NEED(1, "What help do you need?"),
         ILL_HELP_YOU(1, "I'll help you."),
         YES_RESCUE_ILONA(1, "Yes, rescue Ilona."),
@@ -250,10 +265,33 @@ public class Dialogs {
         GET_CROSSBOWS(1, "No problem. I'll get you two phoenix crossbows."),
         //TALK_SHIELD_OF_ARRAV(1, "Talk about the Shield of Arrav."),
         TALK_SHIELD_OF_ARRAV_2(1, "Talk about the Shield of Arrav."),
-        FAREWELL(3, "Farewell.");
+        FAREWELL(3, "Farewell."),
 
+        /// Stolen Hearts
+        LET_ME_IN(3, "Let me in or I'll poke your eyes out!"),
+        TELL_ME_JOBS(1, "Tell me what jobs you have in the works."),
+        HOW_FIND_HQ(1, "How do we find the HQ?"),
+        LOCK_UP(4, "I'll lock you up and throw away the key."),
+        FIND_EASILY(3, "We'll find them easily enough ourselves."),
+        TAKE_PRIDE(3, "What will you take pride in while locked up?"),
+        CLEAR(1, "Crystal clear."),
+        CARRY(1, "Carry their goods home and case the joint."),
+        DIG(1, "Dig a tunnel."),
+        LACKEY(1, "Have my lackeys work them over..."),
+        YESSR(1, "Yes."),
+        BACK(1, "I'll be back soon."),
+        PASSCODE(1, "Scheherazade."),
         ///Family Crest
+        /// THE GOLEM
+        OPEN_PORTAL(1, "How do I open the portal?"),
+        STATUETTE_UZER(3, "I'm looking for a statuette recovered from the city of Uzer."),
+        OPEN_ELDER_DEMON_PORTAL(1, "I want to open a portal to the lair of an elder-demon."),
+        LETTER_IN_DESERT(3, "I found a letter in the desert with your name on."),
 
+
+        ///Rune Mythos
+        //YES("Yes."),
+        IM_GOOD_WHATS_NEXT(4,"I'm good. What's next?");
 
         private final int number;
         private final String text;
@@ -270,16 +308,6 @@ public class Dialogs {
         public String getText() {
             return text;
         }
-    }
-
-    public static boolean isCLick(){
-        Component thing = ComponentQuery.newQuery(955).componentIndex(18).subComponentIndex(-1).results().first();
-        if(thing != null){
-
-            return true;
-        }
-        println("null");
-        return false;
     }
 
 
