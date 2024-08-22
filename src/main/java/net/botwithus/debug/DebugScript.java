@@ -99,8 +99,9 @@ public class DebugScript extends LoopingScript {
             case WHAT_LIES_BELOW -> WhatLiesBelow.quest();
             case THE_KNIGHT_SWORD -> TheKnightSword.quest(); // Nav stuck on agilty req
             case SHIELD_OF_ARRAV -> ShieldofArrav.quest(); //Nav stuck on stairs down after collecting shield.
-            case STOLEN_HEARTS ->
-                    StolenHearts.quest2(); //Requires manual play for diamond idol and seems to be crashy...
+            case STOLEN_HEARTS -> StolenHearts.quest2(); //Requires manual play for diamond idol and seems to be crashy...
+            case THE_GOLEM -> TheGolem.quest();
+            case RUNE_MYTHOS ->RuneMythos.quest();
             //case FAMILY_CREST -> FamilyCrest.quest();
             default -> delay(100);
         }
@@ -139,6 +140,8 @@ public class DebugScript extends LoopingScript {
         SHIELD_OF_ARRAV(63),
         FAMILY_CREST(116),
         STOLEN_HEARTS(355),
+        THE_GOLEM(286),
+        RUNE_MYTHOS(494),
         TEST(135);
 
         private final int questId;

@@ -13,6 +13,7 @@ import net.botwithus.rs3.script.ScriptConsole;
 
 import java.util.List;
 
+import static net.botwithus.debug.DebugScript.currentQuest;
 import static net.botwithus.rs3.game.cs2.layouts.Layout.INT;
 
 public class Dialogs {
@@ -46,7 +47,7 @@ public class Dialogs {
                 Interfaces.isOpen(1189) ||
                 Interfaces.isOpen(1186) ||
                 Interfaces.isOpen(720) ||
-                Interfaces.isOpen(1370) ||
+                (Interfaces.isOpen(1370) && currentQuest == DebugScript.Quest.NECROMANCY_INTRO) ||
                 Interfaces.isOpen(1251) ||
                 Interfaces.isOpen(847) ||
                 Interfaces.isOpen(1187) ||
@@ -127,7 +128,7 @@ public class Dialogs {
             MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 47185921);
         } else if (Interfaces.isOpen(1224)) {
             MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1, -1, 80216108);
-        } else if (Interfaces.isOpen(1370)) {
+        } else if (Interfaces.isOpen(1370) && currentQuest == DebugScript.Quest.NECROMANCY_INTRO) {
             MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 89784350);
         } else if (Interfaces.isOpen(847)) {
             MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 55509014);
@@ -279,9 +280,20 @@ public class Dialogs {
         LACKEY(1, "Have my lackeys work them over..."),
         YESSR(1, "Yes."),
         BACK(1, "I'll be back soon."),
-        PASSCODE(1, "Scheherazade.");
-        ///Family Crest
+        PASSCODE(1, "Scheherazade."),
 
+        ///Family Crest
+      
+        /// THE GOLEM
+        OPEN_PORTAL(1, "How do I open the portal?"),
+        STATUETTE_UZER(3, "I'm looking for a statuette recovered from the city of Uzer."),
+        OPEN_ELDER_DEMON_PORTAL(1, "I want to open a portal to the lair of an elder-demon."),
+        LETTER_IN_DESERT(3, "I found a letter in the desert with your name on."),
+
+
+        ///Rune Mythos
+        //YES("Yes."),
+        IM_GOOD_WHATS_NEXT(4,"I'm good. What's next?");
 
         private final int number;
         private final String text;
