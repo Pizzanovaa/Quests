@@ -2,7 +2,6 @@ package net.botwithus.debug;
 
 
 import net.botwithus.api.game.hud.Dialog;
-import net.botwithus.rs3.game.cs2.ScriptBuilder;
 import net.botwithus.rs3.game.hud.interfaces.Component;
 import net.botwithus.rs3.game.hud.interfaces.Interfaces;
 import net.botwithus.rs3.game.minimenu.MiniMenu;
@@ -14,11 +13,9 @@ import net.botwithus.rs3.script.ScriptConsole;
 import java.util.List;
 
 import static net.botwithus.debug.DebugScript.currentQuest;
-import static net.botwithus.rs3.game.cs2.layouts.Layout.INT;
 
 public class Dialogs {
 
-    public static final ScriptBuilder click1193 = ScriptBuilder.of(5583).args(INT, INT); // 1188 interface  (13,x) CLOSE DIALOG
 
 
     public static void dialog1188() {
