@@ -142,11 +142,11 @@ public class DebugScript extends LoopingScript {
         WHAT_LIES_BELOW(144),
         THE_KNIGHT_SWORD(261),
         SHIELD_OF_ARRAV(63),
-        FAMILY_CREST(116),
+        FAMILY_CREST_INCOMPLETE(116),
         STOLEN_HEARTS(355),
         THE_GOLEM(286),
         RUNE_MYTHOS(494),
-        TEST(135);
+        TEST_DONTSELECT(135);
 
         private final int questId;
 
