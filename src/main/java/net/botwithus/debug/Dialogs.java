@@ -18,7 +18,6 @@ import static net.botwithus.rs3.game.cs2.layouts.Layout.INT;
 
 public class Dialogs {
 
-    public static final ScriptBuilder click1188 = ScriptBuilder.of(5593).args(INT, INT); // 1188 interface  (13,x) CLOSE DIALOG
     public static final ScriptBuilder click1193 = ScriptBuilder.of(5583).args(INT, INT); // 1188 interface  (13,x) CLOSE DIALOG
 
 
@@ -26,16 +25,17 @@ public class Dialogs {
         int number = getDialogueNumber();
         int option = 1;
         switch (number) {
-            case 1 -> option = 16;
-            case 2 -> option = 17;
-            case 3 -> option = 18;
-            case 4 -> option = 19;
-            case 5 -> option = 20;
+            case 1 -> option = 77856776;
+            case 2 -> option = 77856781;
+            case 3 -> option = 77856786;
+            case 4 -> option = 77856791;
+            case 5 -> option = 77856796;
             default -> option = -1; // Optional: handle cases not covered above
         }
         if (option != -1) {
-            click1188.invokeExact(option, -1);
+            MiniMenu.interact(16, 0, -1, option);
         }
+
     }
 
     public static boolean isDialogOpen() {
@@ -102,13 +102,13 @@ public class Dialogs {
             ScriptConsole.println(Dialog.getText());
             if (Dialog.getText().contains("redberry pie. They REALLY like redberry pie.")) { // Knights sword endless chat from reldo
                 println("Found redberry pie msg..");
-                click1188.invokeExact(13, -1); // closes chat without the X option :D
+                MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1, -1, 77856772);
             } else if (Dialog.getText().contains("If I were you I would talk to Baraek,")) {
                 println("Baraek into Located"); // Shield of Arrav
-                click1188.invokeExact(13, -1); // closes chat without the X option :D
+                MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1, -1, 77856772);
             } else if (Dialog.getText().contains("The ruthless and notorious Black Arm ")) {
                 println("Talk to Charlie"); // Shield of Arrav
-                click1188.invokeExact(13, -1); // closes chat without the X option :D
+                MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1, -1, 77856772);
             } else {
                 MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 77594639);
             }
@@ -117,7 +117,7 @@ public class Dialogs {
         } else if (Interfaces.isOpen(1191)) {
             MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 78053391);
         } else if (Interfaces.isOpen(1193)) {
-            click1193.invokeExact(16, -1);
+            ScriptConsole.println("@ me in disc if u see this");
         } else if (Interfaces.isOpen(1500)) {
             MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1, -1, 98304409); // accept
         } else if (Interfaces.isOpen(1189)) {
@@ -138,6 +138,7 @@ public class Dialogs {
         /*else if (Interfaces.isOpen(960)) { // Unreachable and worked without anyway :P
             MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1, -1, 62914639);} */ // Close Open Book
         else if (isCLick()) {
+            MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1, -1, 62586895);
         }
     }
 
@@ -166,13 +167,11 @@ public class Dialogs {
         return -1;
     }
 
-    public static boolean isCLick() {
-        Component thing = ComponentQuery.newQuery(955).componentIndex(18).subComponentIndex(-1).results().first();
-        if (thing != null) {
-
+    public static boolean isCLick() { // Continue promt
+        Component thing = ComponentQuery.newQuery(955).componentIndex(16).subComponentIndex(14).results().first();
+        if (thing != null && !thing.getText().equals("") && !thing.getText().isBlank()) {
             return true;
         }
-        println("null");
         return false;
     }
 
@@ -283,7 +282,7 @@ public class Dialogs {
         PASSCODE(1, "Scheherazade."),
 
         ///Family Crest
-      
+
         /// THE GOLEM
         OPEN_PORTAL(1, "How do I open the portal?"),
         STATUETTE_UZER(3, "I'm looking for a statuette recovered from the city of Uzer."),
@@ -293,7 +292,7 @@ public class Dialogs {
 
         ///Rune Mythos
         //YES("Yes."),
-        IM_GOOD_WHATS_NEXT(4,"I'm good. What's next?");
+        IM_GOOD_WHATS_NEXT(4, "I'm good. What's next?");
 
         private final int number;
         private final String text;

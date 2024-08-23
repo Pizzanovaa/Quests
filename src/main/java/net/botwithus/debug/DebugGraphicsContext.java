@@ -44,7 +44,7 @@ public class DebugGraphicsContext extends ScriptGraphicsContext {
             }
             ImGui.SameLine();
             ImGui.SetItemWidth(200);
-            ImGui.Combo("Quest", quest, questNames);
+            quest = ImGui.Combo("Quest", quest, questNames);
             currentQuest = Quest.values()[quest];
             if (ImGui.Button("Refresh Info")) {
                 previousQuest = Quest.TEST;
