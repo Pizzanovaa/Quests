@@ -11,6 +11,7 @@ import net.botwithus.rs3.game.movement.Movement;
 import net.botwithus.rs3.game.movement.NavPath;
 import net.botwithus.rs3.game.movement.TraverseEvent;
 import net.botwithus.rs3.game.scene.entities.characters.player.LocalPlayer;
+import net.botwithus.rs3.game.vars.VarManager;
 import net.botwithus.rs3.script.LoopingScript;
 import net.botwithus.rs3.script.config.ScriptConfig;
 
@@ -33,52 +34,14 @@ public class DebugScript extends LoopingScript {
         return super.initialize();
     }
 
-    private Subscription<ServerTickedEvent> subscription;
+
 
     public static Quest currentQuest = Quest.NECROMANCY_INTRO;
     public static boolean running = false;
 
 
 
-    static boolean moveTo(Coordinate location) {
-        Dialogs.println("moveTo");
-        LocalPlayer player = Client.getLocalPlayer();
-
-        if (location.distanceTo(player.getCoordinate()) < 4) {
-            Dialogs.println("moveTo | Already at the target location.");
-            return true;
-        }
-
-
-
-        Dialogs.println("moveTo | Traversing to location: " + location);
-        NavPath path = NavPath.resolve(location);
-        TraverseEvent.State moveState = Movement.traverse(path);
-
-        switch (moveState) {
-            case INTERRUPTED -> {
-                Dialogs.println("moveTo | Return false.");
-                return false;
-            }
-            case FINISHED -> {
-                Dialogs.println("moveTo | Successfully moved to the area.");
-                return true;
-            }
-            case NO_PATH -> {
-                Dialogs.println("moveTo | Path failed: " + moveState.toString());
-                return false;
-            }
-            case FAILED -> {
-                Dialogs.println("moveTo | Path state: " + moveState.toString());
-                Dialogs.println("moveTo | No path found or movement failed.");
-                return false;
-            }
-            default -> {
-                Dialogs.println("moveTo | Unexpected state: " + moveState.toString());
-                return false;
-            }
-        }
-    }
+    private Subscription<ServerTickedEvent> subscription;
 
     @Override
     public void onLoop() {
@@ -110,6 +73,46 @@ public class DebugScript extends LoopingScript {
 
     }
 
+    static boolean moveTo(Coordinate location) {
+        Dialogs.println("moveTo");
+        LocalPlayer player = Client.getLocalPlayer();
+
+        if (location.distanceTo(player.getCoordinate()) < 4) {
+            Dialogs.println("moveTo | Already at the target location.");
+            return true;
+        }
+
+
+
+        Dialogs.println("moveTo | Traversing to location: " + location);
+        NavPath path = NavPath.resolve(location).interrupt(event -> (VarManager.getVarbitValue(21222) == 1));
+        TraverseEvent.State moveState = Movement.traverse(path);
+
+        switch (moveState) {
+            case INTERRUPTED -> {
+                Dialogs.println("moveTo | Return false.");
+                return false;
+            }
+            case FINISHED -> {
+                Dialogs.println("moveTo | Successfully moved to the area.");
+                return true;
+            }
+            case NO_PATH -> {
+                Dialogs.println("moveTo | Path failed: " + moveState.toString());
+                return false;
+            }
+            case FAILED -> {
+                Dialogs.println("moveTo | Path state: " + moveState.toString());
+                Dialogs.println("moveTo | No path found or movement failed.");
+                return false;
+            }
+            default -> {
+                Dialogs.println("moveTo | Unexpected state: " + moveState.toString());
+                return false;
+            }
+        }
+    }
+
     public void onActivation() {
 
         subscription = EventBus.EVENT_BUS.subscribe(this, ServerTickedEvent.class, this::onServerTickedEvent);
@@ -127,6 +130,7 @@ public class DebugScript extends LoopingScript {
             EventBus.EVENT_BUS.unsubscribe(subscription);
             subscription = null;
         }
+
     }
 
     public enum Quest {
@@ -138,11 +142,11 @@ public class DebugScript extends LoopingScript {
         WHAT_LIES_BELOW(144),
         THE_KNIGHT_SWORD(261),
         SHIELD_OF_ARRAV(63),
-        FAMILY_CREST(116),
+        FAMILY_CREST_INCOMPLETE(116),
         STOLEN_HEARTS(355),
         THE_GOLEM(286),
         RUNE_MYTHOS(494),
-        TEST(135);
+        TEST_DONTSELECT(135);
 
         private final int questId;
 
