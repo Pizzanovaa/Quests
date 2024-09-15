@@ -151,7 +151,7 @@ public class Dialogs {
                     for (int i = 0; i < size; ++i) {
                         if (((String) options.get(i)).contains(dialogue.getText())) {
                             ScriptConsole.println("Interacting with option: " + dialogue.getText() + " Option: " + i);
-                            option = i;
+                            option = i +1;
                             break;
                         }
                     }
@@ -288,8 +288,22 @@ public class Dialogs {
 
 
         ///Rune Mythos
-        //YES("Yes."),
-        IM_GOOD_WHATS_NEXT(4, "I'm good. What's next?");
+        IM_GOOD_WHATS_NEXT(4, "I'm good. What's next?"),
+
+        ///Ghosts Ahoy
+        WHY_WHAT_IS_THE_MATTER(1, "Why, what is the matter?"),
+        YES_I_DO_ITS_A_SAD_STORY(1, "Yes, I do. It is a very sad story."),
+        DO_YOU_KNOW_WHERE_THIS_WOMAN_CAN_BE_FOUND(1, "Do you know where this woman can be found?"),
+        YOU_ARE_DOING_SO_MUCH_FOR_ME(1, "You are doing so much for me - is there anything I can do for you?"),
+        IS_THIS_YOUR_TOY_BOAT(1, "Is this your toy boat?"),
+        OKAY_WAIT_HERE(1, "Okay, wait here - I'll get you your bow."),
+        TALK_ABOUT_SOMETHING_ELSE(1, "Talk about something else."),
+        YES_ILL_GIVE_YOU_A_GAME(1, "Yes, I'll give you a game."),
+        DO_YOU_HAVE_ANY_JOBS(1, "Do you have any jobs I can do?"),
+        YES_ID_BE_DELIGHTED(1, "Yes, I'd be delighted."),
+        AFTER_HEARING_VELORINAS_STORY(1, "After hearing Velorina's story I will be happy to help out."),
+        TALK_TO_GHOST_CAPTAIN(1, "Please take me to Dragontooth Island."),
+        LET_ANY_GHOST_PASS_ON(1, "Let any ghost who so wishes pass on into the next world.");
 
         private final int number;
         private final String text;

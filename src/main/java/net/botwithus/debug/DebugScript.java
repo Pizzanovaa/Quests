@@ -65,6 +65,7 @@ public class DebugScript extends LoopingScript {
             case STOLEN_HEARTS -> StolenHearts.quest2(); //Requires manual play for diamond idol and seems to be crashy...
             case THE_GOLEM -> TheGolem.quest();
             case RUNE_MYTHOS ->RuneMythos.quest();
+            case GHOSTS_AHOY -> GhostsAhoy.quest();
             //case FAMILY_CREST -> FamilyCrest.quest();
             default -> delay(100);
         }
@@ -146,6 +147,7 @@ public class DebugScript extends LoopingScript {
         STOLEN_HEARTS(355),
         THE_GOLEM(286),
         RUNE_MYTHOS(494),
+        GHOSTS_AHOY(82),
         TEST_DONTSELECT(135);
 
         private final int questId;
