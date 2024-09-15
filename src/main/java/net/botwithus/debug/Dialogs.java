@@ -151,7 +151,7 @@ public class Dialogs {
                     for (int i = 0; i < size; ++i) {
                         if (((String) options.get(i)).contains(dialogue.getText())) {
                             ScriptConsole.println("Interacting with option: " + dialogue.getText() + " Option: " + i);
-                            option = i +1;
+                            option = i;
                             break;
                         }
                     }
@@ -303,7 +303,10 @@ public class Dialogs {
         YES_ID_BE_DELIGHTED(1, "Yes, I'd be delighted."),
         AFTER_HEARING_VELORINAS_STORY(1, "After hearing Velorina's story I will be happy to help out."),
         TALK_TO_GHOST_CAPTAIN(1, "Please take me to Dragontooth Island."),
-        LET_ANY_GHOST_PASS_ON(1, "Let any ghost who so wishes pass on into the next world.");
+        LET_ANY_GHOST_PASS_ON(1, "Let any ghost who so wishes pass on into the next world."),
+
+        ///Vessel Harbinger
+        TALK_ABOUT_VESSEL_HARINGER(1,"Talk about'Vessel of the Harbinger'.");
 
         private final int number;
         private final String text;
