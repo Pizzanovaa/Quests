@@ -291,6 +291,7 @@ public class Dialogs {
         IM_GOOD_WHATS_NEXT(4, "I'm good. What's next?"),
 
         ///Ghosts Ahoy
+        YES_DONT_ASK(1,"Yes, and don't ask me again"),
         WHY_WHAT_IS_THE_MATTER(1, "Why, what is the matter?"),
         YES_I_DO_ITS_A_SAD_STORY(1, "Yes, I do. It is a very sad story."),
         DO_YOU_KNOW_WHERE_THIS_WOMAN_CAN_BE_FOUND(1, "Do you know where this woman can be found?"),
