@@ -66,6 +66,7 @@ public class DebugScript extends LoopingScript {
             case THE_GOLEM -> TheGolem.quest();
             case RUNE_MYTHOS ->RuneMythos.quest();
             case GHOSTS_AHOY -> GhostsAhoy.quest();
+            case VESSEL_HARINGER -> VesselHarbinger.quest();
             //case FAMILY_CREST -> FamilyCrest.quest();
             default -> delay(100);
         }
@@ -148,6 +149,7 @@ public class DebugScript extends LoopingScript {
         THE_GOLEM(286),
         RUNE_MYTHOS(494),
         GHOSTS_AHOY(82),
+        VESSEL_HARINGER(495),
         TEST_DONTSELECT(135);
 
         private final int questId;
