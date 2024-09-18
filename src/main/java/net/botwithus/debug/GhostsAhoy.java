@@ -174,7 +174,7 @@ public class GhostsAhoy {
                             if(VarManager.getVarbitValue(13491) == 3 && !cabinwindarea.contains(player)){
                                 DebugScript.moveTo(cabinwind);
                             } else {
-                                println("Nothing to do here");
+                                println("Manually Effort Required - Dye the boat and collect all three map pieces manually");
                                 // Need to Color Manually
                                 // Varbit for Wind 13485 = 1 is low - check flag color
                             }
