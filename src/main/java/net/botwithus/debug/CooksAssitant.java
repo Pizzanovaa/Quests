@@ -7,10 +7,12 @@ import net.botwithus.rs3.game.Area;
 import net.botwithus.rs3.game.Client;
 import net.botwithus.rs3.game.Coordinate;
 import net.botwithus.rs3.game.Item;
+import net.botwithus.rs3.game.hud.interfaces.Interfaces;
 import net.botwithus.rs3.game.minimenu.MiniMenu;
 import net.botwithus.rs3.game.minimenu.actions.ComponentAction;
 import net.botwithus.rs3.game.queries.builders.characters.NpcQuery;
 import net.botwithus.rs3.game.queries.builders.items.GroundItemQuery;
+import net.botwithus.rs3.game.queries.builders.items.InventoryItemQuery;
 import net.botwithus.rs3.game.queries.builders.objects.SceneObjectQuery;
 import net.botwithus.rs3.game.scene.entities.characters.npc.Npc;
 import net.botwithus.rs3.game.scene.entities.item.GroundItem;
@@ -23,6 +25,7 @@ import static net.botwithus.debug.Dialogs.println;
 import static net.botwithus.rs3.game.minimenu.actions.SelectableAction.SELECTABLE_COMPONENT;
 import static net.botwithus.rs3.game.minimenu.actions.SelectableAction.SELECT_OBJECT;
 import static net.botwithus.rs3.script.Execution.delay;
+import static net.botwithus.rs3.script.ScriptConsole.println;
 
 public class CooksAssitant {
 
@@ -49,7 +52,7 @@ public class CooksAssitant {
 
 
         if (QuestVarp == 0) {
-            ScriptConsole.println("Starting quest... Cooks Assitant!");
+            println("Starting quest... Cooks Assitant!");
 
             if (Dialog.isOpen()) {
                 return;
@@ -61,11 +64,21 @@ public class CooksAssitant {
             }
 
             if (startArea.contains(player) && !Backpack.contains("Empty pot")) {
-                GroundItem bucket = GroundItemQuery.newQuery().name("Empty pot").results().nearest();
-                if (bucket != null) {
-                    bucket.interact("Take");
+                GroundItem item = GroundItemQuery.newQuery().name("Empty pot").results().nearest();
+                if (item != null) {
+                        println(" Taking item" + item.interact("Take"));
+                        delay(RandomGenerator.nextInt(600, 1200));
+                        if (Interfaces.isOpen(1622)) {
+                            Item items = InventoryItemQuery.newQuery(773).name("Empty pot").results().first();
+                            if (items != null) {
+                                println("Item Slot" + items.getSlot());
+                                MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1, items.getSlot(), 106299403);
+                                delay(RandomGenerator.nextInt(600, 1200));
+                                return;
+                            }
+                        }
+                    }
                     delay(RandomGenerator.nextInt(600, 800));
-                }
                 return;
             }
 

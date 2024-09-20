@@ -14,8 +14,7 @@ import net.botwithus.rs3.game.scene.entities.characters.player.LocalPlayer;
 import net.botwithus.rs3.game.vars.VarManager;
 import net.botwithus.rs3.script.LoopingScript;
 import net.botwithus.rs3.script.config.ScriptConfig;
-
-import static net.botwithus.debug.Dialogs.pressDialog;
+import net.botwithus.debug.Dialogs.*;
 
 
 
@@ -36,7 +35,7 @@ public class DebugScript extends LoopingScript {
 
 
 
-    public static Quest currentQuest = Quest.NECROMANCY_INTRO;
+    public static Quest currentQuest = Quest.TEST_DONTSELECT;
     public static boolean running = false;
 
 
@@ -68,6 +67,7 @@ public class DebugScript extends LoopingScript {
             case GHOSTS_AHOY -> GhostsAhoy.quest();
             case VESSEL_HARINGER -> VesselHarbinger.quest();
             case SPIRIT_WAR -> Spirit_War.quest();
+            case TOMES_OF_WARLOCK -> TomesOfWarlock.quest();
             //case FAMILY_CREST -> FamilyCrest.quest();
             default -> delay(100);
         }
@@ -124,7 +124,7 @@ public class DebugScript extends LoopingScript {
 
     private void onServerTickedEvent(ServerTickedEvent event) {
         if (running) {
-            pressDialog();
+            Dialogs.pressDialog();
         }
     }
 
@@ -146,6 +146,7 @@ public class DebugScript extends LoopingScript {
         THE_KNIGHT_SWORD(261),
         SHIELD_OF_ARRAV(63),
         FAMILY_CREST_INCOMPLETE(116),
+        TOMES_OF_WARLOCK(497),
         STOLEN_HEARTS(355),
         THE_GOLEM(286),
         RUNE_MYTHOS(494),

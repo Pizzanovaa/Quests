@@ -150,7 +150,7 @@ public class Dialogs {
 
                     for (int i = 0; i < size; ++i) {
                         if (((String) options.get(i)).contains(dialogue.getText())) {
-                            ScriptConsole.println("Interacting with option: " + dialogue.getText() + " Option: " + i);
+                            ScriptConsole.println("Interacting with option: " + dialogue.getText() + " Option: " + i+1);
                             option = i +1;
                             break;
                         }
