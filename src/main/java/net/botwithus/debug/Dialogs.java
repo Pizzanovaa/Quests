@@ -291,6 +291,7 @@ public class Dialogs {
         IM_GOOD_WHATS_NEXT(4, "I'm good. What's next?"),
 
         ///Ghosts Ahoy
+        YES_DONT_ASK(1,"Yes, and don't ask me again"),
         WHY_WHAT_IS_THE_MATTER(1, "Why, what is the matter?"),
         YES_I_DO_ITS_A_SAD_STORY(1, "Yes, I do. It is a very sad story."),
         DO_YOU_KNOW_WHERE_THIS_WOMAN_CAN_BE_FOUND(1, "Do you know where this woman can be found?"),
@@ -308,9 +309,16 @@ public class Dialogs {
         ///Vessel Harbinger
         TALK_ABOUT_VESSEL_HARINGER(1,"Talk about'Vessel of the Harbinger'."),
 
-        ///Spirit War
-        TAKE_A_BOAT_OUT_ONTO_THE_LAKE(1,"Take a boat out onto the lake.");
-
+        //Tomes of Warlock
+        RASIAL_VESSEL_ORGAN(1, "Death, I've been to Rasial's citadel. I think his vessel is a giant organ."),
+        YES_TOMES(1, "Yes."),
+        ICE_TOMES(1,"Ice."),
+        SMOKE_TOMES(2, "Smoke."),
+        SHADOW_TOMES(3,"Shadow." ),
+        BLOOD_TOMES(4, "Blood."),
+        HAND_IN_BOOK(1, "Yes"),
+        NO_THANKS(2, "No thanks."),
+        GOODBYE(1, "Goodbye.");
 
         private final int number;
         private final String text;
