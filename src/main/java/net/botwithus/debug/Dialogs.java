@@ -318,8 +318,30 @@ public class Dialogs {
         BLOOD_TOMES(4, "Blood."),
         HAND_IN_BOOK(1, "Yes"),
         NO_THANKS(2, "No thanks."),
-        GOODBYE(1, "Goodbye.");
+        GOODBYE(1, "Goodbye."),
 
+        // Daughter of Chaos
+        I_AM_READY(1, "I'm ready."),
+        SHOULD_MOVE_ON(4, "We should move on."),
+        REPORT_BACK_TO_ADRASTEIA(2, "I'll report back to Adrasteia."),
+
+
+        //Diamond in the rough
+        LET_S_KEEP_GOING(4, "Let's keep going."),
+        CALL_FOR_HELP(4, "Call for help."),
+        REACH_FOR_THE_CACTUS(1, "Reach for the cactus."),
+        GRASP_FOR_THE_ROCK(2, "Grasp for the rock."),
+        DO_NOTHING(4, "Do nothing."),
+        //Jack of Spades
+        TALK_ABOUT_JACK_OF_SPADES(1, "Talk about Jack of Spades."),
+        NO_MORE_QUESTIONS(5, "No more questions."),
+        I_KNOW_ALL_I_NEED_LET_S_GO(1, "I know all I need - let's go!"),
+        YES_LET_S_GO(1, "Yes, let's go!"),
+        I_D_LIKE_TO_ASK_FOR_DIRECTIONS(1, "I'd like to ask for directions."),
+        CAN_YOU_TELL_ME_WHERE_THE_PORTS_DISTRICT_IS(1, "Can you tell me where the Ports district is?"),
+        I_VE_HEARD_ENOUGH(4, "I've heard enough."),
+        WHY_STEAL_FROM_PEOPLE(3, "Why steal from those people?");
+        
         private final int number;
         private final String text;
 

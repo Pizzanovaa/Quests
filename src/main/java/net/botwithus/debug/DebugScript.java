@@ -68,6 +68,8 @@ public class DebugScript extends LoopingScript {
             case VESSEL_HARINGER -> VesselHarbinger.quest();
             case SPIRIT_WAR -> Spirit_War.quest();
             case TOMES_OF_WARLOCK -> TomesOfWarlock.quest();
+            case DIAMOND_ROUGH -> DiamondRough.quest();
+            case JACK_OF_SPADES -> JackofSpades.quest();
             //case FAMILY_CREST -> FamilyCrest.quest();
             default -> delay(100);
         }
@@ -153,7 +155,11 @@ public class DebugScript extends LoopingScript {
         GHOSTS_AHOY(82),
         VESSEL_HARINGER(495),
         SPIRIT_WAR(496),
+        TOME_OF_WARLOCK(497),
+        DIAMOND_ROUGH(356),
+        JACK_OF_SPADES(390),
         TEST_DONTSELECT(135);
+
 
         private final int questId;
 
