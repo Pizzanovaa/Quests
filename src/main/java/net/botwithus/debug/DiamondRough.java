@@ -1,11 +1,13 @@
 package net.botwithus.debug;
 
+import static net.botwithus.debug.DebugScript.moveTo;
 import static net.botwithus.debug.Dialogs.isDialogOpen;
 import static net.botwithus.debug.Dialogs.println;
 
 import net.botwithus.rs3.game.Area;
 import net.botwithus.rs3.game.Client;
 import net.botwithus.rs3.game.Coordinate;
+import net.botwithus.rs3.game.Distance;
 import net.botwithus.rs3.game.Item;
 import net.botwithus.rs3.game.hud.interfaces.Interfaces;
 import net.botwithus.rs3.game.inventories.Backpack;
@@ -19,9 +21,13 @@ import net.botwithus.rs3.game.scene.entities.characters.npc.Npc;
 import net.botwithus.rs3.game.scene.entities.item.GroundItem;
 import net.botwithus.rs3.game.scene.entities.object.SceneObject;
 import net.botwithus.rs3.game.vars.VarManager;
+import net.botwithus.rs3.script.Execution;
 import net.botwithus.rs3.script.ScriptConsole;
 import net.botwithus.rs3.util.RandomGenerator;
 import static net.botwithus.rs3.script.Execution.delay;
+import static net.botwithus.rs3.script.Execution.delayUntil;
+
+
 import static net.botwithus.rs3.game.movement.Movement.walkTo;
 
 import net.botwithus.api.game.hud.Dialog;
@@ -47,10 +53,11 @@ public class DiamondRough {
     static Coordinate ladykelicord = new Coordinate(3204, 3083, 0);
     static Area.Circular ladykelicordarea = new Area.Circular(ladykelicord, 10);
 
+    static int test = 0;
     public static void quest() {
         int QuestVarp = VarManager.getVarbitValue(9429);
         player = Client.getLocalPlayer().getServerCoordinate();
-
+        
        
 
         if (isDialogOpen()) {
@@ -149,10 +156,15 @@ public class DiamondRough {
                 if (sundials != null) {
                     sundials.interact("Inspect");
                     delay(RandomGenerator.nextInt(600, 800));
+
+                    MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1, -1, 88735750);
+                  delay(RandomGenerator.nextInt(600, 800));
                 }
-                ScriptConsole.println("Click on Sundial (Het) Manually");
+                
                 break;
                 case 40:
+                talkToOzan();
+                delay(RandomGenerator.nextInt(600, 800));
                 if (!sundialsarea2.contains(player)) {
                     DebugScript.moveTo(sundials2);
                 }
@@ -161,6 +173,7 @@ public class DiamondRough {
                 }
                 break;
                 case 45:
+                talkToOzan();
                 SceneObject sundials2 = SceneObjectQuery.newQuery().name("Sundial (Apmeken)").results().nearest();
                 if (sundials2 != null) {
                     sundials2.interact("Inspect");
@@ -197,10 +210,20 @@ public class DiamondRough {
                 }
                 break;
                 case 57:
-                MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1, -1, 88735753);
-                delay(RandomGenerator.nextInt(600, 800));
+                if(VarManager.getVarbitValue(11884) == 6)
+                {
+                    SceneObject sundials2a = SceneObjectQuery.newQuery().name("Sundial (Apmeken)").results().nearest();
+                    if (sundials2a != null) {
+                    sundials2a.interact("Inspect");
+                    delay(RandomGenerator.nextInt(600, 800));
+                    MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1, -1, 88735753);
+                    delay(RandomGenerator.nextInt(600, 800));
+                }
+                }
+                
                 break;
                 case 60:
+                talkToOzan();
                 if (!sundialsarea3.contains(player)) {
                     DebugScript.moveTo(sundials3);
                 }
@@ -209,29 +232,42 @@ public class DiamondRough {
                 }
                 break;
                 case 65:
-                int test =0;
-                SceneObject sundials2a = SceneObjectQuery.newQuery().name("Sundial (Crondis)").results().nearest();
-                if (sundials2a != null && test == 0) {
-                    sundials2a.interact("Inspect");
-                    delay(RandomGenerator.nextInt(600, 800));
-                    test = test + 1;
-                }
-                SceneObject tunnel = SceneObjectQuery.newQuery().name("Tunnel").results().nearest();
-                if (tunnel != null) {
-                    tunnel.interact("Enter");
-                    delay(RandomGenerator.nextInt(600, 800));
-                }
-                if(Dialog.getText().contains("What am I sitting on? It's really unconfortable..."))
-                {
-                    MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1, -1, 77856772);
-                    delay(RandomGenerator.nextInt(600, 800));
-                    if (sundials2a != null) {
+                
+                
+                    
+                    println("Test" + test);
+                    SceneObject sundials2a = SceneObjectQuery.newQuery().name("Sundial (Crondis)").results().nearest();
+                    SceneObject tunnel = SceneObjectQuery.newQuery().name("Tunnel").results().nearest();
+                    if (sundials2a != null && test == 0) 
+                    {
+                        test +=1;
                         sundials2a.interact("Inspect");
+                        println("Test" + test);
                         delay(RandomGenerator.nextInt(600, 800));
-                        test = test + 1;
+                        
                     }
+                    else if(test == 1)
+                    {
+                        
+                        if (tunnel != null) {
+                        tunnel.interact("Enter");
+                        delay(RandomGenerator.nextInt(600, 800));
+                        }
+                    
+                    }else if(Dialog.getText().contains("What am I sitting on? It's really unconfortable..."))
+                    {
+                        MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1, -1, 77856772);
+                        delay(RandomGenerator.nextInt(600, 800));
+                        if (sundials2a != null) {
+                            sundials2a.interact("Inspect");
+                            delay(RandomGenerator.nextInt(600, 800));
+                            test +=1;
+                        }
 
-                }
+                    } 
+                
+                
+                
                 break;
                 case 67:
                 SceneObject sundials23 = SceneObjectQuery.newQuery().name("Sundial (Crondis)").results().nearest();
@@ -248,21 +284,31 @@ public class DiamondRough {
                 }
                 break;
                 case 70:
-                Coordinate tunnelcord1 = new Coordinate(12424, 4683, 0);
+                SceneObject sundialcoordinates = SceneObjectQuery.newQuery().name("Sundial (Crondis)").results().nearest();
+                if (sundialcoordinates != null) {
+                    println("Sundial Coordinates" + sundialcoordinates.getCoordinate().getX() + " " + sundialcoordinates.getCoordinate().getY());
+                }
+                
                 Coordinate tunnelcord2 = new Coordinate(14339, 839, 0);
-                if(VarManager.getVarbitValue(11884) != 15)
-                {SceneObject tunnel1 = SceneObjectQuery.newQuery().name("Tunnel").results().nearestTo(tunnelcord1);
+                if(VarManager.getVarbitValue(11884) != 15 && sundialcoordinates != null)
+                {
+                Coordinate tunnelcord1 = new Coordinate(sundialcoordinates.getCoordinate().getX() -6, sundialcoordinates.getCoordinate().getY() - 1, 0);
+                SceneObject tunnel1 = SceneObjectQuery.newQuery().name("Tunnel").results().nearestTo(tunnelcord1);
                 if (tunnel1 != null) {
                     tunnel1.interact("Enter");
                     delay(RandomGenerator.nextInt(600, 800));
                 }}
                 else
                 {
-                    walkTo(14339,   839 ,false);
+                    //walkTo(14339,   839 ,false);
                     delay(RandomGenerator.nextInt(600,800));
-                    SceneObject tunnel1 = SceneObjectQuery.newQuery().name("Tunnel").results().nearestTo(tunnelcord2);
+                    SceneObject tunnel1 = SceneObjectQuery.newQuery().name("Tunnel").ids(75702).results().nearest();
                     if (tunnel1 != null) {
+                        println(" " + tunnel1.getCoordinate().getX() + " " + tunnel1.getCoordinate().getY());
+                        walkTo(tunnel1.getCoordinate().getX() + 5, tunnel1.getCoordinate().getY() + 2, false);
+                        delay(RandomGenerator.nextInt(5000, 6000));
                         tunnel1.interact("Enter");
+                        Execution.delayUntil(RandomGenerator.nextInt(3000,5000), () -> !Client.getLocalPlayer().isMoving());
                         delay(RandomGenerator.nextInt(600, 800));
                     }
                 }
@@ -291,7 +337,7 @@ public class DiamondRough {
                         delay(RandomGenerator.nextInt(600, 800));
                         return;
                     }
-                    Npc kalphite = NpcQuery.newQuery().name("Dung kalphite").spotAnimation(3405).results().random();
+                    Npc kalphite = NpcQuery.newQuery().name("Dung kalphite").results().random();
                     if (kalphite != null && !Equipment.Slot.WEAPON.name().equals("Bronze scimitar")) {
                         ScriptConsole.println("Kalphite found and slicing open");
                         kalphite.interact("Slice open");
