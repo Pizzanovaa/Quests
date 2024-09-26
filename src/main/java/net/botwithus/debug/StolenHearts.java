@@ -437,6 +437,9 @@ public class StolenHearts {
                         delay(RandomGenerator.nextInt(3000, 4000));
                     }
                     break;
+                case 90:
+                talkToOzan();   // incase of crash after phasephrase 
+                break;
                 case 100: // still need password fixing
                     ScriptConsole.println("Quest Complete.");
                     break;

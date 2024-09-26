@@ -277,6 +277,7 @@ public class Dialogs {
         YESSR(1, "Yes."),
         BACK(1, "I'll be back soon."),
         PASSCODE(1, "Scheherazade."),
+        CALM_OZAN_DOWN(1, "[Calm Ozan down.]"),
 
         ///Family Crest
 
@@ -322,8 +323,13 @@ public class Dialogs {
 
         // Daughter of Chaos
         I_AM_READY(1, "I'm ready."),
+        ILL_SEE_IT_DONE(2, "I'll see it done."),
         SHOULD_MOVE_ON(4, "We should move on."),
+        AGREE_WITH_ADRASTEIA(1, "Agree with Adrasteia."),
         REPORT_BACK_TO_ADRASTEIA(2, "I'll report back to Adrasteia."),
+        LOWER_THE_DIFFICULTY(1, "Lower the difficulty."),
+        ADRASTEIA_SENT_ME(1, "Adrasteia sent me."),
+        RESPOND_DIPLOMATICALLY(1, "Respond diplomatically."),
 
 
         //Diamond in the rough

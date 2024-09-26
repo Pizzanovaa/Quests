@@ -25,6 +25,8 @@ import static net.botwithus.rs3.game.movement.Movement.walkTo;
 
 import net.botwithus.api.game.hud.Dialog;
 import net.botwithus.api.game.hud.inventories.Equipment;
+import net.botwithus.api.game.hud.inventories.EquipmentInventory;
+import net.botwithus.api.game.hud.inventories.Equipment.Slot;
 import net.botwithus.rs3.game.queries.builders.objects.SceneObjectQuery;    
 import net.botwithus.rs3.game.scene.entities.object.SceneObject;
 
@@ -98,7 +100,20 @@ public class JackofSpades {
                 case 30:
                 break;
                 case 35:
+                //Item weapon = InventoryItemQuery.newQuery(94).equipmentSlot(Equipment.unequip(Slot.WEAPON))
+                //if(Equipment.Slot.
+                if(Equipment.getItemIn(Slot.WEAPON) != null)
+                {
+                    Equipment.unequip(Slot.WEAPON);
+                    delay(RandomGenerator.nextInt(600, 800));
+                }
+                if(Equipment.getItemIn(Slot.SHIELD) != null)
+                {
+                    Equipment.unequip(Slot.SHIELD);
+                    delay(RandomGenerator.nextInt(600, 800));
+                }
                 talktoGrandVizier();
+                delay(RandomGenerator.nextInt(600, 800));
                 talktoHassan();
                 break;
                 case 40:
@@ -224,7 +239,7 @@ public class JackofSpades {
     public static void talktoHassan() {
         Npc Hassan = NpcQuery.newQuery().name("Hassan").results().nearest();
         if (Hassan != null) {
-            Hassan.interact("Talk-to");
+            Hassan.interact(NPCAction.NPC1);
             delay(RandomGenerator.nextInt(600, 800));
         }
     }

@@ -70,6 +70,7 @@ public class DebugScript extends LoopingScript {
             case TOMES_OF_WARLOCK -> TomesOfWarlock.quest();
             case DIAMOND_ROUGH -> DiamondRough.quest();
             case JACK_OF_SPADES -> JackofSpades.quest();
+            case DAUGHTER_OF_CHAOS -> DaughterofChaos.quest();
             //case FAMILY_CREST -> FamilyCrest.quest();
             default -> delay(100);
         }
@@ -158,6 +159,7 @@ public class DebugScript extends LoopingScript {
         TOME_OF_WARLOCK(497),
         DIAMOND_ROUGH(356),
         JACK_OF_SPADES(390),
+        DAUGHTER_OF_CHAOS(483),
         TEST_DONTSELECT(135);
 
 
