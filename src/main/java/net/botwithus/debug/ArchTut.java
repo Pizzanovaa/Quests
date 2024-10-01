@@ -34,6 +34,7 @@ public class ArchTut {
     static Area.Circular monolithaarea = new Area.Circular(monolithcord, 10);
     static Coordinate mapcord = new Coordinate(3326, 3376, 0);
     static Area.Circular maparea = new Area.Circular(mapcord, 10);
+
     public static void quest() {
         int QuestVarp = VarManager.getVarbitValue(46463);
         player = Client.getLocalPlayer().getServerCoordinate();
@@ -51,7 +52,7 @@ public class ArchTut {
             ScriptConsole.println("Starting quest... Arch Tutorial");
 
             if (startarea.contains(player)) {
-                 talktoGuildMaster();
+                talktoGuildMaster();
             } else {
                 DebugScript.moveTo(startcord);
             }
@@ -62,9 +63,10 @@ public class ArchTut {
                     talktoGuildMaster();
                     break;
                 case 10:
-                    if(Backpack.contains("Bronze mattock")){
-                        Backpack.interact("Bronze mattock","Add to tool belt");
-                        delay(600);
+                    if (Backpack.contains("Bronze mattock")) {
+                        Backpack.interact("Bronze mattock", "Add to tool belt");
+                        delay(RandomGenerator.nextInt(600, 1200));
+                        ;
                         return;
                     }
                     break;
@@ -72,62 +74,69 @@ public class ArchTut {
 
                     break;
                 case 20:
-                    if(Client.getLocalPlayer().getAnimationId() != -1){
+                    if (Client.getLocalPlayer().getAnimationId() != -1) {
                         return;
                     }
                     SceneObject soil = SceneObjectQuery.newQuery().name("Senntisten soil").results().nearest();
-                    if(soil != null){
+                    if (soil != null) {
                         soil.interact("Uncover");
-                        delay(600);
+                        delay(RandomGenerator.nextInt(600, 1200));
+                        ;
                     }
                     break;
                 case 25:
                     //46464 Arch tut 0/25 varbit
-                    if(Client.getLocalPlayer().getAnimationId() != -1){
+                    if (Client.getLocalPlayer().getAnimationId() != -1) {
                         return;
                     }
                     SceneObject soilexc = SceneObjectQuery.newQuery().name("Centurion remains").results().nearest();
-                    if(soilexc != null){
+                    if (soilexc != null) {
                         soilexc.interact("Excavate");
-                        delay(600);
+                        delay(RandomGenerator.nextInt(600, 1200));
+                        ;
                     }
                     break;
                 case 30:
-                    if(Backpack.contains(49741)){
-                        Backpack.interact(49741,"Inspect");
-                        delay(1200);
+                    if (Backpack.contains(49741)) {
+                        Backpack.interact(49741, "Inspect");
+                        delay(RandomGenerator.nextInt(1200, 1800));;
 
                     }
                     talktoGuildMaster();
-                    delay(600);
+                    delay(RandomGenerator.nextInt(600, 1200));
+                    ;
                     break;
                 case 40:
-                    if(Interfaces.isOpen(1370)){
+                    if (Interfaces.isOpen(1370)) {
                         MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 89784350);
-                        delay(600);
+                        delay(RandomGenerator.nextInt(600, 1200));
+                        ;
                         return;
                     }
-                    if(Client.getLocalPlayer().getAnimationId() != -1){
+                    if (Client.getLocalPlayer().getAnimationId() != -1) {
                         return;
                     }
                     SceneObject mesh = SceneObjectQuery.newQuery().name("Mesh").results().nearest();
-                    if(mesh != null){
+                    if (mesh != null) {
                         mesh.interact("Screen");
-                        delay(600);
+                        delay(RandomGenerator.nextInt(600, 1200));
+                        ;
                     }
                     break;
                 case 50:
 
                     if (bencharea.contains(player)) {
-                        if(Interfaces.isOpen(660)){
+                        if (Interfaces.isOpen(660)) {
                             MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1, -1, 43253774);
-                            delay(600);
+                            delay(RandomGenerator.nextInt(600, 1200));
+                            ;
                             return;
                         }
                         SceneObject storage = SceneObjectQuery.newQuery().name("Material storage container").results().nearest();
-                        if(storage != null){
+                        if (storage != null) {
                             storage.interact("Store");
-                            delay(600);
+                            delay(RandomGenerator.nextInt(600, 1200));
+                            ;
                         }
                     } else {
                         DebugScript.moveTo(benchcord);
@@ -135,19 +144,21 @@ public class ArchTut {
 
                     break;
                 case 55:
-                    if(Client.getLocalPlayer().getAnimationId() != -1){
+                    if (Client.getLocalPlayer().getAnimationId() != -1) {
                         return;
                     }
                     if (bencharea.contains(player)) {
-                        if(Interfaces.isOpen(1370)){
+                        if (Interfaces.isOpen(1370)) {
                             MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 89784350);
-                            delay(600);
+                            delay(RandomGenerator.nextInt(600, 1200));
+                            ;
                             return;
                         }
                         SceneObject bench = SceneObjectQuery.newQuery().name("Archaeologist's workbench").results().nearest();
-                        if(bench != null){
+                        if (bench != null) {
                             bench.interact("Restore");
-                            delay(600);
+                            delay(RandomGenerator.nextInt(600, 1200));
+                            ;
                         }
                     } else {
                         DebugScript.moveTo(benchcord);
@@ -162,15 +173,17 @@ public class ArchTut {
                     break;
                 case 65:
                     if (veculciaarea.contains(player)) {
-                        if(Interfaces.isOpen(656)){
+                        if (Interfaces.isOpen(656)) {
                             MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1, 0, 42991641);
-                            delay(600);
+                            delay(RandomGenerator.nextInt(600, 1200));
+                            ;
                             return;
                         }
                         Npc velucia = NpcQuery.newQuery().name("Velucia").results().nearest();
-                        if(velucia != null){
+                        if (velucia != null) {
                             velucia.interact("Talk to");
-                            delay(600);
+                            delay(RandomGenerator.nextInt(600, 1200));
+                            ;
                         }
                     } else {
                         DebugScript.moveTo(veculciacord);
@@ -186,28 +199,30 @@ public class ArchTut {
                 case 80:
                     if (monolithaarea.contains(player)) {
                         SceneObject monolith = SceneObjectQuery.newQuery().name("Mysterious monolith").results().nearest();
-                        if(monolith != null){
+                        if (monolith != null) {
                             monolith.interact("Interact");
-                            delay(600);
+                            delay(RandomGenerator.nextInt(600, 1200));
+                            ;
                         }
                     } else {
                         DebugScript.moveTo(monolithcord);
                     }
                     break;
                 case 85:
-                    if(Interfaces.isOpen(691)){
+                    if (Interfaces.isOpen(691)) {
                         MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1, -1, 45285447);
-                        delay(1200);
+                        delay(RandomGenerator.nextInt(1200, 1800));;
                         MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1, -1, 45285433);
-                        delay(1200);
-                        MiniMenu.interact(ComponentAction.COMPONENT.getType(),  1, -1, 45285526);
-                        delay(1200);
+                        delay(RandomGenerator.nextInt(1200, 1800));;
+                        MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1, -1, 45285526);
+                        delay(RandomGenerator.nextInt(1200, 1800));;
                         MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1, -1, 45285522);
-                    }else{
+                    } else {
                         SceneObject monolith = SceneObjectQuery.newQuery().name("Mysterious monolith").results().nearest();
-                        if(monolith != null){
+                        if (monolith != null) {
                             monolith.interact("Manage powers");
-                            delay(600);
+                            delay(RandomGenerator.nextInt(600, 1200));
+                            ;
                         }
                     }
                     break;
@@ -222,19 +237,23 @@ public class ArchTut {
                     }
                     break;
                 case 96:
-                    if(Interfaces.isOpen(1594)){
-                        MiniMenu.interact(ComponentAction.COMPONENT.getType(),1, 0, 104464403 );
-                        delay(600);
-                        MiniMenu.interact(ComponentAction.COMPONENT.getType(),1, -1, 104464438);
-                        delay(600);
-                        MiniMenu.interact(ComponentAction.COMPONENT.getType(),1, -1, 104464444);
-                        delay(600);
+                    if (Interfaces.isOpen(1594)) {
+                        MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1, 0, 104464403);
+                        delay(RandomGenerator.nextInt(600, 1200));
+                        ;
+                        MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1, -1, 104464438);
+                        delay(RandomGenerator.nextInt(600, 1200));
+                        ;
+                        MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1, -1, 104464444);
+                        delay(RandomGenerator.nextInt(600, 1200));
+                        ;
                         return;
                     }
                     Npc ezreal = NpcQuery.newQuery().name("Ezreal").results().nearest();
-                    if(ezreal != null){
+                    if (ezreal != null) {
                         ezreal.interact("Talk to");
-                        delay(600);
+                        delay(RandomGenerator.nextInt(600, 1200));
+                        ;
                     }
                     break;
                 case 97:
@@ -244,11 +263,12 @@ public class ArchTut {
         }
     }
 
-    public static void talktoGuildMaster(){
-        Npc guildmaster = NpcQuery.newQuery().name("Acting Guildmaster",String::contains).results().nearest();
-        if(guildmaster != null){
+    public static void talktoGuildMaster() {
+        Npc guildmaster = NpcQuery.newQuery().name("Acting Guildmaster", String::contains).results().nearest();
+        if (guildmaster != null) {
             guildmaster.interact("Talk to");
-            delay(600);
+            delay(RandomGenerator.nextInt(600, 1200));
+            ;
         }
     }
 }

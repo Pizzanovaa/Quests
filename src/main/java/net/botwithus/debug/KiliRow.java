@@ -119,7 +119,7 @@ public class KiliRow {
                                 Npc chicken = NpcQuery.newQuery().name("Chicken").health(1, 2000).results().nearest();
                                 if (chicken != null) {
                                     chicken.interact("Attack");
-                                    delay(600);
+                                    delay(RandomGenerator.nextInt(600,1200));;
                                 }
                             } else {
                                 DebugScript.moveTo(chickenpencord);
@@ -228,9 +228,9 @@ public class KiliRow {
         if (pedestal != null) {
             if (Interfaces.isOpen(1224)) {
                 MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1, 60, 80216098);
-                delay(600);
+                delay(RandomGenerator.nextInt(600,1200));;
                 MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1, -1, 80216108);
-                delay(600);
+                delay(RandomGenerator.nextInt(600,1200));;
             } else {
                 if (pedestal.getOptions().contains("Replace focus")) {
                     pedestal.interact("Replace focus");
@@ -245,7 +245,7 @@ public class KiliRow {
         Npc kili = NpcQuery.newQuery().name("Kili").results().nearest();
         if (kili != null) {
             kili.interact("Talk to");
-            delay(2000);
+            delay(RandomGenerator.nextInt(2000,2400));
         }
     }
 
