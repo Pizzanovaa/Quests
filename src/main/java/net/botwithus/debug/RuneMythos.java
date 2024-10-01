@@ -63,7 +63,7 @@ public class RuneMythos {
                     SceneObject lessessence = SceneObjectQuery.newQuery().name("Pedestal (lesser essence)").results().nearest();
                     EntityResultSet<Npc> elementglyph = NpcQuery.newQuery().name("Elemental I").results();
                     EntityResultSet<Npc> changeglyph = NpcQuery.newQuery().name("Change I").results();
-                    EntityResultSet<Npc> candle = NpcQuery.newQuery().name("Basic ritual candle").results();
+                    EntityResultSet<Npc> candle = NpcQuery.newQuery().name("Basic ritual candle",String::contains).results();
                     if(lessessence ==null) {
                         placeFocus();
                     }
@@ -171,6 +171,16 @@ public class RuneMythos {
     }
 
     public static void doRitual() {
+        if(VarManager.getVarpValue(10937) == 0) {
+            SceneObject depleted = SceneObjectQuery.newQuery().name("(depleted)", String::contains).results().nearest();
+            if (depleted != null) {
+                SceneObject middle = SceneObjectQuery.newQuery().name("Pedestal", String::contains).results().first();
+                if (middle != null) {
+                    middle.interact("Repair all");
+                    delay(RandomGenerator.nextInt(1200, 2000));
+                }
+            }
+        }
         if (Client.getLocalPlayer().getAnimationId() == -1 && !Client.getLocalPlayer().isMoving()) {
             SceneObject ritual = SceneObjectQuery.newQuery().option("Start ritual").results().first();
             if (ritual != null) {
@@ -181,18 +191,27 @@ public class RuneMythos {
     }
 
     public static void placeFocus() {
-        SceneObject middle = SceneObjectQuery.newQuery().name("Pedestal").results().first();
+        SceneObject middle = SceneObjectQuery.newQuery().name("Pedestal",String::contains).results().first();
         if (middle != null) {
-            middle.interact("Place focus");
-            delay(RandomGenerator.nextInt(600, 800));
-            Execution.delayUntil( 2000, () -> Interfaces.isOpen(1224));
             if(Interfaces.isOpen(1224))
             {
                 MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1,13,80216098);
                 delay(RandomGenerator.nextInt(900, 1250));
                 MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1,-1,80216108);
                 delay(RandomGenerator.nextInt(900, 1250));
+            }else {
+
+                if (middle.getOptions().contains("Replace focus")) {
+                    middle.interact("Replace focus");
+                } else {
+                    middle.interact("Place focus");
+                }
+
+                delay(RandomGenerator.nextInt(600, 800));
+                Execution.delayUntil(2000, () -> Interfaces.isOpen(1224));
             }
+        }else{
+            ScriptConsole.println("Middle null");
         }
     }
 
@@ -217,11 +236,15 @@ public class RuneMythos {
         }
     }
         public static void drawglyphschange() {
-            Npc glyph1 = NpcQuery.newQuery().name("Glyph spot").option("Draw glyph").results().nearest();
+            Npc glyph1 = NpcQuery.newQuery()
+                    .option("Draw glyph")
+                    .results()
+                    .stream()
+                    .filter(npc -> !npc.getName().equals("Elemental I") && !npc.getName().equals("Change I"))
+                    .findFirst()
+                    .orElse(null);
             if (!Client.getLocalPlayer().isMoving()) {
                 if (glyph1 != null) {
-                    //glyph.interact("Draw glyph");
-
                     glyph1.interact("Draw glyph");
                     delay(RandomGenerator.nextInt(1250, 2000));
                     println("Interface is open" + Interfaces.isOpen(1371));

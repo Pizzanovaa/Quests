@@ -316,7 +316,7 @@ public class Dialogs {
 
         //Rune Mythos
         IM_GOOD_WHATS_NEXT(4, "I'm good. What's next?", RUNE_MYTHOS),
-
+        YES_yes(4, "Yes.", RUNE_MYTHOS),
         //Ghosts Ahoy
         YES_DONT_ASK(1, "Yes, and don't ask me again", GHOSTS_AHOY),
         WHY_WHAT_IS_THE_MATTER(1, "Why, what is the matter?", GHOSTS_AHOY),
