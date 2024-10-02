@@ -75,6 +75,8 @@ public class Necromancy1 {
                 case 1330:
                     doRitual();
                     break;
+                case 1458:
+                    talktoMalignius();
                 case 1596:
                     if (!Interfaces.isOpen(1222)) {
                         clickwellofsouls();
@@ -120,7 +122,7 @@ public class Necromancy1 {
                 case 245138:
                     println("Quest complete");
                     break;
-            }
+            };
 
         }
     }

@@ -14,8 +14,6 @@ import net.botwithus.rs3.game.scene.entities.characters.player.LocalPlayer;
 import net.botwithus.rs3.game.vars.VarManager;
 import net.botwithus.rs3.script.LoopingScript;
 import net.botwithus.rs3.script.config.ScriptConfig;
-import net.botwithus.debug.Dialogs.*;
-
 
 
 public class DebugScript extends LoopingScript {
@@ -71,6 +69,9 @@ public class DebugScript extends LoopingScript {
             case DIAMOND_ROUGH -> DiamondRough.quest();
             case JACK_OF_SPADES -> JackofSpades.quest();
             case DAUGHTER_OF_CHAOS -> DaughterofChaos.quest();
+            case KILI_ROW -> KiliRow.quest();
+            case ARCH_TUTORIAL -> ArchTut.quest();
+            case F2P_LODESTONES ->  Loadstones.unlockloadstones();
             //case FAMILY_CREST -> FamilyCrest.quest();
             default -> delay(100);
         }
@@ -160,6 +161,9 @@ public class DebugScript extends LoopingScript {
         DIAMOND_ROUGH(356),
         JACK_OF_SPADES(390),
         DAUGHTER_OF_CHAOS(483),
+        KILI_ROW(500),
+        F2P_LODESTONES(9999999),
+        ARCH_TUTORIAL(999999),
         TEST_DONTSELECT(135);
 
 
