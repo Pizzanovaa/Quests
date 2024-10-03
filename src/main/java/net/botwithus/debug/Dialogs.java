@@ -159,7 +159,7 @@ public class Dialogs {
 
                     for (int i = 0; i < size; ++i) {
                         if (options.get(i).contains(dialogue.getText())) {
-                            ScriptConsole.println("Interacting with option: " + dialogue.getText() + " Option: " + (i + 1));
+                            ScriptConsole.println("Interacting with option: " + dialogue.getText() + " Option: " + (i + 1 ));
                             option = i + 1;
                             break;
                         }
@@ -372,7 +372,13 @@ public class Dialogs {
         I_D_LIKE_TO_ASK_FOR_DIRECTIONS(1, "I'd like to ask for directions.", JACK_OF_SPADES),
         CAN_YOU_TELL_ME_WHERE_THE_PORTS_DISTRICT_IS(1, "Can you tell me where the Ports district is?", JACK_OF_SPADES),
         I_VE_HEARD_ENOUGH(4, "I've heard enough.", JACK_OF_SPADES),
-        WHY_STEAL_FROM_PEOPLE(3, "Why steal from those people?", JACK_OF_SPADES);
+        WHY_STEAL_FROM_PEOPLE(3, "Why steal from those people?", JACK_OF_SPADES),
+
+        //New Foundation
+        YES_NEW_FOUNDATION(2, "Yes", NEW_FOUNDATION), 
+        YES_RITUAL(2, "Yes.", NEW_FOUNDATION),
+        SIGN_ME_UP(2, "Sign me up!", NEW_FOUNDATION);
+
 
         private final int number;
         private final String text;
