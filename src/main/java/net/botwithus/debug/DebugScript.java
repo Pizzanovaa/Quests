@@ -72,6 +72,7 @@ public class DebugScript extends LoopingScript {
             case KILI_ROW -> KiliRow.quest();
             case ARCH_TUTORIAL -> ArchTut.quest();
             case F2P_LODESTONES ->  Loadstones.unlockloadstones();
+            case NEW_FOUNDATION -> NewFoundation.quest();
             //case FAMILY_CREST -> FamilyCrest.quest();
             default -> delay(100);
         }
@@ -164,6 +165,7 @@ public class DebugScript extends LoopingScript {
         KILI_ROW(500),
         F2P_LODESTONES(9999999),
         ARCH_TUTORIAL(999999),
+        NEW_FOUNDATION(489),
         TEST_DONTSELECT(135);
 
 
