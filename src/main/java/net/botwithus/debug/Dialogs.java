@@ -18,7 +18,6 @@ import static net.botwithus.debug.DebugScript.currentQuest;
 public class Dialogs {
 
 
-
     public static void dialog1188() {
         int number = getDialogueNumber();
         int option = 1;
@@ -141,10 +140,10 @@ public class Dialogs {
     }
 
     public static Integer getDialogueNumber() {
-        ScriptConsole.println(Dialog.getOptions());
         List<String> options = Dialog.getOptions();
 
         if (!options.isEmpty() && currentQuest != null) {
+            ScriptConsole.println(options);
             for (Dialogue dialogue : Dialogue.values()) {
                 // Only consider dialogues related to the current quest
                 if (dialogue.getQuest() == currentQuest && options.contains(dialogue.getText())) {
@@ -159,7 +158,7 @@ public class Dialogs {
 
                     for (int i = 0; i < size; ++i) {
                         if (options.get(i).contains(dialogue.getText())) {
-                            ScriptConsole.println("Interacting with option: " + dialogue.getText() + " Option: " + (i + 1 ));
+                            ScriptConsole.println("Interacting with option: " + dialogue.getText() + " Option: " + (i + 1));
                             option = i + 1;
                             break;
                         }
@@ -175,10 +174,10 @@ public class Dialogs {
     // Method to determine if the dialogue should be skipped
     private static boolean shouldSkipDialogue(Dialogue dialogue) {
 
-         int VARBIT_BOOK_ICE = 53558;
-         int VARBIT_BOOK_SMOKE = 53559;
-         int VARBIT_BOOK_SHADOW = 53560;
-         int VARBIT_BOOK_BLOOD = 53561;
+        int VARBIT_BOOK_ICE = 53558;
+        int VARBIT_BOOK_SMOKE = 53559;
+        int VARBIT_BOOK_SHADOW = 53560;
+        int VARBIT_BOOK_BLOOD = 53561;
 
         switch (dialogue) {
             case ICE_TOMES:
@@ -375,7 +374,8 @@ public class Dialogs {
         WHY_STEAL_FROM_PEOPLE(3, "Why steal from those people?", JACK_OF_SPADES),
 
         //New Foundation
-        YES_NEW_FOUNDATION(2, "Yes", NEW_FOUNDATION), 
+        YES_NEW_FOUNDATION(2, "Yes", NEW_FOUNDATION),
+        LEAVE(1, "Leave the starting area.", NEW_FOUNDATION),
         YES_RITUAL(2, "Yes.", NEW_FOUNDATION),
         SIGN_ME_UP(2, "Sign me up!", NEW_FOUNDATION),
         DUKES_QUEST(1, "Duke.", NEW_FOUNDATION);
@@ -403,7 +403,6 @@ public class Dialogs {
             return quest;
         }
     }
-
 
 
     public static void println(String msg) {
