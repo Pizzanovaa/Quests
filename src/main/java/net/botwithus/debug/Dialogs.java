@@ -377,7 +377,8 @@ public class Dialogs {
         //New Foundation
         YES_NEW_FOUNDATION(2, "Yes", NEW_FOUNDATION), 
         YES_RITUAL(2, "Yes.", NEW_FOUNDATION),
-        SIGN_ME_UP(2, "Sign me up!", NEW_FOUNDATION);
+        SIGN_ME_UP(2, "Sign me up!", NEW_FOUNDATION),
+        DUKES_QUEST(1, "Duke.", NEW_FOUNDATION);
 
 
         private final int number;
