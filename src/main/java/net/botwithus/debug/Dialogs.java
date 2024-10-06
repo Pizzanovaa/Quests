@@ -378,8 +378,19 @@ public class Dialogs {
         LEAVE(1, "Leave the starting area.", NEW_FOUNDATION),
         YES_RITUAL(2, "Yes.", NEW_FOUNDATION),
         SIGN_ME_UP(2, "Sign me up!", NEW_FOUNDATION),
-        DUKES_QUEST(1, "Duke.", NEW_FOUNDATION);
+        DUKES_QUEST(1, "Duke.", NEW_FOUNDATION),
 
+        //Kili's row I
+        TALK_ABOUT_UPGRADE1(1, "Talk about active equipment upgrade task.", KILI_ROW_I),
+        CURRENT_TASK1(1, "Ask about your current task.", KILI_ROW_I),
+
+        //Kili's row II
+        TALK_ABOUT_UPGRADE2(1, "Talk about active equipment upgrade task.", KILI_ROW_II),
+        CURRENT_TASK2(1, "Ask about your current task.", KILI_ROW_II);
+
+        //Kili's row III
+        //TALK_ABOUT_UPGRADE3(1, "Talk about active equipment upgrade task.", KILI_ROW_III),
+        //CURRENT_TASK3(1, "Ask about your current task.", KILI_ROW_III);
 
         private final int number;
         private final String text;

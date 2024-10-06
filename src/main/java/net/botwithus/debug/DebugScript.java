@@ -72,6 +72,9 @@ public class DebugScript extends LoopingScript {
             case ARCH_TUTORIAL -> ArchTut.quest();
             case F2P_LODESTONES -> Loadstones.unlockloadstones();
             case NEW_FOUNDATION -> NewFoundation.quest();
+            case KILI_ROW_I -> KiliRowI.quest();
+            case KILI_ROW_II -> KiliRowII.quest();
+            //case KILI_ROW_III -> KiliRowIII.quest();
             //case FAMILY_CREST -> FamilyCrest.quest();
             default -> delay(100);
         }
@@ -139,7 +142,36 @@ public class DebugScript extends LoopingScript {
     }
 
     public enum Quest {
-        COOKS_ASSISTANT(257), VIOLET_IS_BLUE(400), BLOOD_PACT(335), NECROMANCY_INTRO(493), RESTLESS_GHOST(27), WHAT_LIES_BELOW(144), THE_KNIGHT_SWORD(261), SHIELD_OF_ARRAV(63), FAMILY_CREST_INCOMPLETE(116), TOMES_OF_WARLOCK(497), STOLEN_HEARTS(355), THE_GOLEM(286), RUNE_MYTHOS(494), GHOSTS_AHOY(82), VESSEL_HARINGER(495), SPIRIT_WAR(496), TOME_OF_WARLOCK(497), DIAMOND_ROUGH(356), JACK_OF_SPADES(390), DAUGHTER_OF_CHAOS(483), KILI_ROW(500), F2P_LODESTONES(9999999), ARCH_TUTORIAL(999999), NEW_FOUNDATION(489), TEST_DONTSELECT(135);
+
+        COOKS_ASSISTANT(257),
+        VIOLET_IS_BLUE(400),
+        BLOOD_PACT(335),
+        NECROMANCY_INTRO(493),
+        RESTLESS_GHOST(27),
+        WHAT_LIES_BELOW(144),
+        THE_KNIGHT_SWORD(261),
+        SHIELD_OF_ARRAV(63),
+        FAMILY_CREST_INCOMPLETE(116),
+        TOMES_OF_WARLOCK(497),
+        STOLEN_HEARTS(355),
+        THE_GOLEM(286),
+        RUNE_MYTHOS(494),
+        GHOSTS_AHOY(82),
+        VESSEL_HARINGER(495),
+        SPIRIT_WAR(496),
+        TOME_OF_WARLOCK(497),
+        DIAMOND_ROUGH(356),
+        JACK_OF_SPADES(390),
+        DAUGHTER_OF_CHAOS(483),
+        KILI_ROW(500),
+        F2P_LODESTONES(9999999),
+        ARCH_TUTORIAL(999999),
+        NEW_FOUNDATION(489),
+        KILI_ROW_I(99999),
+        KILI_ROW_II(99999),
+        //KILI_ROW_III(99999),
+        TEST_DONTSELECT(135);
+
 
 
         private final int questId;
