@@ -38,7 +38,7 @@ public class DebugGraphicsContext extends ScriptGraphicsContext {
 
     @Override
     public void drawSettings() {
-        if (ImGui.Begin("Quests", ImGuiWindowFlag.None.ordinal())) {
+        if (ImGui.Begin("Quests 1.0", ImGuiWindowFlag.None.ordinal())) {
             if (ImGui.Button(running ? "Stop" : "Start")) {
                 running = !running;
             }
