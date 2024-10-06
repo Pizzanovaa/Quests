@@ -1,6 +1,7 @@
 package net.botwithus.debug;
 
 
+import net.botwithus.api.game.hud.Dialog;
 import net.botwithus.internal.scripts.ScriptDefinition;
 import net.botwithus.rs3.events.EventBus;
 import net.botwithus.rs3.events.Subscription;
@@ -13,11 +14,11 @@ import net.botwithus.rs3.game.movement.TraverseEvent;
 import net.botwithus.rs3.game.scene.entities.characters.player.LocalPlayer;
 import net.botwithus.rs3.game.vars.VarManager;
 import net.botwithus.rs3.script.LoopingScript;
+import net.botwithus.rs3.script.ScriptConsole;
 import net.botwithus.rs3.script.config.ScriptConfig;
 
 
 public class DebugScript extends LoopingScript {
-
 
 
     public DebugScript(String s, ScriptConfig scriptConfig, ScriptDefinition scriptDefinition) {
@@ -32,10 +33,8 @@ public class DebugScript extends LoopingScript {
     }
 
 
-
     public static Quest currentQuest = Quest.TEST_DONTSELECT;
     public static boolean running = false;
-
 
 
     private Subscription<ServerTickedEvent> subscription;
@@ -44,13 +43,12 @@ public class DebugScript extends LoopingScript {
     public void onLoop() {
 
 
-        if(!running){
+        if (!running) {
             return;
-
         }
 
 
-        switch (currentQuest){
+        switch (currentQuest) {
             case VIOLET_IS_BLUE -> VioletIsBlue.quest2();
             case COOKS_ASSISTANT -> CooksAssitant.quest();
             case NECROMANCY_INTRO -> Necromancy1.quest2();
@@ -59,9 +57,10 @@ public class DebugScript extends LoopingScript {
             case WHAT_LIES_BELOW -> WhatLiesBelow.quest();
             case THE_KNIGHT_SWORD -> TheKnightSword.quest(); // Nav stuck on agilty req
             case SHIELD_OF_ARRAV -> ShieldofArrav.quest();
-            case STOLEN_HEARTS -> StolenHearts.quest2(); //Requires manual play for diamond idol and seems to be crashy...
+            case STOLEN_HEARTS ->
+                    StolenHearts.quest2(); //Requires manual play for diamond idol and seems to be crashy...
             case THE_GOLEM -> TheGolem.quest();
-            case RUNE_MYTHOS ->RuneMythos.quest();
+            case RUNE_MYTHOS -> RuneMythos.quest();
             case GHOSTS_AHOY -> GhostsAhoy.quest();
             case VESSEL_HARINGER -> VesselHarbinger.quest();
             case SPIRIT_WAR -> Spirit_War.quest();
@@ -71,7 +70,7 @@ public class DebugScript extends LoopingScript {
             case DAUGHTER_OF_CHAOS -> DaughterofChaos.quest();
             case KILI_ROW -> KiliRow.quest();
             case ARCH_TUTORIAL -> ArchTut.quest();
-            case F2P_LODESTONES ->  Loadstones.unlockloadstones();
+            case F2P_LODESTONES -> Loadstones.unlockloadstones();
             case NEW_FOUNDATION -> NewFoundation.quest();
             case KILI_ROW_I -> KiliRowI.quest();
             case KILI_ROW_II -> KiliRowII.quest();
@@ -79,7 +78,6 @@ public class DebugScript extends LoopingScript {
             //case FAMILY_CREST -> FamilyCrest.quest();
             default -> delay(100);
         }
-
 
 
     }
@@ -92,7 +90,6 @@ public class DebugScript extends LoopingScript {
             Dialogs.println("moveTo | Already at the target location.");
             return true;
         }
-
 
 
         Dialogs.println("moveTo | Traversing to location: " + location);
@@ -145,6 +142,7 @@ public class DebugScript extends LoopingScript {
     }
 
     public enum Quest {
+
         COOKS_ASSISTANT(257),
         VIOLET_IS_BLUE(400),
         BLOOD_PACT(335),
@@ -173,6 +171,7 @@ public class DebugScript extends LoopingScript {
         KILI_ROW_II(99999),
         //KILI_ROW_III(99999),
         TEST_DONTSELECT(135);
+
 
 
         private final int questId;
