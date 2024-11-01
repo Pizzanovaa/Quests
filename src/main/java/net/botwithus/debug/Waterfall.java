@@ -78,6 +78,9 @@ public class Waterfall {
     public static void quest() {
         int QuestVarp = VarManager.getVarpValue(2353);
         player = Client.getLocalPlayer().getServerCoordinate();
+
+        int value = VarManager.getVarpValue(2353);
+        println("Varbit 2353 Quest Varp:" + value);
        
         if (isDialogOpen()) {
             return;
@@ -140,7 +143,7 @@ public class Waterfall {
                     if(!bookarea.contains(player)){
                         DebugScript.moveTo(bookcoordinate);
                     }
-                    else if(bookarea.contains(player) && Backpack.contains("Book on Baxtorian")){
+                    else if(bookarea.contains(player) && !Backpack.contains("Book on Baxtorian")){
                         Coordinate bookcasecoordinate1 = new Coordinate(2520, 3426, 1);
                         SceneObject bookcase = SceneObjectQuery.newQuery().name("Bookcase").results().nearestTo(bookcasecoordinate1);
                         if(bookcase !=null){
@@ -193,6 +196,7 @@ public class Waterfall {
                                         delay(RandomGenerator.nextInt(200, 400));
                                         Execution.delayUntil(3000, () -> player.distanceTo(golrie) < 4);
                                         talktoGolrie();
+                                        delay(RandomGenerator.nextInt(800, 1400));
                                     }
                                 }
                             }
@@ -228,6 +232,7 @@ public class Waterfall {
                     int waterrunes = Backpack.getQuantity("Water rune");
                     int earthrunes = Backpack.getQuantity("Earth rune");
                     int rope = Backpack.getCount("Rope");
+                    
                         
                 if(Client.getLocalPlayer().getServerCoordinate().getRegionId() == 10137 && Backpack.contains(294) && !Backpack.contains(295)){
                     SceneObject chest = SceneObjectQuery.newQuery().name("Closed chest").hidden(false).results().nearest();
@@ -241,6 +246,7 @@ public class Waterfall {
                 }
                 else if(Client.getLocalPlayer().getServerCoordinate().getRegionId() == 10137 && Backpack.contains(294) && Backpack.contains(295) && !Backpack.contains(296)){
                     ///
+                    println("Searching for Glarial's tomb");
                     SceneObject tomb = SceneObjectQuery.newQuery().name("Glarial's tomb").results().nearest();
                     if(tomb !=null){
                         tomb.interact("Search");
@@ -257,8 +263,8 @@ public class Waterfall {
                     }
                    
                 }
-                else if(Backpack.contains(294) && Backpack.contains(295) && Backpack.contains(296) && ardibankarea.contains(player) && airrunes < 6 && waterrunes < 6 && earthrunes < 6 && rope < 1)
-                {                       
+                else if(Backpack.contains(294) && Backpack.contains(295) && Backpack.contains(296) && ardibankarea.contains(player) && (airrunes < 6 || waterrunes < 6 || earthrunes < 6 || rope < 1))
+                {           println("Checking runes and rope");           
                         if( airrunes < 6 || waterrunes < 6 || earthrunes < 6 || rope < 1)
                         {
                             println("Not enough runes found");
@@ -299,7 +305,7 @@ public class Waterfall {
                 else if(Backpack.contains(294) && Backpack.contains(295) && Backpack.contains(296) && airrunes >= 6 && waterrunes >= 6 && earthrunes >= 6 && rope >= 1)
                 {
                     
-                    
+                    println("Enough runes found");
                     if(!treearea.contains(player)){
                         DebugScript.moveTo(tree);
                     }
@@ -329,25 +335,42 @@ public class Waterfall {
                 {
                     Coordinate largedooreastcoordinate = new Coordinate(2565, 9881, 0);
                     Coordinate door1 = new Coordinate(2565, 9881, 0);
+                    Coordinate door120 = new Coordinate(2568, 9893, 0);
 
                     SceneObject largerdoorwest = SceneObjectQuery.newQuery().name("Large door").results().nearestTo(largedooreastcoordinate);
                     if(largerdoorwest !=null && largerdoorwest.isHidden() == false){
                         largerdoorwest.interact("Open");
                     }
                     else if(largerdoorwest !=null && largerdoorwest.isHidden() == true){
-                        
-                        SceneObject door11 = SceneObjectQuery.newQuery().name("Door").results().nearestTo(door1);
-                        if(door11 !=null){
+                        //Coordinate door120 = new Coordinate(2568, 9893, 0);
+                        SceneObject pillar = SceneObjectQuery.newQuery().name("Pillar").results().nearestTo(door120);
+                        SceneObject door11 = SceneObjectQuery.newQuery().name("Door").results().nearestTo(door120);
+                        if(door11 !=null && door120.distanceTo(pillar)  <= player.distanceTo(pillar)){
                             door11.interact("Open");
                             delay(RandomGenerator.nextInt(1200, 1800));
                             
                         }
+                        else if(player.distanceTo(pillar) < door120.distanceTo(pillar)){
+                            Coordinate door12 = new Coordinate(2566, 9901, 0);
+                            SceneObject door121 = SceneObjectQuery.newQuery().name("Door").results().nearestTo(door12);
+                            Item key = InventoryItemQuery.newQuery(93).ids(298).results().first();
+                         if(key !=null){
+                             boolean success = MiniMenu.interact(SelectableAction.SELECTABLE_COMPONENT.getType(), 0, key.getSlot(), 96534533);
+                             if(success){
+                                 delay(RandomGenerator.nextInt(200, 400));
+                                 door121.interact(SelectableAction.SELECT_OBJECT.getType());
+                                 delay(RandomGenerator.nextInt(1200, 1800));
+                             }
+                         }
+                        }
+                            
 
                     }
                 }
                 else{
                     
                     Coordinate largedooreastcoordinate = new Coordinate(2582, 9876, 0);
+                    
                     SceneObject largedooreast = SceneObjectQuery.newQuery().name("Large door").id(31820).results().nearestTo(largedooreastcoordinate);
                     if(largedooreast !=null && largedooreast.isHidden() == false){
                         largedooreast.interact("Open");
