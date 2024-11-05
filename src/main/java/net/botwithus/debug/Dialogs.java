@@ -305,7 +305,19 @@ public class Dialogs {
         CALM_OZAN_DOWN(1, "[Calm Ozan down.]", STOLEN_HEARTS),
 
         // Family Crest
-
+        HI_I_AM_A_BOLD_ADVENTURER(1, "Hi, I am a bold adventurer.", FAMILY_CREST),
+        SO_WHERE_IS_THIS_CREST(2, "So where is this crest?", FAMILY_CREST),
+        ARE_YOU_CALEB_FITZHARMON(1, "Are you Caleb Fitzharmon?", FAMILY_CREST),
+        SO_CAN_I_HAVE_YOUR_BIT(2, "So can I have your bit?", FAMILY_CREST),
+        OK_I_WILL_GET_THOSE(1, "Ok, I will get those.", FAMILY_CREST),
+        UH_WHAT_HAPPENED_TO_THE_REST_OF_IT(1, "Uh... what happened to the rest of it?", FAMILY_CREST),
+        IM_LOOKING_FOR_A_MAN_NAMED_AVAN_FITZHARMON(1, "I'm looking for a man named Avan Fitzharmon.", FAMILY_CREST),
+        YES_SMELT_PERFECT_GOLDEN_RING(1, "Yes smelt 'perfect' golden ring.", FAMILY_CREST),
+        YES_SMELT_PERFECT_GOLDEN_NECKLACE(2, "Yes smelt 'perfect' golden necklace.", FAMILY_CREST),
+        WHERE_CAN_I_FIND_CHRONOZON(2, "Where can I find Chronozon?", FAMILY_CREST),
+        ASK_ABOUT_GAUNTLETS(1, "Ask about gauntlets.", FAMILY_CREST),
+        RECLAIM_LOST_GAUNTLETS(1, "Reclaim lost gauntlets.", FAMILY_CREST),
+        YES_PLEASE(1, "Yes please.", FAMILY_CREST),
 
         // THE GOLEM
         OPEN_PORTAL(1, "How do I open the portal?", THE_GOLEM),
@@ -394,8 +406,26 @@ public class Dialogs {
 
         //Enter the Abyss
         YES_ENTER_THE_ABYSS(1, "Yes", ENTER_THE_ABYSS),
-        WHERE_RUNES(2, "Where do you get your runes from?", ENTER_THE_ABYSS);
-        
+        WHERE_RUNES(2, "Where do you get your runes from?", ENTER_THE_ABYSS),
+
+        //Whats Mine Is Yours
+        DONT_WORRY_ILL_HELP_YOU(1, "Don't worry, I'll help you.", WHATS_MINE_IS_YOURS),
+        YES_WHATS_MINE_IS_YOURS(2, "Yes", WHATS_MINE_IS_YOURS),
+        YES_WHATS_MINE_IS_YOURS1(1, "Yes.", WHATS_MINE_IS_YOURS),
+        I_LL_LEAVE_RIGHT_AWAY(3, "I'll leave right away.", WHATS_MINE_IS_YOURS),
+        DORIC_SENT_ME_HERE_WITH_THESE_WEAPONS(1, "Doric sent me here with these weapons.", WHATS_MINE_IS_YOURS),
+        I_D_LOVE_TO(1, "I'd love to.", WHATS_MINE_IS_YOURS),
+        YES_I_HAVE_THEM_HERE(1, "Yes, I have them here.", WHATS_MINE_IS_YOURS),
+        BORIC_TELL_DORIC_ABOUT_YOUR_GRADUATION(1, "Boric, tell Doric about your graduation.", WHATS_MINE_IS_YOURS),
+        BORIC_TELL_DORIC_WHAT_YOU_THOUGHT_WHEN_DORIC_SENT_YOU_AWAY(1, "Boric, tell Doric what you thought when Doric sent you away.", WHATS_MINE_IS_YOURS),
+        BORIC_TELL_DORIC_WHAT_YOU_THOUGHT_OF_YOUR_EDUCATION(1, "Boric, tell Doric what you thought of your education.", WHATS_MINE_IS_YOURS),
+        BORIC_TELL_DORIC_WHY_YOU_WANTED_TO_STAY_HERE(1, "Boric, tell Doric why you wanted to stay here.", WHATS_MINE_IS_YOURS),
+        BORIC_TELL_DORIC_WHAT_YOU_THOUGHT_OF_KELDAGRIM(1, "Boric, tell Doric what you thought of Keldagrim.", WHATS_MINE_IS_YOURS),
+        DORIC_TELL_BORIC_WHAT_YOU_THOUGHT_WHEN_BORIC_WAS_BORN(1, "Doric, tell Boric what you thought when Boric was born.", WHATS_MINE_IS_YOURS),
+        BORIC_TELL_BORIC_WHY_YOU_SENT_HIM_TO_KELDAGRIM(1, "Boric, tell Boric why you sent him to Keldagrim.", WHATS_MINE_IS_YOURS),
+        BORIC_TELL_BORIC_HOW_YOU_FELT_BRINGING_BORIC_UP_ALONE(1, "Boric, tell Boric how you felt bringing Boric up alone.", WHATS_MINE_IS_YOURS),
+        DORIC_TELL_BORIC_WHAT_YOU_HOPE_SENDING_HIM_AWAY_WOULD_TEACH_HIM(1, "Doric, tell Boric what you hoped sending him away would teach him.", WHATS_MINE_IS_YOURS);
+
 
 
         private final int number;
