@@ -161,7 +161,6 @@ public class DebugScript extends LoopingScript {
         GHOSTS_AHOY(82),
         VESSEL_HARINGER(495),
         SPIRIT_WAR(496),
-        TOME_OF_WARLOCK(497),
         DIAMOND_ROUGH(356),
         JACK_OF_SPADES(390),
         DAUGHTER_OF_CHAOS(483),
