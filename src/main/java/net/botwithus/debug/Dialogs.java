@@ -386,11 +386,17 @@ public class Dialogs {
 
         //Kili's row II
         TALK_ABOUT_UPGRADE2(1, "Talk about active equipment upgrade task.", KILI_ROW_II),
-        CURRENT_TASK2(1, "Ask about your current task.", KILI_ROW_II);
+        CURRENT_TASK2(1, "Ask about your current task.", KILI_ROW_II),
 
         //Kili's row III
         //TALK_ABOUT_UPGRADE3(1, "Talk about active equipment upgrade task.", KILI_ROW_III),
         //CURRENT_TASK3(1, "Ask about your current task.", KILI_ROW_III);
+
+        //Enter the Abyss
+        YES_ENTER_THE_ABYSS(1, "Yes", ENTER_THE_ABYSS),
+        WHERE_RUNES(2, "Where do you get your runes from?", ENTER_THE_ABYSS);
+        
+
 
         private final int number;
         private final String text;
