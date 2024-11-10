@@ -10,7 +10,7 @@ repositories {
     mavenLocal()
     mavenCentral()
     maven {
-        setUrl("https://nexus.botwithus.net/repository/maven-snapshots/")
+        setUrl("https://nexus.botwithus.net/repository/maven-releases/")
     }
 }
 
@@ -41,9 +41,9 @@ tasks.named<Jar>("jar") {
 }
 
 dependencies {
-    implementation("net.botwithus.rs3:botwithus-api:1.0.0-SNAPSHOT")
-    implementation("net.botwithus.xapi.public:api:1.0.0-SNAPSHOT")
-    "includeInJar"("net.botwithus.xapi.public:api:1.0.0-SNAPSHOT")
+    implementation("net.botwithus.rs3:botwithus-api:1.0.1")
+    implementation("net.botwithus.xapi.public:api:1.0.2")
+    "includeInJar"("net.botwithus.xapi.public:api:1.0.2")
     implementation("com.google.flogger:flogger:0.7.4")
     implementation("com.google.flogger:flogger-system-backend:0.7.4")
     implementation("com.google.code.gson:gson:2.10.1")

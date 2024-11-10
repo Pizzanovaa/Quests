@@ -77,8 +77,11 @@ public class DebugScript extends LoopingScript {
             case KILI_ROW_II -> KiliRowII.quest();
             case WATERFALL -> Waterfall.quest();
             case ENTER_THE_ABYSS -> Entertheabyss.quest();
+            case FAMILY_CREST_INCOMPLETE -> FamilyCrest.quest();
+            case WHATS_MINE_IS_YOURS -> WhatsMineIsYours.quest();
+            
             //case KILI_ROW_III -> KiliRowIII.quest();
-            //case FAMILY_CREST -> FamilyCrest.quest();
+            
             default -> delay(100);
         }
 
@@ -173,6 +176,8 @@ public class DebugScript extends LoopingScript {
         KILI_ROW_II(99999),
         WATERFALL(93),
         ENTER_THE_ABYSS(3149),
+        WHATS_MINE_IS_YOURS(357),
+        
         //KILI_ROW_III(99999),
         TEST_DONTSELECT(135);
 
