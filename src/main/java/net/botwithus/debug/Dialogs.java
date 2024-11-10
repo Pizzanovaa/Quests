@@ -224,6 +224,7 @@ public class Dialogs {
         I_GET_ON_IT(1, "I'll get right on it.", COOKS_ASSISTANT),
 
         //Violet is Blue
+        READY_FOR_ADVENTURE1(1, "To go on an adventure.", VIOLET_IS_BLUE),
         KNOCK(1, "Knock again.", VIOLET_IS_BLUE),
         READY_FOR_ADVENTURE(1, "Go on an adventure!", VIOLET_IS_BLUE),
         BREAK_THE_DOOR_DOWN(3, "Break the door down.", VIOLET_IS_BLUE),
@@ -231,6 +232,7 @@ public class Dialogs {
         USEFUL(1, "Do you have anything useful?", VIOLET_IS_BLUE),
         HEAD(1, "Happy face.", VIOLET_IS_BLUE),
         YES(1, "Yes!", VIOLET_IS_BLUE),
+        VIOLET_YES(1, "Yes.", VIOLET_IS_BLUE),
 
         //BLOOD PACT
         HANDLE(4, "I can handle this.", BLOOD_PACT),
