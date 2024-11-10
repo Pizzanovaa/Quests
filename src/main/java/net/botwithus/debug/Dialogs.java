@@ -121,7 +121,7 @@ public class Dialogs {
             MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 77922323);
         } else if (Interfaces.isOpen(1186)) {
             MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 77725704);
-        } else if (Interfaces.isOpen(720)) {
+        } else if (Interfaces.isOpen(720) && currentQuest != NEW_FOUNDATION && currentQuest != ARCH_TUTORIAL) {
             MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 47185921);
         } else if (Interfaces.isOpen(1224)) {
             MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1, -1, 80216108);

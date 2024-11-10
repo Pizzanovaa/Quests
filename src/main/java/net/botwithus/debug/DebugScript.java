@@ -48,6 +48,7 @@ public class DebugScript extends LoopingScript {
         }
 
 
+
         switch (currentQuest) {
             case VIOLET_IS_BLUE -> VioletIsBlue.quest2();
             case COOKS_ASSISTANT -> CooksAssitant.quest();
@@ -64,7 +65,7 @@ public class DebugScript extends LoopingScript {
             case GHOSTS_AHOY -> GhostsAhoy.quest();
             case VESSEL_HARINGER -> VesselHarbinger.quest();
             case SPIRIT_WAR -> Spirit_War.quest();
-            case TOMES_OF_WARLOCK -> TomesOfWarlock.quest();
+            case TOMES_OF_WARLOCK -> TomesOfWarlock.quest(); //whynowrok
             case DIAMOND_ROUGH -> DiamondRough.quest();
             case JACK_OF_SPADES -> JackofSpades.quest();
             case DAUGHTER_OF_CHAOS -> DaughterofChaos.quest();
@@ -159,7 +160,6 @@ public class DebugScript extends LoopingScript {
         GHOSTS_AHOY(82),
         VESSEL_HARINGER(495),
         SPIRIT_WAR(496),
-        TOME_OF_WARLOCK(497),
         DIAMOND_ROUGH(356),
         JACK_OF_SPADES(390),
         DAUGHTER_OF_CHAOS(483),
@@ -171,7 +171,6 @@ public class DebugScript extends LoopingScript {
         KILI_ROW_II(99999),
         //KILI_ROW_III(99999),
         TEST_DONTSELECT(135);
-
 
 
         private final int questId;
