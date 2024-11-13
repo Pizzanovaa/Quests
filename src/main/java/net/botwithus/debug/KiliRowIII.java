@@ -18,8 +18,12 @@ import net.botwithus.rs3.script.Execution;
 import net.botwithus.rs3.script.ScriptConsole;
 import net.botwithus.rs3.util.RandomGenerator;
 import static net.botwithus.rs3.script.Execution.delay;
+import net.botwithus.rs3.game.inventories.Backpack;
+import net.botwithus.rs3.game.scene.entities.item.GroundItem;
+import net.botwithus.rs3.game.queries.builders.items.GroundItemQuery;
 
 import static net.botwithus.debug.Dialogs.isDialogOpen;
+import static net.botwithus.debug.Dialogs.println;
 
 public class KiliRowIII {
         static Coordinate player = Client.getLocalPlayer().getServerCoordinate();
@@ -27,6 +31,8 @@ public class KiliRowIII {
         static Area.Circular startarea = new Area.Circular(startcord, 10);
         static Coordinate ritualcord = new Coordinate(1038, 1772, 1);
         static Area.Circular ritualarea = new Area.Circular(ritualcord, 20);
+        static Coordinate morgecord = new Coordinate(3003, 3119, 0);
+        static Area.Circular morgearea = new Area.Circular(morgecord, 15);
 
     public static void quest() {
         int QuestVarp = VarManager.getVarbitValue(53745);
@@ -43,7 +49,7 @@ public class KiliRowIII {
         }
 
         if (QuestVarp == 0) {
-            ScriptConsole.println("Starting quest... Kili's Row II");
+            ScriptConsole.println("Starting quest... Kili's Knowledge III");
 
             if (startarea.contains(player)) {
                 //Quest Giver
@@ -85,7 +91,8 @@ public class KiliRowIII {
                             doRitual();
                         }
                     }
-                } else {
+                } else if (progress == needed &&Backpack.contains(55561) && Backpack.contains(2323))
+                {
                     if (progress == needed) {
                         if (startarea.contains(player)) {
                             talkToKili();
@@ -96,15 +103,52 @@ public class KiliRowIII {
                         DebugScript.moveTo(ritualcord);
                     }
                 }
+                else if(progress == needed && !Backpack.contains(55561) && Backpack.contains(6664))
+                {
+                        if(!morgearea.contains(player))
+                        {
+                            DebugScript.moveTo(morgecord);
+                        }
+                        else
+                        {
+                            SceneObject Ominousspot = SceneObjectQuery.newQuery().name("Ominous Fishing Spot").results().nearest();
+                            Npc morge = NpcQuery.newQuery().name("Mogre").results().nearest();
+                            GroundItem flippers = GroundItemQuery.newQuery().ids(55561).results().nearest();
+                            println("At Morge area");
+                            if(Ominousspot != null && morge == null && flippers == null)
+                            {
+                                println("Exploding");   
+                                Ominousspot.interact("Explode!");
+                                delay(RandomGenerator.nextInt(600, 1200));
+                            }
+                            else if(morge != null && flippers == null && Ominousspot != null)
+                            {
+                                println("Attacking Morge");
+                                morge.interact("Attack");
+                                delay(RandomGenerator.nextInt(600, 1200));
+
+                            } else if(flippers != null && !Backpack.contains(55561))
+                            {
+                                println("Taking flippers");
+                                if(flippers != null && !Backpack.contains(4615))
+                                {
+                                    flippers.interact("Take");
+                                    delay(RandomGenerator.nextInt(600, 1200));
+                                      if (Interfaces.isOpen(1622)) {
+                                        Item items = InventoryItemQuery.newQuery(773).ids(55561).results().first();
+                                        if (items != null) {
+                                            println("Item Slot" + items.getSlot());
+                                            MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1, items.getSlot(), 106299403);
+                                            delay(RandomGenerator.nextInt(600, 1200));
+                                            return;
+                            }
+                        }
+                    }
+                            }
+                        }
+                }
                 break;
-                case 6:
-                break;
-                case 7:
-                break;
-                case 8:
-                break;
-                case 9:
-                break;
+
             }
         }
     }

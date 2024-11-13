@@ -307,19 +307,19 @@ public class Dialogs {
         CALM_OZAN_DOWN(1, "[Calm Ozan down.]", STOLEN_HEARTS),
 
         // Family Crest
-        HI_I_AM_A_BOLD_ADVENTURER(1, "Hi, I am a bold adventurer.", FAMILY_CREST),
-        SO_WHERE_IS_THIS_CREST(2, "So where is this crest?", FAMILY_CREST),
-        ARE_YOU_CALEB_FITZHARMON(1, "Are you Caleb Fitzharmon?", FAMILY_CREST),
-        SO_CAN_I_HAVE_YOUR_BIT(2, "So can I have your bit?", FAMILY_CREST),
-        OK_I_WILL_GET_THOSE(1, "Ok, I will get those.", FAMILY_CREST),
-        UH_WHAT_HAPPENED_TO_THE_REST_OF_IT(1, "Uh... what happened to the rest of it?", FAMILY_CREST),
-        IM_LOOKING_FOR_A_MAN_NAMED_AVAN_FITZHARMON(1, "I'm looking for a man named Avan Fitzharmon.", FAMILY_CREST),
-        YES_SMELT_PERFECT_GOLDEN_RING(1, "Yes smelt 'perfect' golden ring.", FAMILY_CREST),
-        YES_SMELT_PERFECT_GOLDEN_NECKLACE(2, "Yes smelt 'perfect' golden necklace.", FAMILY_CREST),
-        WHERE_CAN_I_FIND_CHRONOZON(2, "Where can I find Chronozon?", FAMILY_CREST),
-        ASK_ABOUT_GAUNTLETS(1, "Ask about gauntlets.", FAMILY_CREST),
-        RECLAIM_LOST_GAUNTLETS(1, "Reclaim lost gauntlets.", FAMILY_CREST),
-        YES_PLEASE(1, "Yes please.", FAMILY_CREST),
+        HI_I_AM_A_BOLD_ADVENTURER(1, "Hi, I am a bold adventurer.", FAMILY_CREST_INCOMPLETE),
+        SO_WHERE_IS_THIS_CREST(2, "So where is this crest?", FAMILY_CREST_INCOMPLETE),
+        ARE_YOU_CALEB_FITZHARMON(1, "Are you Caleb Fitzharmon?", FAMILY_CREST_INCOMPLETE),
+        SO_CAN_I_HAVE_YOUR_BIT(2, "So can I have your bit?", FAMILY_CREST_INCOMPLETE),
+        OK_I_WILL_GET_THOSE(1, "Ok, I will get those.", FAMILY_CREST_INCOMPLETE),
+        UH_WHAT_HAPPENED_TO_THE_REST_OF_IT(1, "Uh... what happened to the rest of it?", FAMILY_CREST_INCOMPLETE),
+        IM_LOOKING_FOR_A_MAN_NAMED_AVAN_FITZHARMON(1, "I'm looking for a man named Avan Fitzharmon.", FAMILY_CREST_INCOMPLETE),
+        YES_SMELT_PERFECT_GOLDEN_RING(1, "Yes smelt 'perfect' golden ring.", FAMILY_CREST_INCOMPLETE),
+        YES_SMELT_PERFECT_GOLDEN_NECKLACE(2, "Yes smelt 'perfect' golden necklace.", FAMILY_CREST_INCOMPLETE),
+        WHERE_CAN_I_FIND_CHRONOZON(2, "Where can I find Chronozon?", FAMILY_CREST_INCOMPLETE),
+        ASK_ABOUT_GAUNTLETS(1, "Ask about gauntlets.", FAMILY_CREST_INCOMPLETE),
+        RECLAIM_LOST_GAUNTLETS(1, "Reclaim lost gauntlets.", FAMILY_CREST_INCOMPLETE),
+        YES_PLEASE(1, "Yes please.", FAMILY_CREST_INCOMPLETE),
 
         // THE GOLEM
         OPEN_PORTAL(1, "How do I open the portal?", THE_GOLEM),
@@ -395,16 +395,24 @@ public class Dialogs {
         DUKES_QUEST(1, "Duke.", NEW_FOUNDATION),
 
         //Kili's row I
-        TALK_ABOUT_UPGRADE1(1, "Talk about active equipment upgrade task.", KILI_ROW_I),
-        CURRENT_TASK1(1, "Ask about your current task.", KILI_ROW_I),
+        TALK_ABOUT_UPGRADE1(1, "Talk about active equipment upgrade task.", KILI_KNOWLEDGE_I),
+        CURRENT_TASK1(1, "Ask about your current task.", KILI_KNOWLEDGE_I),
 
         //Kili's row II
-        TALK_ABOUT_UPGRADE2(1, "Talk about active equipment upgrade task.", KILI_ROW_II),
-        CURRENT_TASK2(1, "Ask about your current task.", KILI_ROW_II),
+        TALK_ABOUT_UPGRADE2(1, "Talk about active equipment upgrade task.", KILI_KNOWLEDGE_II),
+        CURRENT_TASK2(1, "Ask about your current task.", KILI_KNOWLEDGE_II),
 
         //Kili's row III
-        //TALK_ABOUT_UPGRADE3(1, "Talk about active equipment upgrade task.", KILI_ROW_III),
-        //CURRENT_TASK3(1, "Ask about your current task.", KILI_ROW_III);
+        TALK_ABOUT_UPGRADE3(1, "Talk about active equipment upgrade task.", KILI_KNOWLEDGE_III),
+        CURRENT_TASK3(1, "Ask about your current task.", KILI_KNOWLEDGE_III),
+
+        //Kili's row IV
+        TALK_ABOUT_UPGRADE4(1, "Talk about active equipment upgrade task.", KILI_KNOWLEDGE_IV),
+        CURRENT_TASK4(1, "Ask about your current task.", KILI_KNOWLEDGE_IV),    
+
+        //Kili's row V
+        TALK_ABOUT_UPGRADE5(1, "Talk about active equipment upgrade task.", KILI_KNOWLEDGE_V),
+        CURRENT_TASK5(1, "Ask about your current task.", KILI_KNOWLEDGE_V),    
 
         //Enter the Abyss
         YES_ENTER_THE_ABYSS(1, "Yes", ENTER_THE_ABYSS),
@@ -426,7 +434,15 @@ public class Dialogs {
         DORIC_TELL_BORIC_WHAT_YOU_THOUGHT_WHEN_BORIC_WAS_BORN(1, "Doric, tell Boric what you thought when Boric was born.", WHATS_MINE_IS_YOURS),
         BORIC_TELL_BORIC_WHY_YOU_SENT_HIM_TO_KELDAGRIM(1, "Boric, tell Boric why you sent him to Keldagrim.", WHATS_MINE_IS_YOURS),
         BORIC_TELL_BORIC_HOW_YOU_FELT_BRINGING_BORIC_UP_ALONE(1, "Boric, tell Boric how you felt bringing Boric up alone.", WHATS_MINE_IS_YOURS),
-        DORIC_TELL_BORIC_WHAT_YOU_HOPE_SENDING_HIM_AWAY_WOULD_TEACH_HIM(1, "Doric, tell Boric what you hoped sending him away would teach him.", WHATS_MINE_IS_YOURS);
+        DORIC_TELL_BORIC_WHAT_YOU_HOPE_SENDING_HIM_AWAY_WOULD_TEACH_HIM(1, "Doric, tell Boric what you hoped sending him away would teach him.", WHATS_MINE_IS_YOURS),
+
+        //Gertrude Cat
+        WHAT_WILL_MAKE_YOU_TELL_ME(2, "What will make you tell me?", GERTRUDE_CAT),
+        OKAY_THEN_ILL_PAY(2, "Okay then, I'll pay.", GERTRUDE_CAT),
+
+        //Mogre Lore Activity
+        WHO_ARE_THEY(2, "Who are (Dramatic pause) THEY?", MOGRE_ACTIVITY),
+        THROW_THE_WATER(1, "Throw the water!", MOGRE_ACTIVITY);
 
 
 

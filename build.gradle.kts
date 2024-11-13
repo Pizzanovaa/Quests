@@ -15,8 +15,6 @@ repositories {
 }
 
 tasks.withType<JavaCompile> {
-    sourceCompatibility = "20"
-    targetCompatibility = "20"
     options.compilerArgs.add("--enable-preview")
 }
 

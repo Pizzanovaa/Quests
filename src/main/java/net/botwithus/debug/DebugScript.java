@@ -73,15 +73,17 @@ public class DebugScript extends LoopingScript {
             case ARCH_TUTORIAL -> ArchTut.quest();
             case F2P_LODESTONES -> Loadstones.unlockloadstones();
             case NEW_FOUNDATION -> NewFoundation.quest();
-            case KILI_ROW_I -> KiliRowI.quest();
-            case KILI_ROW_II -> KiliRowII.quest();
+            case KILI_KNOWLEDGE_I -> KiliRowI.quest();
+            case KILI_KNOWLEDGE_II -> KiliRowII.quest();
             case WATERFALL -> Waterfall.quest();
             case ENTER_THE_ABYSS -> Entertheabyss.quest();
             case FAMILY_CREST_INCOMPLETE -> FamilyCrest.quest();
             case WHATS_MINE_IS_YOURS -> WhatsMineIsYours.quest();
-            
-            //case KILI_ROW_III -> KiliRowIII.quest();
-            
+            case GERTRUDE_CAT -> GertrudeCat.quest();
+            case MOGRE_ACTIVITY -> mogre_lore_activity.quest();
+            case KILI_KNOWLEDGE_III -> KiliRowIII.quest();
+            case KILI_KNOWLEDGE_IV -> KiliRowIV.quest();
+            //case KILI_KNOWLEDGE_V -> KiliRowV.quest();
             default -> delay(100);
         }
 
@@ -172,13 +174,18 @@ public class DebugScript extends LoopingScript {
         F2P_LODESTONES(9999999),
         ARCH_TUTORIAL(999999),
         NEW_FOUNDATION(489),
-        KILI_ROW_I(99999),
-        KILI_ROW_II(99999),
+        KILI_KNOWLEDGE_I(99999),
+        KILI_KNOWLEDGE_II(99999),
+        KILI_KNOWLEDGE_III(99999),
+        KILI_KNOWLEDGE_IV(99999),
+        KILI_KNOWLEDGE_V(99999),
+        MOGRE_ACTIVITY(99999),
         WATERFALL(93),
         ENTER_THE_ABYSS(3149),
         WHATS_MINE_IS_YOURS(357),
+        GERTRUDE_CAT(138),
         
-        //KILI_ROW_III(99999),
+        
         TEST_DONTSELECT(135);
 
 
