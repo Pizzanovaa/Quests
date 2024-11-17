@@ -424,7 +424,22 @@ public class Dialogs {
         DORIC_TELL_BORIC_WHAT_YOU_THOUGHT_WHEN_BORIC_WAS_BORN(1, "Doric, tell Boric what you thought when Boric was born.", WHATS_MINE_IS_YOURS),
         BORIC_TELL_BORIC_WHY_YOU_SENT_HIM_TO_KELDAGRIM(1, "Boric, tell Boric why you sent him to Keldagrim.", WHATS_MINE_IS_YOURS),
         BORIC_TELL_BORIC_HOW_YOU_FELT_BRINGING_BORIC_UP_ALONE(1, "Boric, tell Boric how you felt bringing Boric up alone.", WHATS_MINE_IS_YOURS),
+<<<<<<< Updated upstream
         DORIC_TELL_BORIC_WHAT_YOU_HOPE_SENDING_HIM_AWAY_WOULD_TEACH_HIM(1, "Doric, tell Boric what you hoped sending him away would teach him.", WHATS_MINE_IS_YOURS);
+=======
+        DORIC_TELL_BORIC_WHAT_YOU_HOPE_SENDING_HIM_AWAY_WOULD_TEACH_HIM(1, "Doric, tell Boric what you hoped sending him away would teach him.", WHATS_MINE_IS_YOURS),
+
+        //Gertrude Cat
+        WHAT_WILL_MAKE_YOU_TELL_ME(2, "What will make you tell me?", GERTRUDE_CAT),
+        OKAY_THEN_ILL_PAY(2, "Okay then, I'll pay.", GERTRUDE_CAT),
+
+        //Anachronia Base Tutorial
+        YES_ANACHRONIA_BASE_TUTORIAL(1, "Yes.", ANACHRONIA_BASE_TUTORIAL),
+
+        //Mogre Lore Activity
+        WHO_ARE_THEY(2, "Who are (Dramatic pause) THEY?", MOGRE_ACTIVITY),
+        THROW_THE_WATER(1, "Throw the water!", MOGRE_ACTIVITY);
+>>>>>>> Stashed changes
 
 
 

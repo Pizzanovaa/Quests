@@ -78,9 +78,18 @@ public class DebugScript extends LoopingScript {
             case ENTER_THE_ABYSS -> Entertheabyss.quest();
             case FAMILY_CREST_INCOMPLETE -> FamilyCrest.quest();
             case WHATS_MINE_IS_YOURS -> WhatsMineIsYours.quest();
+<<<<<<< Updated upstream
             
             //case KILI_ROW_III -> KiliRowIII.quest();
             
+=======
+            case GERTRUDE_CAT -> GertrudeCat.quest();
+            case MOGRE_ACTIVITY -> mogre_lore_activity.quest();
+            case KILI_KNOWLEDGE_III -> KiliRowIII.quest();
+            case KILI_KNOWLEDGE_IV -> KiliRowIV.quest();
+            //case KILI_KNOWLEDGE_V -> KiliRowV.quest();
+            case ANACHRONIA_BASE_TUTORIAL -> AnachroniaTut.quest();
+>>>>>>> Stashed changes
             default -> delay(100);
         }
 
@@ -171,6 +180,7 @@ public class DebugScript extends LoopingScript {
         KILI_ROW(500),
         F2P_LODESTONES(9999999),
         ARCH_TUTORIAL(999999),
+        ANACHRONIA_BASE_TUTORIAL(999999),
         NEW_FOUNDATION(489),
         KILI_ROW_I(99999),
         KILI_ROW_II(99999),
