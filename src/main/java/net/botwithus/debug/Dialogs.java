@@ -440,6 +440,9 @@ public class Dialogs {
         WHAT_WILL_MAKE_YOU_TELL_ME(2, "What will make you tell me?", GERTRUDE_CAT),
         OKAY_THEN_ILL_PAY(2, "Okay then, I'll pay.", GERTRUDE_CAT),
 
+        //Anachronia Tutorial
+        YES_ANACHRONIA_TUTORIAL(1, "Yes.", ANACHRONIA_TUT),
+
         //Mogre Lore Activity
         WHO_ARE_THEY(2, "Who are (Dramatic pause) THEY?", MOGRE_ACTIVITY),
         THROW_THE_WATER(1, "Throw the water!", MOGRE_ACTIVITY);

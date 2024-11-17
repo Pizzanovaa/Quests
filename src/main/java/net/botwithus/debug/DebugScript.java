@@ -84,6 +84,7 @@ public class DebugScript extends LoopingScript {
             case KILI_KNOWLEDGE_III -> KiliRowIII.quest();
             case KILI_KNOWLEDGE_IV -> KiliRowIV.quest();
             //case KILI_KNOWLEDGE_V -> KiliRowV.quest();
+            case ANACHRONIA_TUT -> AnachroniaTut.quest();
             default -> delay(100);
         }
 
@@ -173,6 +174,7 @@ public class DebugScript extends LoopingScript {
         KILI_ROW(500),
         F2P_LODESTONES(9999999),
         ARCH_TUTORIAL(999999),
+        ANACHRONIA_TUT(99999999),
         NEW_FOUNDATION(489),
         KILI_KNOWLEDGE_I(99999),
         KILI_KNOWLEDGE_II(99999),
