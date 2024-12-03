@@ -85,6 +85,7 @@ public class DebugScript extends LoopingScript {
             case KILI_KNOWLEDGE_IV -> KiliRowIV.quest();
             //case KILI_KNOWLEDGE_V -> KiliRowV.quest();
             case ANACHRONIA_TUT -> AnachroniaTut.quest();
+            case CHRISTMAS_REUNION -> ChristmasReunion.quest();
             default -> delay(100);
         }
 
@@ -186,7 +187,7 @@ public class DebugScript extends LoopingScript {
         ENTER_THE_ABYSS(3149),
         WHATS_MINE_IS_YOURS(357),
         GERTRUDE_CAT(138),
-        
+        CHRISTMAS_REUNION(516),
         
         TEST_DONTSELECT(135);
 

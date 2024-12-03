@@ -445,7 +445,14 @@ public class Dialogs {
 
         //Mogre Lore Activity
         WHO_ARE_THEY(2, "Who are (Dramatic pause) THEY?", MOGRE_ACTIVITY),
-        THROW_THE_WATER(1, "Throw the water!", MOGRE_ACTIVITY);
+        THROW_THE_WATER(1, "Throw the water!", MOGRE_ACTIVITY),
+
+        //Christmas Reunion
+        PLAIN_BROWN_OUTFITS_DONT_EXACTLY_SCREAM_CHRISTMAS(1, "The plain brown outfits don't exactly scream 'Christmas'.", CHRISTMAS_REUNION),
+        TALK_ABOUT_A_CHRISTMAS_REUNION(1, "Talk about 'A Christmas Reunion'.", CHRISTMAS_REUNION),
+        COULD_I_PAY_YOU_TO_MAKE_THEM_FOR_ME(1, "Could I pay you to make them for me?", CHRISTMAS_REUNION),
+        MAKE_CHRISTMAS_DYE(1, "Make Christmas dye.", CHRISTMAS_REUNION),
+        RED_AND_BLACK(1, "Red and black.", CHRISTMAS_REUNION);
 
 
 
