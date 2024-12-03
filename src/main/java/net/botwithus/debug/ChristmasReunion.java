@@ -38,8 +38,8 @@ public class ChristmasReunion {
     static Coordinate player = Client.getLocalPlayer().getServerCoordinate();
     static Coordinate startcord = new Coordinate(5246, 9773, 0);
     static Area.Circular startarea = new Area.Circular(startcord, 10);
-    static Coordinate pixielumb = new Coordinate(3157, 3239, 0);;
-    static Area.Circular pixielumbarea = new Area.Circular(pixielumb, 10);
+    static Coordinate pixielumb = new Coordinate(3160, 3237, 0);;
+    static Area.Circular pixielumbarea = new Area.Circular(pixielumb, 2);
     static Coordinate pixiealk = new Coordinate(3410, 3167, 0);;
     static Area.Circular pixiealkarea = new Area.Circular(pixiealk, 10);
     static Coordinate pixiede = new Coordinate(3438, 3746, 1);
@@ -102,14 +102,14 @@ public class ChristmasReunion {
                  SceneObject carvingbench = SceneObjectQuery.newQuery().name("Carving bench").hidden(false).results().nearest();
                  SceneObject finishingbench = SceneObjectQuery.newQuery().name("Finishing bench").hidden(false).results().nearest();
 
-                 if(Backpack.getCount(57922) <=3 && !Backpack.contains("Split fir logs") && (paintingbench == null || carvingbench == null || finishingbench == null))   //Fir Wood
+                 if(Backpack.getCount(57922) <3 && !Backpack.contains("Split fir logs") && (paintingbench == null || carvingbench == null || finishingbench == null))   //Fir Wood
                  {
-                    if(tree != null && !tree.isHidden())
+                    if(tree != null && !tree.isHidden() )
                     {   
                         //println("Chopping down fir tree");
                         println("Fir Log: " + Backpack.getCount(57922));
                         println("Chop down: " + tree.interact("Chop down"));
-                        Execution.delayUntil(RandomGenerator.nextInt(5000, 10000), () -> Backpack.getCount(57922) >= 3);
+                        Execution.delayUntil(RandomGenerator.nextInt(5000, 10000), () -> Backpack.getCount(57922) > 3);
                         //delay(RandomGenerat5or.nextInt(600, 800));
                     }
 
@@ -129,7 +129,7 @@ public class ChristmasReunion {
                         Execution.delay(RandomGenerator.nextInt(600, 2000));
                     }
                  }
-                 else if(Backpack.getQuantity(1539) <= 15 && Backpack.getCount(57922) >=3 && (paintingbench == null || carvingbench == null || finishingbench == null))  // Steel nails
+                 else if(Backpack.getQuantity(1539) <= 15 && Backpack.getCount(57923) >=3 && (paintingbench == null || carvingbench == null || finishingbench == null))  // Steel nails
                  {
                     if (Client.getLocalPlayer().isMoving()) {
                         return;
@@ -151,7 +151,7 @@ public class ChristmasReunion {
                     }
                     
                  }
-                 else if(pileofplanks != null && (paintingbench == null || carvingbench == null || finishingbench == null))
+                 else if(pileofplanks != null && (paintingbench == null || carvingbench == null || finishingbench == null) && Backpack.getQuantity("Steel nails") >= 15 && Backpack.getCount(57923) >=3)
                  {
                     if (Client.getLocalPlayer().isMoving()) {
                         return;
@@ -185,7 +185,7 @@ public class ChristmasReunion {
                 {
                     talktodiango();
                 }
-                if(diango == null && VarManager.getVarbitValue(56885) == 0 && VarManager.getVarbitValue(56886) == 0 && VarManager.getVarbitValue(56887) == 0)
+                if(diango == null) //&& VarManager.getVarbitValue(56885) == 0 && VarManager.getVarbitValue(56886) == 0 && VarManager.getVarbitValue(56887) == 0
                 {
                     if(VarManager.getVarbitValue(56885) == 0)   //pxie in lumb  -- pixie spawn anywhere 56880
                     {
@@ -204,7 +204,7 @@ public class ChristmasReunion {
                                         Component orb = ComponentQuery.newQuery(1473).item(58020).results().stream().findFirst().orElse(null);
                                         if(orb != null)
                                         {
-                                            orb.interact("Scan");
+                                        orb.interact("Scan");
                                         delay(RandomGenerator.nextInt(1100, 1500));
                                         }
                                     }
@@ -231,7 +231,7 @@ public class ChristmasReunion {
                                     Component orb = ComponentQuery.newQuery(1473).item(58020).results().stream().findFirst().orElse(null);
                                     if(orb != null)
                                     {
-                                        orb.interact("Scan");
+                                    orb.interact("Scan");
                                     delay(RandomGenerator.nextInt(1100, 1500));
                                     }
                                 }
@@ -352,7 +352,7 @@ public class ChristmasReunion {
 
                 SceneObject hotchocolate = SceneObjectQuery.newQuery().name("Hot chocolate storage").hidden(false).option("Add hot chocolate powder").results().nearest();
                 SceneObject biscuit = SceneObjectQuery.newQuery().name("Biscuit storage").hidden(false).option("Add biscuits").results().nearest();
-                if(Backpack.contains("Chocolate dust") && Backpack.contains("Bucket of milk") && hotchocolate != null)
+                if(Backpack.contains("Chocolate dust") && Backpack.contains("Bucket of milk") && hotchocolate != null && VarManager.getVarbitValue(56890) ==1)
                 {
                     //SceneObject hotchocolate = SceneObjectQuery.newQuery().name("Hot chocolate storage").hidden(false).results().nearest();
                     if(hotchocolate != null)
@@ -370,7 +370,7 @@ public class ChristmasReunion {
                     }
                     }
                 }
-                else if(Backpack.contains("Biscuits") && biscuit != null )
+                else if(Backpack.contains("Biscuits") && biscuit != null && VarManager.getVarbitValue(56891) ==1)
                 {
                     
                     if(biscuit != null)
@@ -388,7 +388,7 @@ public class ChristmasReunion {
                     }
                     }
                 }
-                else if(hotchocolate == null && biscuit == null)
+                else if(hotchocolate == null && biscuit == null && VarManager.getVarbitValue(56893) == 1 && VarManager.getVarbitValue(56892) == 1)
                 {
                     talktodiango();
                 }
@@ -491,17 +491,17 @@ public class ChristmasReunion {
             delay(RandomGenerator.nextInt(600, 800));
             if(Interfaces.isOpen(517))
             {
-                if(!Backpack.contains("Biscuits"))
+                if(!Backpack.contains("Biscuits") && VarManager.getVarbitValue(56891) ==1)
                 {
                     Bank.withdraw("Biscuits", 2);
                     delay(RandomGenerator.nextInt(600, 800));
                 }
-                else if(!Backpack.contains("Chocolate dust"))
+                else if(!Backpack.contains("Chocolate dust") && VarManager.getVarbitValue(56890) ==1)
                 {
                     Bank.withdraw("Chocolate dust", 2);
                     delay(RandomGenerator.nextInt(600, 800));
                 }
-                else if(!Backpack.contains("Bucket of milk"))
+                else if(!Backpack.contains("Bucket of milk") && VarManager.getVarbitValue(56890) ==1)
                 {
                     Bank.withdraw("Bucket of milk", 2);
                     delay(RandomGenerator.nextInt(600, 800));

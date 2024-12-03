@@ -452,7 +452,8 @@ public class Dialogs {
         TALK_ABOUT_A_CHRISTMAS_REUNION(1, "Talk about 'A Christmas Reunion'.", CHRISTMAS_REUNION),
         COULD_I_PAY_YOU_TO_MAKE_THEM_FOR_ME(1, "Could I pay you to make them for me?", CHRISTMAS_REUNION),
         MAKE_CHRISTMAS_DYE(1, "Make Christmas dye.", CHRISTMAS_REUNION),
-        RED_AND_BLACK(1, "Red and black.", CHRISTMAS_REUNION);
+        RED_AND_BLACK(1, "Red and black.", CHRISTMAS_REUNION),
+        THE_ABBEY(1, "The abbey?", CHRISTMAS_REUNION);
 
 
 
