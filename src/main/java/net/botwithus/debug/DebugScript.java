@@ -5,6 +5,7 @@ import net.botwithus.api.game.hud.Dialog;
 import net.botwithus.internal.scripts.ScriptDefinition;
 import net.botwithus.rs3.events.EventBus;
 import net.botwithus.rs3.events.Subscription;
+import net.botwithus.rs3.events.impl.ChatMessageEvent;
 import net.botwithus.rs3.events.impl.ServerTickedEvent;
 import net.botwithus.rs3.game.Client;
 import net.botwithus.rs3.game.Coordinate;
@@ -38,7 +39,9 @@ public class DebugScript extends LoopingScript {
 
 
     private Subscription<ServerTickedEvent> subscription;
-
+    private Subscription<ChatMessageEvent> subscription2;
+    
+    public static String message = "";
     @Override
     public void onLoop() {
 
@@ -86,6 +89,7 @@ public class DebugScript extends LoopingScript {
             //case KILI_KNOWLEDGE_V -> KiliRowV.quest();
             case ANACHRONIA_TUT -> AnachroniaTut.quest();
             case CHRISTMAS_REUNION -> ChristmasReunion.quest();
+            case ITS_SNOW_BOTHER -> ItsSnowBother.quest();
             default -> delay(100);
         }
 
@@ -134,6 +138,7 @@ public class DebugScript extends LoopingScript {
     public void onActivation() {
 
         subscription = EventBus.EVENT_BUS.subscribe(this, ServerTickedEvent.class, this::onServerTickedEvent);
+        subscription2 = EventBus.EVENT_BUS.subscribe(this, ChatMessageEvent.class, this::onChatMessageEvent);
 
     }
 
@@ -143,11 +148,44 @@ public class DebugScript extends LoopingScript {
         }
     }
 
+    private void onChatMessageEvent(ChatMessageEvent event) {
+        if(running)
+        {
+            String message = event.getMessage();
+            if(message.contains("Delivered 0/5 presents to citizens of Gielinor"))
+            {
+                DebugScript.message = message;
+            }
+            if(message.contains("Delivered 1/5 presents to citizens of Gielinor"))
+            {
+                DebugScript.message = message;
+            }
+            else if(message.contains("Delivered 2/5 presents to citizens of Gielinor"))
+            {
+                DebugScript.message = message;
+            }
+            if(message.contains("Delivered 3/5 presents to citizens of Gielinor"))
+            {
+                DebugScript.message = message;
+            }
+            else if(message.contains("Delivered 4/5 presents to citizens of Gielinor"))
+            {
+                DebugScript.message = message;
+            }
+
+        }
+    }
+
     public void onDeactivation() {
         if (subscription != null) {
             EventBus.EVENT_BUS.unsubscribe(subscription);
             subscription = null;
         }
+        if (subscription2 != null) {
+            EventBus.EVENT_BUS.unsubscribe(subscription2);
+            subscription2 = null;
+        }
+
 
     }
 
@@ -188,6 +226,7 @@ public class DebugScript extends LoopingScript {
         WHATS_MINE_IS_YOURS(357),
         GERTRUDE_CAT(138),
         CHRISTMAS_REUNION(516),
+        ITS_SNOW_BOTHER(508),
         
         TEST_DONTSELECT(135);
 
@@ -202,6 +241,8 @@ public class DebugScript extends LoopingScript {
             return questId;
         }
     }
+
+
 
 
 }

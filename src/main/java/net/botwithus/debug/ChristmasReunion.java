@@ -129,7 +129,7 @@ public class ChristmasReunion {
                         Execution.delay(RandomGenerator.nextInt(600, 2000));
                     }
                  }
-                 else if(Backpack.getQuantity(1539) <= 15 && Backpack.getCount(57923) >=3 && (paintingbench == null || carvingbench == null || finishingbench == null))  // Steel nails
+                 else if(Backpack.getQuantity(1539) < 15 && Backpack.getCount(57923) >=3 && (paintingbench == null || carvingbench == null || finishingbench == null))  // Steel nails
                  {
                     if (Client.getLocalPlayer().isMoving()) {
                         return;

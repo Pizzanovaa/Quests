@@ -453,7 +453,10 @@ public class Dialogs {
         COULD_I_PAY_YOU_TO_MAKE_THEM_FOR_ME(1, "Could I pay you to make them for me?", CHRISTMAS_REUNION),
         MAKE_CHRISTMAS_DYE(1, "Make Christmas dye.", CHRISTMAS_REUNION),
         RED_AND_BLACK(1, "Red and black.", CHRISTMAS_REUNION),
-        THE_ABBEY(1, "The abbey?", CHRISTMAS_REUNION);
+        THE_ABBEY(1, "The abbey?", CHRISTMAS_REUNION),
+
+        //Its Snow Bother
+        ITS_SNOW_BOTER(1, "Talk about 'It's Snow Bother'.", ITS_SNOW_BOTHER);
 
 
 
@@ -480,6 +483,33 @@ public class Dialogs {
         }
     }
 
+
+    public static enum QuestInstruction
+    {
+
+        ////Christmas Reunion
+        CHRISTMAS_REUNION_INSTRUCTION("Have Christmas Village Teleport on Action Bar, Talk to Hunter NPC at the enterance of Citharede manual if you haven't done with before", CHRISTMAS_REUNION),
+
+        //Its Snow Bother
+        ITS_SNOW_BOTHER_INSTRUCTION("Have Christmas Village Teleport on Action Bar.  Might need to Select 5 NPCs to deliver presents to. - NPC are Sir Amik Varze, Bob, Brugsen Bursen, Doric and Reldo", ITS_SNOW_BOTHER);
+
+
+        private final String text;
+        private final DebugScript.Quest quest;
+
+        QuestInstruction(String text, DebugScript.Quest quest) {
+            this.text = text;
+            this.quest = quest;
+        }
+
+        public String getText() {
+            return text;
+        }
+
+        public DebugScript.Quest getQuest() {
+            return quest;
+        }
+    }
 
     public static void println(String msg) {
         ScriptConsole.println(msg);

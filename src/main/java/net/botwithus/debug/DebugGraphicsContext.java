@@ -11,6 +11,9 @@ import net.botwithus.rs3.script.ScriptGraphicsContext;
 
 import static net.botwithus.debug.DebugScript.*;
 
+import net.botwithus.debug.DebugScript.Quest;
+import net.botwithus.debug.Dialogs.QuestInstruction;
+
 public class DebugGraphicsContext extends ScriptGraphicsContext {
 
     private final DebugScript script;
@@ -35,6 +38,7 @@ public class DebugGraphicsContext extends ScriptGraphicsContext {
     private String requiredItemsText = "";
     private String skillRequirementsText = "";
     private String progressVarbitsText = "";
+    private String specialInstructionsText = "";
 
     @Override
     public void drawSettings() {
@@ -158,6 +162,19 @@ public class DebugGraphicsContext extends ScriptGraphicsContext {
                     progressVarbitsBuilder.append("N/A");
                 }
                 progressVarbitsText = progressVarbitsBuilder.toString();
+
+                // Update special instructions text
+                StringBuilder specialInstructionsBuilder = new StringBuilder("Special Instructions:\n");
+                for (QuestInstruction instruction : QuestInstruction.values()) {
+                    if (instruction.getQuest() == currentQuest) {
+                        specialInstructionsBuilder.append(instruction.getText());
+                        break;
+                    }
+                }
+                if (specialInstructionsBuilder.toString().equals("Special Instructions:\n")) {
+                    specialInstructionsBuilder.append("None.");
+                }
+                specialInstructionsText = specialInstructionsBuilder.toString();
             }
 
             // Display texts
@@ -168,6 +185,7 @@ public class DebugGraphicsContext extends ScriptGraphicsContext {
             ImGui.Separator();
             ImGui.Text(progressVarbitsText);
             ImGui.Separator();
+            ImGui.Text(specialInstructionsText);
 
             ImGui.EndTabItem();
         }
