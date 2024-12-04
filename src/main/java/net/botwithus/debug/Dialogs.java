@@ -456,7 +456,8 @@ public class Dialogs {
         THE_ABBEY(1, "The abbey?", CHRISTMAS_REUNION),
 
         //Its Snow Bother
-        ITS_SNOW_BOTER(1, "Talk about 'It's Snow Bother'.", ITS_SNOW_BOTHER);
+        ITS_SNOW_BOTER(1, "Talk about 'It's Snow Bother'.", ITS_SNOW_BOTHER),
+        TALK_TO_RELDO(2, "[Talk to Reldo.]", ITS_SNOW_BOTHER);
 
 
 

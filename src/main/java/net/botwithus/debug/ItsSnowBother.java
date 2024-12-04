@@ -14,6 +14,7 @@ import net.botwithus.rs3.game.actionbar.ActionBar;
 import net.botwithus.rs3.game.hud.interfaces.Component;
 import net.botwithus.rs3.game.hud.interfaces.Interfaces;
 import net.botwithus.rs3.game.minimenu.actions.ComponentAction;
+import net.botwithus.rs3.game.minimenu.actions.NPCAction;
 import net.botwithus.rs3.game.minimenu.actions.SelectableAction;
 import net.botwithus.rs3.game.queries.builders.characters.NpcQuery;
 import net.botwithus.rs3.game.queries.builders.components.ComponentQuery;
@@ -48,9 +49,14 @@ public class ItsSnowBother {
 
     static Coordinate lumbridgemarket = new Coordinate(3211, 3257, 0);
     static Area.Circular lumbridgemarketarea = new Area.Circular(lumbridgemarket, 10);
-
-    static Coordinate lumbridgechrushpile = new Coordinate(3243, 3218, 0);
+    // static Coordinate boblumbridge = new Coordinate(3232, 3203, 0);
+    // static Area.Circular boblumbridgearea = new Area.Circular(boblumbridge, 4);
+    static Coordinate lumbridgechrushpile = new Coordinate(3243, 3205, 0);
     static Area.Circular lumbridgechrushpilearea = new Area.Circular(lumbridgechrushpile, 2);
+    static Coordinate laddersnowpile = new Coordinate(3228,3223,0);
+    static Area.Circular laddersnowpilearea = new Area.Circular(laddersnowpile, 2);
+    static Coordinate kitchensnowpile = new Coordinate(3206, 3216, 0);
+    static Area.Circular kitchensnowpilearea = new Area.Circular(kitchensnowpile, 2);
 
     static Coordinate faladorsiramik = new Coordinate(2959, 3337, 2);
     static Area.Circular faladorsiramikarea = new Area.Circular(faladorsiramik, 4);
@@ -102,6 +108,7 @@ public class ItsSnowBother {
                 break;
                 case 10:
                 talktosnowimp();
+                Execution.delay(RandomGenerator.nextInt(5000, 6000));
                 //talktoVarrockImp();
 
                 SceneObject map = SceneObjectQuery.newQuery().name("Christmas spirit map").results().first();
@@ -165,15 +172,63 @@ public class ItsSnowBother {
                     }
                     else
                     {
-                        println("Lumbridge area");
+                        //println("Lumbridge area");
                         //SceneObject sleigh = SceneObjectQuery.newQuery().name("Sleigh").option("Search").results().first();
-                        if(sleigh != null && pileofsnow == null)
+                        if(sleigh != null && pileofsnow == null && VarManager.getVarbitValue(54819) ==0)
                         {
                             println("Sleigh found");
                             sleigh.interact("Search");
                             delay(RandomGenerator.nextInt(600, 800));
                         }
-                        else if(VarManager.getVarbitValue(54819) == 30 && pileofsnow != null)
+                        else if (VarManager.getVarbitValue(54819) == 0 && pileofsnow != null)
+                        {
+                            if(!boblumbridgearea.contains(player))
+                            {
+                                DebugScript.moveTo(boblumbridge);
+                            }
+                            else
+                            {
+                                pileofsnow.interact("Search");
+                                delay(RandomGenerator.nextInt(600, 800));
+                            }
+                        }
+                        else if(VarManager.getVarbitValue(54819) == 8 && pileofsnow != null)
+                        {
+                            if(!laddersnowpilearea.contains(player))
+                            {
+                                DebugScript.moveTo(laddersnowpile);
+                            }
+                            else
+                            {
+                                pileofsnow.interact("Search");
+                                delay(RandomGenerator.nextInt(600, 800));
+                            }
+                        }
+                        else if(VarManager.getVarbitValue(54819) == 10 && pileofsnow != null)
+                        {
+                            if(!lumbridgechrushpilearea.contains(player))
+                            {
+                                DebugScript.moveTo(lumbridgechrushpile);
+                            }
+                            else
+                            {
+                                pileofsnow.interact("Search");
+                                delay(RandomGenerator.nextInt(600, 800));
+                            }
+                        }
+                        else if(VarManager.getVarbitValue(54819) == 26)
+                        {
+                            if(!kitchensnowpilearea.contains(player))
+                            {
+                                DebugScript.moveTo(kitchensnowpile);
+                            }
+                            else
+                            {
+                                pileofsnow.interact("Search");
+                                delay(RandomGenerator.nextInt(600, 800));
+                            }
+                        }
+                        else if(VarManager.getVarbitValue(54819) == 30)
                         {
                             println("Lumbridge Market Area");
                             if(!lumbridgemarketarea.contains(player))
@@ -231,7 +286,7 @@ public class ItsSnowBother {
                 case 35:
                 SceneObject santarequest = SceneObjectQuery.newQuery().name("Santa's request").results().first();
                 int varpValue = VarManager.getVarpValue(11576);
-                //int lastTwoDigits = varpValue & 0xFF;
+                int lastTwoDigits1 = varpValue & 0xFF;
                 int lastTwoDigits = varpValue % 100; 
                 
                 if(santarequest != null && !Backpack.contains("Santa's sack"))
@@ -240,7 +295,7 @@ public class ItsSnowBother {
                     delay(RandomGenerator.nextInt(600, 800));
                 }
                 
-                else if(lastTwoDigits ==48 &&   Backpack.contains("Santa's sack")  && !Interfaces.isOpen(1279) && giftcounter==0)
+                else if((lastTwoDigits ==48 || lastTwoDigits1 ==48) &&   Backpack.contains("Santa's sack")  && !Interfaces.isOpen(1279) && giftcounter==0)
                 {
                     Backpack.interact("Santa's sack", "Check");
                     delay(RandomGenerator.nextInt(600, 800));
@@ -267,7 +322,7 @@ public class ItsSnowBother {
                    
                 }
              
-                else if(lastTwoDigits ==48 && Interfaces.isOpen(1279) && DebugScript.message.contains("Delivered 0/5 presents to citizens of Gielinor"))
+                else if((lastTwoDigits ==48 || lastTwoDigits1 ==48) && Interfaces.isOpen(1279) && DebugScript.message.contains("Delivered 0/5 presents to citizens of Gielinor"))
                 {
                     boolean success = MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1, -1, 83820554);   // Selecting Sir Amik Varze
                     if(success)
@@ -277,7 +332,7 @@ public class ItsSnowBother {
                         delay(RandomGenerator.nextInt(600, 800));
                     }
                 }
-                else if(lastTwoDigits ==48 && Interfaces.isOpen(1279) && DebugScript.message.contains("Delivered 1/5 presents to citizens of Gielinor"))
+                else if((lastTwoDigits ==48 || lastTwoDigits1 ==48) && Interfaces.isOpen(1279) && DebugScript.message.contains("Delivered 1/5 presents to citizens of Gielinor"))
                 {
                     boolean success = MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1, -1, 83820555);   // Bob
                     if(success)
@@ -287,7 +342,7 @@ public class ItsSnowBother {
                         delay(RandomGenerator.nextInt(600, 800));
                     }
                 }
-                else if(lastTwoDigits ==48 && Interfaces.isOpen(1279) && DebugScript.message.contains("Delivered 2/5 presents to citizens of Gielinor"))
+                else if((lastTwoDigits ==48 || lastTwoDigits1 ==48) && Interfaces.isOpen(1279) && DebugScript.message.contains("Delivered 2/5 presents to citizens of Gielinor"))
                 {
                     boolean success = MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1, -1, 83820556);   // Selecting Brugsen
                     if(success)
@@ -297,7 +352,7 @@ public class ItsSnowBother {
                         delay(RandomGenerator.nextInt(600, 800));
                     }
                 }
-                else if(lastTwoDigits ==48 && Interfaces.isOpen(1279) && DebugScript.message.contains("Delivered 3/5 presents to citizens of Gielinor"))
+                else if((lastTwoDigits ==48 || lastTwoDigits1 ==48) && Interfaces.isOpen(1279) && DebugScript.message.contains("Delivered 3/5 presents to citizens of Gielinor"))
                 {
                     boolean success = MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1, -1, 83820557);   // Selecting Doric
                     if(success)
@@ -307,7 +362,7 @@ public class ItsSnowBother {
                         delay(RandomGenerator.nextInt(600, 800));
                     }
                 }
-                else if(lastTwoDigits ==48 && Interfaces.isOpen(1279) && DebugScript.message.contains("Delivered 4/5 presents to citizens of Gielinor"))
+                else if((lastTwoDigits ==48 || lastTwoDigits1 ==48) && Interfaces.isOpen(1279) && DebugScript.message.contains("Delivered 4/5 presents to citizens of Gielinor"))
                 {
                     boolean success = MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1, -1, 83820564);   // Selecting Reldo
                     if(success)
@@ -317,7 +372,7 @@ public class ItsSnowBother {
                         delay(RandomGenerator.nextInt(600, 800));
                     }
                 }
-                else if(lastTwoDigits ==49)
+                else if((lastTwoDigits ==49 || lastTwoDigits1 ==49))
                 {
                     if(!faladorsiramikarea.contains(player))
                     {
@@ -330,6 +385,7 @@ public class ItsSnowBother {
                         {
                             siramik.interact("Talk-to");
                             delay(RandomGenerator.nextInt(600, 800));
+                            giftcounter = 0;
                             if(giftcounter == 0)
                         {
                             Backpack.interact("Santa's sack", "Check");
@@ -340,7 +396,7 @@ public class ItsSnowBother {
                     }
 
                 }
-                else if(lastTwoDigits ==50 )
+                else if((lastTwoDigits ==50 || lastTwoDigits1 ==50))
                 {
                    if(!boblumbridgearea.contains(player))
                    {
@@ -353,7 +409,8 @@ public class ItsSnowBother {
                     {
                         bob.interact("Talk-to");
                         delay(RandomGenerator.nextInt(600, 800));
-                        if(giftcounter == 1)
+                        giftcounter = 0;
+                        if(giftcounter > 0)
                         {
                             Backpack.interact("Santa's sack", "Check");
                             delay(RandomGenerator.nextInt(600, 800));
@@ -362,7 +419,7 @@ public class ItsSnowBother {
                     }
                    }
                 }
-                else if(lastTwoDigits ==51)
+                else if((lastTwoDigits ==51 || lastTwoDigits1 ==51))
                 {
                    if(!brugsenarea.contains(player))
                    {
@@ -375,7 +432,8 @@ public class ItsSnowBother {
                     {
                         brugsen.interact("Talk-to");
                         delay(RandomGenerator.nextInt(600, 800));
-                        if(giftcounter == 2)
+                        giftcounter = 0;
+                        if(giftcounter > 0)
                         {
                             Backpack.interact("Santa's sack", "Check");
                             delay(RandomGenerator.nextInt(600, 800));
@@ -384,7 +442,7 @@ public class ItsSnowBother {
                     }
                    }
                 }
-                else if(lastTwoDigits ==52)
+                else if((lastTwoDigits ==52 || lastTwoDigits1 ==52))
                 {
                     if(!doricarea.contains(player))
                     {
@@ -397,7 +455,8 @@ public class ItsSnowBother {
                         {
                             doric.interact("Talk-to");
                             delay(RandomGenerator.nextInt(600, 800));
-                            if(giftcounter == 3)
+                            giftcounter = 0;
+                            if(giftcounter > 0)
                         {
                             Backpack.interact("Santa's sack", "Check");
                             delay(RandomGenerator.nextInt(600, 800));
@@ -406,7 +465,7 @@ public class ItsSnowBother {
                         }
                     }
                 }
-                else if(lastTwoDigits ==59)
+                else if((lastTwoDigits ==59 || lastTwoDigits1 ==59))
                 {
                     if(!reldoarea.contains(player))
                     {
@@ -419,7 +478,8 @@ public class ItsSnowBother {
                         {
                             reldo.interact("Talk to");
                             delay(RandomGenerator.nextInt(600, 800));
-                            if(giftcounter == 4)
+                            giftcounter = 0;
+                            if(giftcounter > 0)
                         {
                             Backpack.interact("Santa's sack", "Check");
                             delay(RandomGenerator.nextInt(600, 800));
@@ -459,10 +519,17 @@ public class ItsSnowBother {
 
     public static void talktosnowimp()
     {
-        Npc mariusclaus = NpcQuery.newQuery().name("Marius Claus","Barry Claus", "Benny Claus", "Boris Claus","Magnus","Marcus Claus","Charlie Claus","Marvin Claus","Morris Claus","Murphy Claus", "Dennis Claus" ,"Freddie Claus", "Norris Claus", "Rasmus Claus").results().first();
+
+        String[] snowImps = {
+            "Marius Claus", "Barry Claus", "Benny Claus", "Boris Claus", 
+            "Magnus", "Marcus Claus", "Charlie Claus", "Marvin Claus", 
+            "Morris Claus", "Murphy Claus", "Dennis Claus", "Freddie Claus", 
+            "Norris Claus", "Rasmus Claus"
+        };
+        Npc mariusclaus = NpcQuery.newQuery().name(snowImps).results().first();
         if (mariusclaus != null) {
-            mariusclaus.interact("Talk-to");
-            mariusclaus.interact("Talk to");
+            mariusclaus.interact(NPCAction.NPC1);
+            //mariusclaus.interact("Talk to");
             delay(RandomGenerator.nextInt(600, 800));
         }
     }
