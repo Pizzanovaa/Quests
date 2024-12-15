@@ -90,11 +90,16 @@ public class DebugScript extends LoopingScript {
             case ANACHRONIA_TUT -> AnachroniaTut.quest();
             case CHRISTMAS_REUNION -> ChristmasReunion.quest();
             case ITS_SNOW_BOTHER -> ItsSnowBother.quest();
+            case DEAD_AND_BURIED -> DeadandBuried.quest();
+            case ANCIENT_AWAKENING -> AncientAwakening.quest();
+            case BATTLE_OF_FORINTHRY -> BattleofForinthry.quest();
+            case REQUIEM_FOR_A_DRAGON -> RequiemforaDragon.quest();
             default -> delay(100);
         }
 
 
     }
+    private static boolean disableDive = true;
 
     static boolean moveTo(Coordinate location) {
         Dialogs.println("moveTo");
@@ -104,10 +109,16 @@ public class DebugScript extends LoopingScript {
             Dialogs.println("moveTo | Already at the target location.");
             return true;
         }
+        int flag = 0;
+        if(disableDive)
+        {
+            flag |= Movement.DISABLE_DIVE;
+            ScriptConsole.println(" Movement Ability Dive is Disabled");
+        }
 
 
         Dialogs.println("moveTo | Traversing to location: " + location);
-        NavPath path = NavPath.resolve(location).interrupt(event -> (VarManager.getVarbitValue(21222) == 1));
+        NavPath path = NavPath.resolve(location, flag).interrupt(event -> (VarManager.getVarbitValue(21222) == 1));
         TraverseEvent.State moveState = Movement.traverse(path);
 
         switch (moveState) {
@@ -227,6 +238,11 @@ public class DebugScript extends LoopingScript {
         GERTRUDE_CAT(138),
         CHRISTMAS_REUNION(516),
         ITS_SNOW_BOTHER(508),
+        DEAD_AND_BURIED(492),
+        ANCIENT_AWAKENING(502),
+        BATTLE_OF_FORINTHRY(507),
+        REQUIEM_FOR_A_DRAGON(509),
+
         
         TEST_DONTSELECT(135);
 

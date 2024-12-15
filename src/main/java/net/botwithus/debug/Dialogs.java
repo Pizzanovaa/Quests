@@ -10,7 +10,10 @@ import net.botwithus.rs3.game.queries.builders.components.ComponentQuery;
 import net.botwithus.rs3.game.vars.VarManager;
 import net.botwithus.rs3.script.ScriptConsole;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static net.botwithus.debug.DebugScript.Quest.*;
 import static net.botwithus.debug.DebugScript.currentQuest;
@@ -201,6 +204,7 @@ public class Dialogs {
         }
         return false;
     }
+
 
     public static enum Dialogue {
 
@@ -457,7 +461,78 @@ public class Dialogs {
 
         //Its Snow Bother
         ITS_SNOW_BOTER(1, "Talk about 'It's Snow Bother'.", ITS_SNOW_BOTHER),
-        TALK_TO_RELDO(2, "[Talk to Reldo.]", ITS_SNOW_BOTHER);
+        TALK_TO_RELDO(2, "[Talk to Reldo.]", ITS_SNOW_BOTHER),
+
+        //Dead and Buried
+        TALK_ABOUT_DEAD_AND_BURIED(1, "Talk about 'Dead and Buried'.", DEAD_AND_BURIED),
+        CONCLUDE_INTERVIEW(4, "(Conclude interview.)", DEAD_AND_BURIED),
+        YES_I_VE_ASKED_ENOUGH_QUESTIONS(1, "Yes, I've asked enough questions.", DEAD_AND_BURIED),
+        YES_I_KNOW_THAT(1, "Yes, I know that.", DEAD_AND_BURIED),
+        MUST_WE(1, "Must we?", DEAD_AND_BURIED),
+        LEARDERSHIP_SKILLS(1, "Leadership skills.", DEAD_AND_BURIED),
+        YOUR_MAJESTY(1, "Your Majesty?", DEAD_AND_BURIED),
+        WHY_DID_YOU_MARRY_THE_KING(1, "Why did you marry the king?", DEAD_AND_BURIED),
+        COULDNT_YOU_HAVE_BEEN_A_WARRIIOR_QUEEN(1, "Couldn't you have been a warrior queen?", DEAD_AND_BURIED),
+        SO_YOU_STARTED_WEARING_A_DISGUISE(1, "So you started wearing a disguise?", DEAD_AND_BURIED),
+        YES_DEAD_AND_BURIED(1, "Yes.", DEAD_AND_BURIED),
+        ENTER_DREAM(1, "Enter dream.", DEAD_AND_BURIED),
+        TALK_ABOUT_QUESTS(2, "Talk about quests.", DEAD_AND_BURIED),
+
+        //Ancient Awakening
+        TALK_ABOUT_ANCIENT_AWAKENING(2, "Talk about 'Ancient Awakening'.", ANCIENT_AWAKENING),
+        I_DONT_NEED_TO_KNOW_YOUR_FAMILY_HISTORY(1, "I don't need to know your family history, Bill.", ANCIENT_AWAKENING),
+        LETS_SKIP_THE_SMALL_TALK(1, "Let's skip the small talk.", ANCIENT_AWAKENING),
+        I_NEED_YOU_TO_RETURN_TO_THE_FORT(1, "I need you to return to the fort.", ANCIENT_AWAKENING),
+        YES_ANCIENT_AWAKENING(1, "Yes.", ANCIENT_AWAKENING),
+        WHO_ARE_YOU(1, "Who are you?", ANCIENT_AWAKENING),
+        WHAT_IS_THIS_PLACE(1, "What is this place?", ANCIENT_AWAKENING),
+        TELL_ME_ABOUT_VORKATH(1, "Tell me about Vorkath.", ANCIENT_AWAKENING),
+        TELL_ME_ABOUT_THIS_TOMB(1, "Tell me about this tomb.", ANCIENT_AWAKENING),
+        NONSENSE_ASTER_IS_DOING_FINE(1, "Nonsense! Aster is doing fine.", ANCIENT_AWAKENING),
+        What_ARE_YOU_DOING_HERE(1, "What are you doing here?", ANCIENT_AWAKENING),
+        IS_IT_SAFE_FOR_CIVILIANS_TO_BE_HERE(1, "Is it safe for civilians to be here?", ANCIENT_AWAKENING),
+        I_WAS_JUST_CURIOUS(1, "I was just curious.", ANCIENT_AWAKENING),
+        WE_NEED_TO_FOCUS(1, "We need to focus.", ANCIENT_AWAKENING),
+        CAN_YOU_ACTIVATE_THIS_CONDUIT(1, "Can you activate this conduit?", ANCIENT_AWAKENING),
+
+        //Battle of Forinthry
+        TALK_ABOUT_BATTLE_OF_FORINTHRY(1, "Talk about 'Battle of Forinthry'.", BATTLE_OF_FORINTHRY),
+        YES_I_AM_READY(1, "Yes, I am ready.", BATTLE_OF_FORINTHRY),
+        OF_COURSE(1, "Of course.", BATTLE_OF_FORINTHRY),
+        YES_BEGIN_THE_FEAST(1, "Yes, begin the feast.", BATTLE_OF_FORINTHRY),
+
+        //Requiem for a Dragon
+        
+        TALK_ABOUT_QUESTS_REQUIEM(1, "Talk about quests...", REQUIEM_FOR_A_DRAGON),
+        TALK_ABOUT_REQUIEM_FOR_A_DRAGON(1, "Talk about 'Requiem for a Dragon'.", REQUIEM_FOR_A_DRAGON),
+        YES_REQUIEM(1, "Yes.", REQUIEM_FOR_A_DRAGON),
+        REACH_OUT_YOUR_HAND(1, "Reach out your hand.(friendly)", REQUIEM_FOR_A_DRAGON),
+        KEEP_YOUR_HAND_EXTENDED(1, "Keep your hand extended.(friendly)", REQUIEM_FOR_A_DRAGON),
+        ENCOURAGE_VORKATH(1, "Encourage Vorkath.(friendly)", REQUIEM_FOR_A_DRAGON),
+        TRY_NOT_TO_SHIVER(1, "Try not to shiver.(friendly)", REQUIEM_FOR_A_DRAGON),
+        //STUDY_THE_CREATURE(1, "Study the creature. (neutral)", REQUIEM_FOR_A_DRAGON),
+        LAY_THE_DRAGON_S_SOUL_TO_REST(1, "Lay the dragon's soul to rest. (Necromancy)", REQUIEM_FOR_A_DRAGON),
+        // THE_CONGEALED_POTION(1, "The congealed potion.", REQUIEM_FOR_A_DRAGON),
+        // THE_BROKEN_FOCUS(1, "The broken focus.", REQUIEM_FOR_A_DRAGON),
+        // THE_CRYSTAL_SHARD(1, "The crystal shard.", REQUIEM_FOR_A_DRAGON),
+        // THE_WALL_MURAL(1, "The wall mural.", REQUIEM_FOR_A_DRAGON),
+        NO_HE_SUFFERED_ENOUGH(1, "No, he's suffered enough.", REQUIEM_FOR_A_DRAGON),
+        // SHOW_OFF_YOUR_MASTERY_OF_NECROMANCY(1, "Show off your mastery of necromancy.", REQUIEM_FOR_A_DRAGON),
+        // WHAT_DID_YOU_DO_TO_VORKATH(1, "What did you do to Vorkath?", REQUIEM_FOR_A_DRAGON),
+        MOCK_HIS_SKELETAL_FORM(1, "Mock his skeletal form.", REQUIEM_FOR_A_DRAGON),
+        REMIND_HIM_OF_THE_OTHER_TIMES_YOU_VE_DEFEATED_HIM(1, "Remind him of the other times you've defeated him.", REQUIEM_FOR_A_DRAGON),
+        I_HAVE_A_SOUL_AND_YOU_DON_T(1, "I have a soul and you don't.", REQUIEM_FOR_A_DRAGON),
+        WHAT_DID_YOU_DO_TO_VORKATH_REQUIEM(1, "What did you do to Vorkath?", REQUIEM_FOR_A_DRAGON),
+        I_VE_HEARD_ENOUGH_REQUIEM(1, "I've heard enough.", REQUIEM_FOR_A_DRAGON),
+        JUST_TELL_ME_WHAT_THE_LEAD_IS(1, "Just tell me what the lead is.", REQUIEM_FOR_A_DRAGON),
+        CONTINUE_REQUIEM_FOR_A_DRAGON(1, "Continue Requiem for a Dragon.", REQUIEM_FOR_A_DRAGON),
+        LETS_GET_STRAIGHT_TO_THE_POINT(1, "Let's get straight to the point.", REQUIEM_FOR_A_DRAGON),
+        DEDUCE_THE_GLYPH_ORDER(1, "Deduce the glyph order.", REQUIEM_FOR_A_DRAGON),
+        CHANGE_THE_GLYPHS(1, "Change the glyphs.", REQUIEM_FOR_A_DRAGON),
+        ELEMENTAL(1, "Elemental", REQUIEM_FOR_A_DRAGON),
+        COMMUNE(1, "Commune", REQUIEM_FOR_A_DRAGON),
+        TALK_ABOUT_REQUIEM_FOR_A_DRAGON_1(1, "Talk about 'Requiem for a Dragon'", REQUIEM_FOR_A_DRAGON),
+        CHANGE_THE_GLYPHS_REQUIEM(1, "Change the glyphs.", REQUIEM_FOR_A_DRAGON);
 
 
 
@@ -492,7 +567,19 @@ public class Dialogs {
         CHRISTMAS_REUNION_INSTRUCTION("Have Christmas Village Teleport on Action Bar, Talk to Hunter NPC at the enterance of Citharede manual if you haven't done with before", CHRISTMAS_REUNION),
 
         //Its Snow Bother
-        ITS_SNOW_BOTHER_INSTRUCTION("Have Christmas Village Teleport on Action Bar.  Might need to Select 5 NPCs to deliver presents to. - NPC are Sir Amik Varze, Bob, Brugsen Bursen, Doric and Reldo", ITS_SNOW_BOTHER);
+        ITS_SNOW_BOTHER_INSTRUCTION("Have Christmas Village Teleport on Action Bar.  Might need to Select 5 NPCs to deliver presents to. - NPC are Sir Amik Varze, Bob, Brugsen Bursen, Doric and Reldo", ITS_SNOW_BOTHER),
+
+        //Dead and Buried
+        DEAD_AND_BURIED_INSTRUCTION("Have Items in banks and armour equipped and some food.Puzzel required manual intervention.", DEAD_AND_BURIED),
+
+        //Ancient Awakening
+        ANCIENT_AWAKENING_INSTRUCTION("Have Armour and weapon equipped. Inventory fill with food before going to Ungael Site, 12 Waves are required manual intervention.", ANCIENT_AWAKENING),
+
+        //Battle of Forinthry
+        BATTLE_OF_FORINTHRY_INSTRUCTION("Have Armour and weapon equipped. Inventory fill with food before going to fight with Vorkath", BATTLE_OF_FORINTHRY),
+
+        //Requiem for a Dragon
+        REQUIEM_FOR_A_DRAGON_INSTRUCTION("Talking to Archivist and Zemouregal is required manual intervention. Resotring becon chat option with tree of balance is required manual intervention. Ritual required manual intervention.", REQUIEM_FOR_A_DRAGON);
 
 
         private final String text;
