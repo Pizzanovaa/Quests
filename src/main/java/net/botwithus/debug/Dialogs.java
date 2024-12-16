@@ -208,6 +208,12 @@ public class Dialogs {
 
     public static enum Dialogue {
 
+        //Death Plateau
+        DO_YOU_HAVE_ANY_QUESTS_FOR_ME(1, "Do you have any quests for me?", DEATH_PLATEAU),
+        Ive_been_sent_to_look_for_a_route_to_Death_Plateau_Can_you_help(1, "I've been sent to look for a route to Death Plateau. Can you help?", DEATH_PLATEAU),
+        Can_you_put_some_fresh_spikes_on_these_climbing_boots_for_me(1, "Can you put some fresh spikes on these climbing boots for me?", DEATH_PLATEAU),
+        Prepare_to_die_troll(3, "Prepare to die, troll!", DEATH_PLATEAU),
+
         //LOST CITY
         WHY_CAMPED_OUT_HERE(1, "Why are you camped out here?", TEST_DONTSELECT),
         WHOS_ZANARIS(1, "Who's Zanaris?", TEST_DONTSELECT),

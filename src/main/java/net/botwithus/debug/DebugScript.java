@@ -53,6 +53,7 @@ public class DebugScript extends LoopingScript {
 
 
         switch (currentQuest) {
+            case DEATH_PLATEAU -> DeathPlateau.quest();
             case VIOLET_IS_BLUE -> VioletIsBlue.quest2();
             case COOKS_ASSISTANT -> CooksAssitant.quest();
             case NECROMANCY_INTRO -> Necromancy1.quest2();
@@ -201,12 +202,18 @@ public class DebugScript extends LoopingScript {
     }
 
     public enum Quest {
-
-        COOKS_ASSISTANT(257),
+        DEATH_PLATEAU(140),
+        //        DRUIDIC_RITUAL(111),
+//        LET_THEM_EAT_PIE(200),
+//        WOLF_WHISTLE(324),
         VIOLET_IS_BLUE(400),
+        //        VIOLET_IS_BLUE_TOO(453),
         BLOOD_PACT(335),
-        NECROMANCY_INTRO(493),
         RESTLESS_GHOST(27),
+        COOKS_ASSISTANT(257),
+
+        NECROMANCY_INTRO(493),
+
         WHAT_LIES_BELOW(144),
         THE_KNIGHT_SWORD(261),
         SHIELD_OF_ARRAV(63),
