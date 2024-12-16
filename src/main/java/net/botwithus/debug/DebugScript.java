@@ -5,6 +5,7 @@ import net.botwithus.api.game.hud.Dialog;
 import net.botwithus.internal.scripts.ScriptDefinition;
 import net.botwithus.rs3.events.EventBus;
 import net.botwithus.rs3.events.Subscription;
+import net.botwithus.rs3.events.impl.ChatMessageEvent;
 import net.botwithus.rs3.events.impl.ServerTickedEvent;
 import net.botwithus.rs3.game.Client;
 import net.botwithus.rs3.game.Coordinate;
@@ -38,7 +39,9 @@ public class DebugScript extends LoopingScript {
 
 
     private Subscription<ServerTickedEvent> subscription;
-
+    private Subscription<ChatMessageEvent> subscription2;
+    
+    public static String message = "";
     @Override
     public void onLoop() {
 
@@ -46,6 +49,7 @@ public class DebugScript extends LoopingScript {
         if (!running) {
             return;
         }
+
 
 
         switch (currentQuest) {
@@ -64,7 +68,7 @@ public class DebugScript extends LoopingScript {
             case GHOSTS_AHOY -> GhostsAhoy.quest();
             case VESSEL_HARINGER -> VesselHarbinger.quest();
             case SPIRIT_WAR -> Spirit_War.quest();
-            case TOMES_OF_WARLOCK -> TomesOfWarlock.quest();
+            case TOMES_OF_WARLOCK -> TomesOfWarlock.quest(); //whynowrok
             case DIAMOND_ROUGH -> DiamondRough.quest();
             case JACK_OF_SPADES -> JackofSpades.quest();
             case DAUGHTER_OF_CHAOS -> DaughterofChaos.quest();
@@ -72,29 +76,21 @@ public class DebugScript extends LoopingScript {
             case ARCH_TUTORIAL -> ArchTut.quest();
             case F2P_LODESTONES -> Loadstones.unlockloadstones();
             case NEW_FOUNDATION -> NewFoundation.quest();
-            case KILI_ROW_I -> KiliRowI.quest();
-            case KILI_ROW_II -> KiliRowII.quest();
+            case KILI_KNOWLEDGE_I -> KiliRowI.quest();
+            case KILI_KNOWLEDGE_II -> KiliRowII.quest();
             case WATERFALL -> Waterfall.quest();
             case ENTER_THE_ABYSS -> Entertheabyss.quest();
             case FAMILY_CREST_INCOMPLETE -> FamilyCrest.quest();
             case WHATS_MINE_IS_YOURS -> WhatsMineIsYours.quest();
-<<<<<<< Updated upstream
             
             //case KILI_ROW_III -> KiliRowIII.quest();
             
-=======
-            case GERTRUDE_CAT -> GertrudeCat.quest();
-            case MOGRE_ACTIVITY -> mogre_lore_activity.quest();
-            case KILI_KNOWLEDGE_III -> KiliRowIII.quest();
-            case KILI_KNOWLEDGE_IV -> KiliRowIV.quest();
-            //case KILI_KNOWLEDGE_V -> KiliRowV.quest();
-            case ANACHRONIA_BASE_TUTORIAL -> AnachroniaTut.quest();
->>>>>>> Stashed changes
             default -> delay(100);
         }
 
 
     }
+    private static boolean disableDive = true;
 
     static boolean moveTo(Coordinate location) {
         Dialogs.println("moveTo");
@@ -104,10 +100,16 @@ public class DebugScript extends LoopingScript {
             Dialogs.println("moveTo | Already at the target location.");
             return true;
         }
+        int flag = 0;
+        if(disableDive)
+        {
+            flag |= Movement.DISABLE_DIVE;
+            ScriptConsole.println(" Movement Ability Dive is Disabled");
+        }
 
 
         Dialogs.println("moveTo | Traversing to location: " + location);
-        NavPath path = NavPath.resolve(location).interrupt(event -> (VarManager.getVarbitValue(21222) == 1));
+        NavPath path = NavPath.resolve(location, flag).interrupt(event -> (VarManager.getVarbitValue(21222) == 1));
         TraverseEvent.State moveState = Movement.traverse(path);
 
         switch (moveState) {
@@ -138,6 +140,7 @@ public class DebugScript extends LoopingScript {
     public void onActivation() {
 
         subscription = EventBus.EVENT_BUS.subscribe(this, ServerTickedEvent.class, this::onServerTickedEvent);
+        subscription2 = EventBus.EVENT_BUS.subscribe(this, ChatMessageEvent.class, this::onChatMessageEvent);
 
     }
 
@@ -147,11 +150,44 @@ public class DebugScript extends LoopingScript {
         }
     }
 
+    private void onChatMessageEvent(ChatMessageEvent event) {
+        if(running)
+        {
+            String message = event.getMessage();
+            if(message.contains("Delivered 0/5 presents to citizens of Gielinor"))
+            {
+                DebugScript.message = message;
+            }
+            if(message.contains("Delivered 1/5 presents to citizens of Gielinor"))
+            {
+                DebugScript.message = message;
+            }
+            else if(message.contains("Delivered 2/5 presents to citizens of Gielinor"))
+            {
+                DebugScript.message = message;
+            }
+            if(message.contains("Delivered 3/5 presents to citizens of Gielinor"))
+            {
+                DebugScript.message = message;
+            }
+            else if(message.contains("Delivered 4/5 presents to citizens of Gielinor"))
+            {
+                DebugScript.message = message;
+            }
+
+        }
+    }
+
     public void onDeactivation() {
         if (subscription != null) {
             EventBus.EVENT_BUS.unsubscribe(subscription);
             subscription = null;
         }
+        if (subscription2 != null) {
+            EventBus.EVENT_BUS.unsubscribe(subscription2);
+            subscription2 = null;
+        }
+
 
     }
 
@@ -173,24 +209,32 @@ public class DebugScript extends LoopingScript {
         GHOSTS_AHOY(82),
         VESSEL_HARINGER(495),
         SPIRIT_WAR(496),
-        TOME_OF_WARLOCK(497),
         DIAMOND_ROUGH(356),
         JACK_OF_SPADES(390),
         DAUGHTER_OF_CHAOS(483),
         KILI_ROW(500),
         F2P_LODESTONES(9999999),
         ARCH_TUTORIAL(999999),
-        ANACHRONIA_BASE_TUTORIAL(999999),
         NEW_FOUNDATION(489),
-        KILI_ROW_I(99999),
-        KILI_ROW_II(99999),
+        KILI_KNOWLEDGE_I(99999),
+        KILI_KNOWLEDGE_II(99999),
+        KILI_KNOWLEDGE_III(99999),
+        KILI_KNOWLEDGE_IV(99999),
+        KILI_KNOWLEDGE_V(99999),
+        MOGRE_ACTIVITY(99999),
         WATERFALL(93),
         ENTER_THE_ABYSS(3149),
         WHATS_MINE_IS_YOURS(357),
-        
-        //KILI_ROW_III(99999),
-        TEST_DONTSELECT(135);
+        GERTRUDE_CAT(138),
+        CHRISTMAS_REUNION(516),
+        ITS_SNOW_BOTHER(508),
+        DEAD_AND_BURIED(492),
+        ANCIENT_AWAKENING(502),
+        BATTLE_OF_FORINTHRY(507),
+        REQUIEM_FOR_A_DRAGON(509),
 
+        
+        TEST_DONTSELECT(135);
 
 
         private final int questId;
@@ -203,6 +247,8 @@ public class DebugScript extends LoopingScript {
             return questId;
         }
     }
+
+
 
 
 }

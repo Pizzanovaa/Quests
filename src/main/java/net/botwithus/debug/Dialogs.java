@@ -10,7 +10,10 @@ import net.botwithus.rs3.game.queries.builders.components.ComponentQuery;
 import net.botwithus.rs3.game.vars.VarManager;
 import net.botwithus.rs3.script.ScriptConsole;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static net.botwithus.debug.DebugScript.Quest.*;
 import static net.botwithus.debug.DebugScript.currentQuest;
@@ -121,7 +124,7 @@ public class Dialogs {
             MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 77922323);
         } else if (Interfaces.isOpen(1186)) {
             MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 77725704);
-        } else if (Interfaces.isOpen(720)) {
+        } else if (Interfaces.isOpen(720) && currentQuest != NEW_FOUNDATION && currentQuest != ARCH_TUTORIAL) {
             MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 47185921);
         } else if (Interfaces.isOpen(1224)) {
             MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1, -1, 80216108);
@@ -202,6 +205,7 @@ public class Dialogs {
         return false;
     }
 
+
     public static enum Dialogue {
 
         //LOST CITY
@@ -224,6 +228,7 @@ public class Dialogs {
         I_GET_ON_IT(1, "I'll get right on it.", COOKS_ASSISTANT),
 
         //Violet is Blue
+        READY_FOR_ADVENTURE1(1, "To go on an adventure.", VIOLET_IS_BLUE),
         KNOCK(1, "Knock again.", VIOLET_IS_BLUE),
         READY_FOR_ADVENTURE(1, "Go on an adventure!", VIOLET_IS_BLUE),
         BREAK_THE_DOOR_DOWN(3, "Break the door down.", VIOLET_IS_BLUE),
@@ -231,6 +236,7 @@ public class Dialogs {
         USEFUL(1, "Do you have anything useful?", VIOLET_IS_BLUE),
         HEAD(1, "Happy face.", VIOLET_IS_BLUE),
         YES(1, "Yes!", VIOLET_IS_BLUE),
+        VIOLET_YES(1, "Yes.", VIOLET_IS_BLUE),
 
         //BLOOD PACT
         HANDLE(4, "I can handle this.", BLOOD_PACT),
@@ -305,19 +311,19 @@ public class Dialogs {
         CALM_OZAN_DOWN(1, "[Calm Ozan down.]", STOLEN_HEARTS),
 
         // Family Crest
-        HI_I_AM_A_BOLD_ADVENTURER(1, "Hi, I am a bold adventurer.", FAMILY_CREST),
-        SO_WHERE_IS_THIS_CREST(2, "So where is this crest?", FAMILY_CREST),
-        ARE_YOU_CALEB_FITZHARMON(1, "Are you Caleb Fitzharmon?", FAMILY_CREST),
-        SO_CAN_I_HAVE_YOUR_BIT(2, "So can I have your bit?", FAMILY_CREST),
-        OK_I_WILL_GET_THOSE(1, "Ok, I will get those.", FAMILY_CREST),
-        UH_WHAT_HAPPENED_TO_THE_REST_OF_IT(1, "Uh... what happened to the rest of it?", FAMILY_CREST),
-        IM_LOOKING_FOR_A_MAN_NAMED_AVAN_FITZHARMON(1, "I'm looking for a man named Avan Fitzharmon.", FAMILY_CREST),
-        YES_SMELT_PERFECT_GOLDEN_RING(1, "Yes smelt 'perfect' golden ring.", FAMILY_CREST),
-        YES_SMELT_PERFECT_GOLDEN_NECKLACE(2, "Yes smelt 'perfect' golden necklace.", FAMILY_CREST),
-        WHERE_CAN_I_FIND_CHRONOZON(2, "Where can I find Chronozon?", FAMILY_CREST),
-        ASK_ABOUT_GAUNTLETS(1, "Ask about gauntlets.", FAMILY_CREST),
-        RECLAIM_LOST_GAUNTLETS(1, "Reclaim lost gauntlets.", FAMILY_CREST),
-        YES_PLEASE(1, "Yes please.", FAMILY_CREST),
+        HI_I_AM_A_BOLD_ADVENTURER(1, "Hi, I am a bold adventurer.", FAMILY_CREST_INCOMPLETE),
+        SO_WHERE_IS_THIS_CREST(2, "So where is this crest?", FAMILY_CREST_INCOMPLETE),
+        ARE_YOU_CALEB_FITZHARMON(1, "Are you Caleb Fitzharmon?", FAMILY_CREST_INCOMPLETE),
+        SO_CAN_I_HAVE_YOUR_BIT(2, "So can I have your bit?", FAMILY_CREST_INCOMPLETE),
+        OK_I_WILL_GET_THOSE(1, "Ok, I will get those.", FAMILY_CREST_INCOMPLETE),
+        UH_WHAT_HAPPENED_TO_THE_REST_OF_IT(1, "Uh... what happened to the rest of it?", FAMILY_CREST_INCOMPLETE),
+        IM_LOOKING_FOR_A_MAN_NAMED_AVAN_FITZHARMON(1, "I'm looking for a man named Avan Fitzharmon.", FAMILY_CREST_INCOMPLETE),
+        YES_SMELT_PERFECT_GOLDEN_RING(1, "Yes smelt 'perfect' golden ring.", FAMILY_CREST_INCOMPLETE),
+        YES_SMELT_PERFECT_GOLDEN_NECKLACE(2, "Yes smelt 'perfect' golden necklace.", FAMILY_CREST_INCOMPLETE),
+        WHERE_CAN_I_FIND_CHRONOZON(2, "Where can I find Chronozon?", FAMILY_CREST_INCOMPLETE),
+        ASK_ABOUT_GAUNTLETS(1, "Ask about gauntlets.", FAMILY_CREST_INCOMPLETE),
+        RECLAIM_LOST_GAUNTLETS(1, "Reclaim lost gauntlets.", FAMILY_CREST_INCOMPLETE),
+        YES_PLEASE(1, "Yes please.", FAMILY_CREST_INCOMPLETE),
 
         // THE GOLEM
         OPEN_PORTAL(1, "How do I open the portal?", THE_GOLEM),
@@ -393,16 +399,24 @@ public class Dialogs {
         DUKES_QUEST(1, "Duke.", NEW_FOUNDATION),
 
         //Kili's row I
-        TALK_ABOUT_UPGRADE1(1, "Talk about active equipment upgrade task.", KILI_ROW_I),
-        CURRENT_TASK1(1, "Ask about your current task.", KILI_ROW_I),
+        TALK_ABOUT_UPGRADE1(1, "Talk about active equipment upgrade task.", KILI_KNOWLEDGE_I),
+        CURRENT_TASK1(1, "Ask about your current task.", KILI_KNOWLEDGE_I),
 
         //Kili's row II
-        TALK_ABOUT_UPGRADE2(1, "Talk about active equipment upgrade task.", KILI_ROW_II),
-        CURRENT_TASK2(1, "Ask about your current task.", KILI_ROW_II),
+        TALK_ABOUT_UPGRADE2(1, "Talk about active equipment upgrade task.", KILI_KNOWLEDGE_II),
+        CURRENT_TASK2(1, "Ask about your current task.", KILI_KNOWLEDGE_II),
 
         //Kili's row III
-        //TALK_ABOUT_UPGRADE3(1, "Talk about active equipment upgrade task.", KILI_ROW_III),
-        //CURRENT_TASK3(1, "Ask about your current task.", KILI_ROW_III);
+        TALK_ABOUT_UPGRADE3(1, "Talk about active equipment upgrade task.", KILI_KNOWLEDGE_III),
+        CURRENT_TASK3(1, "Ask about your current task.", KILI_KNOWLEDGE_III),
+
+        //Kili's row IV
+        TALK_ABOUT_UPGRADE4(1, "Talk about active equipment upgrade task.", KILI_KNOWLEDGE_IV),
+        CURRENT_TASK4(1, "Ask about your current task.", KILI_KNOWLEDGE_IV),    
+
+        //Kili's row V
+        TALK_ABOUT_UPGRADE5(1, "Talk about active equipment upgrade task.", KILI_KNOWLEDGE_V),
+        CURRENT_TASK5(1, "Ask about your current task.", KILI_KNOWLEDGE_V),    
 
         //Enter the Abyss
         YES_ENTER_THE_ABYSS(1, "Yes", ENTER_THE_ABYSS),
@@ -424,22 +438,7 @@ public class Dialogs {
         DORIC_TELL_BORIC_WHAT_YOU_THOUGHT_WHEN_BORIC_WAS_BORN(1, "Doric, tell Boric what you thought when Boric was born.", WHATS_MINE_IS_YOURS),
         BORIC_TELL_BORIC_WHY_YOU_SENT_HIM_TO_KELDAGRIM(1, "Boric, tell Boric why you sent him to Keldagrim.", WHATS_MINE_IS_YOURS),
         BORIC_TELL_BORIC_HOW_YOU_FELT_BRINGING_BORIC_UP_ALONE(1, "Boric, tell Boric how you felt bringing Boric up alone.", WHATS_MINE_IS_YOURS),
-<<<<<<< Updated upstream
         DORIC_TELL_BORIC_WHAT_YOU_HOPE_SENDING_HIM_AWAY_WOULD_TEACH_HIM(1, "Doric, tell Boric what you hoped sending him away would teach him.", WHATS_MINE_IS_YOURS);
-=======
-        DORIC_TELL_BORIC_WHAT_YOU_HOPE_SENDING_HIM_AWAY_WOULD_TEACH_HIM(1, "Doric, tell Boric what you hoped sending him away would teach him.", WHATS_MINE_IS_YOURS),
-
-        //Gertrude Cat
-        WHAT_WILL_MAKE_YOU_TELL_ME(2, "What will make you tell me?", GERTRUDE_CAT),
-        OKAY_THEN_ILL_PAY(2, "Okay then, I'll pay.", GERTRUDE_CAT),
-
-        //Anachronia Base Tutorial
-        YES_ANACHRONIA_BASE_TUTORIAL(1, "Yes.", ANACHRONIA_BASE_TUTORIAL),
-
-        //Mogre Lore Activity
-        WHO_ARE_THEY(2, "Who are (Dramatic pause) THEY?", MOGRE_ACTIVITY),
-        THROW_THE_WATER(1, "Throw the water!", MOGRE_ACTIVITY);
->>>>>>> Stashed changes
 
 
 
@@ -466,6 +465,45 @@ public class Dialogs {
         }
     }
 
+
+    public static enum QuestInstruction
+    {
+
+        ////Christmas Reunion
+        CHRISTMAS_REUNION_INSTRUCTION("Have Christmas Village Teleport on Action Bar, Talk to Hunter NPC at the enterance of Citharede manual if you haven't done with before", CHRISTMAS_REUNION),
+
+        //Its Snow Bother
+        ITS_SNOW_BOTHER_INSTRUCTION("Have Christmas Village Teleport on Action Bar.  Might need to Select 5 NPCs to deliver presents to. - NPC are Sir Amik Varze, Bob, Brugsen Bursen, Doric and Reldo", ITS_SNOW_BOTHER),
+
+        //Dead and Buried
+        DEAD_AND_BURIED_INSTRUCTION("Have Items in banks and armour equipped and some food.Puzzel required manual intervention.", DEAD_AND_BURIED),
+
+        //Ancient Awakening
+        ANCIENT_AWAKENING_INSTRUCTION("Have Armour and weapon equipped. Inventory fill with food before going to Ungael Site, 12 Waves are required manual intervention.", ANCIENT_AWAKENING),
+
+        //Battle of Forinthry
+        BATTLE_OF_FORINTHRY_INSTRUCTION("Have Armour and weapon equipped. Inventory fill with food before going to fight with Vorkath", BATTLE_OF_FORINTHRY),
+
+        //Requiem for a Dragon
+        REQUIEM_FOR_A_DRAGON_INSTRUCTION("Talking to Archivist and Zemouregal is required manual intervention. Resotring becon chat option with tree of balance is required manual intervention. Ritual required manual intervention.", REQUIEM_FOR_A_DRAGON);
+
+
+        private final String text;
+        private final DebugScript.Quest quest;
+
+        QuestInstruction(String text, DebugScript.Quest quest) {
+            this.text = text;
+            this.quest = quest;
+        }
+
+        public String getText() {
+            return text;
+        }
+
+        public DebugScript.Quest getQuest() {
+            return quest;
+        }
+    }
 
     public static void println(String msg) {
         ScriptConsole.println(msg);

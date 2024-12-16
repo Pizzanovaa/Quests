@@ -15,8 +15,6 @@ repositories {
 }
 
 tasks.withType<JavaCompile> {
-    sourceCompatibility = "20"
-    targetCompatibility = "20"
     options.compilerArgs.add("--enable-preview")
 }
 
@@ -41,9 +39,9 @@ tasks.named<Jar>("jar") {
 }
 
 dependencies {
-    implementation("net.botwithus.rs3:botwithus-api:1.+")
-    implementation("net.botwithus.xapi.public:api:1.+")
-    "includeInJar"("net.botwithus.xapi.public:api:1.+")
+    implementation("net.botwithus.rs3:botwithus-api:1.0.1")
+    implementation("net.botwithus.xapi.public:api:1.0.2")
+    "includeInJar"("net.botwithus.xapi.public:api:1.0.2")
     implementation("com.google.flogger:flogger:0.7.4")
     implementation("com.google.flogger:flogger-system-backend:0.7.4")
     implementation("com.google.code.gson:gson:2.10.1")
