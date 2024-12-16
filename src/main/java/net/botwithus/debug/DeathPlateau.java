@@ -145,6 +145,7 @@ public class DeathPlateau {
         }
     }
 
+
     public static void talktoFreda() {
         Npc npc = NpcQuery.newQuery().name("Freda").results().first();
         if (npc != null) {
