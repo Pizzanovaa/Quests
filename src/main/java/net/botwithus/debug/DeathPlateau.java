@@ -16,8 +16,6 @@ import net.botwithus.rs3.script.Execution;
 import net.botwithus.rs3.util.RandomGenerator;
 
 public class DeathPlateau {
-
-
     static Coordinate player = Client.getLocalPlayer().getServerCoordinate();
     static Coordinate startcord = new Coordinate(2917, 3559, 0);
     static Area.Circular startarea = new Area.Circular(startcord, 10);
@@ -57,6 +55,7 @@ public class DeathPlateau {
                         talktoSabbot();
                     }
                     break;
+
                 case 10, 30:
                     if (!fredaarea.contains(player)) {
                         DebugScript.moveTo(fredacord);
@@ -64,6 +63,7 @@ public class DeathPlateau {
                         talktoFreda();
                     }
                     break;
+
                 case 15:
                     if (!dustanarea.contains(player)) {
                         DebugScript.moveTo(dustancord);
@@ -71,6 +71,7 @@ public class DeathPlateau {
                         talktoDustan();
                     }
                     break;
+
                 case 35:
                     if (Backpack.contains("Survey")) {
                         Backpack.interact("Survey", "Read");
@@ -80,6 +81,7 @@ public class DeathPlateau {
                         println("YOU DONT HAVE THE SURVEY ON YOU");
                     }
                     break;
+
                 case 40:
                     if (player.getRegionId() != 9034) {
                         DebugScript.moveTo(sabbotcord);
@@ -91,6 +93,7 @@ public class DeathPlateau {
                         }
                     }
                     break;
+
                 case 45:
                     Coordinate coord = new Coordinate(3435, 4240, 2);
                     DebugScript.moveTo(coord);
@@ -101,26 +104,30 @@ public class DeathPlateau {
                     }
                     Execution.delay(5000);
                     break;
+
                 case 50:
                     talktoTheMap();
                     break;
+
                 case 55:
-                   println("In Combat - Waiting for The Map to die");
+                    println("In Combat - Waiting for The Map to die");
                     break;
+
                 case 60:
-                    if(!startarea.contains(player)){
+                    if (!startarea.contains(player)) {
                         DebugScript.moveTo(startcord);
-                    }
-                    else{
+                    } else {
                         talktoCommanderDenulth();
                     }
                     break;
+
                 case 65:
                     println("Quest Done");
                     break;
             }
         }
     }
+
     public static void talktoTheMap() {
         Npc npc = NpcQuery.newQuery().name("The Map").results().first();
         if (npc != null) {
@@ -128,6 +135,7 @@ public class DeathPlateau {
             delay(RandomGenerator.nextInt(600, 800));
         }
     }
+
     public static void talktoCommanderDenulth() {
         Npc npc = NpcQuery.newQuery().name("Commander Denulth").results().first();
         if (npc != null) {
@@ -143,7 +151,6 @@ public class DeathPlateau {
             delay(RandomGenerator.nextInt(600, 800));
         }
     }
-
 
     public static void talktoFreda() {
         Npc npc = NpcQuery.newQuery().name("Freda").results().first();
