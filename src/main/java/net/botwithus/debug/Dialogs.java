@@ -545,8 +545,47 @@ public class Dialogs {
         ELEMENTAL(1, "Elemental", REQUIEM_FOR_A_DRAGON),
         COMMUNE(1, "Commune", REQUIEM_FOR_A_DRAGON),
         TALK_ABOUT_REQUIEM_FOR_A_DRAGON_1(1, "Talk about 'Requiem for a Dragon'", REQUIEM_FOR_A_DRAGON),
-        CHANGE_THE_GLYPHS_REQUIEM(1, "Change the glyphs.", REQUIEM_FOR_A_DRAGON);
+        CHANGE_THE_GLYPHS_REQUIEM(1, "Change the glyphs.", REQUIEM_FOR_A_DRAGON),
 
+        //Murder on the Border
+        TALK_ABOUT_QUESTS_MURDER(1, "Talk about quests...", MURDER_ON_THE_BORDER),
+        TALK_ABOUT_MURDER_ON_THE_BORDER(1, "Talk about 'Murder on the Border'.", MURDER_ON_THE_BORDER),
+        YES_MURDER(1, "Yes.", MURDER_ON_THE_BORDER),
+        I_LL_BEAR_THAT_IN_MIND(1, "I'll bear that in mind.", MURDER_ON_THE_BORDER),
+        I_M_SURE_IT_WILL_BE_FINE(1, "I'm sure it will be fine.", MURDER_ON_THE_BORDER),
+        VERY_PRECEPTIVE_YOUR_MAJESTY(1, "Very perceptive, your majesty.", MURDER_ON_THE_BORDER),
+        WELCOME_TO_FORT_FORINTHRY(1, "Welcome to Fort Forinthry.", MURDER_ON_THE_BORDER),
+        YOU_RE_THE_DUKE_OF_EDGEVILLE(1, "You're the duke of Edgeville.", MURDER_ON_THE_BORDER),
+        WE_VE_GOT_THIS(1, "We've got this.", MURDER_ON_THE_BORDER),
+        JUST_MAKE_HIM_THE_DISH_ASTER(1, "Just make him the dish, Aster.", MURDER_ON_THE_BORDER),
+        I_M_DOING_THE_BEST_I_CAN(1, "I'm doing the best I can.", MURDER_ON_THE_BORDER),
+        LOCK_DOWN_THE_FORT_NOW(1, "Lock down the fort.Now.", MURDER_ON_THE_BORDER),
+        I_M_GLAD_I_HAVE_YOUR_SUPPORT(1, "I'm glad I have your support.", MURDER_ON_THE_BORDER),
+        WE_NEED_TO_FIND_WHO_THIS_BELONGS_TO(1, "We need to find who this belongs to.", MURDER_ON_THE_BORDER),
+        USE_IT_ON_THE_DUKES_MEAT_PATE(2, "Use it on the duke's meat pâté.", MURDER_ON_THE_BORDER),
+        TALK_TO_KING_ROALD(1, "Talk to King Roald.", MURDER_ON_THE_BORDER),
+        DID_YOU_NOTICE_ANYTHING_SUSPICIOUS(1, "Did you notice anything suspicious?", MURDER_ON_THE_BORDER),
+        //THAT_S_ALL_FOR_NOW(3, "That's all for now.", MURDER_ON_THE_BORDER),
+        THAT_S_UNACCEPTABLE(1, "That's unacceptable.", MURDER_ON_THE_BORDER),
+        TALK_ABOUT_THE_ASSASSIN(1, "Talk about the assassin.", MURDER_ON_THE_BORDER),
+        CONFIRM_ASTER_S_INNOCENCE(1, "Confirm Aster's innocence.", MURDER_ON_THE_BORDER),
+        I_THINK_SHE_REALLY_IS_THIS_DENSE(1, "I think she really is this dense.", MURDER_ON_THE_BORDER),
+        WHAT_S_YOUR_BEEF_WITH_KING_ROALD(1, "What's your beef with King Roald?", MURDER_ON_THE_BORDER),
+        ASK_ABOUT_ELLAMARIA(1, "Ask about Ellamaria.", MURDER_ON_THE_BORDER),
+        I_HEARD_YOU_WERE_ONCE_FRIENDS_WITH_BIANCA(1, "I heard you were once friends with Bianca.", MURDER_ON_THE_BORDER),
+        YES_I_M_READY(1, "Yes, I'm ready.", MURDER_ON_THE_BORDER),
+        DIANCA_DUNNET(5, "Bianca Dunnet", MURDER_ON_THE_BORDER),
+        END_THE_BANQUET(1, "End the banquet.", MURDER_ON_THE_BORDER),
+        I_M_SO_SORRY_TO_HEAR_THAT(1, "I'm so sorry to hear that.", MURDER_ON_THE_BORDER),
+        SIMON_LEFT_IT_THERE_HIMSELF(1, "Simon left it there himself.", MURDER_ON_THE_BORDER),
+        THEY_WANTED_HIS_WEALTH(1, "They wanted his wealth.", MURDER_ON_THE_BORDER),
+        IT_WAS_AN_EXCUSE_TO_PROTECT_YOU(1, "It was an excuse to protect you.", MURDER_ON_THE_BORDER),
+        TO_TAKE_REVENGE_ON_QUEEN_ELLAMARIA(1, "To take revenge on Queen Ellamaria.", MURDER_ON_THE_BORDER),
+        SHE_DESERVES_IT_AFTER_BETRAYING_ME_LIKE_THIS(1, "She deserves it after betraying me like this.", MURDER_ON_THE_BORDER),
+        ASK_HOW_ASTER_IS_FEELING(1, "Ask how Aster is feeling.", MURDER_ON_THE_BORDER),
+        JUST_DON_T_NURDER_ANYONE(1, "Just don't murder anyone.", MURDER_ON_THE_BORDER),
+        //LINK_A_CLUE_TO_SIMON(2, "Link a clue to Simon.", MURDER_ON_THE_BORDER),
+        TALK_ABOUT_MURDER_ON_THE_BORDER_1(1, "Yes, let's start the feast.", MURDER_ON_THE_BORDER);
 
 
         private final int number;
@@ -592,8 +631,10 @@ public class Dialogs {
         BATTLE_OF_FORINTHRY_INSTRUCTION("Have Armour and weapon equipped. Inventory fill with food before going to fight with Vorkath", BATTLE_OF_FORINTHRY),
 
         //Requiem for a Dragon
-        REQUIEM_FOR_A_DRAGON_INSTRUCTION("Talking to Archivist and Zemouregal is required manual intervention. Resotring becon chat option with tree of balance is required manual intervention. Ritual required manual intervention.", REQUIEM_FOR_A_DRAGON);
+        REQUIEM_FOR_A_DRAGON_INSTRUCTION("Talking to Archivist and Zemouregal is required manual intervention. Resotring becon chat option with tree of balance is required manual intervention. Ritual required manual intervention.", REQUIEM_FOR_A_DRAGON),
 
+        //Murder on the Border
+        MURDER_ON_THE_BORDER_INSTRUCTION("Selecting the murder option required manual intervention and talk to Rodney during second half of the quest", MURDER_ON_THE_BORDER);
 
         private final String text;
         private final DebugScript.Quest quest;
