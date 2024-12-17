@@ -94,6 +94,7 @@ public class DebugScript extends LoopingScript {
             case ANACHRONIA_TUT -> AnachroniaTut.quest();
             case CHRISTMAS_REUNION -> ChristmasReunion.quest();
             case ITS_SNOW_BOTHER -> ItsSnowBother.quest();
+            case MURDER_ON_THE_BORDER -> Murderontheborder.quest();
             case DEAD_AND_BURIED -> DeadandBuried.quest();
             case ANCIENT_AWAKENING -> AncientAwakening.quest();
             case BATTLE_OF_FORINTHRY -> BattleofForinthry.quest();
@@ -260,6 +261,7 @@ public class DebugScript extends LoopingScript {
         ANCIENT_AWAKENING(502),
         BATTLE_OF_FORINTHRY(507),
         REQUIEM_FOR_A_DRAGON(509),
+        MURDER_ON_THE_BORDER(490),
 
 
         TEST_DONTSELECT(135);
