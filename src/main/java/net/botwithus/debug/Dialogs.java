@@ -221,6 +221,9 @@ public class Dialogs {
         Ive_been_sent_to_help_make_an_ointment_of_imbalance_for_Kaqemeex(1, "I've been sent to help make an ointment of imbalance for Kaqemeex.", DRUIDIC_RITUAL),
         Ok_Ill_do_that_then(1, "Ok, I'll do that then.", DRUIDIC_RITUAL),
 
+        //Let Them Eat Pie
+        Id_best_get_on_with_it_then(1, "I'd best get on with it then.", LET_THEM_EAT_PIE),
+
         //LOST CITY
         WHY_CAMPED_OUT_HERE(1, "Why are you camped out here?", TEST_DONTSELECT),
         WHOS_ZANARIS(1, "Who's Zanaris?", TEST_DONTSELECT),

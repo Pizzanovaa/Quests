@@ -81,9 +81,9 @@ public class DruidicRitual {
                             DebugScript.moveTo(fishingcord);
                         } else {
                             SceneObjectQuery.newQuery().option("Bait").results().nearest().interact("Bait");
-                            while (Client.getLocalPlayer().getAnimationId() != -1) {
-                                println("FISHING. Please Wait.");
-                            }
+                            println("FISHING. Please Wait.");
+                            Execution.delay(5000);
+
                         }
                     } else if (!Backpack.contains("Stone scales") && Backpack.contains("Stone fish")) {
                         Backpack.interact("Stone fish", "Gather-scales");
