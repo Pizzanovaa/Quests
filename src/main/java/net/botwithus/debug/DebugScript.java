@@ -1,7 +1,7 @@
 package net.botwithus.debug;
 
 
-import net.botwithus.api.game.hud.Dialog;
+
 import net.botwithus.internal.scripts.ScriptDefinition;
 import net.botwithus.rs3.events.EventBus;
 import net.botwithus.rs3.events.Subscription;
@@ -40,8 +40,9 @@ public class DebugScript extends LoopingScript {
 
     private Subscription<ServerTickedEvent> subscription;
     private Subscription<ChatMessageEvent> subscription2;
-    
+
     public static String message = "";
+
     @Override
     public void onLoop() {
 
@@ -51,8 +52,9 @@ public class DebugScript extends LoopingScript {
         }
 
 
-
         switch (currentQuest) {
+            case DEATH_PLATEAU -> DeathPlateau.quest();
+            case DRUIDIC_RITUAL -> DruidicRitual.quest();
             case VIOLET_IS_BLUE -> VioletIsBlue.quest2();
             case COOKS_ASSISTANT -> CooksAssitant.quest();
             case NECROMANCY_INTRO -> Necromancy1.quest2();
@@ -99,6 +101,7 @@ public class DebugScript extends LoopingScript {
 
 
     }
+
     private static boolean disableDive = true;
 
     static boolean moveTo(Coordinate location) {
@@ -110,8 +113,7 @@ public class DebugScript extends LoopingScript {
             return true;
         }
         int flag = 0;
-        if(disableDive)
-        {
+        if (disableDive) {
             flag |= Movement.DISABLE_DIVE;
             ScriptConsole.println(" Movement Ability Dive is Disabled");
         }
@@ -160,27 +162,19 @@ public class DebugScript extends LoopingScript {
     }
 
     private void onChatMessageEvent(ChatMessageEvent event) {
-        if(running)
-        {
+        if (running) {
             String message = event.getMessage();
-            if(message.contains("Delivered 0/5 presents to citizens of Gielinor"))
-            {
+            if (message.contains("Delivered 0/5 presents to citizens of Gielinor")) {
                 DebugScript.message = message;
             }
-            if(message.contains("Delivered 1/5 presents to citizens of Gielinor"))
-            {
+            if (message.contains("Delivered 1/5 presents to citizens of Gielinor")) {
+                DebugScript.message = message;
+            } else if (message.contains("Delivered 2/5 presents to citizens of Gielinor")) {
                 DebugScript.message = message;
             }
-            else if(message.contains("Delivered 2/5 presents to citizens of Gielinor"))
-            {
+            if (message.contains("Delivered 3/5 presents to citizens of Gielinor")) {
                 DebugScript.message = message;
-            }
-            if(message.contains("Delivered 3/5 presents to citizens of Gielinor"))
-            {
-                DebugScript.message = message;
-            }
-            else if(message.contains("Delivered 4/5 presents to citizens of Gielinor"))
-            {
+            } else if (message.contains("Delivered 4/5 presents to citizens of Gielinor")) {
                 DebugScript.message = message;
             }
 
@@ -201,12 +195,18 @@ public class DebugScript extends LoopingScript {
     }
 
     public enum Quest {
-
-        COOKS_ASSISTANT(257),
+        DEATH_PLATEAU(140),
+        DRUIDIC_RITUAL(111),
+        //        LET_THEM_EAT_PIE(200),
+//        WOLF_WHISTLE(324),
         VIOLET_IS_BLUE(400),
+        //        VIOLET_IS_BLUE_TOO(453),
         BLOOD_PACT(335),
-        NECROMANCY_INTRO(493),
         RESTLESS_GHOST(27),
+        COOKS_ASSISTANT(257),
+
+        NECROMANCY_INTRO(493),
+
         WHAT_LIES_BELOW(144),
         THE_KNIGHT_SWORD(261),
         SHIELD_OF_ARRAV(63),
@@ -243,7 +243,7 @@ public class DebugScript extends LoopingScript {
         BATTLE_OF_FORINTHRY(507),
         REQUIEM_FOR_A_DRAGON(509),
 
-        
+
         TEST_DONTSELECT(135);
 
 
@@ -257,8 +257,6 @@ public class DebugScript extends LoopingScript {
             return questId;
         }
     }
-
-
 
 
 }
