@@ -57,6 +57,7 @@ public class DebugScript extends LoopingScript {
             //case LET_THEM_EAT_PIE -> LetThemEatPie.quest();
             case WOLF_WHISTLE -> WolfWhistle.quest();
             case VIOLET_IS_BLUE -> VioletIsBlue.quest2();
+            case VIOLET_IS_BLUE_TOO -> VioletIsBlueToo.quest();
             case COOKS_ASSISTANT -> CooksAssitant.quest();
             case NECROMANCY_INTRO -> Necromancy1.quest2();
             case BLOOD_PACT -> BloodPact.quest();
@@ -165,6 +166,22 @@ public class DebugScript extends LoopingScript {
     private void onChatMessageEvent(ChatMessageEvent event) {
         if (running) {
             String message = event.getMessage();
+            if(currentQuest==Quest.VIOLET_IS_BLUE_TOO){
+                println("TRACKING CHAT FOR VIOLET IS BLUE TOO");
+                println(message);
+//                if (message.contains("Objective: Visit Taylor to the northwest of the town to pick out a new Christmas tree for the town centrepiece.")) {
+//                   VioletIsBlueToo.currentStep="GOTOTAYLOR";
+//                }
+//                if (message.contains("5/5 lampposts decorated")) {
+//                    VioletIsBlueToo.currentStep="DOHOUSES";
+//                }
+                if (message.contains("Objective: Find an area high enough in the town to launch a snow impling from to decorate the tree.")) {
+                    VioletIsBlueToo.currentStep5="GOUPHILL";
+                    println(VioletIsBlueToo.currentStep5);
+                }
+                return;
+            }
+
             if (message.contains("Delivered 0/5 presents to citizens of Gielinor")) {
                 DebugScript.message = message;
             }
@@ -201,7 +218,7 @@ public class DebugScript extends LoopingScript {
         // LET_THEM_EAT_PIE(200), //UNFINISHED
         WOLF_WHISTLE(324),
         VIOLET_IS_BLUE(400),
-        //        VIOLET_IS_BLUE_TOO(453),
+        VIOLET_IS_BLUE_TOO(453),
         BLOOD_PACT(335),
         RESTLESS_GHOST(27),
         COOKS_ASSISTANT(257),

@@ -223,14 +223,24 @@ public class Dialogs {
         //Id_best_get_on_with_it_then(1, "I'd best get on with it then.", LET_THEM_EAT_PIE),
 
         //Wolf Whistle
-        Do_you_have_a_quest_for_me(2,"Do you have a quest for me?",WOLF_WHISTLE),
-        Look_Ill_just_go_and_take_a_look_myself(1,"Look, I'll just go and take a look myself...",WOLF_WHISTLE),
-        Bowloftrix_has_been_kidnapped_by_trolls(2,"Bowloftrix has been kidnapped by trolls!",WOLF_WHISTLE),
-        I_think_I_had_better_go(5,"I think I had better go.",WOLF_WHISTLE),
-        Ask_about_the_white_hare_meat(1,"Ask about the white hare meat.",WOLF_WHISTLE),
-        HOW_MUCH_IS_THAT_PUPPY(2,"How much is that puppy in the window?.",WOLF_WHISTLE),
-        I_need_to_ask_you_something_about_the_quest(2,"I need to ask you something about the quest...",WOLF_WHISTLE),
-        I_made_the_giant_wolpertinger_pouch(1,"I made the giant wolpertinger pouch!",WOLF_WHISTLE),
+        Do_you_have_a_quest_for_me(2, "Do you have a quest for me?", WOLF_WHISTLE),
+        Look_Ill_just_go_and_take_a_look_myself(1, "Look, I'll just go and take a look myself...", WOLF_WHISTLE),
+        Bowloftrix_has_been_kidnapped_by_trolls(2, "Bowloftrix has been kidnapped by trolls!", WOLF_WHISTLE),
+        I_think_I_had_better_go(5, "I think I had better go.", WOLF_WHISTLE),
+        Ask_about_the_white_hare_meat(1, "Ask about the white hare meat.", WOLF_WHISTLE),
+        HOW_MUCH_IS_THAT_PUPPY(2, "How much is that puppy in the window?.", WOLF_WHISTLE),
+        I_need_to_ask_you_something_about_the_quest(2, "I need to ask you something about the quest...", WOLF_WHISTLE),
+        I_made_the_giant_wolpertinger_pouch(1, "I made the giant wolpertinger pouch!", WOLF_WHISTLE),
+
+
+        //VIOLET IS BLUE TOO
+        VIOLETISBLUETOO(1, "Violet is Blue Too.", VIOLET_IS_BLUE_TOO),
+        IREMEBERHIM(1, "I remember him.", VIOLET_IS_BLUE_TOO),
+        What_should_we_do(2, "What should we do?", VIOLET_IS_BLUE_TOO),
+        PEEK(1, "Peek.", VIOLET_IS_BLUE_TOO),
+        At_least_you_got_out_before_Christmas(3, "At least you got out before Christmas.", VIOLET_IS_BLUE_TOO),
+        How_can_we_help_out(1, "How can we help out?", VIOLET_IS_BLUE_TOO),
+
         //LOST CITY
         WHY_CAMPED_OUT_HERE(1, "Why are you camped out here?", TEST_DONTSELECT),
         WHOS_ZANARIS(1, "Who's Zanaris?", TEST_DONTSELECT),
@@ -435,11 +445,11 @@ public class Dialogs {
 
         //Kili's row IV
         TALK_ABOUT_UPGRADE4(1, "Talk about active equipment upgrade task.", KILI_KNOWLEDGE_IV),
-        CURRENT_TASK4(1, "Ask about your current task.", KILI_KNOWLEDGE_IV),    
+        CURRENT_TASK4(1, "Ask about your current task.", KILI_KNOWLEDGE_IV),
 
         //Kili's row V
         TALK_ABOUT_UPGRADE5(1, "Talk about active equipment upgrade task.", KILI_KNOWLEDGE_V),
-        CURRENT_TASK5(1, "Ask about your current task.", KILI_KNOWLEDGE_V),    
+        CURRENT_TASK5(1, "Ask about your current task.", KILI_KNOWLEDGE_V),
 
         //Enter the Abyss
         YES_ENTER_THE_ABYSS(1, "Yes", ENTER_THE_ABYSS),
@@ -525,7 +535,7 @@ public class Dialogs {
         YES_BEGIN_THE_FEAST(1, "Yes, begin the feast.", BATTLE_OF_FORINTHRY),
 
         //Requiem for a Dragon
-        
+
         TALK_ABOUT_QUESTS_REQUIEM(1, "Talk about quests...", REQUIEM_FOR_A_DRAGON),
         TALK_ABOUT_REQUIEM_FOR_A_DRAGON(1, "Talk about 'Requiem for a Dragon'.", REQUIEM_FOR_A_DRAGON),
         YES_REQUIEM(1, "Yes.", REQUIEM_FOR_A_DRAGON),
@@ -558,7 +568,6 @@ public class Dialogs {
         CHANGE_THE_GLYPHS_REQUIEM(1, "Change the glyphs.", REQUIEM_FOR_A_DRAGON);
 
 
-
         private final int number;
         private final String text;
         private final DebugScript.Quest quest;
@@ -583,8 +592,7 @@ public class Dialogs {
     }
 
 
-    public static enum QuestInstruction
-    {
+    public static enum QuestInstruction {
 
         ////Christmas Reunion
         CHRISTMAS_REUNION_INSTRUCTION("Have Christmas Village Teleport on Action Bar, Talk to Hunter NPC at the enterance of Citharede manual if you haven't done with before", CHRISTMAS_REUNION),
