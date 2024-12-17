@@ -10,10 +10,8 @@ import net.botwithus.rs3.game.queries.builders.components.ComponentQuery;
 import net.botwithus.rs3.game.vars.VarManager;
 import net.botwithus.rs3.script.ScriptConsole;
 
-import java.util.Arrays;
-import java.util.HashSet;
+
 import java.util.List;
-import java.util.Set;
 
 import static net.botwithus.debug.DebugScript.Quest.*;
 import static net.botwithus.debug.DebugScript.currentQuest;
