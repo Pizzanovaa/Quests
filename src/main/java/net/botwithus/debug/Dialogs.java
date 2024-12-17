@@ -224,6 +224,9 @@ public class Dialogs {
         //Let Them Eat Pie
         //Id_best_get_on_with_it_then(1, "I'd best get on with it then.", LET_THEM_EAT_PIE),
 
+        //Wolf Whistle
+
+
         //LOST CITY
         WHY_CAMPED_OUT_HERE(1, "Why are you camped out here?", TEST_DONTSELECT),
         WHOS_ZANARIS(1, "Who's Zanaris?", TEST_DONTSELECT),
