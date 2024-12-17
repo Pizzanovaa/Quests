@@ -10,10 +10,8 @@ import net.botwithus.rs3.game.queries.builders.components.ComponentQuery;
 import net.botwithus.rs3.game.vars.VarManager;
 import net.botwithus.rs3.script.ScriptConsole;
 
-import java.util.Arrays;
-import java.util.HashSet;
+
 import java.util.List;
-import java.util.Set;
 
 import static net.botwithus.debug.DebugScript.Quest.*;
 import static net.botwithus.debug.DebugScript.currentQuest;
@@ -221,6 +219,18 @@ public class Dialogs {
         Ive_been_sent_to_help_make_an_ointment_of_imbalance_for_Kaqemeex(1, "I've been sent to help make an ointment of imbalance for Kaqemeex.", DRUIDIC_RITUAL),
         Ok_Ill_do_that_then(1, "Ok, I'll do that then.", DRUIDIC_RITUAL),
 
+        //Let Them Eat Pie
+        //Id_best_get_on_with_it_then(1, "I'd best get on with it then.", LET_THEM_EAT_PIE),
+
+        //Wolf Whistle
+        Do_you_have_a_quest_for_me(2,"Do you have a quest for me?",WOLF_WHISTLE),
+        Look_Ill_just_go_and_take_a_look_myself(1,"Look, I'll just go and take a look myself...",WOLF_WHISTLE),
+        Bowloftrix_has_been_kidnapped_by_trolls(2,"Bowloftrix has been kidnapped by trolls!",WOLF_WHISTLE),
+        I_think_I_had_better_go(5,"I think I had better go.",WOLF_WHISTLE),
+        Ask_about_the_white_hare_meat(1,"Ask about the white hare meat.",WOLF_WHISTLE),
+        HOW_MUCH_IS_THAT_PUPPY(2,"How much is that puppy in the window?.",WOLF_WHISTLE),
+        I_need_to_ask_you_something_about_the_quest(2,"I need to ask you something about the quest...",WOLF_WHISTLE),
+        I_made_the_giant_wolpertinger_pouch(1,"I made the giant wolpertinger pouch!",WOLF_WHISTLE),
         //LOST CITY
         WHY_CAMPED_OUT_HERE(1, "Why are you camped out here?", TEST_DONTSELECT),
         WHOS_ZANARIS(1, "Who's Zanaris?", TEST_DONTSELECT),
