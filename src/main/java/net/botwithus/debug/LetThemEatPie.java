@@ -44,6 +44,7 @@ public class LetThemEatPie {
 
     static Coordinate farmerjoecord = new Coordinate(2896, 3470, 0);
     static Area.Circular farmerjoearea = new Area.Circular(fishingcord, 6);
+
     public static void quest() {
         int QuestVarp = VarManager.getVarbitValue(13240);
         player = Client.getLocalPlayer().getServerCoordinate();
@@ -68,14 +69,38 @@ public class LetThemEatPie {
         } else {
             switch (QuestVarp) {
                 case 6:
-                    if (true) {
-                        if (!Backpack.contains("Fishing bait")) {
-                            if (!baitarea.contains(player)) {
-                                DebugScript.moveTo(baitcord);
+
+                    if (!Backpack.contains("Fishing bait")) {
+                        if (!baitarea.contains(player)) {
+                            DebugScript.moveTo(baitcord);
+                        } else {
+
+                            println("Getting Fishing bait.");
+                            var bait = GroundItemQuery.newQuery().name("Fishing bait").results().nearest();
+                            if (bait != null)
+                                bait.interact("Take");
+                            Execution.delay(600);
+                            var lootMenu = ComponentQuery.newQuery(1622).componentIndex(22).results().first();
+                            if (lootMenu != null)
+                                lootMenu.interact();
+                        }
+                    } else if (!Backpack.contains("Wheat") && !Backpack.contains("Maggoty flour")) {
+                        if (!wheatarea.contains(player)) {
+                            DebugScript.moveTo(wheatcord);
+                        } else {
+                            println("Getting Wheat.");
+                            var bait = SceneObjectQuery.newQuery().name("Wheat").results().nearest();
+                            if (bait != null)
+                                bait.interact("Pick");
+                        }
+                    } else if (!Backpack.contains("Maggoty flour")) {
+                        if (!Backpack.contains("Empty pot")) {
+                            if (!millarea.contains(player)) {
+                                DebugScript.moveTo(millcord);
                             } else {
 
-                                println("Getting Fishing bait.");
-                                var bait = GroundItemQuery.newQuery().name("Fishing bait").results().nearest();
+                                println("Getting a Pot.");
+                                var bait = GroundItemQuery.newQuery().name("Empty pot").results().nearest();
                                 if (bait != null)
                                     bait.interact("Take");
                                 Execution.delay(600);
@@ -83,64 +108,40 @@ public class LetThemEatPie {
                                 if (lootMenu != null)
                                     lootMenu.interact();
                             }
-                        } else if (!Backpack.contains("Wheat") && !Backpack.contains("Maggoty flour")) {
-                            if (!wheatarea.contains(player)) {
-                                DebugScript.moveTo(wheatcord);
+                        } else {
+                            if (!mill1stfloorarea.contains(player)) {
+                                DebugScript.moveTo(mill1stfloorcord);
                             } else {
-                                println("Getting Wheat.");
-                                var bait = SceneObjectQuery.newQuery().name("Wheat").results().nearest();
-                                if (bait != null)
-                                    bait.interact("Pick");
-                            }
-                        } else if (!Backpack.contains("Maggoty flour")) {
-                            if (!Backpack.contains("Empty pot")) {
-                                if (!millarea.contains(player)) {
-                                    DebugScript.moveTo(millcord);
-                                } else {
-
-                                    println("Getting a Pot.");
-                                    var bait = GroundItemQuery.newQuery().name("Empty pot").results().nearest();
-                                    if (bait != null)
-                                        bait.interact("Take");
-                                    Execution.delay(600);
-                                    var lootMenu = ComponentQuery.newQuery(1622).componentIndex(22).results().first();
-                                    if (lootMenu != null)
-                                        lootMenu.interact();
-                                }
-                            } else {
-                                if (!mill1stfloorarea.contains(player)) {
-                                    DebugScript.moveTo(mill1stfloorcord);
-                                } else {
-                                    println("Interaction with wheat");
-                                    SceneObject hopper = SceneObjectQuery.newQuery().name("Hopper").results().nearest();
-                                    if (hopper != null) {
-                                        int itemslot = net.botwithus.api.game.hud.inventories.Backpack.getItem("Wheat").getSlot();
-                                        MiniMenu.interact(SELECTABLE_COMPONENT.getType(), 0, itemslot, 96534533);
-                                        delay(RandomGenerator.nextInt(300, 500));
-                                        //Interact Hopper
-                                        MiniMenu.interact(SELECT_OBJECT.getType(), 67774, 2893, 3426);
-                                        delay(RandomGenerator.nextInt(2000, 3000));
-                                        Execution.delay(3000);
-                                        SceneObject hopperControls = SceneObjectQuery.newQuery().name("Hopper controls").results().nearest();
-                                        if (hopperControls != null) {
-                                            hopperControls.interact("Operate");
-                                            Execution.delay(6000);
-                                            DebugScript.moveTo(millcord);
-                                            SceneObject flourBin = SceneObjectQuery.newQuery().name("Flour bin").results().nearest();
-                                            if (flourBin != null) {
-                                                flourBin.interact("Take-flour");
-                                                Execution.delay(3000);
-                                                DebugScript.moveTo(startcord);
-                                                Execution.delay(3000);
-                                                talktoNailsNewton();
-                                            }
+                                println("Interaction with wheat");
+                                SceneObject hopper = SceneObjectQuery.newQuery().name("Hopper").results().nearest();
+                                if (hopper != null) {
+                                    int itemslot = net.botwithus.api.game.hud.inventories.Backpack.getItem("Wheat").getSlot();
+                                    MiniMenu.interact(SELECTABLE_COMPONENT.getType(), 0, itemslot, 96534533);
+                                    delay(RandomGenerator.nextInt(300, 500));
+                                    //Interact Hopper
+                                    MiniMenu.interact(SELECT_OBJECT.getType(), 67774, 2893, 3426);
+                                    delay(RandomGenerator.nextInt(2000, 3000));
+                                    Execution.delay(3000);
+                                    SceneObject hopperControls = SceneObjectQuery.newQuery().name("Hopper controls").results().nearest();
+                                    if (hopperControls != null) {
+                                        hopperControls.interact("Operate");
+                                        Execution.delay(6000);
+                                        DebugScript.moveTo(millcord);
+                                        SceneObject flourBin = SceneObjectQuery.newQuery().name("Flour bin").results().nearest();
+                                        if (flourBin != null) {
+                                            flourBin.interact("Take-flour");
+                                            Execution.delay(3000);
+                                            DebugScript.moveTo(startcord);
+                                            Execution.delay(3000);
+                                            talktoNailsNewton();
                                         }
-
                                     }
+
                                 }
                             }
                         }
                     }
+
                     break;
 
                 case 9:

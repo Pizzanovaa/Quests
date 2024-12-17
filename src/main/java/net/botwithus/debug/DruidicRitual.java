@@ -82,7 +82,7 @@ public class DruidicRitual {
                         } else {
                             SceneObjectQuery.newQuery().option("Bait").results().nearest().interact("Bait");
                             println("FISHING. Please Wait.");
-                            Execution.delay(5000);
+                            Execution.delay(10000);
 
                         }
                     } else if (!Backpack.contains("Stone scales") && Backpack.contains("Stone fish")) {
