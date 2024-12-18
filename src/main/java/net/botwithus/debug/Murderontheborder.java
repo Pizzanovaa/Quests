@@ -12,7 +12,6 @@ import net.botwithus.rs3.game.vars.VarManager;
 import net.botwithus.rs3.input.GameInput;
 import net.botwithus.rs3.script.ScriptConsole;
 import net.botwithus.rs3.util.RandomGenerator;
-import x.r;
 import net.botwithus.rs3.game.minimenu.MiniMenu;
 import net.botwithus.rs3.game.minimenu.actions.ComponentAction;
 import net.botwithus.rs3.game.minimenu.actions.NPCAction;
@@ -41,7 +40,6 @@ import static net.botwithus.rs3.game.minimenu.actions.SelectableAction.SELECTABL
 import static net.botwithus.rs3.game.minimenu.actions.SelectableAction.SELECT_OBJECT;
 import static net.botwithus.rs3.script.Execution.delay;
 
-import c.f;
 import net.botwithus.api.game.hud.inventories.Backpack;
 import net.botwithus.api.game.hud.inventories.Bank;
 import net.botwithus.api.game.hud.traversal.Lodestone;

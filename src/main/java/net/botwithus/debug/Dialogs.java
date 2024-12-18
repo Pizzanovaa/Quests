@@ -605,7 +605,15 @@ public class Dialogs {
         ASK_HOW_ASTER_IS_FEELING(1, "Ask how Aster is feeling.", MURDER_ON_THE_BORDER),
         JUST_DON_T_NURDER_ANYONE(1, "Just don't murder anyone.", MURDER_ON_THE_BORDER),
         //LINK_A_CLUE_TO_SIMON(2, "Link a clue to Simon.", MURDER_ON_THE_BORDER),
-        TALK_ABOUT_MURDER_ON_THE_BORDER_1(1, "Yes, let's start the feast.", MURDER_ON_THE_BORDER);
+        TALK_ABOUT_MURDER_ON_THE_BORDER_1(1, "Yes, let's start the feast.", MURDER_ON_THE_BORDER),
+
+        //Unwelcome Guests
+        TALK_ABOUT_QUESTS_UNWELCOME(1, "Talk about quests.", UNWELCOME_GUESTS),
+        TALK_ABOUT_UNWELCOME_GUESTS(2, "Talk about 'Unwelcome Guests'.", UNWELCOME_GUESTS),
+        YES_UNWELCOME_GUESTS(1, "Yes.", UNWELCOME_GUESTS),
+        YES_I_UNDERSTAND_THE_RESTRICTIONS(1, "Yes, I understand the restrictions.", UNWELCOME_GUESTS),
+        TALK_ABOUT_UNWELCOME_GUESTS_1(1, "Talk about 'Unwelcome Guests'.", UNWELCOME_GUESTS);
+
 
         private final int number;
         private final String text;
@@ -652,7 +660,10 @@ public class Dialogs {
         REQUIEM_FOR_A_DRAGON_INSTRUCTION("Talking to Archivist and Zemouregal is required manual intervention. Resotring becon chat option with tree of balance is required manual intervention. Ritual required manual intervention.", REQUIEM_FOR_A_DRAGON),
 
         //Murder on the Border
-        MURDER_ON_THE_BORDER_INSTRUCTION("Selecting the murder option required manual intervention and talk to Rodney during second half of the quest", MURDER_ON_THE_BORDER);
+        MURDER_ON_THE_BORDER_INSTRUCTION("Selecting the murder option required manual intervention and talk to Rodney during second half of the quest", MURDER_ON_THE_BORDER),
+
+        //Unwelcome Guests
+        UNWELCOME_GUESTS_INSTRUCTION("Kill 10 Fetid Zombies manually for faster quest completion. Build defence is required manual intervention. Kill 10 Zombies after building Guard house manually", UNWELCOME_GUESTS);
 
         private final String text;
         private final DebugScript.Quest quest;
