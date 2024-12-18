@@ -621,6 +621,7 @@ public class Dialogs {
         TALK_ABOUT_MURDER_ON_THE_BORDER_1(1, "Yes, let's start the feast.", MURDER_ON_THE_BORDER),
         //endregion
         //region Unwelcome Guests
+
         TALK_ABOUT_QUESTS_UNWELCOME(1, "Talk about quests.", UNWELCOME_GUESTS),
         TALK_ABOUT_UNWELCOME_GUESTS(2, "Talk about 'Unwelcome Guests'.", UNWELCOME_GUESTS),
         YES_UNWELCOME_GUESTS(1, "Yes.", UNWELCOME_GUESTS),

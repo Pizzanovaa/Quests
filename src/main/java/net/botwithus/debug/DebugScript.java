@@ -59,6 +59,7 @@ public class DebugScript extends LoopingScript {
             case VIOLET_IS_BLUE -> VioletIsBlue.quest2();
             case VIOLET_IS_BLUE_TOO -> VioletIsBlueToo.quest();
             case COOKS_ASSISTANT -> CooksAssitant.quest();
+            //TODO: Rework the whole quest to use do movement base on a fix coordinate, instead of player coordinate, can use the coordinate from the entrace SceneObject, this will make it much faster, and reliable
             case MYTHS_OF_THE_WHITE_LANDS -> MythsOfTheWhiteLands.quest();
             case NECROMANCY_INTRO -> Necromancy1.quest2();
             case BLOOD_PACT -> BloodPact.quest();
