@@ -206,23 +206,23 @@ public class Dialogs {
 
     public static enum Dialogue {
 
-        //Death Plateau
+        //region Death Plateau
         DO_YOU_HAVE_ANY_QUESTS_FOR_ME(1, "Do you have any quests for me?", DEATH_PLATEAU),
         Ive_been_sent_to_look_for_a_route_to_Death_Plateau_Can_you_help(1, "I've been sent to look for a route to Death Plateau. Can you help?", DEATH_PLATEAU),
         Can_you_put_some_fresh_spikes_on_these_climbing_boots_for_me(1, "Can you put some fresh spikes on these climbing boots for me?", DEATH_PLATEAU),
         Prepare_to_die_troll(3, "Prepare to die, troll!", DEATH_PLATEAU),
-
-        //Druidic Ritual
+        //endregion
+        //region Druidic Ritual
         Talk_about_Druidic_Ritual(1, "Talk about Druidic Ritual.", DRUIDIC_RITUAL),
         What_do_you_need_help_with(1, "What do you need help with?", DRUIDIC_RITUAL),
         Im_pretty_sure_Ive_heard_that_before(1, "I'm pretty sure I've heard that before.", DRUIDIC_RITUAL),
         Ive_been_sent_to_help_make_an_ointment_of_imbalance_for_Kaqemeex(1, "I've been sent to help make an ointment of imbalance for Kaqemeex.", DRUIDIC_RITUAL),
         Ok_Ill_do_that_then(1, "Ok, I'll do that then.", DRUIDIC_RITUAL),
-
-        //Let Them Eat Pie
+        //endregion
+        //region Let Them Eat Pie (UNFINISHED)
         //Id_best_get_on_with_it_then(1, "I'd best get on with it then.", LET_THEM_EAT_PIE),
-
-        //Wolf Whistle
+        //endregion
+        //region Wolf Whistle
         Do_you_have_a_quest_for_me(2, "Do you have a quest for me?", WOLF_WHISTLE),
         Look_Ill_just_go_and_take_a_look_myself(1, "Look, I'll just go and take a look myself...", WOLF_WHISTLE),
         Bowloftrix_has_been_kidnapped_by_trolls(2, "Bowloftrix has been kidnapped by trolls!", WOLF_WHISTLE),
@@ -231,36 +231,8 @@ public class Dialogs {
         HOW_MUCH_IS_THAT_PUPPY(2, "How much is that puppy in the window?.", WOLF_WHISTLE),
         I_need_to_ask_you_something_about_the_quest(2, "I need to ask you something about the quest...", WOLF_WHISTLE),
         I_made_the_giant_wolpertinger_pouch(1, "I made the giant wolpertinger pouch!", WOLF_WHISTLE),
-
-
-        //VIOLET IS BLUE TOO
-        VIOLETISBLUETOO(1, "Violet is Blue Too.", VIOLET_IS_BLUE_TOO),
-        IREMEBERHIM(1, "I remember him.", VIOLET_IS_BLUE_TOO),
-        What_should_we_do(2, "What should we do?", VIOLET_IS_BLUE_TOO),
-        PEEK(1, "Peek.", VIOLET_IS_BLUE_TOO),
-        At_least_you_got_out_before_Christmas(3, "At least you got out before Christmas.", VIOLET_IS_BLUE_TOO),
-        How_can_we_help_out(1, "How can we help out?", VIOLET_IS_BLUE_TOO),
-
-        //LOST CITY
-        WHY_CAMPED_OUT_HERE(1, "Why are you camped out here?", TEST_DONTSELECT),
-        WHOS_ZANARIS(1, "Who's Zanaris?", TEST_DONTSELECT),
-        HIDDEN_FIND_IT(1, "If it's hidden, how are you planning to find it?", TEST_DONTSELECT),
-        DONT_KNOW_EITHER(2, "Looks like you don't know either.", TEST_DONTSELECT),
-        IVE_BEEN_IN_THAT_SHED(2, "I've been in that shed and I didn't see a city.", TEST_DONTSELECT),
-        YES_PLEASE_TELEPORT_USEFUL(1, "Yes, please, a teleport would be useful.", TEST_DONTSELECT),
-        WELL_THAT_IS_A_RISK(2, "Well, that is a risk I will have to take.", TEST_DONTSELECT),
-
-        //Cook's Assistant
-        IM_AFTER_SOME_TOP_QUALITY_MILK(1, "I'm after some top-quality milk.", COOKS_ASSISTANT),
-        IM_LOOKING_FOR_EXTRA_FINE_FLOWER(1, "I'm looking for extra fine flour.", COOKS_ASSISTANT),
-        DO_YOU_HAVE_ANY_OTHER_QUESTS(1, "Do you have any other quests for me?", COOKS_ASSISTANT),
-        ANGRY_IT_MAKES_ME_ANGRY(1, "Angry! It makes me angry!", COOKS_ASSISTANT),
-        WHAT_SEEMS_TO_BE_THE_PROBLEM(1, "What seems to be the problem?", COOKS_ASSISTANT),
-        IM_FINE_THANKS(2, "I'm fine, thanks.", COOKS_ASSISTANT),
-        WHAT_WRONG(1, "What's wrong?", COOKS_ASSISTANT),
-        I_GET_ON_IT(1, "I'll get right on it.", COOKS_ASSISTANT),
-
-        //Violet is Blue
+        //endregion
+        //region Violet is Blue
         READY_FOR_ADVENTURE1(1, "To go on an adventure.", VIOLET_IS_BLUE),
         KNOCK(1, "Knock again.", VIOLET_IS_BLUE),
         READY_FOR_ADVENTURE(1, "Go on an adventure!", VIOLET_IS_BLUE),
@@ -270,8 +242,16 @@ public class Dialogs {
         HEAD(1, "Happy face.", VIOLET_IS_BLUE),
         YES(1, "Yes!", VIOLET_IS_BLUE),
         VIOLET_YES(1, "Yes.", VIOLET_IS_BLUE),
-
-        //BLOOD PACT
+        //endregion
+        //region VIOLET IS BLUE TOO
+        VIOLETISBLUETOO(1, "Violet is Blue Too.", VIOLET_IS_BLUE_TOO),
+        IREMEBERHIM(1, "I remember him.", VIOLET_IS_BLUE_TOO),
+        What_should_we_do(2, "What should we do?", VIOLET_IS_BLUE_TOO),
+        PEEK(1, "Peek.", VIOLET_IS_BLUE_TOO),
+        At_least_you_got_out_before_Christmas(3, "At least you got out before Christmas.", VIOLET_IS_BLUE_TOO),
+        How_can_we_help_out(1, "How can we help out?", VIOLET_IS_BLUE_TOO),
+        //endregion
+        //region BLOOD PACT
         HANDLE(4, "I can handle this.", BLOOD_PACT),
         YES_NOW_DIE(3, "Yes. Now die!", BLOOD_PACT),
         TIME_DIE(2, "Time for you to die!", BLOOD_PACT),
@@ -281,15 +261,48 @@ public class Dialogs {
         ILL_HELP_YOU(1, "I'll help you.", BLOOD_PACT),
         YES_RESCUE_ILONA(1, "Yes, rescue Ilona.", BLOOD_PACT),
         IM_READY_FOR_MY_REWARD(1, "I'm ready for my reward.", BLOOD_PACT),
-
-        //RESTLESS GHOST
+        //endregion
+        //region RESTLESS GHOST
         IM_LOOKING_FOR_A_QUEST(3, "I'm looking for a quest!", RESTLESS_GHOST),
         FATHER_AERECK_SENT_ME(2, "Father Aereck sent me to talk to you.", RESTLESS_GHOST),
         A_GHOST_IS_HAUNTING(1, "A ghost is haunting his graveyard.", RESTLESS_GHOST),
         YEP_NOW_TELL_ME(1, "Yep. Now, tell me what the problem is.", RESTLESS_GHOST),
         SKULL(1, "Put the skull in the coffin.", RESTLESS_GHOST),
+        //endregion
+        //region Cook's Assistant
+        IM_AFTER_SOME_TOP_QUALITY_MILK(1, "I'm after some top-quality milk.", COOKS_ASSISTANT),
+        IM_LOOKING_FOR_EXTRA_FINE_FLOWER(1, "I'm looking for extra fine flour.", COOKS_ASSISTANT),
+        DO_YOU_HAVE_ANY_OTHER_QUESTS(1, "Do you have any other quests for me?", COOKS_ASSISTANT),
+        ANGRY_IT_MAKES_ME_ANGRY(1, "Angry! It makes me angry!", COOKS_ASSISTANT),
+        WHAT_SEEMS_TO_BE_THE_PROBLEM(1, "What seems to be the problem?", COOKS_ASSISTANT),
+        IM_FINE_THANKS(2, "I'm fine, thanks.", COOKS_ASSISTANT),
+        WHAT_WRONG(1, "What's wrong?", COOKS_ASSISTANT),
+        I_GET_ON_IT(1, "I'll get right on it.", COOKS_ASSISTANT),
+        //endregion
+        //region Myths of the white lands
+        YOU_MENTIONED_A_QUEST(2, "You mentioned a quest?", MYTHS_OF_THE_WHITE_LANDS),
+        HOW_DO_I_GET_TO_THE_LAND_OF_SNOW(1, "How do I get to the Land of Snow?", MYTHS_OF_THE_WHITE_LANDS),
+        ACTUALLY_NEVER_MIND(3, "Actually, never mind.", MYTHS_OF_THE_WHITE_LANDS),
+        IM_A_FRIEND_OF_EXPLORER_JACK_AND_NEED_TELEPORTING(2, "I'm a friend of Explorer Jack and need teleporting.", MYTHS_OF_THE_WHITE_LANDS),
+        ABOUT_MYTHS_OF_THE_WHITE_LANDS(2, "About Myths of the White Lands...", MYTHS_OF_THE_WHITE_LANDS),
+        CARRY_ON_WITH_THE_IMPS_PRANK(2, "Carry on with the imps' prank.", MYTHS_OF_THE_WHITE_LANDS),
+        //endregion
+        //region Ernest the chicken (UNTESTED)
 
-        //WHAT LIES BELOW
+        //endregion
+        //region Swept Away (UNFINISHED)
+
+        //endregion
+        //region LOST CITY
+        WHY_CAMPED_OUT_HERE(1, "Why are you camped out here?", TEST_DONTSELECT),
+        WHOS_ZANARIS(1, "Who's Zanaris?", TEST_DONTSELECT),
+        HIDDEN_FIND_IT(1, "If it's hidden, how are you planning to find it?", TEST_DONTSELECT),
+        DONT_KNOW_EITHER(2, "Looks like you don't know either.", TEST_DONTSELECT),
+        IVE_BEEN_IN_THAT_SHED(2, "I've been in that shed and I didn't see a city.", TEST_DONTSELECT),
+        YES_PLEASE_TELEPORT_USEFUL(1, "Yes, please, a teleport would be useful.", TEST_DONTSELECT),
+        WELL_THAT_IS_A_RISK(2, "Well, that is a risk I will have to take.", TEST_DONTSELECT),
+        //endregion
+        //region WHAT LIES BELOW
         HELLO_THERE(2, "Hello there!", WHAT_LIES_BELOW),
         SHALL_I_GET_THEM_BACK(3, "Shall I get them back for you?", WHAT_LIES_BELOW),
         BRING_IT_ON(1, "Bring it on!", WHAT_LIES_BELOW),
@@ -297,8 +310,8 @@ public class Dialogs {
         YES_I_HAVE_A_LETTER_FOR_YOU(1, "Yes! I have a letter for you.", WHAT_LIES_BELOW),
         RAT_BURGISS_SENT_ME(4, "Rat Burgiss sent me.", WHAT_LIES_BELOW),
         I_HAVE_THE_THINGS_YOU_WANTED(1, "I have the things you wanted!", WHAT_LIES_BELOW),
-
-        //The Knight's Sword
+//endregion
+        //region The Knight's Sword
         CLOSE(6, "redberry pie. They REALLY like redberry pie.", THE_KNIGHT_SWORD),
         CHAT(1, "Chat", THE_KNIGHT_SWORD),
         ASK_LIFE(1, "And how is life as a squire?", THE_KNIGHT_SWORD),
@@ -307,8 +320,8 @@ public class Dialogs {
         SOMETHING_ELSE(2, "Something else.", THE_KNIGHT_SWORD),
         OFFER_PIE(2, "Would you like some redberry pie?", THE_KNIGHT_SWORD),
         IMCANDO_DWARVES(3, "What do you know about the Imcando dwarves?", THE_KNIGHT_SWORD),
-
-        //Shield of Arrav
+        //endregion
+        //region Shield of Arrav
         SEARCH_QUEST(1, "I'm in search of a ", SHIELD_OF_ARRAV),
         FIND_PHOENIX_GANG(1, "Do you know where I can find the Phoenix Gang?", SHIELD_OF_ARRAV),
         PHOENIX_GANG_LOCATION(1, "Can you tell me where I can find the Phoenix Gang?", SHIELD_OF_ARRAV),
@@ -326,8 +339,8 @@ public class Dialogs {
         GET_CROSSBOWS(1, "No problem. I'll get you two phoenix crossbows.", SHIELD_OF_ARRAV),
         TALK_SHIELD_OF_ARRAV_2(1, "Talk about the Shield of Arrav.", SHIELD_OF_ARRAV),
         FAREWELL(3, "Farewell.", SHIELD_OF_ARRAV),
-
-        // Stolen Hearts
+        //endregion
+        //region  Stolen Hearts
         LET_ME_IN(3, "Let me in or I'll poke your eyes out!", STOLEN_HEARTS),
         TELL_ME_JOBS(1, "Tell me what jobs you have in the works.", STOLEN_HEARTS),
         HOW_FIND_HQ(1, "How do we find the HQ?", STOLEN_HEARTS),
@@ -342,8 +355,8 @@ public class Dialogs {
         BACK(1, "I'll be back soon.", STOLEN_HEARTS),
         PASSCODE(1, "Scheherazade.", STOLEN_HEARTS),
         CALM_OZAN_DOWN(1, "[Calm Ozan down.]", STOLEN_HEARTS),
-
-        // Family Crest
+        //endregion
+        //region  Family Crest
         HI_I_AM_A_BOLD_ADVENTURER(1, "Hi, I am a bold adventurer.", FAMILY_CREST_INCOMPLETE),
         SO_WHERE_IS_THIS_CREST(2, "So where is this crest?", FAMILY_CREST_INCOMPLETE),
         ARE_YOU_CALEB_FITZHARMON(1, "Are you Caleb Fitzharmon?", FAMILY_CREST_INCOMPLETE),
@@ -357,14 +370,14 @@ public class Dialogs {
         ASK_ABOUT_GAUNTLETS(1, "Ask about gauntlets.", FAMILY_CREST_INCOMPLETE),
         RECLAIM_LOST_GAUNTLETS(1, "Reclaim lost gauntlets.", FAMILY_CREST_INCOMPLETE),
         YES_PLEASE(1, "Yes please.", FAMILY_CREST_INCOMPLETE),
-
-        // THE GOLEM
+        //endregion
+        //region  THE GOLEM
         OPEN_PORTAL(1, "How do I open the portal?", THE_GOLEM),
         STATUETTE_UZER(3, "I'm looking for a statuette recovered from the city of Uzer.", THE_GOLEM),
         OPEN_ELDER_DEMON_PORTAL(1, "I want to open a portal to the lair of an elder-demon.", THE_GOLEM),
         LETTER_IN_DESERT(3, "I found a letter in the desert with your name on.", THE_GOLEM),
-
-        //Rune Mythos
+        //endregion
+        //region Rune Mythos
         IM_GOOD_WHATS_NEXT(4, "I'm good. What's next?", RUNE_MYTHOS),
         YES_yes(4, "Yes.", RUNE_MYTHOS),
         //Ghosts Ahoy
@@ -382,11 +395,11 @@ public class Dialogs {
         AFTER_HEARING_VELORINAS_STORY(1, "After hearing Velorina's story I will be happy to help out.", GHOSTS_AHOY),
         TALK_TO_GHOST_CAPTAIN(1, "Please take me to Dragontooth Island.", GHOSTS_AHOY),
         LET_ANY_GHOST_PASS_ON(1, "Let any ghost who so wishes pass on into the next world.", GHOSTS_AHOY),
-
-        //Vessel Harbinger
+        //endregion
+        //region Vessel Harbinger
         TALK_ABOUT_VESSEL_HARINGER(1, "Talk about 'Vessel of the Harbinger'.", VESSEL_HARINGER),
-
-        //Tomes of Warlock
+        //endregion
+        //region Tomes of Warlock
         RASIAL_VESSEL_ORGAN(1, "Death, I've been to Rasial's citadel. I think his vessel is a giant organ.", TOMES_OF_WARLOCK),
         YES_TOMES(1, "Yes.", TOMES_OF_WARLOCK),
         ICE_TOMES(1, "Ice.", TOMES_OF_WARLOCK),
@@ -396,8 +409,8 @@ public class Dialogs {
         HAND_IN_BOOK(1, "Yes", TOMES_OF_WARLOCK),
         NO_THANKS(2, "No thanks.", TOMES_OF_WARLOCK),
         GOODBYE(1, "Goodbye.", TOMES_OF_WARLOCK),
-
-        // Daughter of Chaos
+        //endregion
+        //region  Daughter of Chaos
         I_AM_READY(1, "I'm ready.", DAUGHTER_OF_CHAOS),
         ILL_SEE_IT_DONE(2, "I'll see it done.", DAUGHTER_OF_CHAOS),
         SHOULD_MOVE_ON(4, "We should move on.", DAUGHTER_OF_CHAOS),
@@ -406,15 +419,15 @@ public class Dialogs {
         LOWER_THE_DIFFICULTY(1, "Lower the difficulty.", DAUGHTER_OF_CHAOS),
         ADRASTEIA_SENT_ME(1, "Adrasteia sent me.", DAUGHTER_OF_CHAOS),
         RESPOND_DIPLOMATICALLY(1, "Respond diplomatically.", DAUGHTER_OF_CHAOS),
-
-        //Diamond in the Rough
+        //endregion
+        //region Diamond in the Rough
         LET_S_KEEP_GOING(4, "Let's keep going.", DIAMOND_ROUGH),
         CALL_FOR_HELP(4, "Call for help.", DIAMOND_ROUGH),
         REACH_FOR_THE_CACTUS(1, "Reach for the cactus.", DIAMOND_ROUGH),
         GRASP_FOR_THE_ROCK(2, "Grasp for the rock.", DIAMOND_ROUGH),
         DO_NOTHING(4, "Do nothing.", DIAMOND_ROUGH),
-
-        //Jack of Spades
+        //endregion
+        //region Jack of Spades
         TALK_ABOUT_JACK_OF_SPADES(1, "Talk about Jack of Spades.", JACK_OF_SPADES),
         NO_MORE_QUESTIONS(5, "No more questions.", JACK_OF_SPADES),
         I_KNOW_ALL_I_NEED_LET_S_GO(1, "I know all I need - let's go!", JACK_OF_SPADES),
@@ -423,39 +436,39 @@ public class Dialogs {
         CAN_YOU_TELL_ME_WHERE_THE_PORTS_DISTRICT_IS(1, "Can you tell me where the Ports district is?", JACK_OF_SPADES),
         I_VE_HEARD_ENOUGH(4, "I've heard enough.", JACK_OF_SPADES),
         WHY_STEAL_FROM_PEOPLE(3, "Why steal from those people?", JACK_OF_SPADES),
-
-        //New Foundation
+        //endregion
+        //region New Foundation
         YES_NEW_FOUNDATION(2, "Yes", NEW_FOUNDATION),
         LEAVE(1, "Leave the starting area.", NEW_FOUNDATION),
         YES_RITUAL(2, "Yes.", NEW_FOUNDATION),
         SIGN_ME_UP(2, "Sign me up!", NEW_FOUNDATION),
         DUKES_QUEST(1, "Duke.", NEW_FOUNDATION),
-
-        //Kili's row I
+        //endregion
+        //region Kili's row I
         TALK_ABOUT_UPGRADE1(1, "Talk about active equipment upgrade task.", KILI_KNOWLEDGE_I),
         CURRENT_TASK1(1, "Ask about your current task.", KILI_KNOWLEDGE_I),
-
-        //Kili's row II
+        //endregion
+        //region Kili's row II
         TALK_ABOUT_UPGRADE2(1, "Talk about active equipment upgrade task.", KILI_KNOWLEDGE_II),
         CURRENT_TASK2(1, "Ask about your current task.", KILI_KNOWLEDGE_II),
-
-        //Kili's row III
+        //endregion
+        //region Kili's row III
         TALK_ABOUT_UPGRADE3(1, "Talk about active equipment upgrade task.", KILI_KNOWLEDGE_III),
         CURRENT_TASK3(1, "Ask about your current task.", KILI_KNOWLEDGE_III),
-
-        //Kili's row IV
+        //endregion
+        //region Kili's row IV
         TALK_ABOUT_UPGRADE4(1, "Talk about active equipment upgrade task.", KILI_KNOWLEDGE_IV),
         CURRENT_TASK4(1, "Ask about your current task.", KILI_KNOWLEDGE_IV),
-
-        //Kili's row V
+        //endregion
+        //region Kili's row V
         TALK_ABOUT_UPGRADE5(1, "Talk about active equipment upgrade task.", KILI_KNOWLEDGE_V),
         CURRENT_TASK5(1, "Ask about your current task.", KILI_KNOWLEDGE_V),
-
-        //Enter the Abyss
+        //endregion
+        //region Enter the Abyss
         YES_ENTER_THE_ABYSS(1, "Yes", ENTER_THE_ABYSS),
         WHERE_RUNES(2, "Where do you get your runes from?", ENTER_THE_ABYSS),
-
-        //Whats Mine Is Yours
+        //endregion
+        //region Whats Mine Is Yours
         DONT_WORRY_ILL_HELP_YOU(1, "Don't worry, I'll help you.", WHATS_MINE_IS_YOURS),
         YES_WHATS_MINE_IS_YOURS(2, "Yes", WHATS_MINE_IS_YOURS),
         YES_WHATS_MINE_IS_YOURS1(1, "Yes.", WHATS_MINE_IS_YOURS),
@@ -472,31 +485,31 @@ public class Dialogs {
         BORIC_TELL_BORIC_WHY_YOU_SENT_HIM_TO_KELDAGRIM(1, "Boric, tell Boric why you sent him to Keldagrim.", WHATS_MINE_IS_YOURS),
         BORIC_TELL_BORIC_HOW_YOU_FELT_BRINGING_BORIC_UP_ALONE(1, "Boric, tell Boric how you felt bringing Boric up alone.", WHATS_MINE_IS_YOURS),
         DORIC_TELL_BORIC_WHAT_YOU_HOPE_SENDING_HIM_AWAY_WOULD_TEACH_HIM(1, "Doric, tell Boric what you hoped sending him away would teach him.", WHATS_MINE_IS_YOURS),
-
-        //Gertrude Cat
+        //endregion
+        //region Gertrude Cat
         WHAT_WILL_MAKE_YOU_TELL_ME(2, "What will make you tell me?", GERTRUDE_CAT),
         OKAY_THEN_ILL_PAY(2, "Okay then, I'll pay.", GERTRUDE_CAT),
-
-        //Anachronia Tutorial
+        //endregion
+        //region Anachronia Tutorial
         YES_ANACHRONIA_TUTORIAL(1, "Yes.", ANACHRONIA_TUT),
-
-        //Mogre Lore Activity
+        //endregion
+        //region Mogre Lore Activity
         WHO_ARE_THEY(2, "Who are (Dramatic pause) THEY?", MOGRE_ACTIVITY),
         THROW_THE_WATER(1, "Throw the water!", MOGRE_ACTIVITY),
-
-        //Christmas Reunion
+        //endregion
+        //region Christmas Reunion
         PLAIN_BROWN_OUTFITS_DONT_EXACTLY_SCREAM_CHRISTMAS(1, "The plain brown outfits don't exactly scream 'Christmas'.", CHRISTMAS_REUNION),
         TALK_ABOUT_A_CHRISTMAS_REUNION(1, "Talk about 'A Christmas Reunion'.", CHRISTMAS_REUNION),
         COULD_I_PAY_YOU_TO_MAKE_THEM_FOR_ME(1, "Could I pay you to make them for me?", CHRISTMAS_REUNION),
         MAKE_CHRISTMAS_DYE(1, "Make Christmas dye.", CHRISTMAS_REUNION),
         RED_AND_BLACK(1, "Red and black.", CHRISTMAS_REUNION),
         THE_ABBEY(1, "The abbey?", CHRISTMAS_REUNION),
-
-        //Its Snow Bother
+        //endregion
+        //region Its Snow Bother
         ITS_SNOW_BOTER(1, "Talk about 'It's Snow Bother'.", ITS_SNOW_BOTHER),
         TALK_TO_RELDO(2, "[Talk to Reldo.]", ITS_SNOW_BOTHER),
-
-        //Dead and Buried
+        //endregion
+        //region Dead and Buried
         TALK_ABOUT_DEAD_AND_BURIED(1, "Talk about 'Dead and Buried'.", DEAD_AND_BURIED),
         CONCLUDE_INTERVIEW(4, "(Conclude interview.)", DEAD_AND_BURIED),
         YES_I_VE_ASKED_ENOUGH_QUESTIONS(1, "Yes, I've asked enough questions.", DEAD_AND_BURIED),
@@ -510,8 +523,8 @@ public class Dialogs {
         YES_DEAD_AND_BURIED(1, "Yes.", DEAD_AND_BURIED),
         ENTER_DREAM(1, "Enter dream.", DEAD_AND_BURIED),
         TALK_ABOUT_QUESTS(2, "Talk about quests.", DEAD_AND_BURIED),
-
-        //Ancient Awakening
+        //endregion
+        //region Ancient Awakening
         TALK_ABOUT_ANCIENT_AWAKENING(2, "Talk about 'Ancient Awakening'.", ANCIENT_AWAKENING),
         I_DONT_NEED_TO_KNOW_YOUR_FAMILY_HISTORY(1, "I don't need to know your family history, Bill.", ANCIENT_AWAKENING),
         LETS_SKIP_THE_SMALL_TALK(1, "Let's skip the small talk.", ANCIENT_AWAKENING),
@@ -527,14 +540,14 @@ public class Dialogs {
         I_WAS_JUST_CURIOUS(1, "I was just curious.", ANCIENT_AWAKENING),
         WE_NEED_TO_FOCUS(1, "We need to focus.", ANCIENT_AWAKENING),
         CAN_YOU_ACTIVATE_THIS_CONDUIT(1, "Can you activate this conduit?", ANCIENT_AWAKENING),
-
-        //Battle of Forinthry
+        //endregion
+        //region Battle of Forinthry
         TALK_ABOUT_BATTLE_OF_FORINTHRY(1, "Talk about 'Battle of Forinthry'.", BATTLE_OF_FORINTHRY),
         YES_I_AM_READY(1, "Yes, I am ready.", BATTLE_OF_FORINTHRY),
         OF_COURSE(1, "Of course.", BATTLE_OF_FORINTHRY),
         YES_BEGIN_THE_FEAST(1, "Yes, begin the feast.", BATTLE_OF_FORINTHRY),
-
-        //Requiem for a Dragon
+//endregion
+        //region Requiem for a Dragon
 
         TALK_ABOUT_QUESTS_REQUIEM(1, "Talk about quests...", REQUIEM_FOR_A_DRAGON),
         TALK_ABOUT_REQUIEM_FOR_A_DRAGON(1, "Talk about 'Requiem for a Dragon'.", REQUIEM_FOR_A_DRAGON),
@@ -566,8 +579,8 @@ public class Dialogs {
         COMMUNE(1, "Commune", REQUIEM_FOR_A_DRAGON),
         TALK_ABOUT_REQUIEM_FOR_A_DRAGON_1(1, "Talk about 'Requiem for a Dragon'", REQUIEM_FOR_A_DRAGON),
         CHANGE_THE_GLYPHS_REQUIEM(1, "Change the glyphs.", REQUIEM_FOR_A_DRAGON),
-
-        //Murder on the Border
+        //endregion
+        //region Murder on the Border
         TALK_ABOUT_QUESTS_MURDER(1, "Talk about quests...", MURDER_ON_THE_BORDER),
         TALK_ABOUT_MURDER_ON_THE_BORDER(1, "Talk about 'Murder on the Border'.", MURDER_ON_THE_BORDER),
         YES_MURDER(1, "Yes.", MURDER_ON_THE_BORDER),
@@ -606,14 +619,15 @@ public class Dialogs {
         JUST_DON_T_NURDER_ANYONE(1, "Just don't murder anyone.", MURDER_ON_THE_BORDER),
         //LINK_A_CLUE_TO_SIMON(2, "Link a clue to Simon.", MURDER_ON_THE_BORDER),
         TALK_ABOUT_MURDER_ON_THE_BORDER_1(1, "Yes, let's start the feast.", MURDER_ON_THE_BORDER),
+        //endregion
+        //region Unwelcome Guests
 
-        //Unwelcome Guests
         TALK_ABOUT_QUESTS_UNWELCOME(1, "Talk about quests.", UNWELCOME_GUESTS),
         TALK_ABOUT_UNWELCOME_GUESTS(2, "Talk about 'Unwelcome Guests'.", UNWELCOME_GUESTS),
         YES_UNWELCOME_GUESTS(1, "Yes.", UNWELCOME_GUESTS),
         YES_I_UNDERSTAND_THE_RESTRICTIONS(1, "Yes, I understand the restrictions.", UNWELCOME_GUESTS),
         TALK_ABOUT_UNWELCOME_GUESTS_1(1, "Talk about 'Unwelcome Guests'.", UNWELCOME_GUESTS);
-
+//endregion
 
         private final int number;
         private final String text;
@@ -660,10 +674,7 @@ public class Dialogs {
         REQUIEM_FOR_A_DRAGON_INSTRUCTION("Talking to Archivist and Zemouregal is required manual intervention. Resotring becon chat option with tree of balance is required manual intervention. Ritual required manual intervention.", REQUIEM_FOR_A_DRAGON),
 
         //Murder on the Border
-        MURDER_ON_THE_BORDER_INSTRUCTION("Selecting the murder option required manual intervention and talk to Rodney during second half of the quest", MURDER_ON_THE_BORDER),
-
-        //Unwelcome Guests
-        UNWELCOME_GUESTS_INSTRUCTION("Kill 10 Fetid Zombies manually for faster quest completion. Build defence is required manual intervention. Kill 10 Zombies after building Guard house manually", UNWELCOME_GUESTS);
+        MURDER_ON_THE_BORDER_INSTRUCTION("Selecting the murder option required manual intervention and talk to Rodney during second half of the quest", MURDER_ON_THE_BORDER);
 
         private final String text;
         private final DebugScript.Quest quest;
