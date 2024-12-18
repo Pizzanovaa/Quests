@@ -34,7 +34,6 @@ public class WolfWhistle {
             return true;
         } else
             return false;
-
     }
 
     static Coordinate player = Client.getLocalPlayer().getServerCoordinate();
@@ -53,7 +52,7 @@ public class WolfWhistle {
     public static void quest() {
         int QuestVarp = VarManager.getVarbitValue(12334);
         player = Client.getLocalPlayer().getServerCoordinate();
-        println("QuestVarp: " + QuestVarp);
+        //println("QuestVarp: " + QuestVarp);
 
 
         if (isDialogOpen()) {
@@ -144,6 +143,7 @@ public class WolfWhistle {
                             DebugScript.moveTo(startcord);
                         } else {
                             talktoPikkupstix();
+                            //New Values
                             //The QuestVarp changed to 20
                             //The varbit 12335 value 0
                             //The varbit 12336 value 1
@@ -175,6 +175,7 @@ public class WolfWhistle {
                             if (obelisk != null) {
                                 obelisk.interact("Infuse-pouch");
                             }
+                            //New Values
                             //The QuestVarp changed to 25
                             //The varbit 12335 value 0
                             //The varbit 12336 value 1
@@ -202,7 +203,8 @@ public class WolfWhistle {
                             DebugScript.moveTo(startcord);
                         } else {
                             talktoPikkupstix();
-                            //The QuestVarp changed to 20
+                            //New Values
+                            //The QuestVarp changed to 30
                             //The varbit 12335 value 0
                             //The varbit 12336 value 1
                             //The varbit 12337 value 1
@@ -228,21 +230,7 @@ public class WolfWhistle {
                             DebugScript.moveTo(wellcord);
                         } else {
                             talktoScalectrix();
-                            //The QuestVarp changed to 20
-                            //The varbit 12335 value 0
-                            //The varbit 12336 value 1
-                            //The varbit 12337 value 1
-                            //The varbit 12338 value 1
-                            //The varbit 12339 value 0
-                            //The varbit 12340 value 1
-                            //The varbit 12341 value 0
-                            //The varbit 12342 value 1
-                            //The varbit 12343 value 0
-                            //The varbit 12344 value 0
-                            //The varbit 12345 value 1
-                            //The varbit 12346 value 0
-                            //The varbit 12347 value 0
-                            //The varbit 12348 value 0
+                            //Quest Finished
                         }
                     }
                     break;
