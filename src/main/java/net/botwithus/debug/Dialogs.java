@@ -56,6 +56,7 @@ public class Dialogs {
         return false;
     }
 
+
     public static void dialog1188pick(int num) {
         int number = num;
         int option = 1;
@@ -278,7 +279,7 @@ public class Dialogs {
         WHAT_WRONG(1, "What's wrong?", COOKS_ASSISTANT),
         I_GET_ON_IT(1, "I'll get right on it.", COOKS_ASSISTANT),
         //endregion
-        //region Myths of the white lands (UNTESTED)
+        //region Myths of the white lands
         YOU_MENTIONED_A_QUEST(2, "You mentioned a quest?", MYTHS_OF_THE_WHITE_LANDS),
         HOW_DO_I_GET_TO_THE_LAND_OF_SNOW(1, "How do I get to the Land of Snow?", MYTHS_OF_THE_WHITE_LANDS),
         ACTUALLY_NEVER_MIND(3, "Actually, never mind.", MYTHS_OF_THE_WHITE_LANDS),
@@ -617,9 +618,15 @@ public class Dialogs {
         ASK_HOW_ASTER_IS_FEELING(1, "Ask how Aster is feeling.", MURDER_ON_THE_BORDER),
         JUST_DON_T_NURDER_ANYONE(1, "Just don't murder anyone.", MURDER_ON_THE_BORDER),
         //LINK_A_CLUE_TO_SIMON(2, "Link a clue to Simon.", MURDER_ON_THE_BORDER),
-        TALK_ABOUT_MURDER_ON_THE_BORDER_1(1, "Yes, let's start the feast.", MURDER_ON_THE_BORDER);
+        TALK_ABOUT_MURDER_ON_THE_BORDER_1(1, "Yes, let's start the feast.", MURDER_ON_THE_BORDER),
+        //endregion
+        //region Unwelcome Guests
+        TALK_ABOUT_QUESTS_UNWELCOME(1, "Talk about quests.", UNWELCOME_GUESTS),
+        TALK_ABOUT_UNWELCOME_GUESTS(2, "Talk about 'Unwelcome Guests'.", UNWELCOME_GUESTS),
+        YES_UNWELCOME_GUESTS(1, "Yes.", UNWELCOME_GUESTS),
+        YES_I_UNDERSTAND_THE_RESTRICTIONS(1, "Yes, I understand the restrictions.", UNWELCOME_GUESTS),
+        TALK_ABOUT_UNWELCOME_GUESTS_1(1, "Talk about 'Unwelcome Guests'.", UNWELCOME_GUESTS);
 //endregion
-
 
         private final int number;
         private final String text;

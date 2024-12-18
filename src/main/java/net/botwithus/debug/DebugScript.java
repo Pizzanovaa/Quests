@@ -96,6 +96,7 @@ public class DebugScript extends LoopingScript {
             case CHRISTMAS_REUNION -> ChristmasReunion.quest();
             case ITS_SNOW_BOTHER -> ItsSnowBother.quest();
             case MURDER_ON_THE_BORDER -> Murderontheborder.quest();
+            case UNWELCOME_GUESTS -> unwelcomeguests.quest();
             case DEAD_AND_BURIED -> DeadandBuried.quest();
             case ANCIENT_AWAKENING -> AncientAwakening.quest();
             case BATTLE_OF_FORINTHRY -> BattleofForinthry.quest();
@@ -264,6 +265,7 @@ public class DebugScript extends LoopingScript {
         BATTLE_OF_FORINTHRY(507),
         REQUIEM_FOR_A_DRAGON(509),
         MURDER_ON_THE_BORDER(490),
+        UNWELCOME_GUESTS(491),
 
 
         TEST_DONTSELECT(135);
