@@ -59,6 +59,7 @@ public class DebugScript extends LoopingScript {
             case VIOLET_IS_BLUE -> VioletIsBlue.quest2();
             case VIOLET_IS_BLUE_TOO -> VioletIsBlueToo.quest();
             case COOKS_ASSISTANT -> CooksAssitant.quest();
+            case MYTHS_OF_THE_WHITE_LANDS -> MythsOfTheWhiteLands.quest();
             case NECROMANCY_INTRO -> Necromancy1.quest2();
             case BLOOD_PACT -> BloodPact.quest();
             case RESTLESS_GHOST -> RestlessGhost.quest();
@@ -167,7 +168,7 @@ public class DebugScript extends LoopingScript {
     private void onChatMessageEvent(ChatMessageEvent event) {
         if (running) {
             String message = event.getMessage();
-            if(currentQuest==Quest.VIOLET_IS_BLUE_TOO){
+            if (currentQuest == Quest.VIOLET_IS_BLUE_TOO) {
                 println("TRACKING CHAT FOR VIOLET IS BLUE TOO");
                 println(message);
 //                if (message.contains("Objective: Visit Taylor to the northwest of the town to pick out a new Christmas tree for the town centrepiece.")) {
@@ -177,7 +178,7 @@ public class DebugScript extends LoopingScript {
 //                    VioletIsBlueToo.currentStep="DOHOUSES";
 //                }
                 if (message.contains("Objective: Find an area high enough in the town to launch a snow impling from to decorate the tree.")) {
-                    VioletIsBlueToo.currentStep5="GOUPHILL";
+                    VioletIsBlueToo.currentStep5 = "GOUPHILL";
                     println(VioletIsBlueToo.currentStep5);
                 }
                 return;
@@ -214,6 +215,7 @@ public class DebugScript extends LoopingScript {
     }
 
     public enum Quest {
+        MYTHS_OF_THE_WHITE_LANDS(74),
         DEATH_PLATEAU(140),
         DRUIDIC_RITUAL(111),
         // LET_THEM_EAT_PIE(200), //UNFINISHED
@@ -223,7 +225,7 @@ public class DebugScript extends LoopingScript {
         BLOOD_PACT(335),
         RESTLESS_GHOST(27),
         COOKS_ASSISTANT(257),
-
+       // MYTHS_OF_THE_WHITE_LANDS(74),
         NECROMANCY_INTRO(493),
 
         WHAT_LIES_BELOW(144),
