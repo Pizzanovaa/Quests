@@ -284,6 +284,7 @@ public class Dialogs {
         ACTUALLY_NEVER_MIND(3, "Actually, never mind.", MYTHS_OF_THE_WHITE_LANDS),
         IM_A_FRIEND_OF_EXPLORER_JACK_AND_NEED_TELEPORTING(2, "I'm a friend of Explorer Jack and need teleporting.", MYTHS_OF_THE_WHITE_LANDS),
         ABOUT_MYTHS_OF_THE_WHITE_LANDS(2, "About Myths of the White Lands...", MYTHS_OF_THE_WHITE_LANDS),
+        CARRY_ON_WITH_THE_IMPS_PRANK(2, "Carry on with the imps' prank.", MYTHS_OF_THE_WHITE_LANDS),
         //endregion
         //region Ernest the chicken (UNTESTED)
 
