@@ -61,6 +61,7 @@ public class DebugScript extends LoopingScript {
             case COOKS_ASSISTANT -> CooksAssitant.quest();
             //TODO: Rework the whole quest to use do movement base on a fix coordinate, instead of player coordinate, can use the coordinate from the entrace SceneObject, this will make it much faster, and reliable
             case MYTHS_OF_THE_WHITE_LANDS -> MythsOfTheWhiteLands.quest();
+            case ERNEST_THE_CHICKEN -> ErnestTheChicken.quest();
             case NECROMANCY_INTRO -> Necromancy1.quest2();
             case BLOOD_PACT -> BloodPact.quest();
             case RESTLESS_GHOST -> RestlessGhost.quest();
@@ -217,7 +218,7 @@ public class DebugScript extends LoopingScript {
     }
 
     public enum Quest {
-        MYTHS_OF_THE_WHITE_LANDS(74),
+        ERNEST_THE_CHICKEN(15),
         DEATH_PLATEAU(140),
         DRUIDIC_RITUAL(111),
         // LET_THEM_EAT_PIE(200), //UNFINISHED
@@ -227,7 +228,9 @@ public class DebugScript extends LoopingScript {
         BLOOD_PACT(335),
         RESTLESS_GHOST(27),
         COOKS_ASSISTANT(257),
-       // MYTHS_OF_THE_WHITE_LANDS(74),
+        MYTHS_OF_THE_WHITE_LANDS(74),
+
+
         NECROMANCY_INTRO(493),
 
         WHAT_LIES_BELOW(144),
