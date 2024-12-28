@@ -167,10 +167,54 @@ public class DebugGraphicsContext extends ScriptGraphicsContext {
                         int currentValue = VarManager.getVarbitValue(varbit[0]);
                         String status = currentValue < varbit[1] ? "Not Started" :
                                       currentValue < varbit[2] ? "In Progress" : "Complete";
-                        progressBuilder.append("Status: ").append(status).append("\n");
+                        //progressBuilder.append("Status: ").append(status).append("\n");
+                        progressBuilder.append("Status: ").append(status)
+                                        .append(", Varbit ID: ").append(varbit[0])
+                                        .append(", Start: ").append(varbit[1])
+                                        .append(", Finish: ").append(varbit[2])
+                                        .append(", Current: ").append(currentValue).append("\n");
+                    }
+
+                    else {
+                        progressBuilder.append("Invalid progress varbit format.\n");
                     }
                 }
             }
+            else {
+                int[][] Varps = questType.progressVarps();
+                if (Varps != null && Varps.length > 0) {
+                    for (int[] varp : Varps) {
+                        if (varp.length == 3) {
+                            int varpId = varp[0];
+                            int value = varp[1];
+                            int value2 = varp[2];
+
+                            int currentvarpValue = VarManager.getVarpValue(varpId);
+                            String progressStatus;
+                            if (currentvarpValue < value) {
+                                progressStatus = "Uncompleted";
+                            } else if (currentvarpValue < value2) {
+                                progressStatus = "In progress";
+                            } else {
+                                progressStatus = "Completed";
+                            }
+
+                            progressBuilder.append("Status: ").append(progressStatus)
+                                    .append(", Varp ID: ").append(varpId)
+                                    .append(", Start: ").append(value)
+                                    .append(", Finish: ").append(value2)
+                                    .append(", Current: ").append(currentvarpValue).append("\n");
+                        } else {
+                            progressBuilder.append("Invalid progress varp format.\n");
+                        }
+                    }
+                } else {
+                    progressBuilder.append("N/A");
+                }
+            }
+        }
+        else {
+            progressBuilder.append("N/A");
         }
         progressVarbitsText = progressBuilder.toString();
 

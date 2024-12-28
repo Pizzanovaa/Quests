@@ -626,8 +626,18 @@ public class Dialogs {
         TALK_ABOUT_UNWELCOME_GUESTS(2, "Talk about 'Unwelcome Guests'.", UNWELCOME_GUESTS),
         YES_UNWELCOME_GUESTS(1, "Yes.", UNWELCOME_GUESTS),
         YES_I_UNDERSTAND_THE_RESTRICTIONS(1, "Yes, I understand the restrictions.", UNWELCOME_GUESTS),
-        TALK_ABOUT_UNWELCOME_GUESTS_1(1, "Talk about 'Unwelcome Guests'.", UNWELCOME_GUESTS);
-//endregion
+        TALK_ABOUT_UNWELCOME_GUESTS_1(1, "Talk about 'Unwelcome Guests'.", UNWELCOME_GUESTS),
+        //endregion
+
+        //region Imp Catcher
+        CAN_I_HELP_YOU(1, "Can I help you?", IMP_CATCHER),
+        HAVE_YOU_TRIED_A_BOWL_OF_HOT_WATER(1, "Have you tried a bowl of hot water?", IMP_CATCHER),
+        WHY_WOULD_HE_BE_DISAPPOINTED(1, "Why would he be disappointed?", IMP_CATCHER),
+        SOME_DAYS_YOU_LL_HAVE_SETBACKS_TOMORROW_IS_NEW_DAY(1, "Some days you'll have setbacks. Tomorrow is a new day.", IMP_CATCHER),
+        TAKE_YOUR_TIME_NO_ONE_IS_RUSHING_YOU_TO_FEEL_BETTER(1, "Take your time. No one is rushing you to feel better.", IMP_CATCHER),
+        I_VE_GOT_ALL_FOUR_BEADS(1, "I've got all four beads.", IMP_CATCHER);
+        //endregion
+
 
         private final int number;
         private final String text;
@@ -674,7 +684,10 @@ public class Dialogs {
         REQUIEM_FOR_A_DRAGON_INSTRUCTION("Talking to Archivist and Zemouregal is required manual intervention. Resotring becon chat option with tree of balance is required manual intervention. Ritual required manual intervention.", REQUIEM_FOR_A_DRAGON),
 
         //Murder on the Border
-        MURDER_ON_THE_BORDER_INSTRUCTION("Selecting the murder option required manual intervention and talk to Rodney during second half of the quest", MURDER_ON_THE_BORDER);
+        MURDER_ON_THE_BORDER_INSTRUCTION("Selecting the murder option required manual intervention and talk to Rodney during second half of the quest", MURDER_ON_THE_BORDER),
+
+        //Imp Catcher
+        IMP_CATCHER_INSTRUCTION("Race the imp at Air Ruins manual", IMP_CATCHER);
 
         private final String text;
         private final DebugScript.Quest quest;
