@@ -11,6 +11,7 @@ import net.botwithus.rs3.game.vars.VarManager;
 import net.botwithus.rs3.script.ScriptConsole;
 
 
+import java.util.Arrays;
 import java.util.List;
 
 import static net.botwithus.debug.DebugScript.Quest.*;
@@ -97,15 +98,13 @@ public class Dialogs {
                 dialog1188();
             }
         } else if (Interfaces.isOpen(1184)) {
-            ScriptConsole.println(Dialog.getText());
-            if (Dialog.getText().contains("redberry pie. They REALLY like redberry pie.")) { // Knights sword endless chat from reldo
-                println("Found redberry pie msg..");
-                MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1, -1, 77856772);
-            } else if (Dialog.getText().contains("If I were you I would talk to Baraek,")) {
-                println("Baraek into Located"); // Shield of Arrav
-                MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1, -1, 77856772);
-            } else if (Dialog.getText().contains("The ruthless and notorious Black Arm ")) {
-                println("Talk to Charlie"); // Shield of Arrav
+            String dialogText = Dialog.getText();
+            ScriptConsole.println(dialogText);
+
+            boolean matched = Arrays.stream(AutoCloseDialogs.values())
+                    .anyMatch(topic -> dialogText.contains(topic.getPhrase()));
+
+            if (matched) { //Check if the dialog should be closed instead of continued. checks 'AutoCloseDialogs' enum
                 MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1, -1, 77856772);
             } else {
                 MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 77594639);
@@ -135,7 +134,7 @@ public class Dialogs {
         }  // read Book
         /*else if (Interfaces.isOpen(960)) { // Unreachable and worked without anyway :P
             MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1, -1, 62914639);} */ // Close Open Book
-        else if (isCLick()) {
+        else if (continueHandler()) {
             MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1, -1, 62586895);
         }
     }
@@ -172,7 +171,7 @@ public class Dialogs {
         return -1; // Return -1 if no matching option found
     }
 
-    // Method to determine if the dialogue should be skipped
+    // Method to determine if the dialogue should be skipped, used for chats that require you to go threw various options but the previous still exist.
     private static boolean shouldSkipDialogue(Dialogue dialogue) {
 
         int VARBIT_BOOK_ICE = 53558;
@@ -195,7 +194,7 @@ public class Dialogs {
     }
 
 
-    public static boolean isCLick() { // Continue promt
+    public static boolean continueHandler() { // Continue prompt, for new characters.
         Component thing = ComponentQuery.newQuery(955).componentIndex(16).subComponentIndex(14).results().first();
         if (thing != null && !thing.getText().equals("") && !thing.getText().isBlank()) {
             return true;
@@ -244,6 +243,7 @@ public class Dialogs {
         VIOLET_YES(1, "Yes.", VIOLET_IS_BLUE),
         //endregion
         //region VIOLET IS BLUE TOO
+        AUDIO(1, "No.", VIOLET_IS_BLUE_TOO),
         VIOLETISBLUETOO(1, "Violet is Blue Too.", VIOLET_IS_BLUE_TOO),
         IREMEBERHIM(1, "I remember him.", VIOLET_IS_BLUE_TOO),
         What_should_we_do(2, "What should we do?", VIOLET_IS_BLUE_TOO),
@@ -697,6 +697,24 @@ public class Dialogs {
         }
     }
 
+    // Enum to hold dialogue phrases that should close out dialog windows.
+    // used for when a quest npc will get stuck in dialog since we don't want to press any options that are available
+    enum AutoCloseDialogs {
+        REDBERRY_PIE("redberry pie. They REALLY like redberry pie."),
+        BARAEK("If I were you I would talk to Baraek,"),
+        BLACK_ARM("The ruthless and notorious Black Arm "),
+        PET_SHOP_OWNER("Is there anything else i can help you with?");
+
+        private final String phrase;
+
+        AutoCloseDialogs(String phrase) {
+            this.phrase = phrase;
+        }
+
+        public String getPhrase() {
+            return phrase;
+        }
+    }
 
     public static enum QuestInstruction {
 
