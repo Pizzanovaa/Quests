@@ -635,9 +635,44 @@ public class Dialogs {
         WHY_WOULD_HE_BE_DISAPPOINTED(1, "Why would he be disappointed?", IMP_CATCHER),
         SOME_DAYS_YOU_LL_HAVE_SETBACKS_TOMORROW_IS_NEW_DAY(1, "Some days you'll have setbacks. Tomorrow is a new day.", IMP_CATCHER),
         TAKE_YOUR_TIME_NO_ONE_IS_RUSHING_YOU_TO_FEEL_BETTER(1, "Take your time. No one is rushing you to feel better.", IMP_CATCHER),
-        I_VE_GOT_ALL_FOUR_BEADS(1, "I've got all four beads.", IMP_CATCHER);
+        I_VE_GOT_ALL_FOUR_BEADS(1, "I've got all four beads.", IMP_CATCHER),
         //endregion
-
+        
+        //region Rune Mysteries
+        
+        WHAT_S_HAPPENING_HERE(1, "What's happening here?", RUNE_MYSTERIES),
+        WHAT_CAN_I_DO_TO_HELP(2, "What can I do to help?", RUNE_MYSTERIES),
+        WHAT_DO_YOU_WANT_ME_TO_DO(3, "What do you want me to do?", RUNE_MYSTERIES),
+        I_LL_GET_ON_IT(2, "I'll get on it.", RUNE_MYSTERIES),
+        HAVE_YOU_SEEN_ANYTHING_UNUSUAL_LATER(1, "Have you seen anything unusual lately?", RUNE_MYSTERIES),
+        IN_THE_POWER_BEAM(2, "In the power beam?", RUNE_MYSTERIES),
+        WHERE_DO_THESE_THINGS_COME_FROM(3, "Where do these things come from?", RUNE_MYSTERIES),
+        ARIANE_SAYS_THE_TOWER_IS_IN_DANGER(3, "Ariane says the tower is in danger.", RUNE_MYSTERIES),
+        WHAT_ARE_YOU_GOING_TO_DO(4, "What are you going to do?", RUNE_MYSTERIES),
+        GOODBYE_1(5, "Goodbye.", RUNE_MYSTERIES),
+        THANKS_1(2, "Thanks.", RUNE_MYSTERIES),
+        I_VE_SPOKEN_TO_SOME_OF_THE_WIZARDS(2, "I've spoken to some of the wizards...", RUNE_MYSTERIES),
+        WIZARD_TRAIBORN_SAID_SOMETHING_CAME_THROUGH_THE_LIBRARY_FLOOR(3, "Wizard Traiborn said something came through the library floor.", RUNE_MYSTERIES),
+        THEN_LET_S_GET_DOWN_THERE_AND_INVESTIGATE(2, "Then let's get down there and investigate!", RUNE_MYSTERIES),
+        I_LL_GET_RIGHT_ON_IT(2, "I'll get right on it.", RUNE_MYSTERIES),
+        HOW_CAN_I_GET_INTO_THE_OLD_TOWER(2, "How can I get into the old tower?", RUNE_MYSTERIES),
+        YOU_DO_KNOW_THOUGH(3, "You do know, though?", RUNE_MYSTERIES),
+        YOU_MEAN_THE_RUMOUR_ABOUT_WATER_SURGE(3, "You mean the rumour about Water Surge?", RUNE_MYSTERIES),
+        WHAT_DO_YOU_MEAN_THE_KEY_LIES_IN_UNDERSTANDING_WATER_SURGE(3, "What do you mean, the key lies in understanding Water Surge?", RUNE_MYSTERIES),
+        ITS_SUCH_A_PITY_YOU_COULDNT_HELP_ME_MAYBE_I_LL_VISIT_THE_LIBRARY(2, "It's such a pity you couldn't help me, Maybe I'll visit the library.", RUNE_MYSTERIES),
+        I_VE_GOT_THE_KEY_TO_THE_RUINS(2, "I've got the key to the ruins.", RUNE_MYSTERIES),
+        WE_SHOULD_KEEP_OUR_MINDS_ON_THE_JOB(2, "We should keep our minds on the job.", RUNE_MYSTERIES),
+        YES_IT_S_INSPIRING(1, "Yes, it's inspiring.", RUNE_MYSTERIES),
+        OKAY_WHAT_SHOULD_WE_DO_NOW(2, "Okay, what should we do now?", RUNE_MYSTERIES),
+        I_M_READY_TO_BE_TESTED(3, "I'm ready to be tested.", RUNE_MYSTERIES),
+        I_M_MAKING_US_A_BRIDGE(1, "I'm making us a bridge.", RUNE_MYSTERIES),
+        DO_YOU_HAVE_A_BETTER_IDEA(1, "Do you have a better idea?", RUNE_MYSTERIES),
+        I_WISH_I_COULD_HAVE_SEEN_IT(1, "I wish I could have seen it.", RUNE_MYSTERIES),
+        NEVER_MIND_THE_HISTORY_WHAT_DOES_THAT_MEAN_FOR_US(2, "Never mind the history, what does that mean for us?", RUNE_MYSTERIES),
+        OKAY_SO_WHAT_DO_WE_DO(2, "Okay, so what do we do?", RUNE_MYSTERIES),
+        OKAY_I_LL_DO_THAT_NOW(3, "Okay, I'll do that now.", RUNE_MYSTERIES),
+        IS_THERE_A_REWARD(3, "Is there a reward?", RUNE_MYSTERIES);
+        //endregion
 
         private final int number;
         private final String text;

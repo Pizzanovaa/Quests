@@ -216,14 +216,20 @@ public class RuneMythos {
     }
 
     public static void drawglyphselement() {
-        Npc glyph = NpcQuery.newQuery().name("Glyph spot").option("Draw glyph").results().nearest();
+        Npc glyph = NpcQuery.newQuery()
+            .option("Draw glyph")
+            .results()
+            .stream()
+            .filter(npc -> !npc.getName().equals("Elemental I") && !npc.getName().equals("Change I"))
+            .findFirst()
+            .orElse(null);
+        EntityResultSet<Npc> elementI = NpcQuery.newQuery().name("Elemental I", "Elemental I (depleted)").results();
+        //Npc elementII = NpcQuery.newQuery().results().stream().filter(npc -> npc.getName().equals("Elemental II") || npc.getName().equals("Elemental II (depleted)")).findFirst().orElse(null);
         if (!Client.getLocalPlayer().isMoving()) {
-            if (glyph != null) {
-                //glyph.interact("Draw glyph");
-
+            if (glyph != null && elementI.size() < 2) {
                 glyph.interact("Draw glyph");
                 delay(RandomGenerator.nextInt(1250, 2000));
-                println("Interface is open" + Interfaces.isOpen(1371));
+                ScriptConsole.println("Interface is open" + Interfaces.isOpen(1371));
                 Execution.delayUntil(5000, () -> Interfaces.isOpen(1371));
                 MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1, 1, 89849878);
                 delay(RandomGenerator.nextInt(1250, 2000));
@@ -232,37 +238,37 @@ public class RuneMythos {
                     delay(RandomGenerator.nextInt(1250, 2000));
                 }
 
-            }
+                }
         }
     }
-        public static void drawglyphschange() {
+    public static void drawglyphschange() {
             Npc glyph1 = NpcQuery.newQuery()
-                    .option("Draw glyph")
-                    .results()
-                    .stream()
-                    .filter(npc -> !npc.getName().equals("Elemental I") && !npc.getName().equals("Change I"))
-                    .findFirst()
-                    .orElse(null);
-            if (!Client.getLocalPlayer().isMoving()) {
-                if (glyph1 != null) {
-                    glyph1.interact("Draw glyph");
+            .option("Draw glyph")
+            .results()
+            .stream()
+            .filter(npc -> !npc.getName().equals("Change I") && !npc.getName().equals("Elemental I"))
+            .findFirst()
+            .orElse(null);
+        EntityResultSet<Npc> changeI = NpcQuery.newQuery().name("Change I", "Change I (depleted)").results();
+        if (!Client.getLocalPlayer().isMoving()) {
+            if (glyph1 != null && changeI.size() < 2) {
+                glyph1.interact("Draw glyph");
+                delay(RandomGenerator.nextInt(1250, 2000));
+                ScriptConsole.println("Interface is open" + Interfaces.isOpen(1371));
+                Execution.delayUntil(5000, () -> Interfaces.isOpen(1371));
+                MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1, 13, 89849878);
+                delay(RandomGenerator.nextInt(1250, 2000));
+                if (Interfaces.isOpen(1370)) {
+                    MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 89784350);
                     delay(RandomGenerator.nextInt(1250, 2000));
-                    println("Interface is open" + Interfaces.isOpen(1371));
-                    Execution.delayUntil(5000, () -> Interfaces.isOpen(1371));
-                    MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1,13, 89849878);
-                    delay(RandomGenerator.nextInt(1250, 2000));
-                    if(Interfaces.isOpen(1370))
-                    {
-                        MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 89784350);
-                        delay(RandomGenerator.nextInt(1250, 2000));
-                    }
-
                 }
+
             }
+        }
 
     }
     public static void RepairGlyph() {
-        Npc glyph = NpcQuery.newQuery().name("Elemental I (depleted)").results().first();
+        Npc glyph = NpcQuery.newQuery().name("Elemental I (depleted)", "Change I (depleted)").results().first();
         if (glyph != null) {
             glyph.interact("Repair");
             delay(RandomGenerator.nextInt(600, 800));
@@ -276,10 +282,6 @@ public class RuneMythos {
                 delay(RandomGenerator.nextInt(600, 800));
                 if (!Interfaces.isOpen(1370)) {
                     light.interact("Place light source");
-
-
-
-
                     delay(RandomGenerator.nextInt(600, 800));
                 } else {
                     //add
