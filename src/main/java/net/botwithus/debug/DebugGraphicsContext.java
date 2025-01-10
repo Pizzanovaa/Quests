@@ -59,6 +59,16 @@ public class DebugGraphicsContext extends ScriptGraphicsContext {
                     if (varbits != null && varbits.length > 0) {
                         int[] varbit = varbits[0];
                         isComplete = VarManager.getVarbitValue(varbit[0]) >= varbit[2];
+                    } else {
+                        // Check for Varps if Varbits are not defined
+                        int[][] varps = questType.progressVarps();
+                        if (varps != null && varps.length > 0) {
+                            int[] varp = varps[0];
+                            if (varp.length == 3) {
+                                int currentVarpValue = VarManager.getVarpValue(varp[0]);
+                                isComplete = currentVarpValue >= varp[2];
+                            }
+                        }
                     }
 
                      // Check requirements
