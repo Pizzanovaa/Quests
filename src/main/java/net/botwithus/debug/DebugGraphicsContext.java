@@ -40,8 +40,8 @@ public class DebugGraphicsContext extends ScriptGraphicsContext {
     @Override
 
     public void drawSettings() {
-        ImGui.SetNextWindowSize(WINDOW_WIDTH, WINDOW_HEIGHT, ImGuiWindowFlag.None.ordinal());
-        if (ImGui.Begin("Quest Helper " + VERSION, ImGuiWindowFlag.None.ordinal())) {
+        ImGui.SetNextWindowSize(WINDOW_WIDTH, WINDOW_HEIGHT, ImGuiWindowFlag.AlwaysAutoResize.getValue());
+        if (ImGui.Begin("Quest Helper " + VERSION, ImGuiWindowFlag.AlwaysAutoResize.getValue())) {
             //ImGui.Text(CREDITS);
             //ImGui.Separator();
             // Left column for quest list
