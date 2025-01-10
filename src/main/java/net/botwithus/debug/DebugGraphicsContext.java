@@ -38,7 +38,7 @@ public class DebugGraphicsContext extends ScriptGraphicsContext {
     private boolean forceScroll = false;
 
     @Override
-    
+
     public void drawSettings() {
         ImGui.SetNextWindowSize(WINDOW_WIDTH, WINDOW_HEIGHT, ImGuiWindowFlag.None.ordinal());
         if (ImGui.Begin("Quest Helper " + VERSION, ImGuiWindowFlag.None.ordinal())) {
@@ -50,7 +50,7 @@ public class DebugGraphicsContext extends ScriptGraphicsContext {
                 if (quest == Quest.TEST_DONTSELECT) continue;
                 boolean isSelected = script.currentQuest == quest;
                 QuestType questType = ConfigManager.getQuestType(quest.getQuestId());
-                
+
                 // Check if quest is complete
                 boolean isComplete = false;
                 boolean meetsRequirements = true;
@@ -124,18 +124,18 @@ public class DebugGraphicsContext extends ScriptGraphicsContext {
                     }
 
                 }
-                
+
                 // Set color based on status
                 if (isComplete) {
                     ImGui.PushStyleColor(0, 0.0f, 1.0f, 0.0f, 1.0f);
                 } else if (!meetsRequirements) {
                     ImGui.PushStyleColor(0, 1.0f, 0.0f, 0.0f, 1.0f);
                 }
-                
+
                 if (ImGui.Selectable(quest.name(), isSelected, 0)) {
                     script.currentQuest = quest;
                 }
-                
+
                 if (isComplete || !meetsRequirements) {
                     ImGui.PopStyleColor();
                 }
@@ -172,7 +172,7 @@ public class DebugGraphicsContext extends ScriptGraphicsContext {
             dependQuest();
             ImGui.Separator();
             ImGui.Text(specialInstructionsText);
-            
+
             ImGui.EndChild();
 
             // Bottom controls
@@ -304,7 +304,7 @@ public class DebugGraphicsContext extends ScriptGraphicsContext {
         specialInstructionsText = instructionsBuilder.toString();
     }
 
-    private void dependQuest(){
+    private void dependQuest() {
         QuestType questType = ConfigManager.getQuestType(script.currentQuest.getQuestId());
 
         ImGui.Text("Dependent Quests:");
@@ -315,6 +315,7 @@ public class DebugGraphicsContext extends ScriptGraphicsContext {
                     QuestType dependentQuestType = ConfigManager.getQuestType(dependQuestId);
                     if (dependentQuestType != null) {
                         boolean isDependentComplete = false;
+                        boolean meetsRequirements = true;
 
                         // Check completion using varbits
                         int[][] varbits = dependentQuestType.progressVarbits();
@@ -333,20 +334,76 @@ public class DebugGraphicsContext extends ScriptGraphicsContext {
                             }
                         }
 
-                        // Push color based on completion status
+                        // Check if dependent quest meets the requirements (if it's not complete)
+                        if (!isDependentComplete) {
+                            int[][] skillReqs = dependentQuestType.skillRequirments();
+                            if (skillReqs != null) {
+                                for (int[] skill : skillReqs) {
+                                    if (skill.length == 2) {
+                                        Skills skillType = Skills.byId(skill[0]);
+                                        if (skillType != null && skillType.getActualLevel() < skill[1]) {
+                                            meetsRequirements = false;
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+
+                            int questpoint = VarManager.getVarValue(VarDomainType.PLAYER, 101);
+                            if (questpoint < dependentQuestType.questPointReq()) {
+                                meetsRequirements = false;
+                            }
+
+                            // Check prerequisite quests
+                            int[] prerequisiteQuests = dependentQuestType.dependentQuests();
+                            if (prerequisiteQuests != null && prerequisiteQuests.length > 0) {
+                                for (int prereqQuestId : prerequisiteQuests) {
+                                    QuestType prereqQuestType = ConfigManager.getQuestType(prereqQuestId);
+                                    boolean isPrereqComplete = false;
+
+                                    if (prereqQuestType != null) {
+                                        int[][] prereqVarbits = prereqQuestType.progressVarbits();
+                                        if (prereqVarbits != null && prereqVarbits.length > 0) {
+                                            int[] varbit = prereqVarbits[0];
+                                            isPrereqComplete = VarManager.getVarbitValue(varbit[0]) >= varbit[2];
+                                        } else {
+                                            // Check completion using varps if varbits are not defined
+                                            int[][] prereqVarps = prereqQuestType.progressVarps();
+                                            if (prereqVarps != null && prereqVarps.length > 0) {
+                                                int[] varp = prereqVarps[0];
+                                                if (varp.length == 3) {
+                                                    int currentVarpValue = VarManager.getVarpValue(varp[0]);
+                                                    isPrereqComplete = currentVarpValue >= varp[2];
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    // If any prerequisite quest is incomplete, set meetsRequirements to false
+                                    if (!isPrereqComplete) {
+                                        meetsRequirements = false;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+
+                        // Set color based on completion, requirements, and prerequisites
                         if (isDependentComplete) {
                             ImGui.PushStyleColor(0, 0.0f, 1.0f, 0.0f, 1.0f); // Green for complete
+                        } else if (!meetsRequirements) {
+                            ImGui.PushStyleColor(0, 1.0f, 0.0f, 0.0f, 1.0f); // Red for incomplete and unmet requirements
                         } else {
-                            ImGui.PushStyleColor(0, 1.0f, 0.0f, 0.0f, 1.0f); // Red for incomplete
+                            ImGui.PushStyleColor(0, 1.0f, 1.0f, 1.0f, 1.0f); // White for incomplete but meets requirements
                         }
 
                         // Render quest name as selectable
-                        if (ImGui.Selectable(dependentQuestType.name() + (isDependentComplete ? " (Complete)" : " (Incomplete)"), false,0)) {
+                        if (ImGui.Selectable(dependentQuestType.name() + (isDependentComplete ? " (Complete)" : " (Incomplete)"), false, 0)) {
                             Quest dependentQuest = Quest.getByQuestId(dependentQuestType.getId());
                             if (dependentQuest != null) {
                                 script.currentQuest = dependentQuest;
                                 updateQuestInfo(); // Refresh quest details after switching
-                                forceScroll = true;//Left side scroll to new quest
+                                forceScroll = true; // Left side scroll to new quest
                             }
                         }
 
@@ -363,5 +420,6 @@ public class DebugGraphicsContext extends ScriptGraphicsContext {
             ImGui.Text("N/A");
         }
     }
+
 
 }
