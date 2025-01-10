@@ -284,6 +284,15 @@ public class DebugScript extends LoopingScript {
         public int getQuestId() {
             return questId;
         }
+
+        public static Quest getByQuestId(int questId) {
+            for (Quest quest : values()) {
+                if (quest.getQuestId() == questId) {
+                    return quest;
+                }
+            }
+            return null; // Return null if no match is found
+        }
     }
 
 

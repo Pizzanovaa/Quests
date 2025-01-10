@@ -35,20 +35,19 @@ public class DebugGraphicsContext extends ScriptGraphicsContext {
     private static final String CREDITS = "Created by Billythebob, Pizzanova, Query";
     private static final float WINDOW_WIDTH = 625;
     private static final float WINDOW_HEIGHT = 500;
+    private boolean forceScroll = false;
 
     @Override
     
     public void drawSettings() {
         ImGui.SetNextWindowSize(WINDOW_WIDTH, WINDOW_HEIGHT, ImGuiWindowFlag.None.ordinal());
-        if (ImGui.Begin("Quest Helper" + VERSION, ImGuiWindowFlag.None.ordinal())) {
+        if (ImGui.Begin("Quest Helper " + VERSION, ImGuiWindowFlag.None.ordinal())) {
             //ImGui.Text(CREDITS);
             //ImGui.Separator();
             // Left column for quest list
             ImGui.BeginChild("quest_list", 250, 400, true, 0);
-            
             for (Quest quest : Quest.values()) {
                 if (quest == Quest.TEST_DONTSELECT) continue;
-                
                 boolean isSelected = script.currentQuest == quest;
                 QuestType questType = ConfigManager.getQuestType(quest.getQuestId());
                 
@@ -141,6 +140,17 @@ public class DebugGraphicsContext extends ScriptGraphicsContext {
                     ImGui.PopStyleColor();
                 }
             }
+
+            if (currentQuest != Quest.TEST_DONTSELECT && forceScroll) { //Force scroll
+                int i = currentQuest.ordinal();
+                float scrollStart = 0.9f;
+                float scrollEnd = 2.7f;
+                int totalQuests = Quest.values().length;
+                float step = (scrollEnd - scrollStart) / (totalQuests - 1);
+                float scrollPosition = scrollEnd - (i * step);
+                ImGui.SetScrollHereY(scrollPosition);
+                forceScroll = false;
+            }
             ImGui.EndChild();
 
             ImGui.SameLine();
@@ -159,20 +169,7 @@ public class DebugGraphicsContext extends ScriptGraphicsContext {
             ImGui.Separator();
             ImGui.Text(progressVarbitsText);
             ImGui.Separator();
-            String[] dependentQuestLines = dependentQuestsText.split("\n");
-            for (String line : dependentQuestLines) {
-                if (line.contains("Complete")) {
-                    ImGui.PushStyleColor(0, 0.0f, 1.0f, 0.0f, 1.0f); // Green for complete
-                } else if (line.contains("Incomplete")) {
-                    ImGui.PushStyleColor(0, 1.0f, 0.0f, 0.0f, 1.0f); // Red for incomplete
-                }
-
-                ImGui.Text(line); // Render the line
-
-                if (line.contains("Complete") || line.contains("Incomplete")) {
-                    ImGui.PopStyleColor(); // Revert to default
-                }
-            }
+            dependQuest();
             ImGui.Separator();
             ImGui.Text(specialInstructionsText);
             
@@ -305,6 +302,66 @@ public class DebugGraphicsContext extends ScriptGraphicsContext {
             instructionsBuilder.append("None.");
         }
         specialInstructionsText = instructionsBuilder.toString();
+    }
+
+    private void dependQuest(){
+        QuestType questType = ConfigManager.getQuestType(script.currentQuest.getQuestId());
+
+        ImGui.Text("Dependent Quests:");
+        if (questType != null) {
+            int[] dependQuests = questType.dependentQuests();
+            if (dependQuests != null && dependQuests.length > 0) {
+                for (int dependQuestId : dependQuests) {
+                    QuestType dependentQuestType = ConfigManager.getQuestType(dependQuestId);
+                    if (dependentQuestType != null) {
+                        boolean isDependentComplete = false;
+
+                        // Check completion using varbits
+                        int[][] varbits = dependentQuestType.progressVarbits();
+                        if (varbits != null && varbits.length > 0) {
+                            int[] varbit = varbits[0];
+                            isDependentComplete = VarManager.getVarbitValue(varbit[0]) >= varbit[2];
+                        } else {
+                            // Check completion using varps if varbits are not defined
+                            int[][] varps = dependentQuestType.progressVarps();
+                            if (varps != null && varps.length > 0) {
+                                int[] varp = varps[0];
+                                if (varp.length == 3) {
+                                    int currentVarpValue = VarManager.getVarpValue(varp[0]);
+                                    isDependentComplete = currentVarpValue >= varp[2];
+                                }
+                            }
+                        }
+
+                        // Push color based on completion status
+                        if (isDependentComplete) {
+                            ImGui.PushStyleColor(0, 0.0f, 1.0f, 0.0f, 1.0f); // Green for complete
+                        } else {
+                            ImGui.PushStyleColor(0, 1.0f, 0.0f, 0.0f, 1.0f); // Red for incomplete
+                        }
+
+                        // Render quest name as selectable
+                        if (ImGui.Selectable(dependentQuestType.name() + (isDependentComplete ? " (Complete)" : " (Incomplete)"), false,0)) {
+                            Quest dependentQuest = Quest.getByQuestId(dependentQuestType.getId());
+                            if (dependentQuest != null) {
+                                script.currentQuest = dependentQuest;
+                                updateQuestInfo(); // Refresh quest details after switching
+                                forceScroll = true;//Left side scroll to new quest
+                            }
+                        }
+
+                        // Pop color after rendering
+                        ImGui.PopStyleColor();
+                    } else {
+                        ImGui.Text("(Unknown Quest)");
+                    }
+                }
+            } else {
+                ImGui.Text("None");
+            }
+        } else {
+            ImGui.Text("N/A");
+        }
     }
 
 }
