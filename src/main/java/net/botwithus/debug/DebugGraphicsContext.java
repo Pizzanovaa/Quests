@@ -22,6 +22,8 @@ public class DebugGraphicsContext extends ScriptGraphicsContext {
     private String skillRequirementsText = "";
     private String progressVarbitsText = "";
     private String specialInstructionsText = "";
+    private String dependentQuestsText = "";
+
     private int scrollPosition = 0;
 
     public DebugGraphicsContext(ScriptConsole console, DebugScript script) {
@@ -88,6 +90,40 @@ public class DebugGraphicsContext extends ScriptGraphicsContext {
                             }
                         }
                     }
+
+                    // Check dependent quests
+                    int[] dependQuests = questType.dependentQuests();
+                    if (dependQuests != null && dependQuests.length > 0) {
+                        for (int dependQuestId : dependQuests) {
+                            QuestType dependentQuestType = ConfigManager.getQuestType(dependQuestId);
+                            if (dependentQuestType != null) {
+                                boolean isDependentComplete = false;
+
+                                // Check completion using varbits
+                                if (varbits != null && varbits.length > 0) {
+                                    int[] varbit = varbits[0];
+                                    isDependentComplete = VarManager.getVarbitValue(varbit[0]) >= varbit[2];
+                                } else {
+                                    // Check completion using varps if varbits are not defined
+                                    int[][] varps = dependentQuestType.progressVarps();
+                                    if (varps != null && varps.length > 0) {
+                                        int[] varp = varps[0];
+                                        if (varp.length == 3) {
+                                            int currentVarpValue = VarManager.getVarpValue(varp[0]);
+                                            isDependentComplete = currentVarpValue >= varp[2];
+                                        }
+                                    }
+                                }
+
+                                // If any dependent quest is incomplete, set meetsRequirements to false
+                                if (!isDependentComplete) {
+                                    meetsRequirements = false;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
                 }
                 
                 // Set color based on status
@@ -114,7 +150,7 @@ public class DebugGraphicsContext extends ScriptGraphicsContext {
             if (script.currentQuest != previousQuest) {
                 updateQuestInfo();
             }
-            
+
             ImGui.Text("Quest Details for: " + script.currentQuest.name());
             ImGui.Separator();
             ImGui.Text(requiredItemsText);
@@ -122,6 +158,21 @@ public class DebugGraphicsContext extends ScriptGraphicsContext {
             ImGui.Text(skillRequirementsText);
             ImGui.Separator();
             ImGui.Text(progressVarbitsText);
+            ImGui.Separator();
+            String[] dependentQuestLines = dependentQuestsText.split("\n");
+            for (String line : dependentQuestLines) {
+                if (line.contains("Complete")) {
+                    ImGui.PushStyleColor(0, 0.0f, 1.0f, 0.0f, 1.0f); // Green for complete
+                } else if (line.contains("Incomplete")) {
+                    ImGui.PushStyleColor(0, 1.0f, 0.0f, 0.0f, 1.0f); // Red for incomplete
+                }
+
+                ImGui.Text(line); // Render the line
+
+                if (line.contains("Complete") || line.contains("Incomplete")) {
+                    ImGui.PopStyleColor(); // Revert to default
+                }
+            }
             ImGui.Separator();
             ImGui.Text(specialInstructionsText);
             
@@ -176,57 +227,71 @@ public class DebugGraphicsContext extends ScriptGraphicsContext {
                     if (varbit.length == 3) {
                         int currentValue = VarManager.getVarbitValue(varbit[0]);
                         String status = currentValue < varbit[1] ? "Not Started" :
-                                      currentValue < varbit[2] ? "In Progress" : "Complete";
-                        //progressBuilder.append("Status: ").append(status).append("\n");
+                                currentValue < varbit[2] ? "In Progress" : "Complete";
                         progressBuilder.append("Status: ").append(status)
-                                        .append(", Varbit ID: ").append(varbit[0])
-                                        .append(", Start: ").append(varbit[1])
-                                        .append(", Finish: ").append(varbit[2])
-                                        .append(", Current: ").append(currentValue).append("\n");
-                    }
-
-                    else {
+                                .append(", Varbit ID: ").append(varbit[0])
+                                .append(", Start: ").append(varbit[1])
+                                .append(", Finish: ").append(varbit[2])
+                                .append(", Current: ").append(currentValue).append("\n");
+                    } else {
                         progressBuilder.append("Invalid progress varbit format.\n");
                     }
                 }
+            } else {
+                progressBuilder.append("N/A");
             }
-            else {
-                int[][] Varps = questType.progressVarps();
-                if (Varps != null && Varps.length > 0) {
-                    for (int[] varp : Varps) {
-                        if (varp.length == 3) {
-                            int varpId = varp[0];
-                            int value = varp[1];
-                            int value2 = varp[2];
-
-                            int currentvarpValue = VarManager.getVarpValue(varpId);
-                            String progressStatus;
-                            if (currentvarpValue < value) {
-                                progressStatus = "Uncompleted";
-                            } else if (currentvarpValue < value2) {
-                                progressStatus = "In progress";
-                            } else {
-                                progressStatus = "Completed";
-                            }
-
-                            progressBuilder.append("Status: ").append(progressStatus)
-                                    .append(", Varp ID: ").append(varpId)
-                                    .append(", Start: ").append(value)
-                                    .append(", Finish: ").append(value2)
-                                    .append(", Current: ").append(currentvarpValue).append("\n");
-                        } else {
-                            progressBuilder.append("Invalid progress varp format.\n");
-                        }
-                    }
-                } else {
-                    progressBuilder.append("N/A");
-                }
-            }
-        }
-        else {
+        } else {
             progressBuilder.append("N/A");
         }
         progressVarbitsText = progressBuilder.toString();
+
+        // Update dependent quests
+        StringBuilder dependentQuestsBuilder = new StringBuilder("Dependent Quests:\n");
+        if (questType != null) {
+            int[] dependQuests = questType.dependentQuests();
+            if (dependQuests != null && dependQuests.length > 0) {
+                for (int dependQuestId : dependQuests) {
+                    QuestType dependentQuestType = ConfigManager.getQuestType(dependQuestId);
+                    if (dependentQuestType != null) {
+                        boolean isDependentComplete = false;
+
+                        // Check completion using varbits
+                        int[][] varbits = dependentQuestType.progressVarbits();
+                        if (varbits != null && varbits.length > 0) {
+                            int[] varbit = varbits[0];
+                            isDependentComplete = VarManager.getVarbitValue(varbit[0]) >= varbit[2];
+                        } else {
+                            // Check completion using varps if varbits are not defined
+                            int[][] varps = dependentQuestType.progressVarps();
+                            if (varps != null && varps.length > 0) {
+                                int[] varp = varps[0];
+                                if (varp.length == 3) {
+                                    int currentVarpValue = VarManager.getVarpValue(varp[0]);
+                                    isDependentComplete = currentVarpValue >= varp[2];
+                                }
+                            }
+                        }
+
+                        // Add only the quest name to the builder
+                        dependentQuestsBuilder.append(dependentQuestType.name());
+                        if (isDependentComplete) {
+                            dependentQuestsBuilder.append(" (Complete)");
+                        } else {
+                            dependentQuestsBuilder.append(" (Incomplete)");
+                        }
+                        dependentQuestsBuilder.append("\n");
+                    } else {
+                        dependentQuestsBuilder.append("(Unknown Quest)").append("\n");
+                    }
+                }
+            } else {
+                dependentQuestsBuilder.append("None.");
+            }
+        } else {
+            dependentQuestsBuilder.append("N/A");
+        }
+        dependentQuestsText = dependentQuestsBuilder.toString();
+
 
         // Update special instructions
         StringBuilder instructionsBuilder = new StringBuilder("Special Instructions:\n");
@@ -241,4 +306,5 @@ public class DebugGraphicsContext extends ScriptGraphicsContext {
         }
         specialInstructionsText = instructionsBuilder.toString();
     }
+
 }
