@@ -284,6 +284,13 @@ public class AncientAwakening {
                 break;
                 case 30, 32:
                 ScriptConsole.println("Wave are done manually");
+                if(!Client.getLocalPlayer().hasTarget() || Client.getLocalPlayer().getTarget().getCurrentHealth() <= 0){ // Auto targeting for a bit of afk.
+                    Npc npc = NpcQuery.newQuery().name("Skeleton","Zombie","Phantom","Slime","Giant").health(0,1000000).results().nearest();
+                    if(npc != null){
+                        npc.interact("Attack");
+                        delay(RandomGenerator.nextInt(600, 800));
+                    }
+                }
                 break;
                 case 38:
                 SceneObject doorway = SceneObjectQuery.newQuery().name("Doorway").hidden(false).option("Interact").results().nearest();

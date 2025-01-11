@@ -39,6 +39,7 @@ import static net.botwithus.debug.Dialogs.println;
 import static net.botwithus.rs3.game.minimenu.actions.SelectableAction.SELECTABLE_COMPONENT;
 import static net.botwithus.rs3.game.minimenu.actions.SelectableAction.SELECT_OBJECT;
 import static net.botwithus.rs3.script.Execution.delay;
+import static net.botwithus.rs3.script.Execution.delayUntil;
 
 import net.botwithus.api.game.hud.inventories.Backpack;
 import net.botwithus.api.game.hud.inventories.Bank;
@@ -53,6 +54,7 @@ public class Murderontheborder {
 
     static boolean hasClickedBuild = false;
     static boolean Activeplay = true;
+    public static boolean talkedtorodney = false;
 
     public static void quest() {
         int QuestVarp = VarManager.getVarbitValue(52689);
@@ -82,7 +84,9 @@ public class Murderontheborder {
         } else {
             switch (QuestVarp) {
                 case 10:
-                SceneObject contrutiionhostspot = SceneObjectQuery.newQuery().name("Optimal Construction hotspot").hidden(false).results().nearest();
+                    talktoBill();
+/*
+                    SceneObject contrutiionhostspot = SceneObjectQuery.newQuery().name("Optimal Construction hotspot").hidden(false).results().nearest();
 
                  if (contrutiionhostspot == null) {
                         if (Backpack.getCount("Stone wall segment") < 6 && Backpack.getCount("Willow frame") < 12) {
@@ -149,7 +153,7 @@ public class Murderontheborder {
                                 hasClickedBuild = false;
                             }
                         }
-                    }
+                    }*/
                 break;
                 case 15:
                 SceneObject contrutiionhostspot1 = SceneObjectQuery.newQuery().name("Optimal Construction hotspot").hidden(false).results().nearest();
@@ -222,7 +226,7 @@ public class Murderontheborder {
                     // Npc Ellamaria = NpcQuery.newQuery().name("Ellamaria").results().nearest();
                     if (stonestairs != null && Client.getLocalPlayer().getServerCoordinate().getZ() != 1 ) {
                         stonestairs.interact("Climb");
-                        delay(RandomGenerator.nextInt(600, 800));
+                        moveDelay();
                         if(Dialogs.isDialogOpen()) {
                             Dialogs.dialog1188pick(1);
                             // MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 77856776);
@@ -239,7 +243,7 @@ public class Murderontheborder {
                 else if (VarManager.getVarbitValue(52709) == 1 && VarManager.getVarbitValue(52710) == 1 && Client.getLocalPlayer().getServerCoordinate().getZ() == 1) {
                     if(regularstairs != null && Client.getLocalPlayer().getServerCoordinate().getZ() == 1) {
                         regularstairs.interact("Climb");
-                        delay(RandomGenerator.nextInt(600, 800));
+                        moveDelay();
                         if(Dialogs.isDialogOpen()) {
                             Dialogs.dialog1188pick(2);
                             // MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 77856776);
@@ -276,8 +280,7 @@ public class Murderontheborder {
                     Npc Simon = NpcQuery.newQuery().name("Simon").byParentType(29920).results().nearest();
                     if(Simon != null && !Interfaces.isOpen(1030)) {
                         Simon.interact("Talk to");
-                        delay(RandomGenerator.nextInt(600, 800));
-
+                        moveDelay();
                         if(Dialogs.isDialogOpen()) {
                             Dialogs.dialog1188pick(2);
                             // MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 77856776);
@@ -309,7 +312,7 @@ public class Murderontheborder {
                     SceneObject supplycupboard = SceneObjectQuery.newQuery().name("Supply cupboard").option("Search").results().nearest();
                     if(strangesatchel != null && Backpack.getCount(54584) < 1 && !Backpack.contains(54585) && !Backpack.contains(54588)) {
                         strangesatchel.interact("Investigate");
-                        delay(RandomGenerator.nextInt(600, 800));
+                        moveDelay();
                         if(Dialogs.isDialogOpen()) {
                             if(Backpack.getCount(54584) < 1) {
                                 Dialogs.dialog1188pick(1);
@@ -322,7 +325,7 @@ public class Murderontheborder {
                     }
                     else if(supplycupboard != null && Backpack.getCount(54584) >= 1 && Backpack.getCount("Hollyhock") < 1 && !Backpack.contains(54585) && !Backpack.contains(54588)) {
                         supplycupboard.interact("Search");
-                        delay(RandomGenerator.nextInt(600, 800));
+                        moveDelay();
                         if(Dialogs.isDialogOpen()) {
                             if(Backpack.getCount("Hollyhock") < 1) {
                                 Dialogs.dialog1188pick(1);
@@ -350,7 +353,7 @@ public class Murderontheborder {
                         SceneObject range = SceneObjectQuery.newQuery().name("Range").option("Cook-at").results().nearest();
                         if(range != null) {
                             range.interact("Cook-at");
-                            delay(RandomGenerator.nextInt(600, 800));
+                            moveDelay();
                             if(Interfaces.isOpen(1370)) {
                                 MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 89784350);
                                 delay(RandomGenerator.nextInt(600, 800));
@@ -362,7 +365,7 @@ public class Murderontheborder {
                         SceneObject dukemeal = SceneObjectQuery.newQuery().name("Duke's meal").results().nearest();
                         Item item = InventoryItemQuery.newQuery(93).ids(54588).results().first();
                         if(dukemeal != null && Backpack.contains(54588)) {
-                          boolean success = MiniMenu.interact(ComponentAction.COMPONENT.getType(), 0, item.getSlot(), 96534533);
+                          boolean success = MiniMenu.interact(SelectableAction.SELECTABLE_COMPONENT.getType(), 0, item.getSlot(), 96534533);
                           delay(RandomGenerator.nextInt(600, 800));
                           if(success) {
                             dukemeal.interact(SelectableAction.SELECT_OBJECT.getType());
@@ -384,7 +387,7 @@ public class Murderontheborder {
                     Npc duchessalba = NpcQuery.newQuery().name("Duchess Alba").byParentType(29939).results().nearest();
                     if(duchessalba != null && !Interfaces.isOpen(1030)) {
                         duchessalba.interact("Talk to");
-                        delay(RandomGenerator.nextInt(600, 800));
+                        moveDelay();
                         if(Dialogs.isDialogOpen()) {
                             Dialogs.dialog1188pick(2);
                             //MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 89784350);
@@ -407,7 +410,7 @@ public class Murderontheborder {
                     Npc bianca = NpcQuery.newQuery().name("Bianca").byParentType(29929).results().nearest();
                     if(bianca != null && !Interfaces.isOpen(1030)) {
                         bianca.interact("Talk to");
-                        delay(RandomGenerator.nextInt(600, 800));
+                        moveDelay();
                         if(Dialogs.isDialogOpen()) {
                             Dialogs.dialog1188pick(2);
                         }
@@ -427,7 +430,7 @@ public class Murderontheborder {
                 SceneObject stonestairs1 = SceneObjectQuery.newQuery().name("Stone stairs").option("Climb").results().nearest();
                 if(stonestairs1 != null && Client.getLocalPlayer().getServerCoordinate().getZ() == 0) {
                     stonestairs1.interact("Climb");
-                    delay(RandomGenerator.nextInt(600, 800));
+                    moveDelay();
                     if(Dialogs.isDialogOpen()) {
                         MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 77856781);
                         delay(RandomGenerator.nextInt(600, 800));
@@ -441,6 +444,14 @@ public class Murderontheborder {
                    }
                 }
                 break;
+                case 100:
+                    if(!Client.getLocalPlayer().hasTarget()){
+                        Npc assassin = NpcQuery.newQuery().name("Assassin").byParentType(29952).results().first();
+                        if(assassin != null){
+                            assassin.interact("Attack");
+                            delay(RandomGenerator.nextInt(600, 800));
+                        }
+                    }
 
                 case 105:
                 Npc aster = NpcQuery.newQuery().name("Aster").byParentType(29915).results().first();
@@ -456,11 +467,16 @@ public class Murderontheborder {
                     delay(RandomGenerator.nextInt(600, 800));
                 }
                 break;
+                case 115:
+                    if(Interfaces.isOpen(960)){ // close book
+                        MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1, -1, 62914639);
+                        delay(RandomGenerator.nextInt(600, 800));
+                    }
                 case 120:
                 SceneObject trapdoor = SceneObjectQuery.newQuery().name("Trap Door").option("Climb").results().nearest();
                 if(trapdoor != null && Client.getLocalPlayer().getServerCoordinate().getZ() == 3) {
                     trapdoor.interact("Climb");
-                    delay(RandomGenerator.nextInt(600, 800));
+                    moveDelay();
                     if(Dialogs.isDialogOpen()) {
                         MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 77856781);
                         delay(RandomGenerator.nextInt(600, 800));
@@ -469,7 +485,7 @@ public class Murderontheborder {
                     Npc kingroald = NpcQuery.newQuery().name("King Roald").byParentType(29918).results().first();
                     if(kingroald != null) {
                         kingroald.interact("Talk to");
-                        delay(RandomGenerator.nextInt(600, 800));
+                        moveDelay();
                     }
                 }
                 break;
@@ -486,9 +502,15 @@ public class Murderontheborder {
                     Npc Iris = NpcQuery.newQuery().name("Iris").byParentType(29926).results().first();
                     if(Iris != null && !Interfaces.isOpen(1030)) {
                         Iris.interact("Talk to");
-                        delay(RandomGenerator.nextInt(600, 800));
+                        moveDelay();
                         if(Dialogs.isDialogOpen()) {
                             MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 77856781);
+                            delay(RandomGenerator.nextInt(600, 800));
+                        }
+                    }else if(Iris == null){ // 2 far away from her
+                        SceneObject Well = SceneObjectQuery.newQuery().name("Well").results().nearest();
+                        if(Well != null){
+                            Movement.walkTo(Well.getCoordinate().getX(),Well.getCoordinate().getY(),false);
                             delay(RandomGenerator.nextInt(600, 800));
                         }
                     }else if(Interfaces.isOpen(1030)) {
@@ -500,7 +522,7 @@ public class Murderontheborder {
                         }
                     }
                 }
-                else if(VarManager.getVarbitValue(52699) == 13 && VarManager.getVarbitValue(52700) == 0)
+                else if(VarManager.getVarbitValue(52699) == 13 && VarManager.getVarbitValue(52700) == 1)
                 {
                     SceneObject burntparchment = SceneObjectQuery.newQuery().name("Burnt parchment").option("Investigate").results().nearest();
                     if(burntparchment != null) {
@@ -513,7 +535,7 @@ public class Murderontheborder {
                     Npc princess = NpcQuery.newQuery().name("Princess").byParentType(29941).results().first();
                     if(princess != null && !Interfaces.isOpen(1030)) {
                         princess.interact("Talk to");
-                        delay(RandomGenerator.nextInt(600, 800));
+                        moveDelay();
                         if(Dialogs.isDialogOpen()) {
                             MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 77856781);
                             delay(RandomGenerator.nextInt(600, 800));
@@ -535,10 +557,12 @@ public class Murderontheborder {
                 Coordinate laddercoords = ladder.getCoordinate();
                 Area.Circular ladderarea = new Area.Circular(laddercoords, 3);
                 
-                if(ladder !=null && !ladderarea.contains(Client.getLocalPlayer().getServerCoordinate()))
+                if(ladder != null && !ladderarea.contains(Client.getLocalPlayer().getServerCoordinate()))
                 {
+                    Movement.walkTo(ladder.getCoordinate().getX()+15, ladder.getCoordinate().getY(), true);
+                    moveDelay();
                     Movement.walkTo(ladder.getCoordinate().getX(), ladder.getCoordinate().getY(), true);
-                    delay(RandomGenerator.nextInt(600, 800));
+                    moveDelay();
                 }
                 else
                 {
@@ -605,7 +629,7 @@ public class Murderontheborder {
                     Npc duchessalba = NpcQuery.newQuery().name("Duchess Alba").byParentType(29939).results().first();
                     if(duchessalba != null) {
                         duchessalba.interact("Talk to");
-                        delay(RandomGenerator.nextInt(600, 800));
+                        moveDelay();
                         if(Dialogs.isDialogOpen()) {
                             MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 77856776);
                             delay(RandomGenerator.nextInt(600, 800));
@@ -616,16 +640,16 @@ public class Murderontheborder {
                 }
                 else if((VarManager.getVarbitValue(52699) == 63 && VarManager.getVarbitValue(52707) == 0))
                 {
+                    Npc rodney = NpcQuery.newQuery().name("Rodney").byParentType(29934).results().first();
+                    if(rodney != null && !talkedtorodney) {
+                        rodney.interact("Talk to");
+                        moveDelay();
+                        return;
+                    }
                     Npc queenellamaria1 = NpcQuery.newQuery().name("Ellamaria").byParentType(29916).results().first();
                     if(queenellamaria1 != null) {
                         queenellamaria1.interact("Talk to");
                         delay(RandomGenerator.nextInt(600, 800));
-                        if(Dialogs.isDialogOpen()) {
-                            MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 77856776);
-                            delay(RandomGenerator.nextInt(600, 800));
-                            MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 77856781);
-                            delay(RandomGenerator.nextInt(600, 800));
-                        }
                     }
                 }
                 else if(VarManager.getVarbitValue(52699) == 191 && VarManager.getVarbitValue(52707) == 1 && VarManager.getVarbitValue(52706) == 0)
@@ -633,7 +657,7 @@ public class Murderontheborder {
                     Npc rodney = NpcQuery.newQuery().name("Rodney").byParentType(29934).results().first();
                     if(rodney != null && !Interfaces.isOpen(1030)) {
                         rodney.interact("Talk to");
-                        delay(RandomGenerator.nextInt(600, 800));
+                        moveDelay();
                         if(Dialogs.isDialogOpen()) {
                             MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 77856781);
                             delay(RandomGenerator.nextInt(600, 800));
@@ -760,4 +784,9 @@ public class Murderontheborder {
         }
     }
 
+    public static void moveDelay(){
+        delay(RandomGenerator.nextInt(700, 1200));
+        delayUntil(20000, () -> !Client.getLocalPlayer().isMoving());
+        delay(RandomGenerator.nextInt(1200, 1800));
+    }
 }

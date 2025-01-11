@@ -87,29 +87,16 @@ public class unwelcomeguests {
                 talktoTheRaptor();
                 break;
                 case 10:
-                // if(!zombiesarea.contains(player)) {
-                //     DebugScript.moveTo(zombies);
-                // } else {
-                //     Npc zombies = NpcQuery.newQuery().name("Fetid Zombie").results().first();
-                //     if (zombies != null) {
-                //         zombies.interact("Attack");
-                //         delay(RandomGenerator.nextInt(600, 800));
-                //     }
-                // }
+
                 SceneObject gates = SceneObjectQuery.newQuery().name("Gates").option("Open").results().first();
-                Npc zombies = NpcQuery.newQuery().name("Fetid zombie").byParentType(30035).results().nearest();
+                Npc zombies = NpcQuery.newQuery().name("Fetid zombie").byParentType(30035).health(1,100000).results().nearest();
                 Npc TheRaptor = NpcQuery.newQuery().name("The Raptor").byParentType(30037).results().first();
                 if (gates != null && zombies == null) {
                     gates.interact("Open");
                     delay(RandomGenerator.nextInt(600, 800));
-                // }else if (TheRaptor != null && zombies != null) {
-                    
-                //         zombies.interact("Attack");
-                //         delay(RandomGenerator.nextInt(600, 800));
-                    
                 }
 
-                else if(VarManager.getVarbitValue(52845) <= 10 && zombies != null) {
+              else if(VarManager.getVarbitValue(52845) <= 10 && zombies != null && !Client.getLocalPlayer().hasTarget() || Client.getLocalPlayer().hasTarget() && Client.getLocalPlayer().getTarget().getCurrentHealth() <= 0) {
                     zombies.interact("Attack");
                     delay(RandomGenerator.nextInt(600, 800));
                 }
@@ -129,22 +116,26 @@ public class unwelcomeguests {
                 talktoBill();
                 break;
                 case 25:
-                // SceneObject gates1 = SceneObjectQuery.newQuery().name("Gates").option("Open").results().first();
-                // SceneObject Buildingsupplies = SceneObjectQuery.newQuery().name("Building supplies").option("Construct defence").results().first();
-               
-                // if (Buildingsupplies != null) {
-                //     Coordinate build = new Coordinate(Buildingsupplies.getCoordinate().getX(), Buildingsupplies.getCoordinate().getY(), 0);
-                //     Coordinate build1 = Buildingsupplies.getCoordinate();
-                //     Area.Circular buildarea = new Area.Circular(build, 10);
-                //     if(!buildarea.contains(player)) {
-                //        Movement.walkTo (build1.getX(), build1.getY(), true);
-                //        //DebugScript.moveTo(build);
-                //     } else {
-                //         Buildingsupplies.interact("Construct defence");
-                //         Execution.delay(RandomGenerator.nextInt(4000, 5000));
-                //         //Execution.delayUntil(5000, () -> Client.getLocalPlayer().getAnimationId() == -1);
-                //     }
-                // }
+                 SceneObject gates1 = SceneObjectQuery.newQuery().name("Gates").option("Open").results().first();
+                 SceneObject Buildingsupplies = SceneObjectQuery.newQuery().name("Building supplies").option("Construct defence").results().nearest();
+                 Coordinate topright = new Coordinate(3307,3575,0);
+                    Coordinate bottomleft = new Coordinate(3280,3540,0);
+                    Area area = new Area.Rectangular(topright,bottomleft);
+
+                    if(gates1 != null && area.contains(player)){
+                     gates1.interact("Open");
+                     delay(RandomGenerator.nextInt(600, 800));
+                     return;
+                 }
+                 if (Buildingsupplies != null) {
+                     Buildingsupplies.interact("Construct defence");
+                        Execution.delay(RandomGenerator.nextInt(4000, 5000));
+                      Execution.delayUntil(5000, () -> Client.getLocalPlayer().getAnimationId() == -1);
+                    }else{
+
+                     Movement.walkTo(3285,3580,false);
+                     delay(RandomGenerator.nextInt(600, 800));
+                 }
                 break;
                 case 30:
                 if(!startarea.contains(player)) {
@@ -239,7 +230,25 @@ public class unwelcomeguests {
                 talktoTheRaptor();
                 break;
                 case 50:
-                println("Kill 10 Zombies manually");
+                    Coordinate topright2 = new Coordinate(3307,3575,0);
+                    Coordinate bottomleft2 = new Coordinate(3280,3540,0);
+                    Area area2 = new Area.Rectangular(topright2,bottomleft2);
+                    Npc zombies2 = NpcQuery.newQuery().name("Fetid zombie").byParentType(30035).health(1,100000).results().nearest();
+                    SceneObject gates2 = SceneObjectQuery.newQuery().name("Gates").option("Open").results().first();
+
+                    if(gates2 != null && area2.contains(player)){
+                        gates2.interact("Open");
+                        delay(RandomGenerator.nextInt(600, 800));
+                        return;
+                    }    else if(VarManager.getVarbitValue(52845) <= 10 && zombies2 != null && !Client.getLocalPlayer().hasTarget() || Client.getLocalPlayer().hasTarget() && Client.getLocalPlayer().getTarget().getCurrentHealth() <= 0) {
+                        zombies2.interact("Attack");
+                        delay(RandomGenerator.nextInt(600, 800));
+                    }
+                    else if(VarManager.getVarbitValue(52845) == 10)
+                    {
+                        gates2.interact("Open");
+                        delay(RandomGenerator.nextInt(600, 800));
+                    }
                 break;
                 case 60:
                 if(!theRaptorarea.contains(player)) {
@@ -277,6 +286,12 @@ public class unwelcomeguests {
         if (Bill != null) {
             Bill.interact("Talk to");
             delay(RandomGenerator.nextInt(600, 800));
+        }else{ // bill to far away walk to well
+            SceneObject Well = SceneObjectQuery.newQuery().name("Well").results().nearest();
+            if(Well != null){
+                Movement.walkTo(Well.getCoordinate().getX(),Well.getCoordinate().getY(),false);
+                delay(RandomGenerator.nextInt(600, 800));
+            }
         }
     }
 

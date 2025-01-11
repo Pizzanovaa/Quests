@@ -267,7 +267,7 @@ public class DebugScript extends LoopingScript {
         DEAD_AND_BURIED(492),
         ANCIENT_AWAKENING(502),
         BATTLE_OF_FORINTHRY(507),
-        REQUIEM_FOR_A_DRAGON(509),
+        REQUIEM_FOR_A_DRAGON(511),
         MURDER_ON_THE_BORDER(490),
         UNWELCOME_GUESTS(491),
 

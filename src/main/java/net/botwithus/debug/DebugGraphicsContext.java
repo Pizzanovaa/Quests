@@ -44,6 +44,7 @@ public class DebugGraphicsContext extends ScriptGraphicsContext {
         if (ImGui.Begin("Quest Helper " + VERSION, ImGuiWindowFlag.AlwaysAutoResize.getValue())) {
             //ImGui.Text(CREDITS);
             //ImGui.Separator();
+
             // Left column for quest list
             ImGui.BeginChild("quest_list", 250, 400, true, 0);
             for (Quest quest : Quest.values()) {
@@ -51,15 +52,18 @@ public class DebugGraphicsContext extends ScriptGraphicsContext {
                 boolean isSelected = script.currentQuest == quest;
                 QuestType questType = ConfigManager.getQuestType(quest.getQuestId());
 
-                // Check if quest is complete
+                // Check if quest is complete, in progress, or not started
                 boolean isComplete = false;
+                boolean isInProgress = false;
                 boolean meetsRequirements = true;
 
                 if (questType != null) {
                     int[][] varbits = questType.progressVarbits();
                     if (varbits != null && varbits.length > 0) {
                         int[] varbit = varbits[0];
-                        isComplete = VarManager.getVarbitValue(varbit[0]) >= varbit[2];
+                        int currentValue = VarManager.getVarbitValue(varbit[0]);
+                        isComplete = currentValue >= varbit[2];
+                        isInProgress = currentValue >= varbit[1] && currentValue < varbit[2];
                     } else {
                         // Check for Varps if Varbits are not defined
                         int[][] varps = questType.progressVarps();
@@ -68,13 +72,14 @@ public class DebugGraphicsContext extends ScriptGraphicsContext {
                             if (varp.length == 3) {
                                 int currentVarpValue = VarManager.getVarpValue(varp[0]);
                                 isComplete = currentVarpValue >= varp[2];
+                                isInProgress = currentVarpValue >= varp[1] && currentVarpValue < varp[2];
                             }
                         }
                     }
 
-                     // Check requirements
-                     int questpoint = VarManager.getVarValue(VarDomainType.PLAYER, 101);
-                     if (questpoint < questType.questPointReq()) {
+                    // Check requirements
+                    int questpoint = VarManager.getVarValue(VarDomainType.PLAYER, 101);
+                    if (questpoint < questType.questPointReq()) {
                         meetsRequirements = false;
                     }
                     int[][] skillReqs = questType.skillRequirments();
@@ -99,14 +104,15 @@ public class DebugGraphicsContext extends ScriptGraphicsContext {
                                 boolean isDependentComplete = false;
 
                                 // Check completion using varbits
-                                if (varbits != null && varbits.length > 0) {
-                                    int[] varbit = varbits[0];
+                                int[][] dependentVarbits = dependentQuestType.progressVarbits();
+                                if (dependentVarbits != null && dependentVarbits.length > 0) {
+                                    int[] varbit = dependentVarbits[0];
                                     isDependentComplete = VarManager.getVarbitValue(varbit[0]) >= varbit[2];
                                 } else {
                                     // Check completion using varps if varbits are not defined
-                                    int[][] varps = dependentQuestType.progressVarps();
-                                    if (varps != null && varps.length > 0) {
-                                        int[] varp = varps[0];
+                                    int[][] dependentVarps = dependentQuestType.progressVarps();
+                                    if (dependentVarps != null && dependentVarps.length > 0) {
+                                        int[] varp = dependentVarps[0];
                                         if (varp.length == 3) {
                                             int currentVarpValue = VarManager.getVarpValue(varp[0]);
                                             isDependentComplete = currentVarpValue >= varp[2];
@@ -114,7 +120,7 @@ public class DebugGraphicsContext extends ScriptGraphicsContext {
                                     }
                                 }
 
-                                // If any dependent quest is incomplete, set meetsRequirements to false
+                                // If any dependent quest is incomplete, log and set meetsRequirements to false
                                 if (!isDependentComplete) {
                                     meetsRequirements = false;
                                     break;
@@ -122,26 +128,27 @@ public class DebugGraphicsContext extends ScriptGraphicsContext {
                             }
                         }
                     }
-
                 }
 
                 // Set color based on status
                 if (isComplete) {
-                    ImGui.PushStyleColor(0, 0.0f, 1.0f, 0.0f, 1.0f);
+                    ImGui.PushStyleColor(0, 0.0f, 1.0f, 0.0f, 1.0f); // Green for complete
+                } else if (isInProgress) {
+                    ImGui.PushStyleColor(0, 0.0f, 1.0f, 1.0f, 1.0f); // Cyan for in progress
                 } else if (!meetsRequirements) {
-                    ImGui.PushStyleColor(0, 1.0f, 0.0f, 0.0f, 1.0f);
+                    ImGui.PushStyleColor(0, 1.0f, 0.0f, 0.0f, 1.0f); // Red for unmet requirements
                 }
 
                 if (ImGui.Selectable(quest.name(), isSelected, 0)) {
                     script.currentQuest = quest;
                 }
 
-                if (isComplete || !meetsRequirements) {
+                if (isComplete || isInProgress || !meetsRequirements) {
                     ImGui.PopStyleColor();
                 }
             }
 
-            if (currentQuest != Quest.TEST_DONTSELECT && forceScroll) { //Force scroll
+            if (currentQuest != Quest.TEST_DONTSELECT && forceScroll) { // Force scroll
                 int i = currentQuest.ordinal();
                 float scrollStart = 0.9f;
                 float scrollEnd = 2.7f;
@@ -187,6 +194,7 @@ public class DebugGraphicsContext extends ScriptGraphicsContext {
         }
         ImGui.End();
     }
+
 
     private void updateQuestInfo() {
         previousQuest = script.currentQuest;

@@ -2,11 +2,13 @@ package net.botwithus.debug;
 
 
 import net.botwithus.api.game.hud.Dialog;
+import net.botwithus.rs3.game.Item;
 import net.botwithus.rs3.game.hud.interfaces.Component;
 import net.botwithus.rs3.game.hud.interfaces.Interfaces;
 import net.botwithus.rs3.game.minimenu.MiniMenu;
 import net.botwithus.rs3.game.minimenu.actions.ComponentAction;
 import net.botwithus.rs3.game.queries.builders.components.ComponentQuery;
+import net.botwithus.rs3.game.queries.builders.items.InventoryItemQuery;
 import net.botwithus.rs3.game.vars.VarManager;
 import net.botwithus.rs3.script.ScriptConsole;
 
@@ -100,6 +102,9 @@ public class Dialogs {
         } else if (Interfaces.isOpen(1184)) {
             String dialogText = Dialog.getText();
             ScriptConsole.println(dialogText);
+            if (dialogText.contains("Don't take my word for it. Ask Bianca.")) {
+                Murderontheborder.talkedtorodney = true;
+            }
 
             boolean matched = Arrays.stream(AutoCloseDialogs.values())
                     .anyMatch(topic -> dialogText.contains(topic.getPhrase()));
@@ -121,8 +126,10 @@ public class Dialogs {
             MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 77922323);
         } else if (Interfaces.isOpen(1186)) {
             MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 77725704);
-        } else if (Interfaces.isOpen(720) && currentQuest != NEW_FOUNDATION && currentQuest != ARCH_TUTORIAL) {
+        } else if (Interfaces.isOpen(720) && currentQuest != NEW_FOUNDATION && currentQuest != ARCH_TUTORIAL && currentQuest != MURDER_ON_THE_BORDER) {
             MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 47185921);
+        } else if (Interfaces.isOpen(720) && currentQuest == MURDER_ON_THE_BORDER) {
+            MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 47185949);
         } else if (Interfaces.isOpen(1224)) {
             MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1, -1, 80216108);
         } else if (Interfaces.isOpen(1370) && currentQuest == DebugScript.Quest.NECROMANCY_INTRO) {
@@ -188,11 +195,24 @@ public class Dialogs {
                 return VarManager.getVarbitValue(VARBIT_BOOK_SHADOW) >= 1;
             case BLOOD_TOMES:
                 return VarManager.getVarbitValue(VARBIT_BOOK_BLOOD) >= 1;
+            case VIAL:
+                return hasItem("Poison detection potion");
+            case HOLLYHOCK:
+                return hasItem("Hollyhock");
+            case DUCHLINK, TALK_ABOUT_THE_ASSASSIN:
+                return VarManager.getVarbitValue(52689) == 155;
+            case TALKRODNEY:
+                return VarManager.getVarbitValue(52699) == 191;
             default:
                 return false; // Default case: do not skip
         }
     }
 
+
+    public static boolean hasItem(String item) { //Murder on the border quest.
+        Item potion = InventoryItemQuery.newQuery(93).name(item, String::contains).results().first();
+        return potion != null;
+    }
 
     public static boolean continueHandler() { // Continue prompt, for new characters.
         Component thing = ComponentQuery.newQuery(955).componentIndex(16).subComponentIndex(14).results().first();
@@ -310,7 +330,7 @@ public class Dialogs {
         YES_I_HAVE_A_LETTER_FOR_YOU(1, "Yes! I have a letter for you.", WHAT_LIES_BELOW),
         RAT_BURGISS_SENT_ME(4, "Rat Burgiss sent me.", WHAT_LIES_BELOW),
         I_HAVE_THE_THINGS_YOU_WANTED(1, "I have the things you wanted!", WHAT_LIES_BELOW),
-//endregion
+        //endregion
         //region The Knight's Sword
         CLOSE(6, "redberry pie. They REALLY like redberry pie.", THE_KNIGHT_SWORD),
         CHAT(1, "Chat", THE_KNIGHT_SWORD),
@@ -512,11 +532,11 @@ public class Dialogs {
         //region Dead and Buried
         TALK_ABOUT_DEAD_AND_BURIED(1, "Talk about 'Dead and Buried'.", DEAD_AND_BURIED),
         CONCLUDE_INTERVIEW(4, "(Conclude interview.)", DEAD_AND_BURIED),
-        YES_I_VE_ASKED_ENOUGH_QUESTIONS(1, "Yes, I've asked enough questions.", DEAD_AND_BURIED),
+        YES_I_VE_ASKED_ENOUGH_QUESTIONS(1, "Yes. I've asked enough questions.", DEAD_AND_BURIED),
         YES_I_KNOW_THAT(1, "Yes, I know that.", DEAD_AND_BURIED),
         MUST_WE(1, "Must we?", DEAD_AND_BURIED),
         LEARDERSHIP_SKILLS(1, "Leadership skills.", DEAD_AND_BURIED),
-        YOUR_MAJESTY(1, "Your Majesty?", DEAD_AND_BURIED),
+        YOUR_MAJESTY(1, "Your majesty?", DEAD_AND_BURIED),
         WHY_DID_YOU_MARRY_THE_KING(1, "Why did you marry the king?", DEAD_AND_BURIED),
         COULDNT_YOU_HAVE_BEEN_A_WARRIIOR_QUEEN(1, "Couldn't you have been a warrior queen?", DEAD_AND_BURIED),
         SO_YOU_STARTED_WEARING_A_DISGUISE(1, "So you started wearing a disguise?", DEAD_AND_BURIED),
@@ -525,21 +545,23 @@ public class Dialogs {
         TALK_ABOUT_QUESTS(2, "Talk about quests.", DEAD_AND_BURIED),
         //endregion
         //region Ancient Awakening
+        TALK_ABOUT_QUEST(2, "Talk about quests.", ANCIENT_AWAKENING),
         TALK_ABOUT_ANCIENT_AWAKENING(2, "Talk about 'Ancient Awakening'.", ANCIENT_AWAKENING),
         I_DONT_NEED_TO_KNOW_YOUR_FAMILY_HISTORY(1, "I don't need to know your family history, Bill.", ANCIENT_AWAKENING),
         LETS_SKIP_THE_SMALL_TALK(1, "Let's skip the small talk.", ANCIENT_AWAKENING),
         I_NEED_YOU_TO_RETURN_TO_THE_FORT(1, "I need you to return to the fort.", ANCIENT_AWAKENING),
         YES_ANCIENT_AWAKENING(1, "Yes.", ANCIENT_AWAKENING),
-        WHO_ARE_YOU(1, "Who are you?", ANCIENT_AWAKENING),
-        WHAT_IS_THIS_PLACE(1, "What is this place?", ANCIENT_AWAKENING),
+        CAN_YOU_ACTIVATE_THIS_CONDUIT(1, "Can you activate the conduit?", ANCIENT_AWAKENING),
+        TELL_ME_ABOUT_TOMB(1, "Tell me about this tomb.", ANCIENT_AWAKENING),
         TELL_ME_ABOUT_VORKATH(1, "Tell me about Vorkath.", ANCIENT_AWAKENING),
+        //WHO_ARE_YOU(1, "Who are you?", ANCIENT_AWAKENING),
+        WHAT_IS_THIS_PLACE(1, "What is this place?", ANCIENT_AWAKENING),
         TELL_ME_ABOUT_THIS_TOMB(1, "Tell me about this tomb.", ANCIENT_AWAKENING),
         NONSENSE_ASTER_IS_DOING_FINE(1, "Nonsense! Aster is doing fine.", ANCIENT_AWAKENING),
         What_ARE_YOU_DOING_HERE(1, "What are you doing here?", ANCIENT_AWAKENING),
         IS_IT_SAFE_FOR_CIVILIANS_TO_BE_HERE(1, "Is it safe for civilians to be here?", ANCIENT_AWAKENING),
         I_WAS_JUST_CURIOUS(1, "I was just curious.", ANCIENT_AWAKENING),
         WE_NEED_TO_FOCUS(1, "We need to focus.", ANCIENT_AWAKENING),
-        CAN_YOU_ACTIVATE_THIS_CONDUIT(1, "Can you activate this conduit?", ANCIENT_AWAKENING),
         //endregion
         //region Battle of Forinthry
         TALK_ABOUT_BATTLE_OF_FORINTHRY(1, "Talk about 'Battle of Forinthry'.", BATTLE_OF_FORINTHRY),
@@ -617,8 +639,27 @@ public class Dialogs {
         SHE_DESERVES_IT_AFTER_BETRAYING_ME_LIKE_THIS(1, "She deserves it after betraying me like this.", MURDER_ON_THE_BORDER),
         ASK_HOW_ASTER_IS_FEELING(1, "Ask how Aster is feeling.", MURDER_ON_THE_BORDER),
         JUST_DON_T_NURDER_ANYONE(1, "Just don't murder anyone.", MURDER_ON_THE_BORDER),
+        SIMONLINK(1, "Link a clue to Simon.", MURDER_ON_THE_BORDER),
+        DUCHLINK(1, "Link a clue to Duchess Alba.", MURDER_ON_THE_BORDER),
+        BIANCALINK(1, "Link a clue to Bianca.", MURDER_ON_THE_BORDER),
+        IRISLINK(1, "Link a clue to Iris.", MURDER_ON_THE_BORDER),
+        PRINCESSLINK(1, "Link a clue to Princess.", MURDER_ON_THE_BORDER),
+        BIANCA(1, "That's unacceptable", MURDER_ON_THE_BORDER),
+        VIAL(1, "Take a vial.", MURDER_ON_THE_BORDER),
+        HOLLYHOCK(1, "Take hollyhock.", MURDER_ON_THE_BORDER),
+        LEAVEVIAL(1, "Leave.", MURDER_ON_THE_BORDER),
+        DECEND(1, "Bottom floor.", MURDER_ON_THE_BORDER),
+        TALKDUCHNESS(1, "Talk to Duchess Alba.", MURDER_ON_THE_BORDER),
+        TALKELLA(1, "Talk to Ellamaria.", MURDER_ON_THE_BORDER),
+        TALKRODNEY(1, "Talk to Rodney.", MURDER_ON_THE_BORDER),
+        LINKRODNEY(1, "Link a clue to Rodney.", MURDER_ON_THE_BORDER),
+        FRIENDS(1, "I heard you were once friends with Bianca.", MURDER_ON_THE_BORDER),
+
+
         //LINK_A_CLUE_TO_SIMON(2, "Link a clue to Simon.", MURDER_ON_THE_BORDER),
         TALK_ABOUT_MURDER_ON_THE_BORDER_1(1, "Yes, let's start the feast.", MURDER_ON_THE_BORDER),
+        MURDERDIALOG(1, "Say nothing.", MURDER_ON_THE_BORDER),
+
         //endregion
         //region Unwelcome Guests
 
@@ -637,9 +678,9 @@ public class Dialogs {
         TAKE_YOUR_TIME_NO_ONE_IS_RUSHING_YOU_TO_FEEL_BETTER(1, "Take your time. No one is rushing you to feel better.", IMP_CATCHER),
         I_VE_GOT_ALL_FOUR_BEADS(1, "I've got all four beads.", IMP_CATCHER),
         //endregion
-        
+
         //region Rune Mysteries
-        
+
         WHAT_S_HAPPENING_HERE(1, "What's happening here?", RUNE_MYSTERIES),
         WHAT_CAN_I_DO_TO_HELP(2, "What can I do to help?", RUNE_MYSTERIES),
         WHAT_DO_YOU_WANT_ME_TO_DO(3, "What do you want me to do?", RUNE_MYSTERIES),
@@ -703,7 +744,11 @@ public class Dialogs {
         REDBERRY_PIE("redberry pie. They REALLY like redberry pie."),
         BARAEK("If I were you I would talk to Baraek,"),
         BLACK_ARM("The ruthless and notorious Black Arm "),
-        PET_SHOP_OWNER("Is there anything else i can help you with?");
+        PET_SHOP_OWNER("Is there anything else i can help you with?"),
+        KING_RONALD("I've told you everything I know."),
+        DUTCHNESS("Let us leave the duchess alone,"),
+        RODNEY("Don't take my word for it. Ask Bianca.");
+
 
         private final String phrase;
 
@@ -731,13 +776,13 @@ public class Dialogs {
         ANCIENT_AWAKENING_INSTRUCTION("Have Armour and weapon equipped. Inventory fill with food before going to Ungael Site, 12 Waves are required manual intervention.", ANCIENT_AWAKENING),
 
         //Battle of Forinthry
-        BATTLE_OF_FORINTHRY_INSTRUCTION("Have Armour and weapon equipped. Inventory fill with food before going to fight with Vorkath", BATTLE_OF_FORINTHRY),
+        BATTLE_OF_FORINTHRY_INSTRUCTION("Requires Grove Gabin Tier 1, Botanist's Workbench Tier 1. Have Armour and weapon equipped. Inventory fill with food before going to fight with Vorkath", BATTLE_OF_FORINTHRY),
 
         //Requiem for a Dragon
         REQUIEM_FOR_A_DRAGON_INSTRUCTION("Talking to Archivist and Zemouregal is required manual intervention. Resotring becon chat option with tree of balance is required manual intervention. Ritual required manual intervention.", REQUIEM_FOR_A_DRAGON),
 
         //Murder on the Border
-        MURDER_ON_THE_BORDER_INSTRUCTION("Selecting the murder option required manual intervention and talk to Rodney during second half of the quest", MURDER_ON_THE_BORDER),
+        MURDER_ON_THE_BORDER_INSTRUCTION("Requires Town Hall Tier 1, Command Centre Tier 1, Chapel Tier 1.  Talk to Rodney during second half of the quest", MURDER_ON_THE_BORDER),
 
         //Imp Catcher
         IMP_CATCHER_INSTRUCTION("Race the imp at Air Ruins manual", IMP_CATCHER);
