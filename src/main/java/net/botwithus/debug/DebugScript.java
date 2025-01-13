@@ -104,6 +104,10 @@ public class DebugScript extends LoopingScript {
             case ANCIENT_AWAKENING -> AncientAwakening.quest();
             case BATTLE_OF_FORINTHRY -> BattleofForinthry.quest();
             case REQUIEM_FOR_A_DRAGON -> RequiemforaDragon.quest();
+            case ICTHLARIN_LITTLE_HELPER -> Icthlarinlittlehelper.quest();
+
+
+            
             default -> delay(100);
         }
 
@@ -234,6 +238,7 @@ public class DebugScript extends LoopingScript {
         IMP_CATCHER(72),
         RUNE_MYSTERIES(358),
         WHAT_LIES_BELOW(144),
+        ICTHLARIN_LITTLE_HELPER(287),
         THE_KNIGHT_SWORD(261),
         SHIELD_OF_ARRAV(63),
         FAMILY_CREST_INCOMPLETE(116),
