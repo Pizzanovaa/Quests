@@ -712,7 +712,21 @@ public class Dialogs {
         NEVER_MIND_THE_HISTORY_WHAT_DOES_THAT_MEAN_FOR_US(2, "Never mind the history, what does that mean for us?", RUNE_MYSTERIES),
         OKAY_SO_WHAT_DO_WE_DO(2, "Okay, so what do we do?", RUNE_MYSTERIES),
         OKAY_I_LL_DO_THAT_NOW(3, "Okay, I'll do that now.", RUNE_MYSTERIES),
-        IS_THERE_A_REWARD(3, "Is there a reward?", RUNE_MYSTERIES);
+        IS_THERE_A_REWARD(3, "Is there a reward?", RUNE_MYSTERIES),
+        //endregion
+
+        //region Icthlarin Little Helper
+        WHY_ICTHLARIN(1, "Why? [Icthlarin's Little Helper]", ICTHLARIN_LITTLE_HELPER),
+        TELL_ME_ABOUT_SOPHANEM(2, "Tell me about Sophanem. [Icthlarin's Little Helper]", ICTHLARIN_LITTLE_HELPER),
+        NUMBER_9(3, "9.", ICTHLARIN_LITTLE_HELPER),
+        I_NEED_HELP(1, "I need help.", ICTHLARIN_LITTLE_HELPER),
+        OKAY_THAT_SOUNDS_FAIR(2, "Okay, that sounds fair.", ICTHLARIN_LITTLE_HELPER),
+        TOTALLY_POSITIVE(3, "Totally positive.", ICTHLARIN_LITTLE_HELPER),
+        SURE_NO_PROBLEM(4, "Sure, no problem.", ICTHLARIN_LITTLE_HELPER),
+        ALRIGHT_I_LL_GET_THE_WOOD_FOR_YOU(2, "Alright, I'll get the wood for you.", ICTHLARIN_LITTLE_HELPER),
+        SCRAPE_IT_OUT(1, "Scrape it out.", ICTHLARIN_LITTLE_HELPER),
+        HIDE_THE_UNHOLY_SYMBOL(1, "Hide the unholy symbol in this sarcophagus.", ICTHLARIN_LITTLE_HELPER),
+        YES_RETURN_TO_HIGH_PRIEST(1, "Yes, return to the high priest in Sophanem.", ICTHLARIN_LITTLE_HELPER);
         //endregion
 
         private final int number;
