@@ -726,7 +726,22 @@ public class Dialogs {
         ALRIGHT_I_LL_GET_THE_WOOD_FOR_YOU(2, "Alright, I'll get the wood for you.", ICTHLARIN_LITTLE_HELPER),
         SCRAPE_IT_OUT(1, "Scrape it out.", ICTHLARIN_LITTLE_HELPER),
         HIDE_THE_UNHOLY_SYMBOL(1, "Hide the unholy symbol in this sarcophagus.", ICTHLARIN_LITTLE_HELPER),
-        YES_RETURN_TO_HIGH_PRIEST(1, "Yes, return to the high priest in Sophanem.", ICTHLARIN_LITTLE_HELPER);
+        YES_RETURN_TO_HIGH_PRIEST(1, "Yes, return to the high priest in Sophanem.", ICTHLARIN_LITTLE_HELPER),
+        //endregion
+
+        //region Nature Spirit
+        TALK_ABOUT_SOMETHING_ELSE_1(2, "Talk about something else.", NATURE_SPIRIT),
+        IS_THERE_ANYTHING_ELSE_INTERESTING_TO_DO_AROUND_HERE(2, "Is there anything else interesting to do around here?", NATURE_SPIRIT),
+        YES_I_LL_GO_AND_LOOK_FOR_HIM(4, "Yes, I'll go and look for him.", NATURE_SPIRIT),
+        YES_I_M_SURE(1, "Yes, I'm sure.", NATURE_SPIRIT),
+        HOW_LONG_HAVE_YOU_BEEN_A_GHOST(2, "How long have you been a ghost?", NATURE_SPIRIT),
+        SO_WHAT_S_YOUR_PLAN(2, "So, what's your plan?", NATURE_SPIRIT),
+        HOW_CAN_I_HELP(4, "How can I help?", NATURE_SPIRIT),
+        TALK_ABOUT_SOMETHING_ELSE_2(2, "Talk about something else.", NATURE_SPIRIT),
+        YES_PLEASE_1(1, "Yes, please.", NATURE_SPIRIT),
+        I_THINK_I_VE_SOLVED_THE_PUZZLE(3, "I think I've solved the puzzle!", NATURE_SPIRIT),
+        YES_1(1, "Yes.", NATURE_SPIRIT),
+        OK_THANKS(4, "Ok, thanks.", NATURE_SPIRIT);
         //endregion
 
         private final int number;
@@ -799,7 +814,9 @@ public class Dialogs {
         MURDER_ON_THE_BORDER_INSTRUCTION("Requires Town Hall Tier 1, Command Centre Tier 1, Chapel Tier 1.  Talk to Rodney during second half of the quest", MURDER_ON_THE_BORDER),
 
         //Imp Catcher
-        IMP_CATCHER_INSTRUCTION("Race the imp at Air Ruins manual", IMP_CATCHER);
+        IMP_CATCHER_INSTRUCTION("Race the imp at Air Ruins manual", IMP_CATCHER),
+
+        Icthlarin_INSTRUCTION("Pramid walk is required manual intervention", ICTHLARIN_LITTLE_HELPER);
 
         private final String text;
         private final DebugScript.Quest quest;
