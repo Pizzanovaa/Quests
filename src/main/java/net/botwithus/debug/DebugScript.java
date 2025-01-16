@@ -106,8 +106,8 @@ public class DebugScript extends LoopingScript {
             case REQUIEM_FOR_A_DRAGON -> RequiemforaDragon.quest();
             case ICTHLARIN_LITTLE_HELPER -> Icthlarinlittlehelper.quest();
             case NATURE_SPIRIT -> naturespirit.quest();
-
-
+            case IN_SEARCH_OF_THE_MYREQUE -> InSearchoftheMyreque.quest();
+            case IN_AID_OF_THE_MYREQUE -> InAidoftheMyreque.quest();
             
             default -> delay(100);
         }
@@ -246,6 +246,8 @@ public class DebugScript extends LoopingScript {
         TOMES_OF_WARLOCK(497),
         STOLEN_HEARTS(355),
         NATURE_SPIRIT(133),
+        IN_SEARCH_OF_THE_MYREQUE(283),
+        IN_AID_OF_THE_MYREQUE(21),
         THE_GOLEM(286),
         RUNE_MYTHOS(494),
         GHOSTS_AHOY(82),

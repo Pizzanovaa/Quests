@@ -203,6 +203,10 @@ public class Dialogs {
                 return VarManager.getVarbitValue(52689) == 155;
             case TALKRODNEY:
                 return VarManager.getVarbitValue(52699) == 191;
+            case I_D_LIKE_TO_HELP_FIX_UP_THE_TOWN:
+                 return !Dialog.getTitle().contains("SELECT AN OPTION");
+            case OK_THANKS_2:         
+                return !Dialog.getTitle().contains("SELECT AN OPTION");
             default:
                 return false; // Default case: do not skip
         }
@@ -741,7 +745,40 @@ public class Dialogs {
         YES_PLEASE_1(1, "Yes, please.", NATURE_SPIRIT),
         I_THINK_I_VE_SOLVED_THE_PUZZLE(3, "I think I've solved the puzzle!", NATURE_SPIRIT),
         YES_1(1, "Yes.", NATURE_SPIRIT),
-        OK_THANKS(4, "Ok, thanks.", NATURE_SPIRIT);
+        OK_THANKS(4, "Ok, thanks.", NATURE_SPIRIT),
+        //endregion
+
+        //region In Search of the Myreque
+        WHY_DO_THEY_NEED_HELP(2, "Why do they need help? Are they in trouble?", IN_SEARCH_OF_THE_MYREQUE),
+        MAYBE_I_COULD_HELP_YOU_OUT_HERE(4, "Perhaps I could help you out here.", IN_SEARCH_OF_THE_MYREQUE),
+        YES_I_LL_DO_IT(4, "Yes, I'll do it!", IN_SEARCH_OF_THE_MYREQUE),
+        WELL_I_GUESS_THEY_LL_JUST_DIE_WITHOUT_WEAPONS(2, "Well, I guess they'll just die without weapons.", IN_SEARCH_OF_THE_MYREQUE),
+        RESOURCEFUL_ENOUGH_TO_GET_THEIR_OWN_STEEL_WEAPONS(2, "Resourceful enough to get their own steel weapons?", IN_SEARCH_OF_THE_MYREQUE),
+        IF_YOU_DON_T_TELL_ME_THEIR_DEATHS_ARE_ON_YOUR_HEAD(3, "If you don't tell me, their deaths are on your head!", IN_SEARCH_OF_THE_MYREQUE),
+        WHAT_KIND_OF_A_MAN_ARE_YOU_TO_SAY_THAT_YOU_DON_T_CARE(3, "What kind of a man are you to say that you don't care?", IN_SEARCH_OF_THE_MYREQUE),
+        GIVE_WOODEN_PLANKS_TO_CYREG(1, "Give wooden planks to Cyreg.", IN_SEARCH_OF_THE_MYREQUE),
+        I_VE_COME_TO_HELP_THE_MYREQUE_I_VE_BRINGED_WEAPONS(1, "I've come to help the Myreque. I've brought weapons.", IN_SEARCH_OF_THE_MYREQUE),
+        OK_THANKS_1(5, "Ok, thanks.", IN_SEARCH_OF_THE_MYREQUE),
+        HOW_DO_I_GET_OUT_OF_HERE(3, "How do I get out of here?", IN_SEARCH_OF_THE_MYREQUE),
+        //endregion
+
+        //region In Aid of the Myreque
+        WANT_TO_JOIN_YOUR_ORGANISATION(1, "I want to join your organisation.", IN_AID_OF_THE_MYREQUE),
+        OK_TELL_ME_THIS_INFORMATION_YOU_HAVE_TO_IMPART(2, "Ok, tell me this information you have to impart.", IN_AID_OF_THE_MYREQUE),
+        CAN_YOU_TELL_ME_ABOUT_THE_JOB(1, "Can you tell me about the job?", IN_AID_OF_THE_MYREQUE),
+        OK_I_LL_DO_THE_JOB(1, "Ok, I'll do the job.", IN_AID_OF_THE_MYREQUE),
+        ARE_THERE_ANY_OUT_OF_THE_WAY_PLACES_IN_HERE(4, "Are there any 'out of the way' places in here?", IN_AID_OF_THE_MYREQUE),
+        OK_THANKS_2(5, "Ok, thanks!", IN_AID_OF_THE_MYREQUE),
+        I_D_LIKE_TO_HELP_FIX_UP_THE_TOWN(3, "I'd like to help fix up the town.", IN_AID_OF_THE_MYREQUE),
+        WHAT_SHOULD_I_DO_NOW(4, "What should I do now?", IN_AID_OF_THE_MYREQUE),
+        DO_YOU_FANCY_THE_JOB(3, "Do you fancy the job?", IN_AID_OF_THE_MYREQUE),
+        YES_2(1, "Yes", IN_AID_OF_THE_MYREQUE),
+        I_FOUND_OUT_SOME_THINGS_ABOUT_EFARITAY(2, "I found out some things about Efaritay.", IN_AID_OF_THE_MYREQUE),
+        IS_THERE_SOMETHING_I_MIGHT_GET_MORE_INFORMATION_ABOUT_IVANDIS(4, "Is there somewhere that I might get more information about Ivandis?", IN_AID_OF_THE_MYREQUE),
+        THE_LIVES_OF_THOSE_PITIFUL_FEW_LEFT_IN_MORYTANIA_COULD_REST_ON_THIS(3, "The lives of those pitiful few left in Morytania could rest on this!", IN_AID_OF_THE_MYREQUE),
+        VELAF_TOLD_ME_ABOUT_IVANDIS(1, "Veliaf told me about Ivandis.", IN_AID_OF_THE_MYREQUE),
+        I_HAVE_BROUGHT_YOU_THE_ROD_OF_IVANDIS(1, "I have brought you the Rod of Ivandis!", IN_AID_OF_THE_MYREQUE),
+        YES_I_VE_COME_TO_GIVE_THE_ROD_OF_IVANDIS_TO_YOU(1, "Yes, I've come to give the Rod of Ivandis to you!", IN_AID_OF_THE_MYREQUE);
         //endregion
 
         private final int number;
@@ -816,7 +853,13 @@ public class Dialogs {
         //Imp Catcher
         IMP_CATCHER_INSTRUCTION("Race the imp at Air Ruins manual", IMP_CATCHER),
 
-        Icthlarin_INSTRUCTION("Pramid walk is required manual intervention", ICTHLARIN_LITTLE_HELPER);
+        Icthlarin_INSTRUCTION("Pramid walk is required manual intervention", ICTHLARIN_LITTLE_HELPER),
+
+        //In Search of the Myreque
+        IN_SEARCH_OF_THE_MYREQUE_INSTRUCTION("Some dialogue is required manual intervention", IN_SEARCH_OF_THE_MYREQUE),
+
+        //In Aid of the Myreque
+        IN_AID_OF_THE_MYREQUE_INSTRUCTION("Start quest with 2 or 3 food and 5 buckets in inventory. Keep all required Items in Bank. Talk to Polmafi, Radigad and then Ivan and play temmple tracking the game manually route 1", IN_AID_OF_THE_MYREQUE);
 
         private final String text;
         private final DebugScript.Quest quest;
