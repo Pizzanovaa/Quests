@@ -47,19 +47,35 @@ public class InSearchoftheMyreque {
     static Area.Circular startarea = new Area.Circular(startcord, 10);
     static Coordinate CyregPaddlehorn = new Coordinate(3522, 3284, 0);
     static Area.Circular CyregPaddlehornarea = new Area.Circular(CyregPaddlehorn, 10);
-    static Coordinate log = new Coordinate(3476,3456,0);
+    static Coordinate log = new Coordinate(3476, 3456, 0);
     static Area.Circular logarea = new Area.Circular(log, 10);
     static Coordinate curpilefyodcord = new Coordinate(3507, 3440, 0);
     static Area.Circular curpilefyodarea = new Area.Circular(curpilefyodcord, 10);
     static Coordinate searchcoord = new Coordinate(3480, 9836, 0);
     static Area.Circular searcharea = new Area.Circular(searchcoord, 10);
+    static Coordinate bridgeskip1 = new Coordinate(3450, 3381, 0);
+    static Area.Circular bridgeskiper = new Area.Circular(bridgeskip1, 10);
+    static Coordinate bridge2 = new Coordinate(3502, 3423, 0);
+    static Area.Circular bridgeskiper2 = new Area.Circular(bridge2, 10);
+    static Coordinate bridgestep1 = new Coordinate(3502, 3427, 0);
+    static Coordinate bridgestep2 = new Coordinate(3502, 3428, 0);
+    static Coordinate bridgestep3 = new Coordinate(3502, 3429, 0);
+    static Coordinate bridgestep4 = new Coordinate(3502, 3430, 0);
+    static Coordinate hideout = new Coordinate(3508,9837,2);
+    static Area.Circular hideoutarea = new Area.Circular(hideout, 10);
+    static Coordinate hideout2 = new Coordinate(3508,9837,0);
+    static Area.Circular hideoutarea2 = new Area.Circular(hideout2, 10);
+
+
+
+
+    static boolean bridgeskip = false;
 
     static int memecounter = 1;
 
     public static void quest() {
         int QuestVarp = VarManager.getVarpValue(2696);
         player = Client.getLocalPlayer().getServerCoordinate();
-
 
 
         if (isDialogOpen()) {
@@ -82,215 +98,257 @@ public class InSearchoftheMyreque {
 
         } else {
             switch (QuestVarp) {
+                //13381 bridge1
+                //13382 bridge2
+                //13383 bridge3
                 case 5:
-                Item druidpouch = InventoryItemQuery.newQuery(93).name("Druid pouch").results().first();
-                int progress = druidpouch.getStackSize();
-                //ScriptConsole.println("Progress: " + progress);
-                
-                if(!logarea.contains(player) && progress < 5) {
-                    DebugScript.moveTo(log);
-                } 
-                else if(progress >= 5)
-                    {
-                        if(!CyregPaddlehornarea.contains(player)) {
-                            DebugScript.moveTo(CyregPaddlehorn);
+                    if(VarManager.getVarbitValue(13383) != 1) { // repair bridge
+                        if (bridgeskiper.contains(player) && !bridgeskip) {
+                            bridgeskip = true;
+                        } else if (!bridgeskip && !bridgeskiper.contains(player)) {
+                            DebugScript.moveTo(bridgeskip1);
+                        } else if (bridgeskip && !bridgeskiper2.contains(player)) {
+                            DebugScript.moveTo(bridge2); //Scuffed method to nav while avoiding the bridge to get to the correct side.
+                        } else if (bridgeskiper2.contains(player)) {
+
+
+                            if (!bridgestep1.equals(player) && !bridgestep2.equals(player) && !bridgestep3.equals(player) && !bridgestep4.equals(player)) {
+                                SceneObject tree = SceneObjectQuery.newQuery().name("Tree").option("Climb").results().nearest();
+                                if (tree != null) {
+                                    tree.interact("Climb");
+                                    delay(RandomGenerator.nextInt(600, 800));
+                                }
+                            } else {
+                                if (VarManager.getVarbitValue(13381) == 0) {
+                                    SceneObject step1 = SceneObjectQuery.newQuery().name("Rope bridge").option("Repair").on(bridgestep2).results().nearest();
+                                    if (step1 != null) {
+                                        step1.interact("Repair");
+                                        delay(RandomGenerator.nextInt(600, 800));
+                                    }
+                                } else if (VarManager.getVarbitValue(13382) == 0) {
+                                    SceneObject step1 = SceneObjectQuery.newQuery().name("Rope bridge").option("Repair").on(bridgestep3).results().nearest();
+                                    if (step1 != null) {
+                                        step1.interact("Repair");
+                                        delay(RandomGenerator.nextInt(600, 800));
+                                    }
+                                }else if (VarManager.getVarbitValue(13383) == 0) {
+                                    SceneObject step1 = SceneObjectQuery.newQuery().name("Rope bridge").option("Repair").on(bridgestep4).results().nearest();
+                                    if (step1 != null) {
+                                        step1.interact("Repair");
+                                        delay(RandomGenerator.nextInt(600, 800));
+                                    }
+                                }
+                            }
+                        }
+                    }else {
+                        //Scuffed bridge handling...
+
+                        if(bridgestep4.equals(player)){
+                            SceneObject step1 = SceneObjectQuery.newQuery().name("Rope bridge").option("Walk-here").on(bridgestep3).results().nearest();
+                            if (step1 != null) {
+                                step1.interact("Walk-here");
+                                delay(RandomGenerator.nextInt(600, 800));
+                            }
+                            return;
+                        }else if(bridgestep3.equals(player)){
+                            SceneObject step1 = SceneObjectQuery.newQuery().name("Rope bridge").option("Walk-here").on(bridgestep2).results().nearest();
+                            if (step1 != null) {
+                                step1.interact("Walk-here");
+                                delay(RandomGenerator.nextInt(600, 800));
+                            }
+                            return;
+                        }else if(bridgestep2.equals(player)){
+                            SceneObject step1 = SceneObjectQuery.newQuery().name("Rope bridge").option("Walk-here").on(bridgestep1).results().nearest();
+                            if (step1 != null) {
+                                step1.interact("Walk-here");
+                                delay(RandomGenerator.nextInt(600, 800));
+                            }
+                            return;
+                        }else if(bridgestep1.equals(player)){
+                            SceneObject tree = SceneObjectQuery.newQuery().name("Tree").option("Climb").results().nearest();
+                            if (tree != null) {
+                                tree.interact("Climb");
+                                delay(RandomGenerator.nextInt(600, 800));
+                            }
+                            return;
+                        }
+                        Item druidpouch = InventoryItemQuery.newQuery(93).name("Druid pouch").results().first();
+                        int progress = druidpouch.getStackSize();
+                        //ScriptConsole.println("Progress: " + progress);
+                        if (!logarea.contains(player) && progress < 5) { //Nav will try use bridge but wont work if not repaired
+                            DebugScript.moveTo(log);
+                        } else if (progress >= 5) {
+                            if (!CyregPaddlehornarea.contains(player)) {
+                                DebugScript.moveTo(CyregPaddlehorn);
+                            } else {
+                                talktoCyregPaddlehorn();
+                            }
                         } else {
-                            talktoCyregPaddlehorn();
+                            SceneObject fungionlog = SceneObjectQuery.newQuery().name("Fungi on log").results().first();
+
+                            if (fungionlog != null) {
+                                fungionlog.interact("Pick");
+                                delay(RandomGenerator.nextInt(600, 800));
+                            } else if (Backpack.getCount("Mort myre fungus") < 6 && fungionlog == null && progress < 6) {
+                                Backpack.interact("Silver sickle (b)", "Bloom");
+                                delay(RandomGenerator.nextInt(600, 800));
+                            } else if (progress < 6) {
+                                Backpack.interact("Druid pouch", "Fill");
+                                delay(RandomGenerator.nextInt(600, 800));
+                            }
+
                         }
                     }
-                    else {
-                        SceneObject fungionlog = SceneObjectQuery.newQuery().name("Fungi on log").results().first();
-    
-                        if(fungionlog != null) {
-                            fungionlog.interact("Pick");
-                            delay(RandomGenerator.nextInt(600, 800));
-                        }
-                        else if(Backpack.getCount("Mort myre fungus") < 6 && fungionlog == null && progress < 6){
-                            Backpack.interact("Silver sickle (b)", "Bloom");
-                            delay(RandomGenerator.nextInt(600, 800));
-                        }
-                        else if(progress < 6)
-                        {
-                            Backpack.interact("Druid pouch", "Fill");
-                            delay(RandomGenerator.nextInt(600, 800));
-                        }
-                        
-                    }    
-                break;
+                    break;
                 case 20:
-                SceneObject swampboat = SceneObjectQuery.newQuery().name("Swamp Boat").results().first();
-                if(swampboat != null) {
-                    swampboat.interact("Board");
-                    delay(RandomGenerator.nextInt(600, 800));
 
-                    if(Dialogs.isDialogOpen()) {
-                        Dialogs.dialog1188pick(1);
+                    SceneObject swampboat = SceneObjectQuery.newQuery().name("Swamp Boat").results().first();
+                    if (swampboat != null) {
+                        swampboat.interact("Board");
                         delay(RandomGenerator.nextInt(600, 800));
+
+                        if (Dialogs.isDialogOpen()) {
+                            Dialogs.dialog1188pick(1);
+                            delay(RandomGenerator.nextInt(600, 800));
+                        }
                     }
-                }
-                break;
+                    break;
                 case 25:
-                if(!curpilefyodarea.contains(player)) {
-                    DebugScript.moveTo(curpilefyodcord);
-                } else {
-                    talktoCurpileFyod();
-                }
-                // SceneObject tree = SceneObjectQuery.newQuery().name("Tree").option("Climb").results().first();
-                // SceneObject ropebridge = SceneObjectQuery.newQuery().name("Rope bridge").option("Repair").results().first();
-                // if(tree != null && ropebridge != null) {
-                //     tree.interact("Climb");
-                //     delay(RandomGenerator.nextInt(600, 800));
-                //     ropebridge.interact("Repair");
-                //     delay(RandomGenerator.nextInt(600, 800));
-                // }
-                
-                break;
+                    //Scuffed bridge handling...
+                    if(bridgestep4.equals(player)){
+                        SceneObject tree = SceneObjectQuery.newQuery().name("Tree").option("Climb").results().nearest();
+                        if (tree != null) {
+                            tree.interact("Climb");
+                            delay(RandomGenerator.nextInt(600, 800));
+                        }
+                        return;
+                    }else if(bridgestep3.equals(player)){
+                        SceneObject step1 = SceneObjectQuery.newQuery().name("Rope bridge").option("Walk-here").on(bridgestep4).results().nearest();
+                        if (step1 != null) {
+                            step1.interact("Walk-here");
+                            delay(RandomGenerator.nextInt(600, 800));
+                        }
+                        return;
+                    }else if(bridgestep2.equals(player)){
+                        SceneObject step1 = SceneObjectQuery.newQuery().name("Rope bridge").option("Walk-here").on(bridgestep3).results().nearest();
+                        if (step1 != null) {
+                            step1.interact("Walk-here");
+                            delay(RandomGenerator.nextInt(600, 800));
+                        }
+                        return;
+                    }else if(bridgestep1.equals(player)){
+                        SceneObject step1 = SceneObjectQuery.newQuery().name("Rope bridge").option("Walk-here").on(bridgestep2).results().nearest();
+                        if (step1 != null) {
+                            step1.interact("Walk-here");
+                            delay(RandomGenerator.nextInt(600, 800));
+                        }
+                        return;
+                    }
+                    if (!curpilefyodarea.contains(player)) {
+                        DebugScript.moveTo(curpilefyodcord);
+                    } else {
+                        talktoCurpileFyod();
+                    }
+
+
+                    break;
                 case 52:
-                if(Interfaces.isOpen(1188))
-                {
-                    Component interface1188 = ComponentQuery.newQuery(1188).componentIndex(3).subComponentIndex(14).results().first();
-                    if(interface1188 != null && interface1188.getText().equals("Who is the youngest member of the Myreque?")) {
-                        Dialog.interact("Ivan Strom.");
-                        delay(RandomGenerator.nextInt(600, 800));
+                    if (!curpilefyodarea.contains(player)) {
+                        DebugScript.moveTo(curpilefyodcord);
+                    } else {
+                        talktoCurpileFyod();
                     }
-                    else if(interface1188 != null && interface1188.getText().equals("Name the only female member of the Myreque.")) {
-                        Dialog.interact("Sani Piliu.");
-                        delay(RandomGenerator.nextInt(600, 800));
-                    }
-                    else if(interface1188 != null && interface1188.getText().equals("Who is the leader of the Myreque?")) {
-                        Dialog.interact("Veliaf Hurtz.");
-                        delay(RandomGenerator.nextInt(600, 800));
-                    }
-                    else if(interface1188 != null && interface1188.getText().equals("What family is rumoured to rule over Morytania?")) {
-                        Dialog.interact("Drakan.");
-                        delay(RandomGenerator.nextInt(600, 800));
-                    }
-                    else if(interface1188 != null && interface1188.getText().equals("Which member of the Myreque was originally a scholar?")) {
-                        Dialog.interact("Polmafi Ferdygris.");
-                        delay(RandomGenerator.nextInt(600, 800));
-                    }
-                    else if(interface1188 != null && interface1188.getText().equals("What does Myreque mean?")) {
-                        Dialog.interact("Hidden in Myre.");
-                        delay(RandomGenerator.nextInt(600, 800));
-                    }
-                    else if(interface1188 != null && interface1188.getText().equals("What is the boatman's name?")) {
-                        Dialog.interact("Cyreg Paddlehorn..");
-                        delay(RandomGenerator.nextInt(600, 800));
-                    }
-                    else if(interface1188 != null && interface1188.getText().equals("Who was previously a scholar?")) {
-                        Dialog.interact("Polmafi Ferdygris.");
-                        delay(RandomGenerator.nextInt(600, 800));
-                    }
-                }
-                break;
+                    break;
                 case 55:
-                SceneObject woodendoors = SceneObjectQuery.newQuery().name("Wooden doors").results().first();
-                if(woodendoors != null) {
-                    woodendoors.interact("Open");
-                    delay(RandomGenerator.nextInt(600, 800));
-                }
-                break;
+                    SceneObject woodendoors = SceneObjectQuery.newQuery().name("Wooden doors").results().first();
+                    if (woodendoors != null) {
+                        woodendoors.interact("Open");
+                        delay(RandomGenerator.nextInt(600, 800));
+                    }
+                    break;
                 case 60:
-                 
-                Npc VeliafHurtz = NpcQuery.newQuery().name("Veliaf Hurtz").results().first();
-                // if(VeliafHurtz != null) {
-                //     VeliafHurtz.interact("Talk-to");
-                //     delay(RandomGenerator.nextInt(600, 800));
-                // }
-                SceneObject stalagmite = SceneObjectQuery.newQuery().name("Stalagmite").results().first();
-                if(stalagmite != null && VeliafHurtz == null) {
-                    stalagmite.interact("Squeeze-past");
-                    delay(RandomGenerator.nextInt(600, 800));
 
-                 SceneObject caveentrance = SceneObjectQuery.newQuery().name("Cave entrance").results().nearest();
-                if(caveentrance != null) {
-                    caveentrance.interact("Enter");
-                    delay(RandomGenerator.nextInt(600, 800));
-                }
-                }
-                else if(VeliafHurtz != null)
-                {
-                    VeliafHurtz.interact("Talk-to");
-                    delay(RandomGenerator.nextInt(600, 800));
-                }
-                break;
+
+                    Npc VeliafHurtz = NpcQuery.newQuery().name("Veliaf Hurtz").results().first();
+
+                    SceneObject stalagmite = SceneObjectQuery.newQuery().name("Stalagmite").option("Squeeze-past").results().first();
+                    if (stalagmite != null && !hideoutarea.contains(player)) {
+                        stalagmite.interact("Squeeze-past");
+                        delay(RandomGenerator.nextInt(600, 800));
+                    } else if (VeliafHurtz != null) {
+                        VeliafHurtz.interact("Talk-to");
+                        delay(RandomGenerator.nextInt(600, 800));
+                    }
+                    break;
                 case 65:
-                if(memecounter == 1) {
-                    talktoIvanStrom();
-                    memecounter++;
-                }
-                else if(memecounter == 2) {
-                    talktoPolmafiFerdygris();
-                    memecounter++;
-                }
-                else if(memecounter == 3) {
-                    talktoHaroldEvans();
-                    memecounter++;
-                }
-                else if(memecounter == 4) {
-                    talktoRadigadPonfit();
-                    memecounter++;
-                }
-                else if(memecounter == 5) {
-                    talktoSaniPiliu();
-                    memecounter++;
-                }
-                else if(memecounter == 6) {
-                    talktoVeliafHurtz();
-                    memecounter++;
-                }
-                break;
+                    int progress = VarManager.getVarbitValue(13379); // Varbit increases when talking to each person
+                    if (progress == 0) {
+                        talktoIvanStrom();
+                    } else if (progress == 16) {
+                        talktoPolmafiFerdygris();
+                    } else if (progress == 24) {
+                        talktoHaroldEvans();
+                    } else if (progress == 26) {
+                        talktoRadigadPonfit();
+                    } else if (progress == 30) {
+                        talktoSaniPiliu();
+                    } else if (progress == 31) {
+                        talktoVeliafHurtz();
+                    }
+                    break;
                 case 85:
-                if(Interfaces.isOpen(1188)) {
-                    Dialogs.dialog1188pick(3);
-                    delay(RandomGenerator.nextInt(600, 800));
-                    
-                }
-                talktoVeliafHurtz();
 
-                break;
+                    talktoVeliafHurtz();
+
+                    break;
                 case 90:
-                if(!searcharea.contains(player)) {
-                    DebugScript.moveTo(searchcoord);
-                }
-                // Npc VeliafHurtz1 = NpcQuery.newQuery().name("Veliaf Hurtz").results().first();
-                // SceneObject woodendoors1 = SceneObjectQuery.newQuery().name("Wooden doors").results().first();
-                // SceneObject caveentrance = SceneObjectQuery.newQuery().name("Cave entrance").results().nearest();
-                // if(caveentrance != null && player.distanceTo()) {
-                //     caveentrance.interact("Enter");
-                //     delay(RandomGenerator.nextInt(600, 800));
-                // }
-                // else if(woodendoors1 != null) {
-                //     woodendoors1.interact("Open");
-                //     delay(RandomGenerator.nextInt(600, 800));
-                // }
-                break;
+                    SceneObject wall2 = SceneObjectQuery.newQuery().name("Wall").option("Search").hidden(false).results().nearest();
+
+                    if(hideoutarea2.contains(player)){
+                        SceneObject entrance = SceneObjectQuery.newQuery().name("Cave entrance").results().nearest();
+                        if(entrance != null){
+                            entrance.interact("Enter");
+                            delay(RandomGenerator.nextInt(600, 800));
+                        }
+                        return;
+                    }else if(player.getY() <= 9836 && wall2 != null) {
+                            wall2.interact("Search");
+                            delay(RandomGenerator.nextInt(600, 800));
+                        return;
+                    }
+                    break;
                 case 95:
-                SceneObject ladder = SceneObjectQuery.newQuery().name("Ladder").option("Climb-up").results().first();
-                if(ladder != null) {
-                    ladder.interact("Climb-up");
-                    delay(RandomGenerator.nextInt(600, 800));
-                }
-                break;
+                    SceneObject wall = SceneObjectQuery.newQuery().name("Wall").option("Search").hidden(false).results().nearest();
+
+                    if(player.getY() <= 9836 && wall != null) {
+                            wall.interact("Search");
+                            delay(RandomGenerator.nextInt(600, 800));
+                        return;
+                    }else {
+                        SceneObject ladder = SceneObjectQuery.newQuery().name("Ladder").option("Climb-up").results().first();
+                        if (ladder != null) {
+                            ladder.interact("Climb-up");
+                            delay(RandomGenerator.nextInt(600, 800));
+                        }
+                    }
+                    break;
                 case 97:
-                talktoStranger();
-                break;
+                    talktoStranger();
+                    break;
             }
         }
     }
 
 
-    public static void talktovanstromklause()
-    {
+    public static void talktovanstromklause() {
         Npc vanstromklause = NpcQuery.newQuery().name("Vanstrom Klause").results().first();
         if (vanstromklause != null) {
             vanstromklause.interact("Talk-to");
             delay(RandomGenerator.nextInt(600, 800));
         }
     }
-    
-    public static void talktoCyregPaddlehorn()
-    {
+
+    public static void talktoCyregPaddlehorn() {
         Npc CyregPaddlehorn = NpcQuery.newQuery().name("Cyreg Paddlehorn").results().first();
         if (CyregPaddlehorn != null) {
             CyregPaddlehorn.interact("Talk-to");
@@ -298,8 +356,7 @@ public class InSearchoftheMyreque {
         }
     }
 
-    public static void talktoCurpileFyod()
-    {
+    public static void talktoCurpileFyod() {
         Npc CurpileFyod = NpcQuery.newQuery().name("Curpile Fyod").results().first();
         if (CurpileFyod != null) {
             CurpileFyod.interact("Talk-to");
@@ -307,8 +364,7 @@ public class InSearchoftheMyreque {
         }
     }
 
-    public static void talktoVeliafHurtz()
-    {
+    public static void talktoVeliafHurtz() {
         Npc VeliafHurtz = NpcQuery.newQuery().name("Veliaf Hurtz").results().first();
         if (VeliafHurtz != null) {
             VeliafHurtz.interact("Talk-to");
@@ -316,8 +372,7 @@ public class InSearchoftheMyreque {
         }
     }
 
-    public static void talktoIvanStrom()
-    {
+    public static void talktoIvanStrom() {
         Npc IvanStrom = NpcQuery.newQuery().name("Ivan Strom").results().first();
         if (IvanStrom != null) {
             IvanStrom.interact("Talk-to");
@@ -325,8 +380,7 @@ public class InSearchoftheMyreque {
         }
     }
 
-    public static void talktoPolmafiFerdygris()
-    {
+    public static void talktoPolmafiFerdygris() {
         Npc PolmafiFerdygris = NpcQuery.newQuery().name("Polmafi Ferdygris").results().first();
         if (PolmafiFerdygris != null) {
             PolmafiFerdygris.interact("Talk to");
@@ -334,8 +388,7 @@ public class InSearchoftheMyreque {
         }
     }
 
-    public static void talktoSaniPiliu()
-    {
+    public static void talktoSaniPiliu() {
         Npc SaniPiliu = NpcQuery.newQuery().name("Sani Piliu").results().first();
         if (SaniPiliu != null) {
             SaniPiliu.interact("Talk-to");
@@ -343,8 +396,7 @@ public class InSearchoftheMyreque {
         }
     }
 
-    public static void talktoHaroldEvans()
-    {
+    public static void talktoHaroldEvans() {
         Npc HaroldEvans = NpcQuery.newQuery().name("Harold Evans").results().first();
         if (HaroldEvans != null) {
             HaroldEvans.interact("Talk-to");
@@ -352,8 +404,7 @@ public class InSearchoftheMyreque {
         }
     }
 
-    public static void talktoRadigadPonfit()
-    {
+    public static void talktoRadigadPonfit() {
         Npc RadigadPonfit = NpcQuery.newQuery().name("Radigad Ponfit").results().first();
         if (RadigadPonfit != null) {
             RadigadPonfit.interact("Talk to");
@@ -361,8 +412,7 @@ public class InSearchoftheMyreque {
         }
     }
 
-    public static void talktoStranger()
-    {
+    public static void talktoStranger() {
         Npc Stranger = NpcQuery.newQuery().name("Stranger").results().first();
         if (Stranger != null) {
             Stranger.interact(NPCAction.NPC1);
