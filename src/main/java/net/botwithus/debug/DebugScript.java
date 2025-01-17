@@ -108,7 +108,8 @@ public class DebugScript extends LoopingScript {
             case NATURE_SPIRIT -> naturespirit.quest();
             case IN_SEARCH_OF_THE_MYREQUE -> InSearchoftheMyreque.quest();
             case IN_AID_OF_THE_MYREQUE -> InAidoftheMyreque.quest();
-            
+            case PRIEST_IN_PERIL -> PriestInPeril.quest();
+
             default -> delay(100);
         }
 
@@ -232,6 +233,7 @@ public class DebugScript extends LoopingScript {
         VIOLET_IS_BLUE_TOO(453),
         BLOOD_PACT(335),
         RESTLESS_GHOST(27),
+        PRIEST_IN_PERIL(276),
         COOKS_ASSISTANT(257),
         MYTHS_OF_THE_WHITE_LANDS(74),
        // MYTHS_OF_THE_WHITE_LANDS(74),
@@ -279,7 +281,6 @@ public class DebugScript extends LoopingScript {
         REQUIEM_FOR_A_DRAGON(511),
         MURDER_ON_THE_BORDER(490),
         UNWELCOME_GUESTS(491),
-
 
         TEST_DONTSELECT(135);
 

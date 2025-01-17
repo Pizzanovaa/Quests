@@ -223,11 +223,15 @@ public class DebugGraphicsContext extends ScriptGraphicsContext {
         }
         skillRequirementsText = skillReqBuilder.toString();
 
-        // Update progress varbits
+        // Update progress varbits and varps
         StringBuilder progressBuilder = new StringBuilder("Progress:\n");
         if (questType != null) {
+            boolean hasProgressData = false;
+
+            // Check progress varbits
             int[][] varbits = questType.progressVarbits();
             if (varbits != null && varbits.length > 0) {
+                hasProgressData = true;
                 for (int[] varbit : varbits) {
                     if (varbit.length == 3) {
                         int currentValue = VarManager.getVarbitValue(varbit[0]);
@@ -242,7 +246,31 @@ public class DebugGraphicsContext extends ScriptGraphicsContext {
                         progressBuilder.append("Invalid progress varbit format.\n");
                     }
                 }
-            } else {
+            }
+
+            // Check progress varps if varbits are not defined
+            if (!hasProgressData) {
+                int[][] varps = questType.progressVarps();
+                if (varps != null && varps.length > 0) {
+                    hasProgressData = true;
+                    for (int[] varp : varps) {
+                        if (varp.length == 3) {
+                            int currentVarpValue = VarManager.getVarpValue(varp[0]);
+                            String status = currentVarpValue < varp[1] ? "Not Started" :
+                                    currentVarpValue < varp[2] ? "In Progress" : "Complete";
+                            progressBuilder.append("Status: ").append(status)
+                                    .append(", Varp ID: ").append(varp[0])
+                                    .append(", Start: ").append(varp[1])
+                                    .append(", Finish: ").append(varp[2])
+                                    .append(", Current: ").append(currentVarpValue).append("\n");
+                        } else {
+                            progressBuilder.append("Invalid progress varp format.\n");
+                        }
+                    }
+                }
+            }
+
+            if (!hasProgressData) {
                 progressBuilder.append("N/A");
             }
         } else {
@@ -261,15 +289,15 @@ public class DebugGraphicsContext extends ScriptGraphicsContext {
                         boolean isDependentComplete = false;
 
                         // Check completion using varbits
-                        int[][] varbits = dependentQuestType.progressVarbits();
-                        if (varbits != null && varbits.length > 0) {
-                            int[] varbit = varbits[0];
+                        int[][] dependentVarbits = dependentQuestType.progressVarbits();
+                        if (dependentVarbits != null && dependentVarbits.length > 0) {
+                            int[] varbit = dependentVarbits[0];
                             isDependentComplete = VarManager.getVarbitValue(varbit[0]) >= varbit[2];
                         } else {
                             // Check completion using varps if varbits are not defined
-                            int[][] varps = dependentQuestType.progressVarps();
-                            if (varps != null && varps.length > 0) {
-                                int[] varp = varps[0];
+                            int[][] dependentVarps = dependentQuestType.progressVarps();
+                            if (dependentVarps != null && dependentVarps.length > 0) {
+                                int[] varp = dependentVarps[0];
                                 if (varp.length == 3) {
                                     int currentVarpValue = VarManager.getVarpValue(varp[0]);
                                     isDependentComplete = currentVarpValue >= varp[2];
@@ -296,7 +324,6 @@ public class DebugGraphicsContext extends ScriptGraphicsContext {
             dependentQuestsBuilder.append("N/A");
         }
         dependentQuestsText = dependentQuestsBuilder.toString();
-
 
         // Update special instructions
         StringBuilder instructionsBuilder = new StringBuilder("Special Instructions:\n");

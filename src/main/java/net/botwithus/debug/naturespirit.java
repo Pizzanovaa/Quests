@@ -1,5 +1,6 @@
 package net.botwithus.debug;
 
+import net.botwithus.api.game.hud.inventories.LootInventory;
 import net.botwithus.rs3.game.Area;
 import net.botwithus.rs3.game.Client;
 import net.botwithus.rs3.game.Coordinate;
@@ -44,9 +45,10 @@ public class naturespirit {
     static Coordinate startcord = new Coordinate(3438, 9895, 0);
     static Area.Circular startarea = new Area.Circular(startcord, 10);
     static Coordinate grottotreeccord = new Coordinate(3439, 3334, 0);
-    static Area.Circular grottotreecarea = new Area.Circular(grottotreeccord, 10);
+    static Area.Circular grottotreecarea = new Area.Circular(grottotreeccord, 5);
     static Coordinate logstotransform = new Coordinate(3429, 3330, 0);
     static Area.Circular logstotransformarea = new Area.Circular(logstotransform, 10);
+    public static boolean planDialog = false;
 
     public static void quest() {
         int QuestVarp = VarManager.getVarpValue(2355);
@@ -106,6 +108,12 @@ public class naturespirit {
                     }
                 }
                 break;
+                case 30:
+                    if(!grottotreecarea.contains(player)) {
+                        DebugScript.moveTo(grottotreeccord);
+                    }
+                    talktoFillimanTarlock();
+                    break;
                 case 35:
                 if(!startarea.contains(player)) {
                     DebugScript.moveTo(startcord);
@@ -116,6 +124,14 @@ public class naturespirit {
                 }
                 break;
                 case 40:
+                    if(grottotreecarea.contains(player)){
+                        SceneObject bridge = SceneObjectQuery.newQuery().name("Bridge").results().nearest();
+                        if(bridge != null){
+                            bridge.interact("Jump");
+                            delay(RandomGenerator.nextInt(600, 800));
+                        }
+                        return;
+                    }
                 if(!logstotransformarea.contains(player)) {
                     DebugScript.moveTo(logstotransform);
                 }
@@ -213,10 +229,20 @@ public class naturespirit {
                 case 75:
                 SceneObject exitgrotto = SceneObjectQuery.newQuery().name("Grotto").option("Exit").results().first();
                 SceneObject fungionlog1 = SceneObjectQuery.newQuery().name("Fungi on log").results().first();
+                GroundItem druidpouch = GroundItemQuery.newQuery().name("Druid pouch").results().nearest();
+                if(!Backpack.contains("Druid pouch") && druidpouch != null){
+                    if(LootInventory.isOpen()){
+                        LootInventory.take("Druid pouch");
+                    }else {
+                        druidpouch.interact("Take");
+                    }
+                    return;
+                }
                 if(exitgrotto != null)
                 {
                     exitgrotto.interact("Exit");
                     delay(RandomGenerator.nextInt(600, 800));
+                    return;
                 }
                 if(!logstotransformarea.contains(player))
                 {
@@ -275,7 +301,7 @@ public class naturespirit {
                 break;
                 case 90, 95, 100:
                 Npc Ghast = NpcQuery.newQuery().name("Ghast").results().nearest();
-                if(Ghast != null)
+                if(Ghast != null && Ghast.getOptions().contains("Invoke"))
                 {
                     Ghast.interact("Invoke");
                     delay(RandomGenerator.nextInt(600, 800));
