@@ -6,3 +6,5 @@ pluginManagement {
 }
 
 rootProject.name = "Quests"
+
+rootProject.name = "Quests"
