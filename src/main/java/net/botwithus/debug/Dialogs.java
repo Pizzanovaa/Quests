@@ -399,7 +399,7 @@ public class Dialogs {
         IMCANDO_DWARVES(3, "What do you know about the Imcando dwarves?", THE_KNIGHT_SWORD),
         //endregion
         //region Shield of Arrav
-        SEARCH_QUEST(1, "I'm in search of a ", SHIELD_OF_ARRAV),
+        SEARCH_QUEST(1, "I'm in search of a quest.", SHIELD_OF_ARRAV),
         FIND_PHOENIX_GANG(1, "Do you know where I can find the Phoenix Gang?", SHIELD_OF_ARRAV),
         PHOENIX_GANG_LOCATION(1, "Can you tell me where I can find the Phoenix Gang?", SHIELD_OF_ARRAV),
         OFFER_GOLD(1, "Alright. Have 10 gold coins.", SHIELD_OF_ARRAV),
