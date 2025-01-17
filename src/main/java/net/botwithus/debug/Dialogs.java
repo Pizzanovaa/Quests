@@ -738,7 +738,7 @@ public class Dialogs {
 
         //region Rune Mysteries
 
-        WHAT_S_HAPPENING_HERE(1, "What's happening here?", RUNE_MYSTERIES),
+    /*    WHAT_S_HAPPENING_HERE(1, "What's happening here?", RUNE_MYSTERIES),
         WHAT_CAN_I_DO_TO_HELP(2, "What can I do to help?", RUNE_MYSTERIES),
         WHAT_DO_YOU_WANT_ME_TO_DO(3, "What do you want me to do?", RUNE_MYSTERIES),
         I_LL_GET_ON_IT(2, "I'll get on it.", RUNE_MYSTERIES),
@@ -769,7 +769,7 @@ public class Dialogs {
         NEVER_MIND_THE_HISTORY_WHAT_DOES_THAT_MEAN_FOR_US(2, "Never mind the history, what does that mean for us?", RUNE_MYSTERIES),
         OKAY_SO_WHAT_DO_WE_DO(2, "Okay, so what do we do?", RUNE_MYSTERIES),
         OKAY_I_LL_DO_THAT_NOW(3, "Okay, I'll do that now.", RUNE_MYSTERIES),
-        IS_THERE_A_REWARD(3, "Is there a reward?", RUNE_MYSTERIES),
+        IS_THERE_A_REWARD(3, "Is there a reward?", RUNE_MYSTERIES),*/
         //endregion
 
         //region Icthlarin Little Helper

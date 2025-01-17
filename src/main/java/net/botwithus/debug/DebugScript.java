@@ -63,7 +63,7 @@ public class DebugScript extends LoopingScript {
             case MYTHS_OF_THE_WHITE_LANDS -> MythsOfTheWhiteLands.quest();
             case NECROMANCY_INTRO -> Necromancy1.quest2();
             case IMP_CATCHER -> Impcatcher.quest();
-            case RUNE_MYSTERIES -> runemysteries.quest();   
+            //case RUNE_MYSTERIES -> runemysteries.quest();
             case BLOOD_PACT -> BloodPact.quest();
             case RESTLESS_GHOST -> RestlessGhost.quest();
             case WHAT_LIES_BELOW -> WhatLiesBelow.quest();
@@ -239,7 +239,8 @@ public class DebugScript extends LoopingScript {
        // MYTHS_OF_THE_WHITE_LANDS(74),
         NECROMANCY_INTRO(493),
         IMP_CATCHER(72),
-        RUNE_MYSTERIES(358),
+
+        //RUNE_MYSTERIES(358),
         WHAT_LIES_BELOW(144),
         ICTHLARIN_LITTLE_HELPER(287),
         THE_KNIGHT_SWORD(261),
