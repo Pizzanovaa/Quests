@@ -9,10 +9,12 @@ import net.botwithus.rs3.game.Client;
 import net.botwithus.rs3.game.Coordinate;
 import net.botwithus.rs3.game.inventories.Backpack;
 import net.botwithus.rs3.game.queries.builders.characters.NpcQuery;
+import net.botwithus.rs3.game.queries.builders.components.ComponentQuery;
 import net.botwithus.rs3.game.queries.builders.objects.SceneObjectQuery;
 import net.botwithus.rs3.game.scene.entities.characters.npc.Npc;
 import net.botwithus.rs3.game.vars.VarManager;
 import net.botwithus.rs3.script.Execution;
+import net.botwithus.rs3.script.ScriptConsole;
 import net.botwithus.rs3.util.RandomGenerator;
 
 public class DeathPlateau {
@@ -28,7 +30,7 @@ public class DeathPlateau {
     public static void quest() {
         int QuestVarp = VarManager.getVarbitValue(10848);
         player = Client.getLocalPlayer().getServerCoordinate();
-//        ScriptConsole.println("QuestVarp: " + QuestVarp);
+        ScriptConsole.println("QuestVarp: " + QuestVarp);
 
         if (isDialogOpen()) {
             return;
@@ -73,6 +75,11 @@ public class DeathPlateau {
                     break;
 
                 case 35:
+                    var surveyIsOpen = ComponentQuery.newQuery(1242).componentIndex(24).subComponentIndex(-1).hidden(false).results().first();
+                    if (surveyIsOpen != null) {
+                        surveyIsOpen.interact();
+                        return;
+                    }
                     if (Backpack.contains("Survey")) {
                         Backpack.interact("Survey", "Read");
                         Execution.delay(1200);
@@ -95,14 +102,37 @@ public class DeathPlateau {
                     break;
 
                 case 45:
-                    Coordinate coord = new Coordinate(3435, 4240, 2);
-                    DebugScript.moveTo(coord);
-                    Execution.delay(1800);
-                    var miningWall = SceneObjectQuery.newQuery().name("Cliffside hole").option("Exit").results().nearest();
-                    if (miningWall != null) {
-                        miningWall.interact("Exit");
+                    println("Varp 45");
+                    Coordinate endCoord = new Coordinate(3435, 4240, 2);
+                    Area.Circular endArea = new Area.Circular(endCoord, 2);
+                    Coordinate startCoord = new Coordinate(3405, 4283, 2);
+                    Area.Circular startArea = new Area.Circular(startCoord, 150);
+                    if (endArea.contains(player)) {
+                        var miningWall = SceneObjectQuery.newQuery().name("Cliffside hole").option("Exit").results().nearest();
+                        if (miningWall != null) {
+                            miningWall.interact("Exit");
+                        }
+                        return;
                     }
-                    Execution.delay(5000);
+
+                    if (startArea.contains(player)) {
+                        DebugScript.moveTo(endCoord);
+                        return;
+                    }
+
+                    if (player.getRegionId() != 9034) {
+                        println("Moving to sabot");
+                        DebugScript.moveTo(sabbotcord);
+                        return;
+                    } else {
+                        println("In sabbot cave");
+                        var miningWall = SceneObjectQuery.newQuery().name("Cavern").option("Enter").results().nearest();
+                        if (miningWall != null) {
+                            miningWall.interact("Enter");
+                            return;
+                        }
+                        println("Cavern Entrance not found????");
+                    }
                     break;
 
                 case 50:

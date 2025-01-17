@@ -115,7 +115,7 @@ public class DebugScript extends LoopingScript {
 
     }
 
-    private static boolean disableDive = true;
+    private static boolean disableDive = false;
 
     static boolean moveTo(Coordinate location) {
         Dialogs.println("moveTo");

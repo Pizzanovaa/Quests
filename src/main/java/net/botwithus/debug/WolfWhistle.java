@@ -7,7 +7,9 @@ import static net.botwithus.rs3.script.Execution.delay;
 import net.botwithus.rs3.game.Area;
 import net.botwithus.rs3.game.Client;
 import net.botwithus.rs3.game.Coordinate;
+import net.botwithus.rs3.game.hud.interfaces.Interfaces;
 import net.botwithus.rs3.game.queries.builders.characters.NpcQuery;
+import net.botwithus.rs3.game.queries.builders.components.ComponentQuery;
 import net.botwithus.rs3.game.queries.builders.objects.SceneObjectQuery;
 import net.botwithus.rs3.game.scene.entities.characters.npc.Npc;
 import net.botwithus.rs3.game.vars.VarManager;
@@ -52,8 +54,19 @@ public class WolfWhistle {
     public static void quest() {
         int QuestVarp = VarManager.getVarbitValue(12334);
         player = Client.getLocalPlayer().getServerCoordinate();
-        //println("QuestVarp: " + QuestVarp);
+        println("QuestVarp: " + QuestVarp);
 
+        //HANDLING A SPECIAL DIALOG HERE
+        var closeComponent = ComponentQuery.newQuery(1188).componentIndex(4).subComponentIndex(-1).hidden(false).results().first();
+        var firstComponent = ComponentQuery.newQuery(1188).componentIndex(8).subComponentIndex(-1).hidden(false).results().first();
+        var secondComponent = ComponentQuery.newQuery(1188).componentIndex(13).subComponentIndex(-1).hidden(false).results().first();
+        var thirdComponent = ComponentQuery.newQuery(1188).componentIndex(18).subComponentIndex(-1).hidden(false).results().first();
+        var fourthComponent = ComponentQuery.newQuery(1188).componentIndex(23).subComponentIndex(-1).hidden(false).results().first();
+        if (animalshoparea.contains(player) && QuestVarp == 15 && closeComponent != null && firstComponent != null && secondComponent != null && thirdComponent != null && fourthComponent != null && Interfaces.isOpen(1188)) {
+            closeComponent.interact();
+            println("Close Special Dialog Component");
+            return;
+        }
 
         if (isDialogOpen()) {
             return;
