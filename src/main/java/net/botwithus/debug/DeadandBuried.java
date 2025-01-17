@@ -103,7 +103,7 @@ public class DeadandBuried {
                 int acadiaframes = Backpack.getCount("Acadia frame");
                 int stonewallsegments = Backpack.getCount("Stone wall segment");
 
-                if(acadiaframes <= 14 && stonewallsegments <= 6)
+                if(acadiaframes < 14 || stonewallsegments < 6)
                 {
                     SceneObject bank = SceneObjectQuery.newQuery().name("Bank chest").results().nearest();
                     if(bank !=null){

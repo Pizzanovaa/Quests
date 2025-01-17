@@ -83,7 +83,7 @@ public class KiliRowIII {
                         if (elementglyph.size() < 1)
                             drawglyphselement();
                         else if (communeglyph.size() < 2)
-                            drawglyphschange();
+                            drawglyphscommuneI();
                         else if (candle.size() < 4) {
                             placelightsource();
                         } else {
@@ -190,9 +190,17 @@ public class KiliRowIII {
     }
 
     public static void drawglyphselement() {
-        Npc glyph = NpcQuery.newQuery().name("Glyph spot").option("Draw glyph").results().nearest();
+        Npc glyph = NpcQuery.newQuery()
+            .option("Draw glyph")
+            .results()
+            .stream()
+            .filter(npc -> !npc.getName().equals("Elemental I") && !npc.getName().equals("Commune I"))
+            .findFirst()
+            .orElse(null);
+        EntityResultSet<Npc> elementI = NpcQuery.newQuery().name("Elemental I", "Elemental I (depleted)").results();
+        //Npc elementII = NpcQuery.newQuery().results().stream().filter(npc -> npc.getName().equals("Elemental II") || npc.getName().equals("Elemental II (depleted)")).findFirst().orElse(null);
         if (!Client.getLocalPlayer().isMoving()) {
-            if (glyph != null) {
+            if (glyph != null && elementI.size() < 2) {
                 glyph.interact("Draw glyph");
                 delay(RandomGenerator.nextInt(1250, 2000));
                 ScriptConsole.println("Interface is open" + Interfaces.isOpen(1371));
@@ -203,35 +211,36 @@ public class KiliRowIII {
                     MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 89784350);
                     delay(RandomGenerator.nextInt(1250, 2000));
                 }
-
-            }
+    
+                }
         }
     }
 
-    public static void drawglyphschange() {
+    public static void drawglyphscommuneI() {
         Npc glyph1 = NpcQuery.newQuery()
-                .option("Draw glyph")
-                .results()
-                .stream()
-                .filter(npc -> !npc.getName().equals("Elemental I") && !npc.getName().equals("Commune I"))
-                .findFirst()
-                .orElse(null);
-        if (!Client.getLocalPlayer().isMoving()) {
-            if (glyph1 != null) {
-                glyph1.interact("Draw glyph");
+        .option("Draw glyph")
+        .results()
+        .stream()
+        .filter(npc -> !npc.getName().equals("Commune I") && !npc.getName().equals("Elemental I"))
+        .findFirst()
+        .orElse(null);
+    EntityResultSet<Npc> communeI = NpcQuery.newQuery().name("Commune I", "Commune I (depleted)").results();
+    if (!Client.getLocalPlayer().isMoving()) {
+        if (glyph1 != null && communeI.size() < 2) {
+            glyph1.interact("Draw glyph");
+            delay(RandomGenerator.nextInt(1250, 2000));
+            ScriptConsole.println("Interface is open" + Interfaces.isOpen(1371));
+            Execution.delayUntil(5000, () -> Interfaces.isOpen(1371));
+            MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1, 25, 89849878);
+            delay(RandomGenerator.nextInt(1250, 2000));
+            if (Interfaces.isOpen(1370)) {
+                MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 89784350);
                 delay(RandomGenerator.nextInt(1250, 2000));
-                ScriptConsole.println("Interface is open" + Interfaces.isOpen(1371));
-                Execution.delayUntil(5000, () -> Interfaces.isOpen(1371));
-                MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1, 25, 89849878);
-                delay(RandomGenerator.nextInt(1250, 2000));
-                if (Interfaces.isOpen(1370)) {
-                    MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 89784350);
-                    delay(RandomGenerator.nextInt(1250, 2000));
-                }
-
             }
+    
         }
-
+    }
+    
     }
 
 

@@ -61,8 +61,9 @@ public class DebugScript extends LoopingScript {
             case COOKS_ASSISTANT -> CooksAssitant.quest();
             //TODO: Rework the whole quest to use do movement base on a fix coordinate, instead of player coordinate, can use the coordinate from the entrace SceneObject, this will make it much faster, and reliable
             case MYTHS_OF_THE_WHITE_LANDS -> MythsOfTheWhiteLands.quest();
-            case ERNEST_THE_CHICKEN -> ErnestTheChicken.quest();
             case NECROMANCY_INTRO -> Necromancy1.quest2();
+            case IMP_CATCHER -> Impcatcher.quest();
+            case RUNE_MYSTERIES -> runemysteries.quest();   
             case BLOOD_PACT -> BloodPact.quest();
             case RESTLESS_GHOST -> RestlessGhost.quest();
             case WHAT_LIES_BELOW -> WhatLiesBelow.quest();
@@ -103,6 +104,11 @@ public class DebugScript extends LoopingScript {
             case ANCIENT_AWAKENING -> AncientAwakening.quest();
             case BATTLE_OF_FORINTHRY -> BattleofForinthry.quest();
             case REQUIEM_FOR_A_DRAGON -> RequiemforaDragon.quest();
+            case ICTHLARIN_LITTLE_HELPER -> Icthlarinlittlehelper.quest();
+            case NATURE_SPIRIT -> naturespirit.quest();
+            case IN_SEARCH_OF_THE_MYREQUE -> InSearchoftheMyreque.quest();
+            case IN_AID_OF_THE_MYREQUE -> InAidoftheMyreque.quest();
+            
             default -> delay(100);
         }
 
@@ -218,7 +224,6 @@ public class DebugScript extends LoopingScript {
     }
 
     public enum Quest {
-        ERNEST_THE_CHICKEN(15),
         DEATH_PLATEAU(140),
         DRUIDIC_RITUAL(111),
         // LET_THEM_EAT_PIE(200), //UNFINISHED
@@ -229,16 +234,20 @@ public class DebugScript extends LoopingScript {
         RESTLESS_GHOST(27),
         COOKS_ASSISTANT(257),
         MYTHS_OF_THE_WHITE_LANDS(74),
-
-
+       // MYTHS_OF_THE_WHITE_LANDS(74),
         NECROMANCY_INTRO(493),
-
+        IMP_CATCHER(72),
+        RUNE_MYSTERIES(358),
         WHAT_LIES_BELOW(144),
+        ICTHLARIN_LITTLE_HELPER(287),
         THE_KNIGHT_SWORD(261),
         SHIELD_OF_ARRAV(63),
         FAMILY_CREST_INCOMPLETE(116),
         TOMES_OF_WARLOCK(497),
         STOLEN_HEARTS(355),
+        NATURE_SPIRIT(133),
+        IN_SEARCH_OF_THE_MYREQUE(283),
+        IN_AID_OF_THE_MYREQUE(21),
         THE_GOLEM(286),
         RUNE_MYTHOS(494),
         GHOSTS_AHOY(82),
@@ -267,7 +276,7 @@ public class DebugScript extends LoopingScript {
         DEAD_AND_BURIED(492),
         ANCIENT_AWAKENING(502),
         BATTLE_OF_FORINTHRY(507),
-        REQUIEM_FOR_A_DRAGON(509),
+        REQUIEM_FOR_A_DRAGON(511),
         MURDER_ON_THE_BORDER(490),
         UNWELCOME_GUESTS(491),
 
@@ -283,6 +292,15 @@ public class DebugScript extends LoopingScript {
 
         public int getQuestId() {
             return questId;
+        }
+
+        public static Quest getByQuestId(int questId) {
+            for (Quest quest : values()) {
+                if (quest.getQuestId() == questId) {
+                    return quest;
+                }
+            }
+            return null; // Return null if no match is found
         }
     }
 

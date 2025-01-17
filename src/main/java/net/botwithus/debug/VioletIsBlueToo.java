@@ -9,6 +9,7 @@ import net.botwithus.rs3.game.Area;
 import net.botwithus.rs3.game.Client;
 import net.botwithus.rs3.game.Coordinate;
 import net.botwithus.rs3.game.inventories.Backpack;
+import net.botwithus.rs3.game.movement.Movement;
 import net.botwithus.rs3.game.queries.builders.characters.NpcQuery;
 import net.botwithus.rs3.game.queries.builders.items.GroundItemQuery;
 import net.botwithus.rs3.game.queries.builders.objects.SceneObjectQuery;
@@ -105,9 +106,18 @@ public class VioletIsBlueToo {
                     if (checkStep(QuestVarp, 0, 0, 0, 0, 0, 0, 0, 0, 0)) {
                         //WALK UP THE HILL
                         //NEEDS FURTHER TESTING
-                        if (!violethousearea.contains(player)) {
-                            DebugScript.moveTo(violethousecord);
+                        Npc Posty = NpcQuery.newQuery().name("Posty").results().nearest();
+                        if(Posty != null){
+                            Coordinate postycord = Posty.getCoordinate();
+                            int postyx = postycord.getX();
+                            int postyy = postycord.getY();
+
+                            delay(RandomGenerator.nextInt(600, 1200));
+                            Movement.walkTo(postyx,postyy+5,false);  // @Pizza: I'm assuming its the y axis to get up the hill.. game kidnapped me so could not double check
                         }
+                        /*    if (!violethousearea.contains(player)) { // @Pizza: This part is an Instance, was getting failed path.
+                            DebugScript.moveTo(violethousecord);
+                        }*/
                         //New Values
                         //The QuestVarp changed to 15
                         //The varbit40610 value 0
@@ -280,7 +290,7 @@ public class VioletIsBlueToo {
                 case 45:
                     if (checkStep(QuestVarp, 4, 0, 0, 0, 0, 0, 0, 0, 0)) {
                         //Open chest then talk to marvin
-                        var npc = NpcQuery.newQuery().name("Marvin Claus").results().first();
+                        var npc = NpcQuery.newQuery().name("Marvin Claus","Boris Claus").results().first(); // @Pizza: Was named Boris for me? Might vary.
                         if (npc != null) {
                             npc.interact("Talk to");
                         } else {
@@ -304,6 +314,7 @@ public class VioletIsBlueToo {
                     break;
 
                 case 60:
+                    // @Pizza: Got stuck here, seems like a lot so ill leave that for you to figure out next time u get to it.
                     if (checkStep(QuestVarp, 4, 0, 0, 0, 0, 0, 0, 0, 0)) {
                         //Talk to assistant brad then move to the trees
                         if (Objects.equals(currentStep, "")) {
@@ -311,7 +322,7 @@ public class VioletIsBlueToo {
                             Execution.delay(1800);
                             currentStep = "GOTOTAYLOR";
                         } else if (Objects.equals(currentStep, "GOTOTAYLOR")) {
-                            var npcMovement = NpcQuery.newQuery().name("Marvin Claus").results().nearest();
+                            var npcMovement = NpcQuery.newQuery().name("Marvin Claus","Boris Claus").results().nearest();
                             println("X: " + npcMovement.getCoordinate().getX()); // 11937
                             println("X: " + npcMovement.getCoordinate().getY()); // 2606
                             Traverse.walkTo(new Coordinate(npcMovement.getCoordinate().getX() - 1, npcMovement.getCoordinate().getY() + 33, npcMovement.getCoordinate().getZ()), true);
@@ -801,7 +812,7 @@ public class VioletIsBlueToo {
     }
 
     public static void talktoMarvinClaus() {
-        Npc npc = NpcQuery.newQuery().name("Marvin Claus").results().first();
+        Npc npc = NpcQuery.newQuery().name("Marvin Claus","Boris Claus").results().first();
         if (npc != null) {
             npc.interact("Talk to");
             delay(RandomGenerator.nextInt(600, 800));

@@ -256,7 +256,7 @@ public class NewFoundation {
     }
 
     public static void killzombies() {
-        if (!Client.getLocalPlayer().inCombat()) {
+        if (!Client.getLocalPlayer().hasTarget()) { //!incombat is very clunky waits till u drop combat and will afk if not auto retalite turned on
             Npc troll1 = NpcQuery.newQuery().name("Armoured zombie").results().nearestTo(player);
             if (troll1 != null) {
                 troll1.interact("Attack");

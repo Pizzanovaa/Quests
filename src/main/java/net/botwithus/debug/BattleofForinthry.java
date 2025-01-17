@@ -5,6 +5,7 @@ import net.botwithus.rs3.game.Client;
 import net.botwithus.rs3.game.Coordinate;
 import net.botwithus.rs3.game.Item;
 import net.botwithus.rs3.game.hud.interfaces.Interfaces;
+import net.botwithus.rs3.game.movement.Movement;
 import net.botwithus.rs3.game.queries.builders.characters.NpcQuery;
 import net.botwithus.rs3.game.scene.entities.characters.npc.Npc;
 import net.botwithus.rs3.game.vars.VarManager;
@@ -76,23 +77,6 @@ public class BattleofForinthry {
                     delay(RandomGenerator.nextInt(600, 800));
                 }
 
-                Npc vorkath = NpcQuery.newQuery().name("Vorkath").results().first();
-                Npc Zemouregal = NpcQuery.newQuery().name("Zemouregal").results().first();
-                if(vorkath != null && Zemouregal != null)
-                {
-                    if(ActionBar.containsAbility("Protect from Necromancy"))
-                    {
-                        ActionBar.useAbility("Protect from Necromancy");
-                    }
-                    else if(ActionBar.containsAbility("Deflect Necromancy"))
-                    {
-                        ActionBar.useAbility("Deflect Necromancy");
-                    }
-
-                    vorkath.interact("Attack");
-                    Zemouregal.interact("Attack");
-                    delay(RandomGenerator.nextInt(600, 800));
-                }
                 break;
                 case 10:
                 if(VarManager.getVarbitValue(54709) == 0  && VarManager.getVarbitValue(54713) == 0)
@@ -130,15 +114,30 @@ public class BattleofForinthry {
                 {
                     pileofstone.interact("Take from");
                     delay(RandomGenerator.nextInt(600, 800));
+                }else if(pileofstone == null && Backpack.getCount("Stone wall segment") < 1){
+                    Npc sofit = NpcQuery.newQuery().name("Guard captain Sof",String::contains).results().nearest();// walk here incase out of range.
+                    if(sofit != null){
+                        Movement.walkTo(sofit.getCoordinate().getX(),sofit.getCoordinate().getY(),false);
+                        delay(RandomGenerator.nextInt(600, 800));
+                        return;
+                    }
                 }
                 else
                 {
-                    SceneObject hotspot = SceneObjectQuery.newQuery().name("Repair hotspot").results().nearest();
+                    SceneObject hotspot = SceneObjectQuery.newQuery().name("Repair hotspot").option("Repair").hidden(false).results().nearest();
                     if(hotspot != null)
                     {
+                        ScriptConsole.println("Repairing...");
                         hotspot.interact("Repair");
                         Execution.delayUntil(10000, () -> Client.getLocalPlayer().getAnimationId() != -1);
                         //delay(RandomGenerator.nextInt(10000, 12000));
+                    }else{
+                        Npc sofit = NpcQuery.newQuery().name("Guard captain Sofia").results().nearest(); // walk here incase out of range.
+                        if(sofit != null){
+                            Movement.walkTo(sofit.getCoordinate().getX(),sofit.getCoordinate().getY(),false);
+                            delay(RandomGenerator.nextInt(600, 800));
+                            return;
+                        }
                     }
                 }
                 break;

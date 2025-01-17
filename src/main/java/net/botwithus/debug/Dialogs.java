@@ -2,15 +2,18 @@ package net.botwithus.debug;
 
 
 import net.botwithus.api.game.hud.Dialog;
+import net.botwithus.rs3.game.Item;
 import net.botwithus.rs3.game.hud.interfaces.Component;
 import net.botwithus.rs3.game.hud.interfaces.Interfaces;
 import net.botwithus.rs3.game.minimenu.MiniMenu;
 import net.botwithus.rs3.game.minimenu.actions.ComponentAction;
 import net.botwithus.rs3.game.queries.builders.components.ComponentQuery;
+import net.botwithus.rs3.game.queries.builders.items.InventoryItemQuery;
 import net.botwithus.rs3.game.vars.VarManager;
 import net.botwithus.rs3.script.ScriptConsole;
 
 
+import java.util.Arrays;
 import java.util.List;
 
 import static net.botwithus.debug.DebugScript.Quest.*;
@@ -97,15 +100,16 @@ public class Dialogs {
                 dialog1188();
             }
         } else if (Interfaces.isOpen(1184)) {
-            ScriptConsole.println(Dialog.getText());
-            if (Dialog.getText().contains("redberry pie. They REALLY like redberry pie.")) { // Knights sword endless chat from reldo
-                println("Found redberry pie msg..");
-                MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1, -1, 77856772);
-            } else if (Dialog.getText().contains("If I were you I would talk to Baraek,")) {
-                println("Baraek into Located"); // Shield of Arrav
-                MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1, -1, 77856772);
-            } else if (Dialog.getText().contains("The ruthless and notorious Black Arm ")) {
-                println("Talk to Charlie"); // Shield of Arrav
+            String dialogText = Dialog.getText();
+            ScriptConsole.println(dialogText);
+            if (dialogText.contains("Don't take my word for it. Ask Bianca.")) {
+                Murderontheborder.talkedtorodney = true;
+            }
+
+            boolean matched = Arrays.stream(AutoCloseDialogs.values())
+                    .anyMatch(topic -> dialogText.contains(topic.getPhrase()));
+
+            if (matched) { //Check if the dialog should be closed instead of continued. checks 'AutoCloseDialogs' enum
                 MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1, -1, 77856772);
             } else {
                 MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 77594639);
@@ -122,8 +126,10 @@ public class Dialogs {
             MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 77922323);
         } else if (Interfaces.isOpen(1186)) {
             MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 77725704);
-        } else if (Interfaces.isOpen(720) && currentQuest != NEW_FOUNDATION && currentQuest != ARCH_TUTORIAL) {
+        } else if (Interfaces.isOpen(720) && currentQuest != NEW_FOUNDATION && currentQuest != ARCH_TUTORIAL && currentQuest != MURDER_ON_THE_BORDER) {
             MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 47185921);
+        } else if (Interfaces.isOpen(720) && currentQuest == MURDER_ON_THE_BORDER) {
+            MiniMenu.interact(ComponentAction.DIALOGUE.getType(), 0, -1, 47185949);
         } else if (Interfaces.isOpen(1224)) {
             MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1, -1, 80216108);
         } else if (Interfaces.isOpen(1370) && currentQuest == DebugScript.Quest.NECROMANCY_INTRO) {
@@ -135,7 +141,7 @@ public class Dialogs {
         }  // read Book
         /*else if (Interfaces.isOpen(960)) { // Unreachable and worked without anyway :P
             MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1, -1, 62914639);} */ // Close Open Book
-        else if (isCLick()) {
+        else if (continueHandler()) {
             MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1, -1, 62586895);
         }
     }
@@ -172,7 +178,7 @@ public class Dialogs {
         return -1; // Return -1 if no matching option found
     }
 
-    // Method to determine if the dialogue should be skipped
+    // Method to determine if the dialogue should be skipped, used for chats that require you to go threw various options but the previous still exist.
     private static boolean shouldSkipDialogue(Dialogue dialogue) {
 
         int VARBIT_BOOK_ICE = 53558;
@@ -189,13 +195,30 @@ public class Dialogs {
                 return VarManager.getVarbitValue(VARBIT_BOOK_SHADOW) >= 1;
             case BLOOD_TOMES:
                 return VarManager.getVarbitValue(VARBIT_BOOK_BLOOD) >= 1;
+            case VIAL:
+                return hasItem("Poison detection potion");
+            case HOLLYHOCK:
+                return hasItem("Hollyhock");
+            case DUCHLINK, TALK_ABOUT_THE_ASSASSIN:
+                return VarManager.getVarbitValue(52689) == 155;
+            case TALKRODNEY:
+                return VarManager.getVarbitValue(52699) == 191;
+            case I_D_LIKE_TO_HELP_FIX_UP_THE_TOWN:
+                 return !Dialog.getTitle().contains("SELECT AN OPTION");
+            case OK_THANKS_2:         
+                return !Dialog.getTitle().contains("SELECT AN OPTION");
             default:
                 return false; // Default case: do not skip
         }
     }
 
 
-    public static boolean isCLick() { // Continue promt
+    public static boolean hasItem(String item) { //Murder on the border quest.
+        Item potion = InventoryItemQuery.newQuery(93).name(item, String::contains).results().first();
+        return potion != null;
+    }
+
+    public static boolean continueHandler() { // Continue prompt, for new characters.
         Component thing = ComponentQuery.newQuery(955).componentIndex(16).subComponentIndex(14).results().first();
         if (thing != null && !thing.getText().equals("") && !thing.getText().isBlank()) {
             return true;
@@ -244,6 +267,7 @@ public class Dialogs {
         VIOLET_YES(1, "Yes.", VIOLET_IS_BLUE),
         //endregion
         //region VIOLET IS BLUE TOO
+        AUDIO(1, "No.", VIOLET_IS_BLUE_TOO),
         VIOLETISBLUETOO(1, "Violet is Blue Too.", VIOLET_IS_BLUE_TOO),
         IREMEBERHIM(1, "I remember him.", VIOLET_IS_BLUE_TOO),
         What_should_we_do(2, "What should we do?", VIOLET_IS_BLUE_TOO),
@@ -310,7 +334,7 @@ public class Dialogs {
         YES_I_HAVE_A_LETTER_FOR_YOU(1, "Yes! I have a letter for you.", WHAT_LIES_BELOW),
         RAT_BURGISS_SENT_ME(4, "Rat Burgiss sent me.", WHAT_LIES_BELOW),
         I_HAVE_THE_THINGS_YOU_WANTED(1, "I have the things you wanted!", WHAT_LIES_BELOW),
-//endregion
+        //endregion
         //region The Knight's Sword
         CLOSE(6, "redberry pie. They REALLY like redberry pie.", THE_KNIGHT_SWORD),
         CHAT(1, "Chat", THE_KNIGHT_SWORD),
@@ -512,11 +536,11 @@ public class Dialogs {
         //region Dead and Buried
         TALK_ABOUT_DEAD_AND_BURIED(1, "Talk about 'Dead and Buried'.", DEAD_AND_BURIED),
         CONCLUDE_INTERVIEW(4, "(Conclude interview.)", DEAD_AND_BURIED),
-        YES_I_VE_ASKED_ENOUGH_QUESTIONS(1, "Yes, I've asked enough questions.", DEAD_AND_BURIED),
+        YES_I_VE_ASKED_ENOUGH_QUESTIONS(1, "Yes. I've asked enough questions.", DEAD_AND_BURIED),
         YES_I_KNOW_THAT(1, "Yes, I know that.", DEAD_AND_BURIED),
         MUST_WE(1, "Must we?", DEAD_AND_BURIED),
         LEARDERSHIP_SKILLS(1, "Leadership skills.", DEAD_AND_BURIED),
-        YOUR_MAJESTY(1, "Your Majesty?", DEAD_AND_BURIED),
+        YOUR_MAJESTY(1, "Your majesty?", DEAD_AND_BURIED),
         WHY_DID_YOU_MARRY_THE_KING(1, "Why did you marry the king?", DEAD_AND_BURIED),
         COULDNT_YOU_HAVE_BEEN_A_WARRIIOR_QUEEN(1, "Couldn't you have been a warrior queen?", DEAD_AND_BURIED),
         SO_YOU_STARTED_WEARING_A_DISGUISE(1, "So you started wearing a disguise?", DEAD_AND_BURIED),
@@ -525,21 +549,23 @@ public class Dialogs {
         TALK_ABOUT_QUESTS(2, "Talk about quests.", DEAD_AND_BURIED),
         //endregion
         //region Ancient Awakening
+        TALK_ABOUT_QUEST(2, "Talk about quests.", ANCIENT_AWAKENING),
         TALK_ABOUT_ANCIENT_AWAKENING(2, "Talk about 'Ancient Awakening'.", ANCIENT_AWAKENING),
         I_DONT_NEED_TO_KNOW_YOUR_FAMILY_HISTORY(1, "I don't need to know your family history, Bill.", ANCIENT_AWAKENING),
         LETS_SKIP_THE_SMALL_TALK(1, "Let's skip the small talk.", ANCIENT_AWAKENING),
         I_NEED_YOU_TO_RETURN_TO_THE_FORT(1, "I need you to return to the fort.", ANCIENT_AWAKENING),
         YES_ANCIENT_AWAKENING(1, "Yes.", ANCIENT_AWAKENING),
-        WHO_ARE_YOU(1, "Who are you?", ANCIENT_AWAKENING),
-        WHAT_IS_THIS_PLACE(1, "What is this place?", ANCIENT_AWAKENING),
+        CAN_YOU_ACTIVATE_THIS_CONDUIT(1, "Can you activate the conduit?", ANCIENT_AWAKENING),
+        TELL_ME_ABOUT_TOMB(1, "Tell me about this tomb.", ANCIENT_AWAKENING),
         TELL_ME_ABOUT_VORKATH(1, "Tell me about Vorkath.", ANCIENT_AWAKENING),
+        //WHO_ARE_YOU(1, "Who are you?", ANCIENT_AWAKENING),
+        WHAT_IS_THIS_PLACE(1, "What is this place?", ANCIENT_AWAKENING),
         TELL_ME_ABOUT_THIS_TOMB(1, "Tell me about this tomb.", ANCIENT_AWAKENING),
         NONSENSE_ASTER_IS_DOING_FINE(1, "Nonsense! Aster is doing fine.", ANCIENT_AWAKENING),
         What_ARE_YOU_DOING_HERE(1, "What are you doing here?", ANCIENT_AWAKENING),
         IS_IT_SAFE_FOR_CIVILIANS_TO_BE_HERE(1, "Is it safe for civilians to be here?", ANCIENT_AWAKENING),
         I_WAS_JUST_CURIOUS(1, "I was just curious.", ANCIENT_AWAKENING),
         WE_NEED_TO_FOCUS(1, "We need to focus.", ANCIENT_AWAKENING),
-        CAN_YOU_ACTIVATE_THIS_CONDUIT(1, "Can you activate this conduit?", ANCIENT_AWAKENING),
         //endregion
         //region Battle of Forinthry
         TALK_ABOUT_BATTLE_OF_FORINTHRY(1, "Talk about 'Battle of Forinthry'.", BATTLE_OF_FORINTHRY),
@@ -617,8 +643,27 @@ public class Dialogs {
         SHE_DESERVES_IT_AFTER_BETRAYING_ME_LIKE_THIS(1, "She deserves it after betraying me like this.", MURDER_ON_THE_BORDER),
         ASK_HOW_ASTER_IS_FEELING(1, "Ask how Aster is feeling.", MURDER_ON_THE_BORDER),
         JUST_DON_T_NURDER_ANYONE(1, "Just don't murder anyone.", MURDER_ON_THE_BORDER),
+        SIMONLINK(1, "Link a clue to Simon.", MURDER_ON_THE_BORDER),
+        DUCHLINK(1, "Link a clue to Duchess Alba.", MURDER_ON_THE_BORDER),
+        BIANCALINK(1, "Link a clue to Bianca.", MURDER_ON_THE_BORDER),
+        IRISLINK(1, "Link a clue to Iris.", MURDER_ON_THE_BORDER),
+        PRINCESSLINK(1, "Link a clue to Princess.", MURDER_ON_THE_BORDER),
+        BIANCA(1, "That's unacceptable", MURDER_ON_THE_BORDER),
+        VIAL(1, "Take a vial.", MURDER_ON_THE_BORDER),
+        HOLLYHOCK(1, "Take hollyhock.", MURDER_ON_THE_BORDER),
+        LEAVEVIAL(1, "Leave.", MURDER_ON_THE_BORDER),
+        DECEND(1, "Bottom floor.", MURDER_ON_THE_BORDER),
+        TALKDUCHNESS(1, "Talk to Duchess Alba.", MURDER_ON_THE_BORDER),
+        TALKELLA(1, "Talk to Ellamaria.", MURDER_ON_THE_BORDER),
+        TALKRODNEY(1, "Talk to Rodney.", MURDER_ON_THE_BORDER),
+        LINKRODNEY(1, "Link a clue to Rodney.", MURDER_ON_THE_BORDER),
+        FRIENDS(1, "I heard you were once friends with Bianca.", MURDER_ON_THE_BORDER),
+
+
         //LINK_A_CLUE_TO_SIMON(2, "Link a clue to Simon.", MURDER_ON_THE_BORDER),
         TALK_ABOUT_MURDER_ON_THE_BORDER_1(1, "Yes, let's start the feast.", MURDER_ON_THE_BORDER),
+        MURDERDIALOG(1, "Say nothing.", MURDER_ON_THE_BORDER),
+
         //endregion
         //region Unwelcome Guests
 
@@ -626,8 +671,115 @@ public class Dialogs {
         TALK_ABOUT_UNWELCOME_GUESTS(2, "Talk about 'Unwelcome Guests'.", UNWELCOME_GUESTS),
         YES_UNWELCOME_GUESTS(1, "Yes.", UNWELCOME_GUESTS),
         YES_I_UNDERSTAND_THE_RESTRICTIONS(1, "Yes, I understand the restrictions.", UNWELCOME_GUESTS),
-        TALK_ABOUT_UNWELCOME_GUESTS_1(1, "Talk about 'Unwelcome Guests'.", UNWELCOME_GUESTS);
-//endregion
+        TALK_ABOUT_UNWELCOME_GUESTS_1(1, "Talk about 'Unwelcome Guests'.", UNWELCOME_GUESTS),
+        //endregion
+
+        //region Imp Catcher
+        CAN_I_HELP_YOU(1, "Can I help you?", IMP_CATCHER),
+        HAVE_YOU_TRIED_A_BOWL_OF_HOT_WATER(1, "Have you tried a bowl of hot water?", IMP_CATCHER),
+        WHY_WOULD_HE_BE_DISAPPOINTED(1, "Why would he be disappointed?", IMP_CATCHER),
+        SOME_DAYS_YOU_LL_HAVE_SETBACKS_TOMORROW_IS_NEW_DAY(1, "Some days you'll have setbacks. Tomorrow is a new day.", IMP_CATCHER),
+        TAKE_YOUR_TIME_NO_ONE_IS_RUSHING_YOU_TO_FEEL_BETTER(1, "Take your time. No one is rushing you to feel better.", IMP_CATCHER),
+        I_VE_GOT_ALL_FOUR_BEADS(1, "I've got all four beads.", IMP_CATCHER),
+        //endregion
+
+        //region Rune Mysteries
+
+        WHAT_S_HAPPENING_HERE(1, "What's happening here?", RUNE_MYSTERIES),
+        WHAT_CAN_I_DO_TO_HELP(2, "What can I do to help?", RUNE_MYSTERIES),
+        WHAT_DO_YOU_WANT_ME_TO_DO(3, "What do you want me to do?", RUNE_MYSTERIES),
+        I_LL_GET_ON_IT(2, "I'll get on it.", RUNE_MYSTERIES),
+        HAVE_YOU_SEEN_ANYTHING_UNUSUAL_LATER(1, "Have you seen anything unusual lately?", RUNE_MYSTERIES),
+        IN_THE_POWER_BEAM(2, "In the power beam?", RUNE_MYSTERIES),
+        WHERE_DO_THESE_THINGS_COME_FROM(3, "Where do these things come from?", RUNE_MYSTERIES),
+        ARIANE_SAYS_THE_TOWER_IS_IN_DANGER(3, "Ariane says the tower is in danger.", RUNE_MYSTERIES),
+        WHAT_ARE_YOU_GOING_TO_DO(4, "What are you going to do?", RUNE_MYSTERIES),
+        GOODBYE_1(5, "Goodbye.", RUNE_MYSTERIES),
+        THANKS_1(2, "Thanks.", RUNE_MYSTERIES),
+        I_VE_SPOKEN_TO_SOME_OF_THE_WIZARDS(2, "I've spoken to some of the wizards...", RUNE_MYSTERIES),
+        WIZARD_TRAIBORN_SAID_SOMETHING_CAME_THROUGH_THE_LIBRARY_FLOOR(3, "Wizard Traiborn said something came through the library floor.", RUNE_MYSTERIES),
+        THEN_LET_S_GET_DOWN_THERE_AND_INVESTIGATE(2, "Then let's get down there and investigate!", RUNE_MYSTERIES),
+        I_LL_GET_RIGHT_ON_IT(2, "I'll get right on it.", RUNE_MYSTERIES),
+        HOW_CAN_I_GET_INTO_THE_OLD_TOWER(2, "How can I get into the old tower?", RUNE_MYSTERIES),
+        YOU_DO_KNOW_THOUGH(3, "You do know, though?", RUNE_MYSTERIES),
+        YOU_MEAN_THE_RUMOUR_ABOUT_WATER_SURGE(3, "You mean the rumour about Water Surge?", RUNE_MYSTERIES),
+        WHAT_DO_YOU_MEAN_THE_KEY_LIES_IN_UNDERSTANDING_WATER_SURGE(3, "What do you mean, the key lies in understanding Water Surge?", RUNE_MYSTERIES),
+        ITS_SUCH_A_PITY_YOU_COULDNT_HELP_ME_MAYBE_I_LL_VISIT_THE_LIBRARY(2, "It's such a pity you couldn't help me, Maybe I'll visit the library.", RUNE_MYSTERIES),
+        I_VE_GOT_THE_KEY_TO_THE_RUINS(2, "I've got the key to the ruins.", RUNE_MYSTERIES),
+        WE_SHOULD_KEEP_OUR_MINDS_ON_THE_JOB(2, "We should keep our minds on the job.", RUNE_MYSTERIES),
+        YES_IT_S_INSPIRING(1, "Yes, it's inspiring.", RUNE_MYSTERIES),
+        OKAY_WHAT_SHOULD_WE_DO_NOW(2, "Okay, what should we do now?", RUNE_MYSTERIES),
+        I_M_READY_TO_BE_TESTED(3, "I'm ready to be tested.", RUNE_MYSTERIES),
+        I_M_MAKING_US_A_BRIDGE(1, "I'm making us a bridge.", RUNE_MYSTERIES),
+        DO_YOU_HAVE_A_BETTER_IDEA(1, "Do you have a better idea?", RUNE_MYSTERIES),
+        I_WISH_I_COULD_HAVE_SEEN_IT(1, "I wish I could have seen it.", RUNE_MYSTERIES),
+        NEVER_MIND_THE_HISTORY_WHAT_DOES_THAT_MEAN_FOR_US(2, "Never mind the history, what does that mean for us?", RUNE_MYSTERIES),
+        OKAY_SO_WHAT_DO_WE_DO(2, "Okay, so what do we do?", RUNE_MYSTERIES),
+        OKAY_I_LL_DO_THAT_NOW(3, "Okay, I'll do that now.", RUNE_MYSTERIES),
+        IS_THERE_A_REWARD(3, "Is there a reward?", RUNE_MYSTERIES),
+        //endregion
+
+        //region Icthlarin Little Helper
+        WHY_ICTHLARIN(1, "Why? [Icthlarin's Little Helper]", ICTHLARIN_LITTLE_HELPER),
+        TELL_ME_ABOUT_SOPHANEM(2, "Tell me about Sophanem. [Icthlarin's Little Helper]", ICTHLARIN_LITTLE_HELPER),
+        NUMBER_9(3, "9.", ICTHLARIN_LITTLE_HELPER),
+        I_NEED_HELP(1, "I need help.", ICTHLARIN_LITTLE_HELPER),
+        OKAY_THAT_SOUNDS_FAIR(2, "Okay, that sounds fair.", ICTHLARIN_LITTLE_HELPER),
+        TOTALLY_POSITIVE(3, "Totally positive.", ICTHLARIN_LITTLE_HELPER),
+        SURE_NO_PROBLEM(4, "Sure, no problem.", ICTHLARIN_LITTLE_HELPER),
+        ALRIGHT_I_LL_GET_THE_WOOD_FOR_YOU(2, "Alright, I'll get the wood for you.", ICTHLARIN_LITTLE_HELPER),
+        SCRAPE_IT_OUT(1, "Scrape it out.", ICTHLARIN_LITTLE_HELPER),
+        HIDE_THE_UNHOLY_SYMBOL(1, "Hide the unholy symbol in this sarcophagus.", ICTHLARIN_LITTLE_HELPER),
+        YES_RETURN_TO_HIGH_PRIEST(1, "Yes, return to the high priest in Sophanem.", ICTHLARIN_LITTLE_HELPER),
+        //endregion
+
+        //region Nature Spirit
+        TALK_ABOUT_SOMETHING_ELSE_1(2, "Talk about something else.", NATURE_SPIRIT),
+        IS_THERE_ANYTHING_ELSE_INTERESTING_TO_DO_AROUND_HERE(2, "Is there anything else interesting to do around here?", NATURE_SPIRIT),
+        YES_I_LL_GO_AND_LOOK_FOR_HIM(4, "Yes, I'll go and look for him.", NATURE_SPIRIT),
+        YES_I_M_SURE(1, "Yes, I'm sure.", NATURE_SPIRIT),
+        HOW_LONG_HAVE_YOU_BEEN_A_GHOST(2, "How long have you been a ghost?", NATURE_SPIRIT),
+        SO_WHAT_S_YOUR_PLAN(2, "So, what's your plan?", NATURE_SPIRIT),
+        HOW_CAN_I_HELP(4, "How can I help?", NATURE_SPIRIT),
+        TALK_ABOUT_SOMETHING_ELSE_2(2, "Talk about something else.", NATURE_SPIRIT),
+        YES_PLEASE_1(1, "Yes, please.", NATURE_SPIRIT),
+        I_THINK_I_VE_SOLVED_THE_PUZZLE(3, "I think I've solved the puzzle!", NATURE_SPIRIT),
+        YES_1(1, "Yes.", NATURE_SPIRIT),
+        OK_THANKS(4, "Ok, thanks.", NATURE_SPIRIT),
+        //endregion
+
+        //region In Search of the Myreque
+        WHY_DO_THEY_NEED_HELP(2, "Why do they need help? Are they in trouble?", IN_SEARCH_OF_THE_MYREQUE),
+        MAYBE_I_COULD_HELP_YOU_OUT_HERE(4, "Perhaps I could help you out here.", IN_SEARCH_OF_THE_MYREQUE),
+        YES_I_LL_DO_IT(4, "Yes, I'll do it!", IN_SEARCH_OF_THE_MYREQUE),
+        WELL_I_GUESS_THEY_LL_JUST_DIE_WITHOUT_WEAPONS(2, "Well, I guess they'll just die without weapons.", IN_SEARCH_OF_THE_MYREQUE),
+        RESOURCEFUL_ENOUGH_TO_GET_THEIR_OWN_STEEL_WEAPONS(2, "Resourceful enough to get their own steel weapons?", IN_SEARCH_OF_THE_MYREQUE),
+        IF_YOU_DON_T_TELL_ME_THEIR_DEATHS_ARE_ON_YOUR_HEAD(3, "If you don't tell me, their deaths are on your head!", IN_SEARCH_OF_THE_MYREQUE),
+        WHAT_KIND_OF_A_MAN_ARE_YOU_TO_SAY_THAT_YOU_DON_T_CARE(3, "What kind of a man are you to say that you don't care?", IN_SEARCH_OF_THE_MYREQUE),
+        GIVE_WOODEN_PLANKS_TO_CYREG(1, "Give wooden planks to Cyreg.", IN_SEARCH_OF_THE_MYREQUE),
+        I_VE_COME_TO_HELP_THE_MYREQUE_I_VE_BRINGED_WEAPONS(1, "I've come to help the Myreque. I've brought weapons.", IN_SEARCH_OF_THE_MYREQUE),
+        OK_THANKS_1(5, "Ok, thanks.", IN_SEARCH_OF_THE_MYREQUE),
+        HOW_DO_I_GET_OUT_OF_HERE(3, "How do I get out of here?", IN_SEARCH_OF_THE_MYREQUE),
+        //endregion
+
+        //region In Aid of the Myreque
+        WANT_TO_JOIN_YOUR_ORGANISATION(1, "I want to join your organisation.", IN_AID_OF_THE_MYREQUE),
+        OK_TELL_ME_THIS_INFORMATION_YOU_HAVE_TO_IMPART(2, "Ok, tell me this information you have to impart.", IN_AID_OF_THE_MYREQUE),
+        CAN_YOU_TELL_ME_ABOUT_THE_JOB(1, "Can you tell me about the job?", IN_AID_OF_THE_MYREQUE),
+        OK_I_LL_DO_THE_JOB(1, "Ok, I'll do the job.", IN_AID_OF_THE_MYREQUE),
+        ARE_THERE_ANY_OUT_OF_THE_WAY_PLACES_IN_HERE(4, "Are there any 'out of the way' places in here?", IN_AID_OF_THE_MYREQUE),
+        OK_THANKS_2(5, "Ok, thanks!", IN_AID_OF_THE_MYREQUE),
+        I_D_LIKE_TO_HELP_FIX_UP_THE_TOWN(3, "I'd like to help fix up the town.", IN_AID_OF_THE_MYREQUE),
+        WHAT_SHOULD_I_DO_NOW(4, "What should I do now?", IN_AID_OF_THE_MYREQUE),
+        DO_YOU_FANCY_THE_JOB(3, "Do you fancy the job?", IN_AID_OF_THE_MYREQUE),
+        YES_2(1, "Yes", IN_AID_OF_THE_MYREQUE),
+        I_FOUND_OUT_SOME_THINGS_ABOUT_EFARITAY(2, "I found out some things about Efaritay.", IN_AID_OF_THE_MYREQUE),
+        IS_THERE_SOMETHING_I_MIGHT_GET_MORE_INFORMATION_ABOUT_IVANDIS(4, "Is there somewhere that I might get more information about Ivandis?", IN_AID_OF_THE_MYREQUE),
+        THE_LIVES_OF_THOSE_PITIFUL_FEW_LEFT_IN_MORYTANIA_COULD_REST_ON_THIS(3, "The lives of those pitiful few left in Morytania could rest on this!", IN_AID_OF_THE_MYREQUE),
+        VELAF_TOLD_ME_ABOUT_IVANDIS(1, "Veliaf told me about Ivandis.", IN_AID_OF_THE_MYREQUE),
+        I_HAVE_BROUGHT_YOU_THE_ROD_OF_IVANDIS(1, "I have brought you the Rod of Ivandis!", IN_AID_OF_THE_MYREQUE),
+        YES_I_VE_COME_TO_GIVE_THE_ROD_OF_IVANDIS_TO_YOU(1, "Yes, I've come to give the Rod of Ivandis to you!", IN_AID_OF_THE_MYREQUE);
+        //endregion
 
         private final int number;
         private final String text;
@@ -652,6 +804,28 @@ public class Dialogs {
         }
     }
 
+    // Enum to hold dialogue phrases that should close out dialog windows.
+    // used for when a quest npc will get stuck in dialog since we don't want to press any options that are available
+    enum AutoCloseDialogs {
+        REDBERRY_PIE("redberry pie. They REALLY like redberry pie."),
+        BARAEK("If I were you I would talk to Baraek,"),
+        BLACK_ARM("The ruthless and notorious Black Arm "),
+        PET_SHOP_OWNER("Is there anything else i can help you with?"),
+        KING_RONALD("I've told you everything I know."),
+        DUTCHNESS("Let us leave the duchess alone,"),
+        RODNEY("Don't take my word for it. Ask Bianca.");
+
+
+        private final String phrase;
+
+        AutoCloseDialogs(String phrase) {
+            this.phrase = phrase;
+        }
+
+        public String getPhrase() {
+            return phrase;
+        }
+    }
 
     public static enum QuestInstruction {
 
@@ -668,13 +842,24 @@ public class Dialogs {
         ANCIENT_AWAKENING_INSTRUCTION("Have Armour and weapon equipped. Inventory fill with food before going to Ungael Site, 12 Waves are required manual intervention.", ANCIENT_AWAKENING),
 
         //Battle of Forinthry
-        BATTLE_OF_FORINTHRY_INSTRUCTION("Have Armour and weapon equipped. Inventory fill with food before going to fight with Vorkath", BATTLE_OF_FORINTHRY),
+        BATTLE_OF_FORINTHRY_INSTRUCTION("Requires Grove Gabin Tier 1, Botanist's Workbench Tier 1. Have Armour and weapon equipped. Inventory fill with food before going to fight with Vorkath", BATTLE_OF_FORINTHRY),
 
         //Requiem for a Dragon
         REQUIEM_FOR_A_DRAGON_INSTRUCTION("Talking to Archivist and Zemouregal is required manual intervention. Resotring becon chat option with tree of balance is required manual intervention. Ritual required manual intervention.", REQUIEM_FOR_A_DRAGON),
 
         //Murder on the Border
-        MURDER_ON_THE_BORDER_INSTRUCTION("Selecting the murder option required manual intervention and talk to Rodney during second half of the quest", MURDER_ON_THE_BORDER);
+        MURDER_ON_THE_BORDER_INSTRUCTION("Requires Town Hall Tier 1, Command Centre Tier 1, Chapel Tier 1.  Talk to Rodney during second half of the quest", MURDER_ON_THE_BORDER),
+
+        //Imp Catcher
+        IMP_CATCHER_INSTRUCTION("Race the imp at Air Ruins manual", IMP_CATCHER),
+
+        Icthlarin_INSTRUCTION("Pramid walk is required manual intervention", ICTHLARIN_LITTLE_HELPER),
+
+        //In Search of the Myreque
+        IN_SEARCH_OF_THE_MYREQUE_INSTRUCTION("Some dialogue is required manual intervention", IN_SEARCH_OF_THE_MYREQUE),
+
+        //In Aid of the Myreque
+        IN_AID_OF_THE_MYREQUE_INSTRUCTION("Start quest with 2 or 3 food and 5 buckets in inventory. Keep all required Items in Bank. Talk to Polmafi, Radigad and then Ivan and play temmple tracking the game manually route 1", IN_AID_OF_THE_MYREQUE);
 
         private final String text;
         private final DebugScript.Quest quest;
