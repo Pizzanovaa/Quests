@@ -258,6 +258,10 @@ public class Dialogs {
                 return !textTitle.contains("What is the boatman's name?");
             case WHAT_SHOULD_I_DO_NOW:
                 return VarManager.getVarbitValue(11498) != 160 && VarManager.getVarbitValue(11498) != 170 && VarManager.getVarbitValue(11498) != 190 && VarManager.getVarbitValue(11498) != 200;
+            case WHAT_DO_YOU_WANT_ME_TO_DO_1:
+                return VarManager.getVarbitValue(10204) !=110;
+            case YOU_STILL_WANT_TO_GO_TO_BURGH_DE_ROTT:
+                return VarManager.getVarbitValue(13978) == 60;
             case I_FOUND_OUT_SOME_THINGS_ABOUT_EFARITAY:
                 return InAidoftheMyreque.option2derzel;
             default:
@@ -849,12 +853,63 @@ public class Dialogs {
         OKTHANKSAID(1,"Ok, thanks.",IN_AID_OF_THE_MYREQUE),
         //endregion
 
+        //region The Darkness of Hallowvale
+        IS_THERE_SOMETHING_I_CAN_DO_TO_HELP_YOU(1, "Is there something I can do to help you?", THE_DARKNESS_OF_HALLOWVALE),
+        HOW_CAN_I_SEARCH_FOR_THE_SANGUINESTI_ORDER_OF_THE_MYREQUE(3, "How can I search for the Sanguinesti order of the Myreque?", THE_DARKNESS_OF_HALLOWVALE),
+        WHAT_IS_THE_SANGUINESTI_REGION(2, "What is the Sanguinesti region?", THE_DARKNESS_OF_HALLOWVALE),
+        CAN_YOU_TELL_ME_ABOUT_THE_SANGUINESTI_MYREQUE(4, "Can you tell me about the Sanguinesti Myreque?", THE_DARKNESS_OF_HALLOWVALE),
+        TELL_ME_AGAIN_HOW_TO_GET_INTO_THE_SANGUINESTI_REGION(5, "Tell me again how to get into the Sanguinesti region.", THE_DARKNESS_OF_HALLOWVALE),
+        OK_THANKS_3(6, "Ok, thanks.", THE_DARKNESS_OF_HALLOWVALE),
+        DO_YOU_KNOW_ABOUT_THE_MYREQUE(1, "(whisper) Do you know about the Myreque?", THE_DARKNESS_OF_HALLOWVALE),
+        I_REALLY_NEED_TO_MEET_THE_MYREQUE(1, "(whisper) I really need to meet the Myreque.", THE_DARKNESS_OF_HALLOWVALE),
+        HOW_CAN_OLD_MAN_RAL_HELP_ME(1, "How can Old Man Ral help me?", THE_DARKNESS_OF_HALLOWVALE),
+        SOMEONE_SAID_YOU_COULD_HELP_ME(1, "Someone said you could help me.", THE_DARKNESS_OF_HALLOWVALE),
+        OLD_MAN_RAL_THE_SAGE_OF_SANGUINESTI(1, "Old Man Ral, the sage of Sanguinesti.", THE_DARKNESS_OF_HALLOWVALE),
+        WHAT_SHOULD_I_DO_NOW_1(1, "What should I do now?", THE_DARKNESS_OF_HALLOWVALE),
+        I_HAVE_A_MESSAGE_FOR_YOU_FROM_VERTIDA(1, "I have a message for you from Vertida!", THE_DARKNESS_OF_HALLOWVALE),
+        WHAT_DO_YOU_WANT_ME_TO_DO_1(1, "What do you want me to do?", THE_DARKNESS_OF_HALLOWVALE),
+        DID_YOU_HEAR_THE_SOUNDS_AS_WELL(1, "Did you hear the sounds as well?", THE_DARKNESS_OF_HALLOWVALE),
+        OK_HAVE_A_BITE(1, "Okay, have a bite(Offer a blood tithe)", THE_DARKNESS_OF_HALLOWVALE),
+        TALK_ABOUT_ITEMS(1, "Talk about items.", THE_DARKNESS_OF_HALLOWVALE),
+        TALK_ABOUT_SOMETHING_ELSE_3(2, "Talk about something else.", THE_DARKNESS_OF_HALLOWVALE),
+        TALK_ABOUT_DARKNESS_OF_HALLOWVALE(1, "Talk about Darkness of Hallowvale.", THE_DARKNESS_OF_HALLOWVALE),
+        WHAT_SHOULD_I_DO_NOW_2(1, "What should I do now?", THE_DARKNESS_OF_HALLOWVALE),
+        YES_THANKS_I_LL_ACCEPT_THE_FREE_TELEPORT(1, "Yes thanks, I'll accept the free teleport.", THE_DARKNESS_OF_HALLOWVALE),
+        I_WAS_ATTACKED_NEAR_TO_PATERDOMUS(1, "I was attacked near to Paterdomus!", THE_DARKNESS_OF_HALLOWVALE),
+        KING_ROALD_CANNOT_SEND_TROOPS(1, "King Roald cannot send troops!", THE_DARKNESS_OF_HALLOWVALE),
+        DO_A_BIT_OF_MENIAL_WORK(2, "Do a bit of menial work.", THE_DARKNESS_OF_HALLOWVALE),
+        YES_I_LL_PLACE_IT_ALL_IN_THE_CART(1, "Yes, I'll place it all in the cart.", THE_DARKNESS_OF_HALLOWVALE),
+        OKAY_LEAD_THE_WAY(2, "Okay, lead the way.", THE_DARKNESS_OF_HALLOWVALE),
+        I_WAS_ATTACKED_NEAR_PATERDOMUS_ON_MY_TRAVELS(1, "I was attacked near Paterdomus on my travels.", THE_DARKNESS_OF_HALLOWVALE),
+        CAN_I_HELP_IN_SOME_WAY(1, "Can I help in some way?", THE_DARKNESS_OF_HALLOWVALE),
+        I_HAVE_ALL_THE_SKETCHES_FOR_YOU(1, "I have all the sketches for you!", THE_DARKNESS_OF_HALLOWVALE),
+        I_HAVE_A_MESSAGE_FOR_YOU_SAFALAAN_IT_MAY_BE_IMPORTANT(1, "I have a message for you Safalaan - it may be important.", THE_DARKNESS_OF_HALLOWVALE),
+        I_HAVE_A_MESSAGE_FOR_YOU_FROM_SAFALAAN(1, "I have a message for you from Safalaan.", THE_DARKNESS_OF_HALLOWVALE),
+        //endregion
+
         //region Priest in peri
         TALKABOUT(1,"Talk about Priest in Peril.",PRIEST_IN_PERIL),
         GREETRONALD(1,"Greet the king.",PRIEST_IN_PERIL),
         KNOCK_DOOR(1,"Knock at the door.",PRIEST_IN_PERIL),
         CHECKDERZEL(1,"Roald sent me to check on Drezel.",PRIEST_IN_PERIL),
-        YESPREIST(1,"Yes.",PRIEST_IN_PERIL);
+        YESPREIST(1,"Yes.",PRIEST_IN_PERIL),
+        //endregion
+
+        //region Legacy of Seergaze
+        OKAY_THANKS_4(3,"Okay, thanks.",LEGACY_OF_SEERGAZE),
+        WHO_DO_YOU_THINK_THESE_SUSPICIOUS_PEOPLE_ARE(2,"Who do you think these suspicious people are?",LEGACY_OF_SEERGAZE),
+        DO_YOU_THINK_THIS_HAS_ANYTHING_TO_DO_WITH_THE_GUTHIXIAN_EDICTS(2,"Do you think this has anything to do with the Guthixian Edicts?",LEGACY_OF_SEERGAZE),
+        YOU_STILL_WANT_TO_GO_TO_BURGH_DE_ROTT(2,"You still want to go to Burgh de Rott?",LEGACY_OF_SEERGAZE),
+        I_CAN_TAKE_YOU_TO_BURGH_DE_ROTT(1,"I can take you to Burgh de Rott.",LEGACY_OF_SEERGAZE),
+        DO_YOU_HAVE_A_JOB_FOR_ME(2,"Do you have a job for me?",LEGACY_OF_SEERGAZE),
+        HOWS_THE_RESEARCH_GOING(3,"How's the research going?",LEGACY_OF_SEERGAZE),
+        CAN_I_HELP_IN_SOME_WAY_1(4,"Can I help in some way?",LEGACY_OF_SEERGAZE),
+        HI_THERE_I_WAS_WONDERING_IF_I_COULD_ASK_SOME_QUESTIONS(2,"Hi there, I was wondering if I could ask some questions?",LEGACY_OF_SEERGAZE),
+        HOW_ABOUT_USING_THIS_AS_THE_HEAD_FOR_THE_FLAIL(2,"How about using this as the head for the flail?",LEGACY_OF_SEERGAZE),
+        IS_THERE_ANYTHING_I_CAN_DO(2,"Is there anything I can do?",LEGACY_OF_SEERGAZE),
+        THE_FLAIL_OF_IVANDIS_KILLS_VYREWATCH(1,"The Flail of Ivandis kills Vyrewatch!",LEGACY_OF_SEERGAZE),
+        VELAF_ASKED_ME_TO_BRING_THIS_VYREWATCH_CORPSE_TO_YOU(2,"Veliaf asked me to bring this Vyrewatch corpse to you.",LEGACY_OF_SEERGAZE),
+        TALK_ABOUT_SOMETHING_ELSE_4(2,"Talk about something else.",LEGACY_OF_SEERGAZE);
         //endregion
 
 
@@ -895,7 +950,9 @@ public class Dialogs {
         FLORIN("Listen, if you do manage to find a way to get a place here,"),
         RAZVAN("Hmm, perhaps you'd consider fixing up the general store."),
         CORNELIUS("Fix the floopin bank would ya!"),
-        AUREL("Please can you fix the bank booth first");
+        AUREL("Please can you fix the bank booth first"),
+        VERTIDA("What should I do now?");
+
 
 
         private final String phrase;
@@ -943,7 +1000,14 @@ public class Dialogs {
 
         //In Aid of the Myreque
         IN_AID_OF_THE_MYREQUE_INSTRUCTION("Start quest with 5 food and 5 buckets in inventory. Buy STEEL Nails. Keep all required Items in Bank. Make sure you are in melee gear, or no gear so you have accuracy with the sickle. Requires manual input of enchanting rod with lvl 1 enchant", IN_AID_OF_THE_MYREQUE),
-        PRIEST_IN_PERIL("Have 25 pure essence and a bucket in your inventory, along with a weapon wielded. Will have to hand in 50 rune essence manually if F2P", DebugScript.Quest.PRIEST_IN_PERIL);
+        PRIEST_IN_PERIL("Have 25 pure essence and a bucket in your inventory, along with a weapon wielded. Will have to hand in 50 rune essence manually if F2P", DebugScript.Quest.PRIEST_IN_PERIL),
+
+        //The Darkness of Hallowvale
+        THE_DARKNESS_OF_HALLOWVALE_INSTRUCTION("Have Items in inventory", THE_DARKNESS_OF_HALLOWVALE),
+
+        //Legacy of Seergaze
+        LEGACY_OF_SEERGAZE_INSTRUCTION("Have Items in inventory. Burgh de Rott is required manual intervention. Maze required manual intervention", LEGACY_OF_SEERGAZE);
+
         private final String text;
         private final DebugScript.Quest quest;
 

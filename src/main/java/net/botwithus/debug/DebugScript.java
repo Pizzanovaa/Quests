@@ -109,7 +109,9 @@ public class DebugScript extends LoopingScript {
             case IN_SEARCH_OF_THE_MYREQUE -> InSearchoftheMyreque.quest();
             case IN_AID_OF_THE_MYREQUE -> InAidoftheMyreque.quest();
             case PRIEST_IN_PERIL -> PriestInPeril.quest();
-
+            case LEGACY_OF_SEERGAZE -> LegacyofSeergaze.quest();
+            case THE_DARKNESS_OF_HALLOWVALE -> TheDarknessofHallowvale.quest();
+            
             default -> delay(100);
         }
 
@@ -250,6 +252,8 @@ public class DebugScript extends LoopingScript {
         NATURE_SPIRIT(133),
         IN_SEARCH_OF_THE_MYREQUE(283),
         IN_AID_OF_THE_MYREQUE(21),
+        THE_DARKNESS_OF_HALLOWVALE(311),
+        LEGACY_OF_SEERGAZE(327),
         THE_GOLEM(286),
         RUNE_MYTHOS(494),
         GHOSTS_AHOY(82),
