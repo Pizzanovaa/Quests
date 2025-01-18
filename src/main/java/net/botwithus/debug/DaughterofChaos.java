@@ -20,7 +20,7 @@ import net.botwithus.rs3.util.RandomGenerator;
 public class DaughterofChaos {
 
     static Coordinate player = Client.getLocalPlayer().getServerCoordinate();
-    static Coordinate startcord = new Coordinate(2983,3341,2);
+    static Coordinate startcord = new Coordinate(2983, 3341, 2);
     static Area.Circular startarea = new Area.Circular(startcord, 10);
     static Coordinate questAnneDimitriLocation = new Coordinate(2970, 3339, 1);
     static Area.Circular questAnneDimitriArea = new Area.Circular(questAnneDimitriLocation, 10);
@@ -32,6 +32,7 @@ public class DaughterofChaos {
 
     public static void quest() {
         int QuestVarp = VarManager.getVarbitValue(51682);
+        ScriptConsole.println("Varp: " + QuestVarp);
         player = Client.getLocalPlayer().getServerCoordinate();
 
 
@@ -48,7 +49,7 @@ public class DaughterofChaos {
             ScriptConsole.println("Starting quest... Daughter of Chaos");
 
             if (startarea.contains(player)) {
-                
+
                 talktoAdrasteia();
             } else {
                 DebugScript.moveTo(startcord);
@@ -58,224 +59,224 @@ public class DaughterofChaos {
             switch (QuestVarp) {
 
                 case 15:
-                if (!questAnneDimitriArea.contains(player)) {
-                    DebugScript.moveTo(questAnneDimitriLocation);
-                } else {
-                    talktoAnneDimitri();
-                }
-                break;
+                    if (!questAnneDimitriArea.contains(player)) {
+                        DebugScript.moveTo(questAnneDimitriLocation);
+                    } else {
+                        talktoAnneDimitri();
+                    }
+                    break;
                 case 20:
-                if(!questAnneDimitriArea2.contains(player)) {
-                    DebugScript.moveTo(questAnneDimitriLocation2);
-                } else {
-                    talktoAnneDimitri();
-                }
-                break;
+                    if (!questAnneDimitriArea2.contains(player)) {
+                        DebugScript.moveTo(questAnneDimitriLocation2);
+                    } else {
+                        talktoAnneDimitri();
+                    }
+                    break;
                 case 25:
-                break;
+                    break;
                 case 30:
-                break;
+                    break;
                 case 35:
-                break;
+                    break;
                 case 40:
-                talktoAnneDimitri();    
-                break;
-                case 45:
-                pointofinterest();
-                talktoAnneDimitri();    
-                break;
-                case 50:
-                Npc npc = NpcQuery.newQuery().name("Memory fragment").results().first();
-                if (npc != null) {
-                    npc.interact(NPCAction.NPC1);
-                    delay(RandomGenerator.nextInt(1200, 1500));
-                }
-                else
-                {
                     talktoAnneDimitri();
-                }
-                break;
+                    break;
+                case 45:
+                    for (int i = 0; i < 3; i++){
+                        if (Client.getLocalPlayer().isMoving()) {
+                            i--;
+                            return;
+                        }
+                        pointofinterest();
+                    }
+
+
+                    talktoAnneDimitri();
+                    break;
+                case 50:
+                    Npc npc = NpcQuery.newQuery().name("Memory fragment").results().first();
+                    if (npc != null) {
+                        npc.interact(NPCAction.NPC1);
+                        delay(RandomGenerator.nextInt(1200, 1500));
+                    } else {
+                        talktoAnneDimitri();
+                    }
+                    break;
                 case 55:
-                Npc npc1 = NpcQuery.newQuery().name("Restored Memory").results().first();
-                if (npc1 != null) {
-                    npc1.interact(NPCAction.NPC1);
-                    delay(RandomGenerator.nextInt(1200, 1500));
-                }
-                break;
+                    Npc npc1 = NpcQuery.newQuery().name("Restored Memory").results().first();
+                    if (npc1 != null) {
+                        npc1.interact(NPCAction.NPC1);
+                        delay(RandomGenerator.nextInt(1200, 1500));
+                    }
+                    break;
                 case 60:
-                Npc npc2 = NpcQuery.newQuery().name("Restored Memory").results().first();
-                if (npc2 != null) {
-                    npc2.interact(NPCAction.NPC1);
-                    delay(RandomGenerator.nextInt(1200, 1500));
-                }
-                break;
+                    Npc npc2 = NpcQuery.newQuery().name("Restored Memory").results().first();
+                    if (npc2 != null) {
+                        npc2.interact(NPCAction.NPC1);
+                        delay(RandomGenerator.nextInt(1200, 1500));
+                    }
+                    break;
                 case 65:
-                talktoEnakhra();
-                talktoGeneralKhazard();
-                talktoZemouregal();
-                talktoBilrach();
-                break;
+                    talktoEnakhra();
+                    talktoGeneralKhazard();
+                    talktoZemouregal();
+                    talktoBilrach();
+                    break;
                 case 70:
 
-                if(VarManager.getVarbitValue(51683) == 1 && VarManager.getVarbitValue(51684) == 0) // Select Easy mode
-                {
-                    talktoAnneDimitri();
-                }
-                else if(VarManager.getVarbitValue(51683) == 1 && VarManager.getVarbitValue(51684) == 1)  // Inside Easy mode
-                { 
-                    talktoAnneDimitri();
-                    println("Manual Fight");
-                    // int currentHealth = Client.getLocalPlayer().getCurrentHealth();
-                    // int maxHealth = Client.getLocalPlayer().getMaximumHealth();
-                    // int healthPercentage = (currentHealth * 100) / maxHealth;
+                    if (VarManager.getVarbitValue(51683) == 1 && VarManager.getVarbitValue(51684) == 0) // Select Easy mode
+                    {
+                        talktoAnneDimitri();
+                    } else if (VarManager.getVarbitValue(51683) == 1 && VarManager.getVarbitValue(51684) == 1)  // Inside Easy mode
+                    {
+                        talktoAnneDimitri();
+                        println("Manual Fight");
+                        // int currentHealth = Client.getLocalPlayer().getCurrentHealth();
+                        // int maxHealth = Client.getLocalPlayer().getMaximumHealth();
+                        // int healthPercentage = (currentHealth * 100) / maxHealth;
 
-                    // Npc healthorb = NpcQuery.newQuery().name("Health orb").results().first();
-                    // if(healthPercentage < 50 && healthorb != null)
-                    // {
-                    // healthorb.interact(NPCAction.NPC1);
-                    // delay(RandomGenerator.nextInt(400, 600));
-                    // return;
-                    // }
+                        // Npc healthorb = NpcQuery.newQuery().name("Health orb").results().first();
+                        // if(healthPercentage < 50 && healthorb != null)
+                        // {
+                        // healthorb.interact(NPCAction.NPC1);
+                        // delay(RandomGenerator.nextInt(400, 600));
+                        // return;
+                        // }
 
-                    // if(Client.getLocalPlayer().getFollowing() == null && !Client.getLocalPlayer().hasTarget() && !Client.getLocalPlayer().inCombat())
-                    // {
-                    //     killDemon();
-                    // }
-                    // else if(Client.getLocalPlayer().getFollowing() == null && !Client.getLocalPlayer().hasTarget() && !Client.getLocalPlayer().inCombat())
-                    // {
-                    //     killCultist();
-                    // }
-                }
-                else if(VarManager.getVarbitValue(51683) == 0 && VarManager.getVarbitValue(51684) == 0)
-                {
-                    println("Manual Fight");
-                //     Npc npc3 = NpcQuery.newQuery().name("Chaos demon").results().first();
-                //     Npc healthorb = NpcQuery.newQuery().name("Health orb").results().first();
-                //     int currentHealth = Client.getLocalPlayer().getCurrentHealth();
-                //     int maxHealth = Client.getLocalPlayer().getMaximumHealth();
-                //     int healthPercentage = (currentHealth * 100) / maxHealth;
+                        // if(Client.getLocalPlayer().getFollowing() == null && !Client.getLocalPlayer().hasTarget() && !Client.getLocalPlayer().inCombat())
+                        // {
+                        //     killDemon();
+                        // }
+                        // else if(Client.getLocalPlayer().getFollowing() == null && !Client.getLocalPlayer().hasTarget() && !Client.getLocalPlayer().inCombat())
+                        // {
+                        //     killCultist();
+                        // }
+                    } else if (VarManager.getVarbitValue(51683) == 0 && VarManager.getVarbitValue(51684) == 0) {
+                        println("Manual Fight");
+                        //     Npc npc3 = NpcQuery.newQuery().name("Chaos demon").results().first();
+                        //     Npc healthorb = NpcQuery.newQuery().name("Health orb").results().first();
+                        //     int currentHealth = Client.getLocalPlayer().getCurrentHealth();
+                        //     int maxHealth = Client.getLocalPlayer().getMaximumHealth();
+                        //     int healthPercentage = (currentHealth * 100) / maxHealth;
 
 
-                //     if (npc3 != null && Client.getLocalPlayer().hasTarget()) {
-                 
-                // MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1, -1, 68550678); //3
-                // delay(RandomGenerator.nextInt(400, 600));
-                // MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1, -1, 68550673); // 2
-                // delay(RandomGenerator.nextInt(400, 600));
-                // MiniMenu.interact(SelectableAction.SELECTABLE_COMPONENT.getType(), 1, -1, 68550668);
-                // delay(RandomGenerator.nextInt(400, 600));
-                // }
-                // if(healthPercentage < 50 && healthorb != null)
-                // {
-                //     healthorb.interact(NPCAction.NPC1);
-                //     delay(RandomGenerator.nextInt(400, 600));
-                // }
-                }
-                
-                break;
+                        //     if (npc3 != null && Client.getLocalPlayer().hasTarget()) {
+
+                        // MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1, -1, 68550678); //3
+                        // delay(RandomGenerator.nextInt(400, 600));
+                        // MiniMenu.interact(ComponentAction.COMPONENT.getType(), 1, -1, 68550673); // 2
+                        // delay(RandomGenerator.nextInt(400, 600));
+                        // MiniMenu.interact(SelectableAction.SELECTABLE_COMPONENT.getType(), 1, -1, 68550668);
+                        // delay(RandomGenerator.nextInt(400, 600));
+                        // }
+                        // if(healthPercentage < 50 && healthorb != null)
+                        // {
+                        //     healthorb.interact(NPCAction.NPC1);
+                        //     delay(RandomGenerator.nextInt(400, 600));
+                        // }
+                    }
+
+                    break;
                 case 75:
-                talktoBilrach();
-                break;
+                    talktoBilrach();
+                    break;
                 case 80:
-                talktoAnneDimitri();
-                break;
+                    talktoAnneDimitri();
+                    break;
                 case 85:
-                
-                break;
-                case 90:
-                
-                break;
-                case 95:
-                talktoAnneDimitri();
-                break;
-                case 100:
-                pointofinterest();
-                talktoAnneDimitri();
-                break;
-                case 105:
-                Npc npc4 = NpcQuery.newQuery().name("Memory fragment").results().first();
-                if (npc4 != null) {
-                    npc4.interact(NPCAction.NPC1);
-                    delay(RandomGenerator.nextInt(1200, 1500));
-                }
-                break;
-                case 110:
-                Npc npc5 = NpcQuery.newQuery().name("Restored Memory").results().first();
-                if (npc5 != null) {
-                    npc5.interact(NPCAction.NPC1);
-                    delay(RandomGenerator.nextInt(1200, 1500));
-                }
-                break;
-                case 115:
-                Npc npc6 = NpcQuery.newQuery().name("Restored Memory").results().first();
-                if (npc6 != null) {
-                    npc6.interact(NPCAction.NPC1);
-                    delay(RandomGenerator.nextInt(1200, 1500));
-                }
-                break;
-                case 120:
-                break;
-                case 125:
-                println("Manual Fight");
-                break;
-                case 130:
-                talktocultist();
-                break;
-                case 135:
-                break;
-                case 140:
-                break;
-                case 145:
-                break;
-                case 150:
-                break;
-                case 155:
-                break;
-                case 160:
-                break;
-                case 165:
-                talktoAnneDimitri();
-                break;
-                case 170:
-                Npc npc7 = NpcQuery.newQuery().name("Restored Memory").results().first();
-                if (npc7 != null) {
-                    npc7.interact(NPCAction.NPC1);
-                    delay(RandomGenerator.nextInt(1200, 1500));
-                }
-                break;
-                case 175:
-                println("Manual Fight");
-                break;
-                case 180:
-                break;
-                case 185:
-                break;
-                case 190:
-                talktoMoia();
-                break;
-                case 195:
-                break;
-                case 200:
-                
-                break;
-                case 205:
-                 if(!startarea.contains(player))
-                 {
-                    DebugScript.moveTo(startcord);
-                 }
-                 else
-                 {
-                    talktoAdrasteia();
-                 }
-                break;
 
-                
+                    break;
+                case 90:
+
+                    break;
+                case 95:
+                    talktoAnneDimitri();
+                    break;
+                case 100:
+                    println("Walk close to the points of interest and then Walk to Anne Dimitri");
+                    pointofinterest();
+                    talktoAnneDimitri();
+                    break;
+                case 105:
+                    Npc npc4 = NpcQuery.newQuery().name("Memory fragment").results().first();
+                    if (npc4 != null) {
+                        npc4.interact(NPCAction.NPC1);
+                        delay(RandomGenerator.nextInt(1200, 1500));
+                    }
+                    break;
+                case 110:
+                    Npc npc5 = NpcQuery.newQuery().name("Restored Memory").results().first();
+                    if (npc5 != null) {
+                        npc5.interact(NPCAction.NPC1);
+                        delay(RandomGenerator.nextInt(1200, 1500));
+                    }
+                    break;
+                case 115:
+                    Npc npc6 = NpcQuery.newQuery().name("Restored Memory").results().first();
+                    if (npc6 != null) {
+                        npc6.interact(NPCAction.NPC1);
+                        delay(RandomGenerator.nextInt(1200, 1500));
+                    }
+                    break;
+                case 120:
+                    break;
+                case 125:
+                    println("Manual Fight");
+                    break;
+                case 130:
+                    talktocultist();
+                    break;
+                case 135:
+                    break;
+                case 140:
+                    break;
+                case 145:
+                    break;
+                case 150:
+                    break;
+                case 155:
+                    break;
+                case 160:
+                    break;
+                case 165:
+                    talktoAnneDimitri();
+                    break;
+                case 170:
+                    Npc npc7 = NpcQuery.newQuery().name("Restored Memory").results().first();
+                    if (npc7 != null) {
+                        npc7.interact(NPCAction.NPC1);
+                        delay(RandomGenerator.nextInt(1200, 1500));
+                    }
+                    break;
+                case 175:
+                    println("Manual Fight");
+                    break;
+                case 180:
+                    break;
+                case 185:
+                    break;
+                case 190:
+                    talktoMoia();
+                    break;
+                case 195:
+                    break;
+                case 200:
+
+                    break;
+                case 205:
+                    if (!startarea.contains(player)) {
+                        DebugScript.moveTo(startcord);
+                    } else {
+                        talktoAdrasteia();
+                    }
+                    break;
+
+
             }
         }
     }
 
-    public static void talktoAdrasteia()
-    {
+    public static void talktoAdrasteia() {
         Npc npc = NpcQuery.newQuery().name("Adrasteia").results().first();
         if (npc != null) {
             npc.interact(NPCAction.NPC1);
@@ -283,8 +284,7 @@ public class DaughterofChaos {
         }
     }
 
-    public static void talktoAnneDimitri()
-    {
+    public static void talktoAnneDimitri() {
         Npc npc = NpcQuery.newQuery().name("Anne Dimitri").results().first();
         if (npc != null) {
             npc.interact(NPCAction.NPC1);
@@ -292,8 +292,7 @@ public class DaughterofChaos {
         }
     }
 
-    public static void talktoMoia()
-    {
+    public static void talktoMoia() {
         Npc npc = NpcQuery.newQuery().name("Moia").results().first();
         if (npc != null) {
             npc.interact(NPCAction.NPC1);
@@ -301,8 +300,7 @@ public class DaughterofChaos {
         }
     }
 
-    public static void talktoTrindine()
-    {
+    public static void talktoTrindine() {
         Npc npc = NpcQuery.newQuery().name("Trindine").results().first();
         if (npc != null) {
             npc.interact(NPCAction.NPC1);
@@ -310,8 +308,7 @@ public class DaughterofChaos {
         }
     }
 
-    public static void pointofinterest()
-    {
+    public static void pointofinterest() {
         Npc npc = NpcQuery.newQuery().name("Point of interest").results().first();
         if (npc != null) {
             npc.interact(NPCAction.NPC1);
@@ -319,8 +316,7 @@ public class DaughterofChaos {
         }
     }
 
-    public static void talktoBilrach()
-    {
+    public static void talktoBilrach() {
         Npc npc = NpcQuery.newQuery().name("Bilrach").results().nearest();
         if (npc != null) {
             npc.interact(NPCAction.NPC1);
@@ -328,8 +324,7 @@ public class DaughterofChaos {
         }
     }
 
-    public static void talktoEnakhra()
-    {
+    public static void talktoEnakhra() {
         Npc npc = NpcQuery.newQuery().name("Enakhra").results().first();
         if (npc != null) {
             npc.interact(NPCAction.NPC1);
@@ -337,8 +332,7 @@ public class DaughterofChaos {
         }
     }
 
-    public static void talktoGeneralKhazard()
-    {
+    public static void talktoGeneralKhazard() {
         Npc npc = NpcQuery.newQuery().name("General Khazard").results().first();
         if (npc != null) {
             npc.interact(NPCAction.NPC1);
@@ -346,8 +340,7 @@ public class DaughterofChaos {
         }
     }
 
-    public static void talktoZemouregal()
-    {
+    public static void talktoZemouregal() {
         Npc npc = NpcQuery.newQuery().name("Zemouregal").results().first();
         if (npc != null) {
             npc.interact(NPCAction.NPC1);
@@ -355,8 +348,7 @@ public class DaughterofChaos {
         }
     }
 
-    public static void talktocultist()
-    {
+    public static void talktocultist() {
         Npc npc = NpcQuery.newQuery().name("Wounded cultist").results().first();
         if (npc != null) {
             npc.interact(NPCAction.NPC1);
@@ -364,8 +356,7 @@ public class DaughterofChaos {
         }
     }
 
-    public static void attacknpc()
-    {
+    public static void attacknpc() {
         Npc npc = NpcQuery.newQuery().name("Chaos demon", "Zamorakian cultist").results().first();
         if (npc != null) {
             npc.interact(NPCAction.NPC1);
@@ -388,6 +379,7 @@ public class DaughterofChaos {
         }
 
     }
+
     public static void killCultist() {
         if (!Client.getLocalPlayer().inCombat()) {
             Npc cultist = NpcQuery.newQuery().name("Zamorakian cultist").results().first();
