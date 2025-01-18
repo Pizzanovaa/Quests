@@ -54,7 +54,7 @@ public class DebugScript extends LoopingScript {
         switch (currentQuest) {
             case DEATH_PLATEAU -> DeathPlateau.quest();
             case DRUIDIC_RITUAL -> DruidicRitual.quest();
-            //case LET_THEM_EAT_PIE -> LetThemEatPie.quest();
+            case LET_THEM_EAT_PIE -> LetThemEatPie.quest();
             case WOLF_WHISTLE -> WolfWhistle.quest();
             case VIOLET_IS_BLUE -> VioletIsBlue.quest2();
             case VIOLET_IS_BLUE_TOO -> VioletIsBlueToo.quest();
@@ -227,7 +227,7 @@ public class DebugScript extends LoopingScript {
     public enum Quest {
         DEATH_PLATEAU(140),
         DRUIDIC_RITUAL(111),
-        // LET_THEM_EAT_PIE(200), //UNFINISHED
+         LET_THEM_EAT_PIE(350),
         WOLF_WHISTLE(324),
         VIOLET_IS_BLUE(400),
         VIOLET_IS_BLUE_TOO(453),
