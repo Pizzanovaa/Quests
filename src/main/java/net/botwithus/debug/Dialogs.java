@@ -968,18 +968,29 @@ public class Dialogs {
         VANSTROM_IS_DEAD(1,"Vanstrom is dead!",BRANCHES_OF_DARKMEYER),
         //endregion
 
-
-        //region Pirates Treasure
-        I_M_IN_SEARCH_OF_TREASURE(1,"I'm in search of treasure.",PIRATES_TREASURE),
-        YES_PLEASE_IMPRESSING_THE_LOCALS(1,"Yes please.",PIRATES_TREASURE),
-        THAT_CUSTOMS_OFFICER_IS_ANNOYING_ISN_T_SHE(1,"That customs officer is annoying isn't she?",PIRATES_TREASURE),
-        COULD_YOU_OFFER_ME_EMPLOYMENT_ON_YOUR_PLANTATION(1,"Could you offer me employment on your plantation?",PIRATES_TREASURE),
-        CAN_I_JOURNEY_ON_THIS_SHIP(1,"Can I journey on this ship?",PIRATES_TREASURE),  
-        SEARCH_AWAY_I_HAVE_NOTHING_TO_HIDE(2,"Search away, I have nothing to hide.",PIRATES_TREASURE),
-        OK_IMPRESSING_THE_LOCALS(1,"Ok.",PIRATES_TREASURE),
-        WELL_CAN_I_GET_A_JOB_HERE(1,"Well, can I get a job here?",PIRATES_TREASURE),
-        OK_THANKS_I_LL_GO_AND_GET_IT(1,"Ok thanks, I'll go and get it.",PIRATES_TREASURE);
+        //region Temple of Ikov
+        I_M_A_MIGHTY_HERO(1,"I'm a mighty hero!",TEMPLE_OF_IKOV),
+        THAT_SOUNDS_LIKE_A_LAUGH(1,"That sounds like a laugh!",TEMPLE_OF_IKOV),
+        YES_I_DO(3,"Yes I do!",TEMPLE_OF_IKOV),
+        I_SEEK_THE_STAFF_OF_ARMADYL(1,"I seek the Staff of Armadyl.",TEMPLE_OF_IKOV),
+        LUCIEN_WILL_GIVE_ME_A_GRAND_REWARD_FOR_IT(1,"Lucien will give me a grand reward for it!",TEMPLE_OF_IKOV),
+        YOU_RE_RIGHT_ITS_TIME_FOR_MY_YEARLY_BATH(3,"You're right, it's time for my yearly bath.",TEMPLE_OF_IKOV),
+        OK_I_LL_HELP(1,"Ok! I'll help!",TEMPLE_OF_IKOV),
         //endregion
+
+        //region Buyers and Cellars
+        WHAT_ARE_YOU_DOING_DOWN_HERE(1,"What are you doing down here?",BUYERS_AND_SELLERS),
+        AND_WHAT_IS_IT_YOU_NEED_DONE(1,"And what is it you need done?",BUYERS_AND_SELLERS),
+        NO_I_THINK_I_VE_GOT_THE_HANG_OF_THIS(1,"No, I think I've got the hang of this.",BUYERS_AND_SELLERS),
+        YES_BUYERS_AND_CELLARS(1,"Yes.",BUYERS_AND_SELLERS),
+        I_M_ALWAYS_WILLING_TO_LEARN(1,"I'm always willing to learn.",BUYERS_AND_SELLERS),
+        GO_AHEAD_BUYERS_AND_CELLARS(1,"Go ahead.",BUYERS_AND_SELLERS),
+        NICE_CHALICE(1,"Nice chalice.",BUYERS_AND_SELLERS),
+        CAN_I_HAVE_A_LOOK_AT_IT(1,"Can I have a look at it?",BUYERS_AND_SELLERS),
+        FIRE_FIRE(1,"Fire! Fire!",BUYERS_AND_SELLERS);
+
+        //endregion
+
 
         private final int number;
         private final String text;

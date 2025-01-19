@@ -112,7 +112,8 @@ public class DebugScript extends LoopingScript {
             case LEGACY_OF_SEERGAZE -> LegacyofSeergaze.quest();
             case THE_DARKNESS_OF_HALLOWVALE -> TheDarknessofHallowvale.quest();
             case BRANCHES_OF_DARKMEYER -> TheBranchesofDarkmeyer.quest();
-            
+            case TEMPLE_OF_IKOV -> TempleofIkov.quest();
+            case BUYERS_AND_SELLERS -> BuyersandCellars.quest();
             default -> delay(100);
         }
 
@@ -239,6 +240,7 @@ public class DebugScript extends LoopingScript {
         PRIEST_IN_PERIL(276),
         COOKS_ASSISTANT(257),
         MYTHS_OF_THE_WHITE_LANDS(74),
+        BUYERS_AND_SELLERS(336),
        // MYTHS_OF_THE_WHITE_LANDS(74),
         NECROMANCY_INTRO(493),
         IMP_CATCHER(72),
@@ -246,6 +248,7 @@ public class DebugScript extends LoopingScript {
         WHAT_LIES_BELOW(144),
         ICTHLARIN_LITTLE_HELPER(287),
         THE_KNIGHT_SWORD(261),
+        TEMPLE_OF_IKOV(126),
         SHIELD_OF_ARRAV(63),
         FAMILY_CREST_INCOMPLETE(116),
         TOMES_OF_WARLOCK(497),
