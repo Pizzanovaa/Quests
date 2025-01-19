@@ -909,9 +909,77 @@ public class Dialogs {
         IS_THERE_ANYTHING_I_CAN_DO(2,"Is there anything I can do?",LEGACY_OF_SEERGAZE),
         THE_FLAIL_OF_IVANDIS_KILLS_VYREWATCH(1,"The Flail of Ivandis kills Vyrewatch!",LEGACY_OF_SEERGAZE),
         VELAF_ASKED_ME_TO_BRING_THIS_VYREWATCH_CORPSE_TO_YOU(2,"Veliaf asked me to bring this Vyrewatch corpse to you.",LEGACY_OF_SEERGAZE),
-        TALK_ABOUT_SOMETHING_ELSE_4(2,"Talk about something else.",LEGACY_OF_SEERGAZE);
+        TALK_ABOUT_SOMETHING_ELSE_4(2,"Talk about something else.",LEGACY_OF_SEERGAZE),
         //endregion
 
+        //region The Branches of Darkmeyer
+        WHATS_WRONG(1,"What's wrong?",BRANCHES_OF_DARKMEYER),
+        IS_THERE_ANYTHING_I_CAN_DO_TO_HELP(1,"Is there anything I can do to help?",BRANCHES_OF_DARKMEYER),
+        OKAY_I_LL_GO(1,"Okay, I'll go.",BRANCHES_OF_DARKMEYER),
+        I_FOUND_A_MEDALLION(1,"I found a medallion.",BRANCHES_OF_DARKMEYER),
+        YES_PLEASE_SEND_ME(1,"Yes, please send me!",BRANCHES_OF_DARKMEYER),
+        WHAT_DO_YOU_THINK_OF_THIS_MEDALLION(1,"What do you think of this medallion?",BRANCHES_OF_DARKMEYER),
+        WHAT_HAVE_THE_VAMPIRES_BEEN_DOING(1,"What have the vampyres been doing?",BRANCHES_OF_DARKMEYER),
+        I_VE_GOT_A_LETTER_FOR_YOU(1,"I've got a letter for you.",BRANCHES_OF_DARKMEYER),
+        WHAT_DO_YOU_THINK(1,"What do you think?",BRANCHES_OF_DARKMEYER),
+        WHAT_DO_YOU_THINK_WE_SHOULD_DO(1,"What do you think we should do?",BRANCHES_OF_DARKMEYER),
+        OF_COURSE_1(1,"Of course.",BRANCHES_OF_DARKMEYER),
+        HOW_DO_YOU_KNOW_MY_NAME(1,"How do you know my name?",BRANCHES_OF_DARKMEYER),
+        WHAT_ARE_YOU_DOING_HERE(1,"What are you doing here?",BRANCHES_OF_DARKMEYER),
+        HOW_CAN_YOU_HELP(1,"How can you help?",BRANCHES_OF_DARKMEYER),
+        I_M_NOT_TELLING_YOU_ANYTHING_VAMPYRE_SCUM(1,"I'm not telling you anything, vampyre scum!",BRANCHES_OF_DARKMEYER),
+        HOW_DO_YOU_PLAN_ON_FREEING_MEIYERDITCH(1,"How do you plan on freeing Meiyerditch?",BRANCHES_OF_DARKMEYER),
+        YOU_WONT_GET_ANY_INFORMATION_OUT_OF_ME(1,"You won't get any information out of me.",BRANCHES_OF_DARKMEYER),
+        WHY_DO_YOU_WANT_TO_KILL_DRAKAN(1,"Why do you want to kill Drakan?",BRANCHES_OF_DARKMEYER),
+        WHY_SHOULD_I_TRUST_YOU(1,"Why should I trust you?",BRANCHES_OF_DARKMEYER),
+        I_LL_LISTEN_FOR_NOW(1,"I'll listen, for now.",BRANCHES_OF_DARKMEYER),
+        TELL_ME_MORE_ABOUT_THIS_TREE(1,"Tell me more about this tree.",BRANCHES_OF_DARKMEYER),
+        HOW_DO_I_KNOW_YOU_ARE_TELLING_THE_TRUTH(1,"How do I know you are telling the truth?",BRANCHES_OF_DARKMEYER),
+        //MEIYERDITCH(2,"Meiyerditch",BRANCHES_OF_DARKMEYER),
+        WHAT_DO_I_NEED_TO_GO_TO_DARKMEYER(1,"What do I need to go to Darkmeyer?",BRANCHES_OF_DARKMEYER),
+        MEIYERDITCH_LABORATORIES(2,"Meiyerditch Laboratories",BRANCHES_OF_DARKMEYER),
+        WHAT_DID_YOU_TELL_SAFALAAN(1,"What did you tell Safalaan?",BRANCHES_OF_DARKMEYER),
+        SO_WHERE_S_THIS_TREE(1,"So, where's this tree?",BRANCHES_OF_DARKMEYER),
+        YES_BRANCHES(1,"Yes",BRANCHES_OF_DARKMEYER),
+        I_LL_GET_ON_WITH_IT_THEN(2,"I'll get on with it, then.",BRANCHES_OF_DARKMEYER),
+        SO_CAN_I_GO_AND_GET_THOSE_LOGS_NOW(1,"So can I go and get those logs now?",BRANCHES_OF_DARKMEYER),
+        NO_OF_COURSE_NOT(1,"No, of course not.",BRANCHES_OF_DARKMEYER),
+        VALENTINA_TALK(1,"Valentina",BRANCHES_OF_DARKMEYER),
+        SANGUINUS_TALK(1,"Sanguinus",BRANCHES_OF_DARKMEYER),
+        WHAT_CAN_I_DO(1,"What can I do?",BRANCHES_OF_DARKMEYER),
+        DRAW_FANGS(2,"Draw Fangs.",BRANCHES_OF_DARKMEYER),
+        
+        QUIET_RAT(1,"Quiet, rat.",BRANCHES_OF_DARKMEYER),
+        WHAT_A_SHAME(1,"What a shame. I'm going to be back later for a tithe.",BRANCHES_OF_DARKMEYER),
+        ENOUGH_VERMIN(1,"Enough, vermin!",BRANCHES_OF_DARKMEYER),
+        HES_DEAD(1,"He's dead.",BRANCHES_OF_DARKMEYER),
+        SILENCE_WRETCH(1,"Silence, wretch!",BRANCHES_OF_DARKMEYER),
+        DISPOSE_OF_ONE(1,"Perhaps we need to 'dispose' of this one",BRANCHES_OF_DARKMEYER),
+        OK(1,"Ok",BRANCHES_OF_DARKMEYER),
+        YES_BRANCHES_OF_DARKMEYER(1,"Yes",BRANCHES_OF_DARKMEYER),
+        BUT_THE_VAMPIRES_WILL_BE_FURIOUS(1,"But the vampyres will be furious! You've betrayed us!",BRANCHES_OF_DARKMEYER),
+        I_MANAGED_TO_GET_SOME_LOGS_FROM_THE_BLISTERWOOD_TREE(1,"I managed to get some logs from the blisterwood tree.",BRANCHES_OF_DARKMEYER),
+        WE_MAY_BE_ABLE_TO_TRUST_HER_YES(1,"We may be able to trust her, yes.",BRANCHES_OF_DARKMEYER),
+        I_D_BE_HAPPY_TO_DISPATCH_ONE_OF_THE_MYREQUE_S_MOST_FEARLESS_OPPONENTS(1,"I'd be happy to dispatch one of the Myreque's most fearsome opponents.",BRANCHES_OF_DARKMEYER),
+        DO_YOU_HAVE_ANY_SICKLES_I_COULD_USE(1,"Do you have any sickles I could use?",BRANCHES_OF_DARKMEYER),
+        THATS_ALL_THANKS(1,"That's all, thanks.",BRANCHES_OF_DARKMEYER),
+        WHAT_HAPPENED(1,"What happened?",BRANCHES_OF_DARKMEYER),
+        VANSTROM_BELIEVED_THAT_SAFALAAN_MAY_BE_THE_ICYENE_BLOOD(1,"Vanstrom believed that Safalaan may be the Icyene blood.",BRANCHES_OF_DARKMEYER),
+        VANSTROM_IS_DEAD(1,"Vanstrom is dead!",BRANCHES_OF_DARKMEYER),
+        //endregion
+
+
+        //region Pirates Treasure
+        I_M_IN_SEARCH_OF_TREASURE(1,"I'm in search of treasure.",PIRATES_TREASURE),
+        YES_PLEASE_IMPRESSING_THE_LOCALS(1,"Yes please.",PIRATES_TREASURE),
+        THAT_CUSTOMS_OFFICER_IS_ANNOYING_ISN_T_SHE(1,"That customs officer is annoying isn't she?",PIRATES_TREASURE),
+        COULD_YOU_OFFER_ME_EMPLOYMENT_ON_YOUR_PLANTATION(1,"Could you offer me employment on your plantation?",PIRATES_TREASURE),
+        CAN_I_JOURNEY_ON_THIS_SHIP(1,"Can I journey on this ship?",PIRATES_TREASURE),  
+        SEARCH_AWAY_I_HAVE_NOTHING_TO_HIDE(2,"Search away, I have nothing to hide.",PIRATES_TREASURE),
+        OK_IMPRESSING_THE_LOCALS(1,"Ok.",PIRATES_TREASURE),
+        WELL_CAN_I_GET_A_JOB_HERE(1,"Well, can I get a job here?",PIRATES_TREASURE),
+        OK_THANKS_I_LL_GO_AND_GET_IT(1,"Ok thanks, I'll go and get it.",PIRATES_TREASURE);
+        //endregion
 
         private final int number;
         private final String text;

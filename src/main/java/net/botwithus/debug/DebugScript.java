@@ -111,6 +111,7 @@ public class DebugScript extends LoopingScript {
             case PRIEST_IN_PERIL -> PriestInPeril.quest();
             case LEGACY_OF_SEERGAZE -> LegacyofSeergaze.quest();
             case THE_DARKNESS_OF_HALLOWVALE -> TheDarknessofHallowvale.quest();
+            case BRANCHES_OF_DARKMEYER -> TheBranchesofDarkmeyer.quest();
             
             default -> delay(100);
         }
@@ -254,6 +255,7 @@ public class DebugScript extends LoopingScript {
         IN_AID_OF_THE_MYREQUE(21),
         THE_DARKNESS_OF_HALLOWVALE(311),
         LEGACY_OF_SEERGAZE(327),
+        BRANCHES_OF_DARKMEYER(347),
         THE_GOLEM(286),
         RUNE_MYTHOS(494),
         GHOSTS_AHOY(82),
