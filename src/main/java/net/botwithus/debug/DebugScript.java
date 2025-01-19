@@ -110,7 +110,11 @@ public class DebugScript extends LoopingScript {
             case IN_SEARCH_OF_THE_MYREQUE -> InSearchoftheMyreque.quest();
             case IN_AID_OF_THE_MYREQUE -> InAidoftheMyreque.quest();
             case PRIEST_IN_PERIL -> PriestInPeril.quest();
-
+            case LEGACY_OF_SEERGAZE -> LegacyofSeergaze.quest();
+            case THE_DARKNESS_OF_HALLOWVALE -> TheDarknessofHallowvale.quest();
+            case BRANCHES_OF_DARKMEYER -> TheBranchesofDarkmeyer.quest();
+            case TEMPLE_OF_IKOV -> TempleofIkov.quest();
+            case BUYERS_AND_SELLERS -> BuyersandCellars.quest();
             default -> delay(100);
         }
 
@@ -241,6 +245,8 @@ public class DebugScript extends LoopingScript {
         ERNEST_THE_CHICKEN(15),
 
 
+        BUYERS_AND_SELLERS(336),
+       // MYTHS_OF_THE_WHITE_LANDS(74),
         NECROMANCY_INTRO(493),
         IMP_CATCHER(72),
         PRIEST_IN_PERIL(276),
@@ -248,6 +254,7 @@ public class DebugScript extends LoopingScript {
         WHAT_LIES_BELOW(144),
         ICTHLARIN_LITTLE_HELPER(287),
         THE_KNIGHT_SWORD(261),
+        TEMPLE_OF_IKOV(126),
         SHIELD_OF_ARRAV(63),
         FAMILY_CREST_INCOMPLETE(116),
         TOMES_OF_WARLOCK(497),
@@ -255,6 +262,9 @@ public class DebugScript extends LoopingScript {
         NATURE_SPIRIT(133),
         IN_SEARCH_OF_THE_MYREQUE(283),
         IN_AID_OF_THE_MYREQUE(21),
+        THE_DARKNESS_OF_HALLOWVALE(311),
+        LEGACY_OF_SEERGAZE(327),
+        BRANCHES_OF_DARKMEYER(347),
         THE_GOLEM(286),
         RUNE_MYTHOS(494),
         GHOSTS_AHOY(82),
