@@ -16,7 +16,9 @@ import net.botwithus.rs3.game.vars.VarManager;
 import net.botwithus.rs3.input.GameInput;
 import net.botwithus.rs3.script.ScriptConsole;
 import net.botwithus.rs3.util.RandomGenerator;
+
 import static net.botwithus.rs3.script.Execution.delay;
+
 import net.botwithus.rs3.script.Execution;
 import net.botwithus.rs3.game.queries.builders.items.InventoryItemQuery;
 import net.botwithus.rs3.game.minimenu.actions.SelectableAction;
@@ -38,7 +40,6 @@ import net.botwithus.api.game.hud.inventories.Backpack;
 import net.botwithus.api.game.hud.inventories.Bank;
 
 
-
 public class Waterfall {
 
     static Coordinate player = Client.getLocalPlayer().getServerCoordinate();
@@ -47,7 +48,7 @@ public class Waterfall {
     static Coordinate bookcoordinate = new Coordinate(2519, 3427, 1);
     static Area.Circular bookarea = new Area.Circular(bookcoordinate, 10);
     static Coordinate gnomedungeoncord = new Coordinate(2531, 3156, 0);
-    static Area.Circular gnomedungeonarea = new Area.Circular(gnomedungeoncord, 10); 
+    static Area.Circular gnomedungeonarea = new Area.Circular(gnomedungeoncord, 10);
     static Coordinate gatecoordinate = new Coordinate(2515, 9575, 0);
     static Area.Circular gatearea = new Area.Circular(gatecoordinate, 10);
     static Coordinate tombs = new Coordinate(2556, 3445, 0);
@@ -73,7 +74,7 @@ public class Waterfall {
     static int airunen1 = 0;
     static int waterrunen1 = 0;
     static int earthrunen1 = 0;
-       
+
 
     public static void quest() {
         int QuestVarp = VarManager.getVarpValue(2353);
@@ -81,7 +82,7 @@ public class Waterfall {
 
         int value = VarManager.getVarpValue(2353);
         println("Varbit 2353 Quest Varp:" + value);
-       
+
         if (isDialogOpen()) {
             return;
         }
@@ -104,15 +105,15 @@ public class Waterfall {
         } else {
             switch (QuestVarp) {
                 case 1:
-                if(!onrockinturruptarea.contains(player)){
-                    DebugScript.moveTo(onrockinturrupt);
-                }
+                    if (!onrockinturruptarea.contains(player)) {
+                        DebugScript.moveTo(onrockinturrupt);
+                    }
                     // SceneObject Gate = SceneObjectQuery.newQuery().name("Gate").id(1551).results().nearest();
                     // if(Gate !=null && Gate.isHidden() == false)
                     // {
                     //     println(" Try to open" + Gate.interact("Open"));
                     //     Execution.delayUntil(3000, () -> !Client.getLocalPlayer().isMoving());
-                        
+
                     // }
                     // else if(Gate !=null )
                     // {
@@ -122,75 +123,64 @@ public class Waterfall {
                     //         println(" Try to board" + raft.interact("Board"));
                     //     }
                     // }
-                    
+
                     //board the raft and talk to hudon
                     break;
                 case 2:
-                Npc hudon = NpcQuery.newQuery().name("Hudon").results().first();
-                
-                if (hudon != null && player.distanceTo(hudon) < 4) {
-                   
-                   talktohudon();
+                    Npc hudon = NpcQuery.newQuery().name("Hudon").results().first();
 
-                   SceneObject river = SceneObjectQuery.newQuery().name("River").results().nearest();
-                    if(river !=null)
-                    {
-                         println(" Try to swim" + river.interact("Swim"));
-                    }
-                }
-                else
-                {
-                    if(!bookarea.contains(player)){
-                        DebugScript.moveTo(bookcoordinate);
-                    }
-                    else if(bookarea.contains(player) && !Backpack.contains("Book on Baxtorian")){
-                        Coordinate bookcasecoordinate1 = new Coordinate(2520, 3426, 1);
-                        SceneObject bookcase = SceneObjectQuery.newQuery().name("Bookcase").results().nearestTo(bookcasecoordinate1);
-                        if(bookcase !=null){
-                            bookcase.interact("Search");
+                    if (hudon != null && player.distanceTo(hudon) < 4) {
+
+                        talktohudon();
+
+                        SceneObject river = SceneObjectQuery.newQuery().name("River").results().nearest();
+                        if (river != null) {
+                            println(" Try to swim" + river.interact("Swim"));
                         }
-                    }
-                    else if(Backpack.contains("Book on Baxtorian")){
-                        Component book = ComponentQuery.newQuery(1473).item(292).results().stream().findFirst().orElse(null);
-                            if(book != null)
-                            {
+                    } else {
+                        if (!bookarea.contains(player)) {
+                            DebugScript.moveTo(bookcoordinate);
+                        } else if (bookarea.contains(player) && !Backpack.contains("Book on Baxtorian")) {
+                            Coordinate bookcasecoordinate1 = new Coordinate(2520, 3426, 1);
+                            SceneObject bookcase = SceneObjectQuery.newQuery().name("Bookcase").results().nearestTo(bookcasecoordinate1);
+                            if (bookcase != null) {
+                                bookcase.interact("Search");
+                            }
+                        } else if (Backpack.contains("Book on Baxtorian")) {
+                            Component book = ComponentQuery.newQuery(1473).item(292).results().stream().findFirst().orElse(null);
+                            if (book != null) {
                                 book.interact("Read");
                                 delay(RandomGenerator.nextInt(1100, 1500));
                             }
-                    }
-                }
-                break;
-                case 3:
-                if(!gnomedungeonarea.contains(player) && Client.getLocalPlayer().getServerCoordinate().getRegionId() != 10133 && !Backpack.contains(294)){
-                    DebugScript.moveTo(gnomedungeoncord);
-                }
-                else if(Client.getLocalPlayer().getServerCoordinate().getRegionId() == 10033 && !Backpack.contains(294)){
-                    SceneObject ladder = SceneObjectQuery.newQuery().name("Ladder").results().nearest();
-                    if(ladder !=null){
-                        ladder.interact("Climb-down");
-                    }
-                    //Region ID 10033
-                    //Region ID 10133
-                }
-                else if(Client.getLocalPlayer().getServerCoordinate().getRegionId() == 10133 && !Backpack.contains(293) && !Backpack.contains(294)){
-                    SceneObject chest = SceneObjectQuery.newQuery().ids(1990).results().nearest();
-                    if(chest !=null){
-                        chest.interact("Search");
-                    }
-                }
-                else if(Backpack.contains(293))
-                {
-                    SceneObject gate = SceneObjectQuery.newQuery().ids(1991).results().nearest();
-                    Npc golrie = NpcQuery.newQuery().name("Golrie").results().first();
-                    if(gate !=null){
-                        if(!gatearea.contains(player)){
-                            DebugScript.moveTo(gatecoordinate);
                         }
-                        else{ 
-                            Execution.delayUntil(3000, () -> !Client.getLocalPlayer().isMoving());
-                            Item key = InventoryItemQuery.newQuery(93).ids(293).results().first();
-                            if(key !=null){
-                            if(MiniMenu.interact(SelectableAction.SELECTABLE_COMPONENT.getType(), 0, key.getSlot(), 96534533)) {
+                    }
+                    break;
+                case 3:
+                    if (!gnomedungeonarea.contains(player) && Client.getLocalPlayer().getServerCoordinate().getRegionId() != 10133 && !Backpack.contains(294)) {
+                        DebugScript.moveTo(gnomedungeoncord);
+                    } else if (Client.getLocalPlayer().getServerCoordinate().getRegionId() == 10033 && !Backpack.contains(294)) {
+                        SceneObject ladder = SceneObjectQuery.newQuery().name("Ladder").results().nearest();
+                        if (ladder != null) {
+                            ladder.interact("Climb-down");
+                        }
+                        //Region ID 10033
+                        //Region ID 10133
+                    } else if (Client.getLocalPlayer().getServerCoordinate().getRegionId() == 10133 && !Backpack.contains(293) && !Backpack.contains(294)) {
+                        SceneObject chest = SceneObjectQuery.newQuery().ids(1990).results().nearest();
+                        if (chest != null) {
+                            chest.interact("Search");
+                        }
+                    } else if (Backpack.contains(293)) {
+                        SceneObject gate = SceneObjectQuery.newQuery().ids(1991).results().nearest();
+                        Npc golrie = NpcQuery.newQuery().name("Golrie").results().first();
+                        if (gate != null) {
+                            if (!gatearea.contains(player)) {
+                                DebugScript.moveTo(gatecoordinate);
+                            } else {
+                                Execution.delayUntil(3000, () -> !Client.getLocalPlayer().isMoving());
+                                Item key = InventoryItemQuery.newQuery(93).ids(293).results().first();
+                                if (key != null) {
+                                    if (MiniMenu.interact(SelectableAction.SELECTABLE_COMPONENT.getType(), 0, key.getSlot(), 96534533)) {
                                         delay(RandomGenerator.nextInt(200, 400));
                                         gate.interact(SelectableAction.SELECT_OBJECT.getType());
                                         delay(RandomGenerator.nextInt(200, 400));
@@ -200,73 +190,64 @@ public class Waterfall {
                                     }
                                 }
                             }
-                            
-                    }
-                }
-                else if(Backpack.contains(294) && Client.getLocalPlayer().getServerCoordinate().getRegionId() != 10137){
-                    if(!tombsarea.contains(player)){
-                        DebugScript.moveTo(tombs);
-                    }
-                    
-                    
-                    else
-                    {
-                        ///
-                        SceneObject tomb = SceneObjectQuery.newQuery().name("Glarial's tombstone").results().nearest();
-                        if(tomb !=null){
-                            Item pebble = InventoryItemQuery.newQuery(93).ids(294).results().first();
-                            if(pebble !=null){
-                                if(MiniMenu.interact(SelectableAction.SELECTABLE_COMPONENT.getType(), 0, pebble.getSlot(), 96534533)) {
-                                    delay(RandomGenerator.nextInt(200, 400));
-                                    tomb.interact(SelectableAction.SELECT_OBJECT.getType());
-                                    delay(RandomGenerator.nextInt(200, 400));
+
+                        }
+                    } else if (Backpack.contains(294) && Client.getLocalPlayer().getServerCoordinate().getRegionId() != 10137) {
+                        if (!tombsarea.contains(player)) {
+                            DebugScript.moveTo(tombs);
+                        } else {
+                            ///
+                            SceneObject tomb = SceneObjectQuery.newQuery().name("Glarial's tombstone").results().nearest();
+                            if (tomb != null) {
+                                Item pebble = InventoryItemQuery.newQuery(93).ids(294).results().first();
+                                if (pebble != null) {
+                                    if (MiniMenu.interact(SelectableAction.SELECTABLE_COMPONENT.getType(), 0, pebble.getSlot(), 96534533)) {
+                                        delay(RandomGenerator.nextInt(200, 400));
+//                                        tomb.interact(SelectableAction.SELECT_OBJECT.getType());
+                                        MiniMenu.interact(SelectableAction.SELECT_OBJECT.getType(), 1992,2558,3444);
+                                        delay(RandomGenerator.nextInt(200, 400));
+                                    }
                                 }
                             }
-                            }
                         }
-                    
-                }
-                break;
+
+                    }
+                    break;
                 case 4:
                     int airrunes = Backpack.getQuantity("Air rune");
                     int waterrunes = Backpack.getQuantity("Water rune");
                     int earthrunes = Backpack.getQuantity("Earth rune");
                     int rope = Backpack.getCount("Rope");
-                    
-                        
-                if(Client.getLocalPlayer().getServerCoordinate().getRegionId() == 10137 && Backpack.contains(294) && !Backpack.contains(295)){
-                    SceneObject chest = SceneObjectQuery.newQuery().name("Closed chest").hidden(false).results().nearest();
-                    SceneObject openchest = SceneObjectQuery.newQuery().name("Open chest").hidden(false).results().nearest();
-                    if(chest !=null){
-                        chest.interact("Open");
-                    }
-                    else if(openchest !=null){
-                        openchest.interact("Search");
-                    }
-                }
-                else if(Client.getLocalPlayer().getServerCoordinate().getRegionId() == 10137 && Backpack.contains(294) && Backpack.contains(295) && !Backpack.contains(296)){
-                    ///
-                    println("Searching for Glarial's tomb");
-                    SceneObject tomb = SceneObjectQuery.newQuery().name("Glarial's tomb").results().nearest();
-                    if(tomb !=null){
-                        tomb.interact("Search");
-                    }
-                }
-                else if(Client.getLocalPlayer().getServerCoordinate().getRegionId() == 10137 && Backpack.contains(294) && Backpack.contains(295) && Backpack.contains(296)){
-                    ///
-                    // SceneObject ladder = SceneObjectQuery.newQuery().name("Ladder").results().nearest();
-                    // if(ladder !=null){
-                    //     ladder.interact("Climb-up");
-                    // }
-                    if(!ardibankarea.contains(player)){
-                        DebugScript.moveTo(ardibank);
-                    }
-                   
-                }
-                else if(Backpack.contains(294) && Backpack.contains(295) && Backpack.contains(296) && ardibankarea.contains(player) && (airrunes < 6 || waterrunes < 6 || earthrunes < 6 || rope < 1))
-                {           println("Checking runes and rope");           
-                        if( airrunes < 6 || waterrunes < 6 || earthrunes < 6 || rope < 1)
-                        {
+
+
+                    if (Client.getLocalPlayer().getServerCoordinate().getRegionId() == 10137 && Backpack.contains(294) && !Backpack.contains(295)) {
+                        SceneObject chest = SceneObjectQuery.newQuery().name("Closed chest").hidden(false).results().nearest();
+                        SceneObject openchest = SceneObjectQuery.newQuery().name("Open chest").hidden(false).results().nearest();
+                        if (chest != null) {
+                            chest.interact("Open");
+                        } else if (openchest != null) {
+                            openchest.interact("Search");
+                        }
+                    } else if (Client.getLocalPlayer().getServerCoordinate().getRegionId() == 10137 && Backpack.contains(294) && Backpack.contains(295) && !Backpack.contains(296)) {
+                        ///
+                        println("Searching for Glarial's tomb");
+                        SceneObject tomb = SceneObjectQuery.newQuery().name("Glarial's tomb").results().nearest();
+                        if (tomb != null) {
+                            tomb.interact("Search");
+                        }
+                    } else if (Client.getLocalPlayer().getServerCoordinate().getRegionId() == 10137 && Backpack.contains(294) && Backpack.contains(295) && Backpack.contains(296)) {
+                        ///
+                        // SceneObject ladder = SceneObjectQuery.newQuery().name("Ladder").results().nearest();
+                        // if(ladder !=null){
+                        //     ladder.interact("Climb-up");
+                        // }
+                        if (!ardibankarea.contains(player)) {
+                            DebugScript.moveTo(ardibank);
+                        }
+
+                    } else if (Backpack.contains(294) && Backpack.contains(295) && Backpack.contains(296) && ardibankarea.contains(player) && (airrunes < 6 || waterrunes < 6 || earthrunes < 6 || rope < 1)) {
+                        println("Checking runes and rope");
+                        if (airrunes < 6 || waterrunes < 6 || earthrunes < 6 || rope < 1) {
                             println("Not enough runes found");
 
                             if (Bank.isOpen()) {
@@ -292,7 +273,7 @@ public class Waterfall {
                                     return;
                                 }
                             }
-            
+
                             SceneObject chest = SceneObjectQuery.newQuery().name("Bank booth").results().nearest();
                             if (chest != null) {
                                 println("Interacting with chest " + chest.interact("Bank"));
@@ -300,95 +281,83 @@ public class Waterfall {
                                 delay(RandomGenerator.nextInt(600, 800));
                             }
                         }
-                    
-                }
-                else if(Backpack.contains(294) && Backpack.contains(295) && Backpack.contains(296) && airrunes >= 6 && waterrunes >= 6 && earthrunes >= 6 && rope >= 1)
-                {
-                    
-                    println("Enough runes found");
-                    if(!treearea.contains(player)){
-                        DebugScript.moveTo(tree);
-                    }
-                    else{
-                        
-                        Item rope1 = InventoryItemQuery.newQuery(93).ids(954).results().first();
-                        SceneObject tree1 = SceneObjectQuery.newQuery().name("Dead tree").id(2020).results().nearest();
-                        if(rope1!=null){
-                            boolean success = MiniMenu.interact(SelectableAction.SELECTABLE_COMPONENT.getType(), 0, rope1.getSlot(), 96534533);
-                            if(success) 
-                                {
-                                delay(RandomGenerator.nextInt(200, 400));
-                                tree1.interact(SelectableAction.SELECT_OBJECT.getType());
-                                delay(RandomGenerator.nextInt(1200, 1800));
-                                SceneObject door = SceneObjectQuery.newQuery().name("Door").results().nearest();
-                                if(door !=null){
-                                    door.interact("Enter");
-                                }
-                                   
+
+                    } else if (Backpack.contains(294) && Backpack.contains(295) && Backpack.contains(296) && airrunes >= 6 && waterrunes >= 6 && earthrunes >= 6 && rope >= 1) {
+
+                        println("Enough runes found");
+                        if (!treearea.contains(player)) {
+                            DebugScript.moveTo(tree);
+                        } else {
+
+                            Item rope1 = InventoryItemQuery.newQuery(93).ids(954).results().first();
+                            SceneObject tree1 = SceneObjectQuery.newQuery().name("Dead tree").id(2020).results().nearest();
+                            if (rope1 != null) {
+                                boolean success = MiniMenu.interact(SelectableAction.SELECTABLE_COMPONENT.getType(), 0, rope1.getSlot(), 96534533);
+                                if (success) {
+                                    delay(RandomGenerator.nextInt(200, 400));
+                                    tree1.interact(SelectableAction.SELECT_OBJECT.getType());
+                                    delay(RandomGenerator.nextInt(1200, 1800));
+                                    SceneObject door = SceneObjectQuery.newQuery().name("Door").results().nearest();
+                                    if (door != null) {
+                                        door.interact("Enter");
+                                    }
+
                                 }
                             }
+                        }
                     }
-                }
-                break;
+                    break;
                 case 5:
-                if(Backpack.contains(298))
-                {
-                    Coordinate largedooreastcoordinate = new Coordinate(2565, 9881, 0);
-                    Coordinate door1 = new Coordinate(2565, 9881, 0);
-                    Coordinate door120 = new Coordinate(2568, 9893, 0);
+                    if (Backpack.contains(298)) {
+                        Coordinate largedooreastcoordinate = new Coordinate(2565, 9881, 0);
+                        Coordinate door1 = new Coordinate(2565, 9881, 0);
+                        Coordinate door120 = new Coordinate(2568, 9893, 0);
 
-                    SceneObject largerdoorwest = SceneObjectQuery.newQuery().name("Large door").results().nearestTo(largedooreastcoordinate);
-                    if(largerdoorwest !=null && largerdoorwest.isHidden() == false){
-                        largerdoorwest.interact("Open");
-                    }
-                    else if(largerdoorwest !=null && largerdoorwest.isHidden() == true){
-                        //Coordinate door120 = new Coordinate(2568, 9893, 0);
-                        SceneObject pillar = SceneObjectQuery.newQuery().name("Pillar").results().nearestTo(door120);
-                        SceneObject door11 = SceneObjectQuery.newQuery().name("Door").results().nearestTo(door120);
-                        if(door11 !=null && door120.distanceTo(pillar)  <= player.distanceTo(pillar)){
-                            door11.interact("Open");
-                            delay(RandomGenerator.nextInt(1200, 1800));
-                            
-                        }
-                        else if(player.distanceTo(pillar) < door120.distanceTo(pillar)){
-                            Coordinate door12 = new Coordinate(2566, 9901, 0);
-                            SceneObject door121 = SceneObjectQuery.newQuery().name("Door").results().nearestTo(door12);
-                            Item key = InventoryItemQuery.newQuery(93).ids(298).results().first();
-                         if(key !=null){
-                             boolean success = MiniMenu.interact(SelectableAction.SELECTABLE_COMPONENT.getType(), 0, key.getSlot(), 96534533);
-                             if(success){
-                                 delay(RandomGenerator.nextInt(200, 400));
-                                 door121.interact(SelectableAction.SELECT_OBJECT.getType());
-                                 delay(RandomGenerator.nextInt(1200, 1800));
-                             }
-                         }
-                        }
-                            
+                        SceneObject largerdoorwest = SceneObjectQuery.newQuery().name("Large door").results().nearestTo(largedooreastcoordinate);
+                        if (largerdoorwest != null && largerdoorwest.isHidden() == false) {
+                            largerdoorwest.interact("Open");
+                        } else if (largerdoorwest != null && largerdoorwest.isHidden() == true) {
+                            //Coordinate door120 = new Coordinate(2568, 9893, 0);
+                            SceneObject pillar = SceneObjectQuery.newQuery().name("Pillar").results().nearestTo(door120);
+                            SceneObject door11 = SceneObjectQuery.newQuery().name("Door").results().nearestTo(door120);
+                            if (door11 != null && door120.distanceTo(pillar) <= player.distanceTo(pillar)) {
+                                door11.interact("Open");
+                                delay(RandomGenerator.nextInt(1200, 1800));
 
+                            } else if (player.distanceTo(pillar) < door120.distanceTo(pillar)) {
+                                Coordinate door12 = new Coordinate(2566, 9901, 0);
+                                SceneObject door121 = SceneObjectQuery.newQuery().name("Door").results().nearestTo(door12);
+                                Item key = InventoryItemQuery.newQuery(93).ids(298).results().first();
+                                if (key != null) {
+                                    boolean success = MiniMenu.interact(SelectableAction.SELECTABLE_COMPONENT.getType(), 0, key.getSlot(), 96534533);
+                                    if (success) {
+                                        delay(RandomGenerator.nextInt(200, 400));
+                                        door121.interact(SelectableAction.SELECT_OBJECT.getType());
+                                        delay(RandomGenerator.nextInt(1200, 1800));
+                                    }
+                                }
+                            }
+
+
+                        }
+                    } else {
+
+                        Coordinate largedooreastcoordinate = new Coordinate(2582, 9876, 0);
+
+                        SceneObject largedooreast = SceneObjectQuery.newQuery().name("Large door").id(31820).results().nearestTo(largedooreastcoordinate);
+                        if (largedooreast != null && largedooreast.isHidden() == false) {
+                            largedooreast.interact("Open");
+                        } else if (largedooreast != null && largedooreast.isHidden() == true) {
+                            SceneObject crate1 = SceneObjectQuery.newQuery().name("Crate").id(1999).results().nearest();
+                            if (crate1 != null) {
+                                crate1.interact("Search");
+                                delay(RandomGenerator.nextInt(1200, 1800));
+                            }
+                        }
                     }
-                }
-                else{
-                    
-                    Coordinate largedooreastcoordinate = new Coordinate(2582, 9876, 0);
-                    
-                    SceneObject largedooreast = SceneObjectQuery.newQuery().name("Large door").id(31820).results().nearestTo(largedooreastcoordinate);
-                    if(largedooreast !=null && largedooreast.isHidden() == false){
-                        largedooreast.interact("Open");
-                    }
-                    else if( largedooreast !=null && largedooreast.isHidden() == true)
-                    {
-                        SceneObject crate1 = SceneObjectQuery.newQuery().name("Crate").id(1999).results().nearest();
-                        if(crate1 !=null){
-                        crate1.interact("Search");
-                        delay(RandomGenerator.nextInt(1200, 1800));
-                    }
-                    }
-                }
-                    
-                    
-                    
-                
-                break;
+
+
+                    break;
 
                 case 6:
                     Coordinate door12 = new Coordinate(2566, 9901, 0);
@@ -396,25 +365,24 @@ public class Waterfall {
                     SceneObject pillar = SceneObjectQuery.newQuery().name("Pillar").results().nearest();
                     //println("Pillar distance: " + player.distanceTo(pillar));
                     //println("Door distance: " + door121.distanceTo(pillar));
-                     if(door121 !=null && door121.distanceTo(pillar)  == player.distanceTo(pillar)){
-                         Item key = InventoryItemQuery.newQuery(93).ids(298).results().first();
-                         if(key !=null){
-                             boolean success = MiniMenu.interact(SelectableAction.SELECTABLE_COMPONENT.getType(), 0, key.getSlot(), 96534533);
-                             if(success){
-                                 delay(RandomGenerator.nextInt(200, 400));
-                                 door121.interact(SelectableAction.SELECT_OBJECT.getType());
-                                 delay(RandomGenerator.nextInt(1200, 1800));
-                             }
-                         }   
-                     }
-                     else if(door121.distanceTo(pillar) > player.distanceTo(pillar)){
+                    if (door121 != null && door121.distanceTo(pillar) == player.distanceTo(pillar)) {
+                        Item key = InventoryItemQuery.newQuery(93).ids(298).results().first();
+                        if (key != null) {
+                            boolean success = MiniMenu.interact(SelectableAction.SELECTABLE_COMPONENT.getType(), 0, key.getSlot(), 96534533);
+                            if (success) {
+                                delay(RandomGenerator.nextInt(200, 400));
+                                door121.interact(SelectableAction.SELECT_OBJECT.getType());
+                                delay(RandomGenerator.nextInt(1200, 1800));
+                            }
+                        }
+                    } else if (door121.distanceTo(pillar) > player.distanceTo(pillar)) {
                         Coordinate pillar1coordinate = new Coordinate(2562, 9910, 0);
                         Coordinate pillar2coordinate = new Coordinate(2562, 9912, 0);
                         Coordinate pillar3coordinate = new Coordinate(2562, 9914, 0);
                         Coordinate pillar4coordinate = new Coordinate(2569, 9910, 0);
                         Coordinate pillar5coordinate = new Coordinate(2569, 9912, 0);
                         Coordinate pillar6coordinate = new Coordinate(2569, 9914, 0);
-                        
+
                         SceneObject pillar11 = SceneObjectQuery.newQuery().name("Pillar").results().nearestTo(pillar1coordinate);
                         SceneObject pillar22 = SceneObjectQuery.newQuery().name("Pillar").results().nearestTo(pillar2coordinate);
                         SceneObject pillar33 = SceneObjectQuery.newQuery().name("Pillar").results().nearestTo(pillar3coordinate);
@@ -426,234 +394,204 @@ public class Waterfall {
                         Item earthrune = InventoryItemQuery.newQuery(93).ids(557).results().first();
                         Item amulet = InventoryItemQuery.newQuery(93).ids(295).results().first();
 
-                        if(pillar1 ==0 && pillar11 !=null)
-                        {
-                            if(airrune !=null && airunen1 ==0)
-                            {
+                        if (pillar1 == 0 && pillar11 != null) {
+                            if (airrune != null && airunen1 == 0) {
                                 boolean success = MiniMenu.interact(SelectableAction.SELECTABLE_COMPONENT.getType(), 0, airrune.getSlot(), 96534533);
-                             if(success){
-                                airunen1 = 1;
-                                 delay(RandomGenerator.nextInt(200, 400));
-                                 pillar11.interact(SelectableAction.SELECT_OBJECT.getType());
-                                 delay(RandomGenerator.nextInt(1200, 1800));
-                             }
-                            }
-                             else if(waterrune !=null && waterrunen1 ==0){
+                                if (success) {
+                                    airunen1 = 1;
+                                    delay(RandomGenerator.nextInt(200, 400));
+                                    pillar11.interact(SelectableAction.SELECT_OBJECT.getType());
+                                    delay(RandomGenerator.nextInt(1200, 1800));
+                                }
+                            } else if (waterrune != null && waterrunen1 == 0) {
                                 boolean success1 = MiniMenu.interact(SelectableAction.SELECTABLE_COMPONENT.getType(), 0, waterrune.getSlot(), 96534533);
-                             if(success1){
-                                waterrunen1 = 1;
-                                 delay(RandomGenerator.nextInt(200, 400));
-                                 pillar11.interact(SelectableAction.SELECT_OBJECT.getType());
-                                 delay(RandomGenerator.nextInt(1200, 1800));
-                             }
-                            }
-                             else if(earthrune !=null && earthrunen1 ==0){
+                                if (success1) {
+                                    waterrunen1 = 1;
+                                    delay(RandomGenerator.nextInt(200, 400));
+                                    pillar11.interact(SelectableAction.SELECT_OBJECT.getType());
+                                    delay(RandomGenerator.nextInt(1200, 1800));
+                                }
+                            } else if (earthrune != null && earthrunen1 == 0) {
                                 boolean success2 = MiniMenu.interact(SelectableAction.SELECTABLE_COMPONENT.getType(), 0, earthrune.getSlot(), 96534533);
-                             if(success2){
-                                pillar1 = 1;
-                                earthrunen1 = 1;
-                                 delay(RandomGenerator.nextInt(200, 400));
-                                 pillar11.interact(SelectableAction.SELECT_OBJECT.getType());
-                                 delay(RandomGenerator.nextInt(1200, 1800));
-                             }
+                                if (success2) {
+                                    pillar1 = 1;
+                                    earthrunen1 = 1;
+                                    delay(RandomGenerator.nextInt(200, 400));
+                                    pillar11.interact(SelectableAction.SELECT_OBJECT.getType());
+                                    delay(RandomGenerator.nextInt(1200, 1800));
+                                }
                             }
-                       
-                        }
-                        else if(pillar2 ==0 && pillar22 !=null)
-                        {
-                            if(airrune !=null && airunen1 ==1)
-                            {
+
+                        } else if (pillar2 == 0 && pillar22 != null) {
+                            if (airrune != null && airunen1 == 1) {
                                 boolean success = MiniMenu.interact(SelectableAction.SELECTABLE_COMPONENT.getType(), 0, airrune.getSlot(), 96534533);
-                             if(success){
-                                airunen1 = 2;
-                                 delay(RandomGenerator.nextInt(200, 400));
-                                 pillar22.interact(SelectableAction.SELECT_OBJECT.getType());
-                                 delay(RandomGenerator.nextInt(1200, 1800));
-                             }
-                            }
-                             else if(waterrune !=null && waterrunen1 ==1){
+                                if (success) {
+                                    airunen1 = 2;
+                                    delay(RandomGenerator.nextInt(200, 400));
+                                    pillar22.interact(SelectableAction.SELECT_OBJECT.getType());
+                                    delay(RandomGenerator.nextInt(1200, 1800));
+                                }
+                            } else if (waterrune != null && waterrunen1 == 1) {
                                 boolean success1 = MiniMenu.interact(SelectableAction.SELECTABLE_COMPONENT.getType(), 0, waterrune.getSlot(), 96534533);
-                             if(success1){
-                                waterrunen1 = 2;
-                                 delay(RandomGenerator.nextInt(200, 400));
-                                 pillar22.interact(SelectableAction.SELECT_OBJECT.getType());
-                                 delay(RandomGenerator.nextInt(1200, 1800));
-                             }
-                            }
-                             else if(earthrune !=null && earthrunen1 ==1){
+                                if (success1) {
+                                    waterrunen1 = 2;
+                                    delay(RandomGenerator.nextInt(200, 400));
+                                    pillar22.interact(SelectableAction.SELECT_OBJECT.getType());
+                                    delay(RandomGenerator.nextInt(1200, 1800));
+                                }
+                            } else if (earthrune != null && earthrunen1 == 1) {
                                 boolean success2 = MiniMenu.interact(SelectableAction.SELECTABLE_COMPONENT.getType(), 0, earthrune.getSlot(), 96534533);
-                             if(success2){
-                                pillar2 = 1;
-                                earthrunen1 = 2;
-                                 delay(RandomGenerator.nextInt(200, 400));
-                                 pillar22.interact(SelectableAction.SELECT_OBJECT.getType());
-                                 delay(RandomGenerator.nextInt(1200, 1800));
-                             }
+                                if (success2) {
+                                    pillar2 = 1;
+                                    earthrunen1 = 2;
+                                    delay(RandomGenerator.nextInt(200, 400));
+                                    pillar22.interact(SelectableAction.SELECT_OBJECT.getType());
+                                    delay(RandomGenerator.nextInt(1200, 1800));
+                                }
                             }
-                        }
-                        else if(pillar3 ==0 && pillar33 !=null)
-                        {
-                            if(airrune !=null && airunen1 ==2)
-                            {
+                        } else if (pillar3 == 0 && pillar33 != null) {
+                            if (airrune != null && airunen1 == 2) {
                                 boolean success = MiniMenu.interact(SelectableAction.SELECTABLE_COMPONENT.getType(), 0, airrune.getSlot(), 96534533);
-                             if(success){
-                                airunen1 = 3;
-                                 delay(RandomGenerator.nextInt(200, 400));
-                                 pillar33.interact(SelectableAction.SELECT_OBJECT.getType());
-                                 delay(RandomGenerator.nextInt(1200, 1800));
-                             }
-                            }
-                             else if(waterrune !=null && waterrunen1 ==2){
+                                if (success) {
+                                    airunen1 = 3;
+                                    delay(RandomGenerator.nextInt(200, 400));
+                                    pillar33.interact(SelectableAction.SELECT_OBJECT.getType());
+                                    delay(RandomGenerator.nextInt(1200, 1800));
+                                }
+                            } else if (waterrune != null && waterrunen1 == 2) {
                                 boolean success1 = MiniMenu.interact(SelectableAction.SELECTABLE_COMPONENT.getType(), 0, waterrune.getSlot(), 96534533);
-                             if(success1){
-                                waterrunen1 = 3;
-                                 delay(RandomGenerator.nextInt(200, 400));
-                                 pillar33.interact(SelectableAction.SELECT_OBJECT.getType());
-                                 delay(RandomGenerator.nextInt(1200, 1800));
-                             }
-                            }
-                             else if(earthrune !=null && earthrunen1 ==2){
+                                if (success1) {
+                                    waterrunen1 = 3;
+                                    delay(RandomGenerator.nextInt(200, 400));
+                                    pillar33.interact(SelectableAction.SELECT_OBJECT.getType());
+                                    delay(RandomGenerator.nextInt(1200, 1800));
+                                }
+                            } else if (earthrune != null && earthrunen1 == 2) {
                                 boolean success2 = MiniMenu.interact(SelectableAction.SELECTABLE_COMPONENT.getType(), 0, earthrune.getSlot(), 96534533);
-                             if(success2){
-                                pillar3 = 1;
-                                earthrunen1 = 3;
-                                 delay(RandomGenerator.nextInt(200, 400));
-                                 pillar33.interact(SelectableAction.SELECT_OBJECT.getType());
-                                 delay(RandomGenerator.nextInt(1200, 1800));
-                             }
+                                if (success2) {
+                                    pillar3 = 1;
+                                    earthrunen1 = 3;
+                                    delay(RandomGenerator.nextInt(200, 400));
+                                    pillar33.interact(SelectableAction.SELECT_OBJECT.getType());
+                                    delay(RandomGenerator.nextInt(1200, 1800));
+                                }
                             }
-                        }
-                        else if(pillar4 ==0 && pillar44 !=null)
-                        {
-                            if(airrune !=null && airunen1 ==3)
-                            {
+                        } else if (pillar4 == 0 && pillar44 != null) {
+                            if (airrune != null && airunen1 == 3) {
                                 boolean success = MiniMenu.interact(SelectableAction.SELECTABLE_COMPONENT.getType(), 0, airrune.getSlot(), 96534533);
-                             if(success){
-                                airunen1 = 4;
-                                 delay(RandomGenerator.nextInt(200, 400));
-                                 pillar44.interact(SelectableAction.SELECT_OBJECT.getType());
-                                 delay(RandomGenerator.nextInt(1200, 1800));
-                             }
-                            }
-                             else if(waterrune !=null && waterrunen1 ==3){
+                                if (success) {
+                                    airunen1 = 4;
+                                    delay(RandomGenerator.nextInt(200, 400));
+                                    pillar44.interact(SelectableAction.SELECT_OBJECT.getType());
+                                    delay(RandomGenerator.nextInt(1200, 1800));
+                                }
+                            } else if (waterrune != null && waterrunen1 == 3) {
                                 boolean success1 = MiniMenu.interact(SelectableAction.SELECTABLE_COMPONENT.getType(), 0, waterrune.getSlot(), 96534533);
-                             if(success1){
-                                waterrunen1 = 4;
-                                 delay(RandomGenerator.nextInt(200, 400));
-                                 pillar44.interact(SelectableAction.SELECT_OBJECT.getType());
-                                 delay(RandomGenerator.nextInt(1200, 1800));
-                             }
-                            }
-                             else if(earthrune !=null && earthrunen1 ==3){
+                                if (success1) {
+                                    waterrunen1 = 4;
+                                    delay(RandomGenerator.nextInt(200, 400));
+                                    pillar44.interact(SelectableAction.SELECT_OBJECT.getType());
+                                    delay(RandomGenerator.nextInt(1200, 1800));
+                                }
+                            } else if (earthrune != null && earthrunen1 == 3) {
                                 boolean success2 = MiniMenu.interact(SelectableAction.SELECTABLE_COMPONENT.getType(), 0, earthrune.getSlot(), 96534533);
-                             if(success2){
-                                pillar4 = 1;
-                                earthrunen1 = 4;
-                                 delay(RandomGenerator.nextInt(200, 400));
-                                 pillar44.interact(SelectableAction.SELECT_OBJECT.getType());
-                                 delay(RandomGenerator.nextInt(1200, 1800));
-                             }
+                                if (success2) {
+                                    pillar4 = 1;
+                                    earthrunen1 = 4;
+                                    delay(RandomGenerator.nextInt(200, 400));
+                                    pillar44.interact(SelectableAction.SELECT_OBJECT.getType());
+                                    delay(RandomGenerator.nextInt(1200, 1800));
+                                }
                             }
-                        }
-                        else if(pillar5 ==0 && pillar55 !=null)
-                        {
-                            if(airrune !=null && airunen1 ==4)
-                            {
+                        } else if (pillar5 == 0 && pillar55 != null) {
+                            if (airrune != null && airunen1 == 4) {
                                 boolean success = MiniMenu.interact(SelectableAction.SELECTABLE_COMPONENT.getType(), 0, airrune.getSlot(), 96534533);
-                             if(success){
-                                airunen1 = 5;
-                                 delay(RandomGenerator.nextInt(200, 400));
-                                 pillar55.interact(SelectableAction.SELECT_OBJECT.getType());
-                                 delay(RandomGenerator.nextInt(1200, 1800));
-                             }
-                            }
-                             else if(waterrune !=null && waterrunen1 ==4){
+                                if (success) {
+                                    airunen1 = 5;
+                                    delay(RandomGenerator.nextInt(200, 400));
+                                    pillar55.interact(SelectableAction.SELECT_OBJECT.getType());
+                                    delay(RandomGenerator.nextInt(1200, 1800));
+                                }
+                            } else if (waterrune != null && waterrunen1 == 4) {
                                 boolean success1 = MiniMenu.interact(SelectableAction.SELECTABLE_COMPONENT.getType(), 0, waterrune.getSlot(), 96534533);
-                             if(success1){
-                                waterrunen1 = 5;
-                                 delay(RandomGenerator.nextInt(200, 400));
-                                 pillar55.interact(SelectableAction.SELECT_OBJECT.getType());
-                                 delay(RandomGenerator.nextInt(1200, 1800));
-                             }
-                            }
-                             else if(earthrune !=null && earthrunen1 ==4){
+                                if (success1) {
+                                    waterrunen1 = 5;
+                                    delay(RandomGenerator.nextInt(200, 400));
+                                    pillar55.interact(SelectableAction.SELECT_OBJECT.getType());
+                                    delay(RandomGenerator.nextInt(1200, 1800));
+                                }
+                            } else if (earthrune != null && earthrunen1 == 4) {
                                 boolean success2 = MiniMenu.interact(SelectableAction.SELECTABLE_COMPONENT.getType(), 0, earthrune.getSlot(), 96534533);
-                             if(success2){
-                                
-                                pillar5 = 1;
-                                earthrunen1 = 5;
-                                 delay(RandomGenerator.nextInt(200, 400));
-                                 pillar55.interact(SelectableAction.SELECT_OBJECT.getType());
-                                 delay(RandomGenerator.nextInt(1200, 1800));
-                             }
+                                if (success2) {
+
+                                    pillar5 = 1;
+                                    earthrunen1 = 5;
+                                    delay(RandomGenerator.nextInt(200, 400));
+                                    pillar55.interact(SelectableAction.SELECT_OBJECT.getType());
+                                    delay(RandomGenerator.nextInt(1200, 1800));
+                                }
                             }
-                        }
-                        else if(pillar6 ==0 && pillar66 !=null)
-                        {
-                            if(airrune !=null && airunen1 ==5)
-                            {
+                        } else if (pillar6 == 0 && pillar66 != null) {
+                            if (airrune != null && airunen1 == 5) {
                                 boolean success = MiniMenu.interact(SelectableAction.SELECTABLE_COMPONENT.getType(), 0, airrune.getSlot(), 96534533);
-                             if(success){
-                                airunen1 = 6;
-                                 delay(RandomGenerator.nextInt(200, 400));
-                                 pillar66.interact(SelectableAction.SELECT_OBJECT.getType());
-                                 delay(RandomGenerator.nextInt(1200, 1800));
-                             }
-                            }
-                             else if(waterrune !=null && waterrunen1 ==5){
+                                if (success) {
+                                    airunen1 = 6;
+                                    delay(RandomGenerator.nextInt(200, 400));
+                                    pillar66.interact(SelectableAction.SELECT_OBJECT.getType());
+                                    delay(RandomGenerator.nextInt(1200, 1800));
+                                }
+                            } else if (waterrune != null && waterrunen1 == 5) {
                                 boolean success1 = MiniMenu.interact(SelectableAction.SELECTABLE_COMPONENT.getType(), 0, waterrune.getSlot(), 96534533);
-                             if(success1){
-                                waterrunen1 = 6;
-                                 delay(RandomGenerator.nextInt(200, 400));
-                                 pillar66.interact(SelectableAction.SELECT_OBJECT.getType());
-                                 delay(RandomGenerator.nextInt(1200, 1800));
-                             }
-                            }
-                             else if(earthrune !=null && earthrunen1 ==5){
+                                if (success1) {
+                                    waterrunen1 = 6;
+                                    delay(RandomGenerator.nextInt(200, 400));
+                                    pillar66.interact(SelectableAction.SELECT_OBJECT.getType());
+                                    delay(RandomGenerator.nextInt(1200, 1800));
+                                }
+                            } else if (earthrune != null && earthrunen1 == 5) {
                                 boolean success2 = MiniMenu.interact(SelectableAction.SELECTABLE_COMPONENT.getType(), 0, earthrune.getSlot(), 96534533);
-                             if(success2){
-                                
-                                pillar6 = 1;
-                                earthrunen1 = 6;
-                                 delay(RandomGenerator.nextInt(200, 400));
-                                 pillar66.interact(SelectableAction.SELECT_OBJECT.getType());
-                                 delay(RandomGenerator.nextInt(1200, 1800));
-                             }
+                                if (success2) {
+
+                                    pillar6 = 1;
+                                    earthrunen1 = 6;
+                                    delay(RandomGenerator.nextInt(200, 400));
+                                    pillar66.interact(SelectableAction.SELECT_OBJECT.getType());
+                                    delay(RandomGenerator.nextInt(1200, 1800));
+                                }
                             }
-                        }
-                        else if(amulet !=null && pillar1 ==1 && pillar2 ==1 && pillar3 ==1 && pillar4 ==1 && pillar5 ==1 && pillar6 ==1){
+                        } else if (amulet != null && pillar1 == 1 && pillar2 == 1 && pillar3 == 1 && pillar4 == 1 && pillar5 == 1 && pillar6 == 1) {
                             println("Activating Glarial");
                             SceneObject Glarial = SceneObjectQuery.newQuery().id(98546).results().nearest();
-                            
-                            if(Glarial !=null){
+
+                            if (Glarial != null) {
                                 boolean success = MiniMenu.interact(SelectableAction.SELECTABLE_COMPONENT.getType(), 0, amulet.getSlot(), 96534533);
-                                if(success){
+                                if (success) {
                                     delay(RandomGenerator.nextInt(200, 400));
                                     Glarial.interact(SelectableAction.SELECT_OBJECT.getType());
                                     delay(RandomGenerator.nextInt(1200, 1800));
                                 }
                             }
-                            
-                         }
-                        
-                }
-            
-                
-                break;
-                case 8:
-                Item urn = InventoryItemQuery.newQuery(93).ids(296).results().first();
-                SceneObject chalce = SceneObjectQuery.newQuery().name("Chalice of Eternity").id(2014).results().nearest();
-                if(chalce !=null && urn !=null){
-                    boolean success = MiniMenu.interact(SelectableAction.SELECTABLE_COMPONENT.getType(), 0, urn.getSlot(), 96534533);
-                    if(success){
-                        delay(RandomGenerator.nextInt(200, 400));
-                        chalce.interact(SelectableAction.SELECT_OBJECT.getType());
-                        delay(RandomGenerator.nextInt(1200, 1800));
+
+                        }
+
                     }
-                }
-                break;
+
+
+                    break;
+                case 8:
+                    Item urn = InventoryItemQuery.newQuery(93).ids(296).results().first();
+                    SceneObject chalce = SceneObjectQuery.newQuery().name("Chalice of Eternity").id(2014).results().nearest();
+                    if (chalce != null && urn != null) {
+                        boolean success = MiniMenu.interact(SelectableAction.SELECTABLE_COMPONENT.getType(), 0, urn.getSlot(), 96534533);
+                        if (success) {
+                            delay(RandomGenerator.nextInt(200, 400));
+                            chalce.interact(SelectableAction.SELECT_OBJECT.getType());
+                            delay(RandomGenerator.nextInt(1200, 1800));
+                        }
+                    }
+                    break;
             }
-            
+
         }
     }
 
@@ -682,15 +620,14 @@ public class Waterfall {
     }
 
 
-        /**
+    /**
      * Withdraws a specified amount of an item from the bank.
      *
      * @param itemName The name of the item to withdraw.
      * @param amount   The amount of the item to withdraw.
      * @return The delay time in milliseconds before the next action.
      */
-    public static long withdrawFromBank(String itemName, int amount)
-    {
+    public static long withdrawFromBank(String itemName, int amount) {
         // Query the bank interface for the component that matches the item name
         Component itemComponent = ComponentQuery.newQuery(new int[]{517})
                 .itemName(itemName)
@@ -698,22 +635,16 @@ public class Waterfall {
                 .first();
 
         // If the component is found, attempt to withdraw the specified amount
-        if (itemComponent != null)
-        {
+        if (itemComponent != null) {
             String interactOption = getWithdrawOption(amount);
             boolean withdrawSuccess = itemComponent.interact(interactOption);
 
-            if (withdrawSuccess)
-            {
+            if (withdrawSuccess) {
                 println("[Bank] Successfully withdrew " + amount + " " + itemName);
-            }
-            else
-            {
+            } else {
                 println("[Bank] Failed to withdraw " + amount + " " + itemName);
             }
-        }
-        else
-        {
+        } else {
             println("[Error] Item " + itemName + " not found in bank.");
         }
         return RandomGenerator.nextInt(1100, 1550);
@@ -725,28 +656,21 @@ public class Waterfall {
      * @param amount The amount to withdraw.
      * @return The interaction option as a string.
      */
-    private static String getWithdrawOption(int amount)
-    {
-        switch (amount)
-        {
-            case 1 ->
-            {
+    private static String getWithdrawOption(int amount) {
+        switch (amount) {
+            case 1 -> {
                 return "Withdraw-1";
             }
-            case 5 ->
-            {
+            case 5 -> {
                 return "Withdraw-5";
             }
-            case 10 ->
-            {
+            case 10 -> {
                 return "Withdraw-10";
             }
-            case 0 ->
-            {
+            case 0 -> {
                 return "Withdraw-All";
             }
-            default ->
-            {
+            default -> {
                 GameInput.setIntInput(amount);
                 return "Withdraw-X";
             }

@@ -132,7 +132,9 @@ public class DebugScript extends LoopingScript {
             flag |= Movement.DISABLE_DIVE;
             ScriptConsole.println(" Movement Ability Dive is Disabled");
         }
-
+        if (player.inCombat()) {
+            flag |= Movement.DISABLE_TELEPORTS;
+        }
 
         Dialogs.println("moveTo | Traversing to location: " + location);
         NavPath path = NavPath.resolve(location, flag).interrupt(event -> (VarManager.getVarbitValue(21222) == 1));
