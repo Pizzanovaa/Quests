@@ -107,17 +107,13 @@ public class VioletIsBlueToo {
                         //WALK UP THE HILL
                         //NEEDS FURTHER TESTING
                         Npc Posty = NpcQuery.newQuery().name("Posty").results().nearest();
-                        if(Posty != null){
+                        if (Posty != null) {
                             Coordinate postycord = Posty.getCoordinate();
                             int postyx = postycord.getX();
                             int postyy = postycord.getY();
-
                             delay(RandomGenerator.nextInt(600, 1200));
-                            Movement.walkTo(postyx,postyy+5,false);  // @Pizza: I'm assuming its the y axis to get up the hill.. game kidnapped me so could not double check
+                            Movement.walkTo(postyx, postyy + 10, false);
                         }
-                        /*    if (!violethousearea.contains(player)) { // @Pizza: This part is an Instance, was getting failed path.
-                            DebugScript.moveTo(violethousecord);
-                        }*/
                         //New Values
                         //The QuestVarp changed to 15
                         //The varbit40610 value 0
@@ -290,7 +286,9 @@ public class VioletIsBlueToo {
                 case 45:
                     if (checkStep(QuestVarp, 4, 0, 0, 0, 0, 0, 0, 0, 0)) {
                         //Open chest then talk to marvin
-                        var npc = NpcQuery.newQuery().name("Marvin Claus","Boris Claus").results().first(); // @Pizza: Was named Boris for me? Might vary.
+                        var npc = NpcQuery.newQuery().name("Marvin Claus", "Boris Claus", "Rasmus Claus").results().first();
+                        // @Pizza: Was named Boris for me? Might vary.
+                        // @Query: Was Marvin Claus on 2 accounts, but now it was also Rasmus Claus
                         if (npc != null) {
                             npc.interact("Talk to");
                         } else {
@@ -322,7 +320,7 @@ public class VioletIsBlueToo {
                             Execution.delay(1800);
                             currentStep = "GOTOTAYLOR";
                         } else if (Objects.equals(currentStep, "GOTOTAYLOR")) {
-                            var npcMovement = NpcQuery.newQuery().name("Marvin Claus","Boris Claus").results().nearest();
+                            var npcMovement = NpcQuery.newQuery().name("Marvin Claus", "Boris Claus", "Rasmus Claus").results().nearest();
                             println("X: " + npcMovement.getCoordinate().getX()); // 11937
                             println("X: " + npcMovement.getCoordinate().getY()); // 2606
                             Traverse.walkTo(new Coordinate(npcMovement.getCoordinate().getX() - 1, npcMovement.getCoordinate().getY() + 33, npcMovement.getCoordinate().getZ()), true);
@@ -367,13 +365,12 @@ public class VioletIsBlueToo {
                     if (checkStep(QuestVarp, 4, 0, 1, 1, 0, 0, 0, 0, 0)) {
                         //Go Back to town center and talk to brad
 //Stating Position 11895 - 2635
-                        if (currentStep2 == "") {
+                        if (Objects.equals(currentStep2, "")) {
                             Traverse.walkTo(new Coordinate(player.getX() + 42, player.getY() - 28, player.getZ()), true);
                             Execution.delay(1800);
                             talktoAssistantBrad();
                             currentStep2 = "TALKTOSUSI";
-                        }
-                        if (currentStep2 == "TALKTOSUSI") {
+                        } else if (Objects.equals(currentStep2, "TALKTOSUSI")) {
                             talktoSusi();
                         }
                         //New Values
@@ -779,6 +776,7 @@ public class VioletIsBlueToo {
                         var door = SceneObjectQuery.newQuery().name("Door").option("Knock").results().nearest();
                         if (door != null) {
                             door.interact("Knock");
+                            Execution.delay(7000);
                         }
                         println("Talk to Trevor");
                         talktoTrevor();
@@ -812,7 +810,7 @@ public class VioletIsBlueToo {
     }
 
     public static void talktoMarvinClaus() {
-        Npc npc = NpcQuery.newQuery().name("Marvin Claus","Boris Claus").results().first();
+        Npc npc = NpcQuery.newQuery().name("Marvin Claus", "Boris Claus", "Rasmus Claus").results().first();
         if (npc != null) {
             npc.interact("Talk to");
             delay(RandomGenerator.nextInt(600, 800));

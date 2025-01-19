@@ -20,7 +20,7 @@ public class RestlessGhost {
 
     static Coordinate player = Client.getLocalPlayer().getServerCoordinate();
     static Coordinate startcord = new Coordinate(3245, 3208, 0);
-    static Area.Circular startarea = new Area.Circular(startcord, 10);
+    static Area.Circular startarea = new Area.Circular(startcord, 5);
     static Coordinate swamphut = new Coordinate(3207, 3150, 0);
     static Area.Circular swamphutarea = new Area.Circular(swamphut, 10);
     static Coordinate coffin = new Coordinate(3248, 3193, 0);

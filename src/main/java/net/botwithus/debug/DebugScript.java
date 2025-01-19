@@ -54,13 +54,14 @@ public class DebugScript extends LoopingScript {
         switch (currentQuest) {
             case DEATH_PLATEAU -> DeathPlateau.quest();
             case DRUIDIC_RITUAL -> DruidicRitual.quest();
-            //case LET_THEM_EAT_PIE -> LetThemEatPie.quest();
+            case LET_THEM_EAT_PIE -> LetThemEatPie.quest();
             case WOLF_WHISTLE -> WolfWhistle.quest();
             case VIOLET_IS_BLUE -> VioletIsBlue.quest2();
             case VIOLET_IS_BLUE_TOO -> VioletIsBlueToo.quest();
             case COOKS_ASSISTANT -> CooksAssitant.quest();
             //TODO: Rework the whole quest to use do movement base on a fix coordinate, instead of player coordinate, can use the coordinate from the entrace SceneObject, this will make it much faster, and reliable
             case MYTHS_OF_THE_WHITE_LANDS -> MythsOfTheWhiteLands.quest();
+            case ERNEST_THE_CHICKEN -> ErnestTheChicken.quest();
             case NECROMANCY_INTRO -> Necromancy1.quest2();
             case IMP_CATCHER -> Impcatcher.quest();
             //case RUNE_MYSTERIES -> runemysteries.quest();
@@ -131,7 +132,9 @@ public class DebugScript extends LoopingScript {
             flag |= Movement.DISABLE_DIVE;
             ScriptConsole.println(" Movement Ability Dive is Disabled");
         }
-
+        if (player.inCombat()) {
+            flag |= Movement.DISABLE_TELEPORTS;
+        }
 
         Dialogs.println("moveTo | Traversing to location: " + location);
         NavPath path = NavPath.resolve(location, flag).interrupt(event -> (VarManager.getVarbitValue(21222) == 1));
@@ -227,19 +230,20 @@ public class DebugScript extends LoopingScript {
     public enum Quest {
         DEATH_PLATEAU(140),
         DRUIDIC_RITUAL(111),
-        // LET_THEM_EAT_PIE(200), //UNFINISHED
+        LET_THEM_EAT_PIE(350),
         WOLF_WHISTLE(324),
         VIOLET_IS_BLUE(400),
         VIOLET_IS_BLUE_TOO(453),
         BLOOD_PACT(335),
         RESTLESS_GHOST(27),
-        PRIEST_IN_PERIL(276),
         COOKS_ASSISTANT(257),
         MYTHS_OF_THE_WHITE_LANDS(74),
-       // MYTHS_OF_THE_WHITE_LANDS(74),
+        ERNEST_THE_CHICKEN(15),
+
+
         NECROMANCY_INTRO(493),
         IMP_CATCHER(72),
-
+        PRIEST_IN_PERIL(276),
         //RUNE_MYSTERIES(358),
         WHAT_LIES_BELOW(144),
         ICTHLARIN_LITTLE_HELPER(287),

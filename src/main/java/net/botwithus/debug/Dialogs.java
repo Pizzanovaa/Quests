@@ -108,7 +108,7 @@ public class Dialogs {
                 Murderontheborder.talkedtorodney = true;
             }
 
-            if(dialogText.contains("In my former incarnation I was Filliman Tarlock")){
+            if (dialogText.contains("In my former incarnation I was Filliman Tarlock")) {
                 naturespirit.planDialog = true;
             }
 
@@ -126,19 +126,19 @@ public class Dialogs {
                 InAidoftheMyreque.florinOption4 = true;
             }*/
             //}
-            if(dialogText.contains("Fix the floopin bank would ya!")){
+            if (dialogText.contains("Fix the floopin bank would ya!")) {
                 InAidoftheMyreque.cornelioustalked = true;
             }
 
-            if(dialogText.contains("After you've informed Radigad and Polmafi")){
+            if (dialogText.contains("After you've informed Radigad and Polmafi")) {
                 InAidoftheMyreque.talkedtovelia = true;
             }
 
-            if(dialogText.contains("Nothing relevant. It is not pertinent to our problems.")){
+            if (dialogText.contains("Nothing relevant. It is not pertinent to our problems.")) {
                 InAidoftheMyreque.option2derzel = true;
             }
 
-            if(dialogText.contains("Yeah, maybe you should tell the King what a great job you")){
+            if (dialogText.contains("Yeah, maybe you should tell the King what a great job you")) {
                 PriestInPeril.talkedtoMonk = true;
             }
 
@@ -295,8 +295,10 @@ public class Dialogs {
         Ive_been_sent_to_help_make_an_ointment_of_imbalance_for_Kaqemeex(1, "I've been sent to help make an ointment of imbalance for Kaqemeex.", DRUIDIC_RITUAL),
         Ok_Ill_do_that_then(1, "Ok, I'll do that then.", DRUIDIC_RITUAL),
         //endregion
-        //region Let Them Eat Pie (UNFINISHED)
-        //Id_best_get_on_with_it_then(1, "I'd best get on with it then.", LET_THEM_EAT_PIE),
+        //region Let Them Eat Pie
+        Id_best_get_on_with_it_then(1, "I'd best get on with it then.", LET_THEM_EAT_PIE),
+        SQUISHY_CRUST(1, "Squishy Crust Belly Filler", LET_THEM_EAT_PIE),
+        I_think_Ive_had_enough_thanks(1, "I think I've had enough, thanks.", LET_THEM_EAT_PIE),
         //endregion
         //region Wolf Whistle
         Do_you_have_a_quest_for_me(2, "Do you have a quest for me?", WOLF_WHISTLE),
@@ -364,7 +366,11 @@ public class Dialogs {
         ABOUT_MYTHS_OF_THE_WHITE_LANDS(2, "About Myths of the White Lands...", MYTHS_OF_THE_WHITE_LANDS),
         CARRY_ON_WITH_THE_IMPS_PRANK(2, "Carry on with the imps' prank.", MYTHS_OF_THE_WHITE_LANDS),
         //endregion
-        //region Ernest the chicken (UNTESTED)
+        //region Ernest the chicken
+        YES_ERNEST(1, "Yes.", ERNEST_THE_CHICKEN),
+        LOOKING_FOR_ERNEST(1, "I'm looking for a guy called Ernest.", ERNEST_THE_CHICKEN),
+        ANYOPTION(2, "Change him back this instant!", ERNEST_THE_CHICKEN),
+
 
         //endregion
         //region Swept Away (UNFINISHED)
@@ -399,7 +405,7 @@ public class Dialogs {
         IMCANDO_DWARVES(3, "What do you know about the Imcando dwarves?", THE_KNIGHT_SWORD),
         //endregion
         //region Shield of Arrav
-        SEARCH_QUEST(1, "I'm in search of a ", SHIELD_OF_ARRAV),
+        SEARCH_QUEST(1, "I'm in search of a quest.", SHIELD_OF_ARRAV),
         FIND_PHOENIX_GANG(1, "Do you know where I can find the Phoenix Gang?", SHIELD_OF_ARRAV),
         PHOENIX_GANG_LOCATION(1, "Can you tell me where I can find the Phoenix Gang?", SHIELD_OF_ARRAV),
         OFFER_GOLD(1, "Alright. Have 10 gold coins.", SHIELD_OF_ARRAV),
@@ -816,16 +822,14 @@ public class Dialogs {
         OK_THANKS_1(5, "Ok, thanks.", IN_SEARCH_OF_THE_MYREQUE),
         IVAN_STORM(3, "Ivan Strom.", IN_SEARCH_OF_THE_MYREQUE),
         SANIPILIU(3, "Sani Piliu.", IN_SEARCH_OF_THE_MYREQUE),
-        VELIAF(1,"Veliaf Hurtz.",IN_SEARCH_OF_THE_MYREQUE),
-        DRAKAN(1,"Drakan.",IN_SEARCH_OF_THE_MYREQUE),
-        POLMAFI(1,"Polmafi Ferdygris.",IN_SEARCH_OF_THE_MYREQUE),
-        HIDDEN(1,"Hidden in Myre.",IN_SEARCH_OF_THE_MYREQUE),
-        CYREG(1,"Cyreg Paddlehorn.",IN_SEARCH_OF_THE_MYREQUE),
-        OKGOODBYE(1,"Ok, goodbye.",IN_SEARCH_OF_THE_MYREQUE),
-        
-        
-        
-        
+        VELIAF(1, "Veliaf Hurtz.", IN_SEARCH_OF_THE_MYREQUE),
+        DRAKAN(1, "Drakan.", IN_SEARCH_OF_THE_MYREQUE),
+        POLMAFI(1, "Polmafi Ferdygris.", IN_SEARCH_OF_THE_MYREQUE),
+        HIDDEN(1, "Hidden in Myre.", IN_SEARCH_OF_THE_MYREQUE),
+        CYREG(1, "Cyreg Paddlehorn.", IN_SEARCH_OF_THE_MYREQUE),
+        OKGOODBYE(1, "Ok, goodbye.", IN_SEARCH_OF_THE_MYREQUE),
+
+
         //endregion
 
         //region In Aid of the Myreque
@@ -846,15 +850,15 @@ public class Dialogs {
         VELAF_TOLD_ME_ABOUT_IVANDIS(1, "Veliaf told me about Ivandis.", IN_AID_OF_THE_MYREQUE),
         I_HAVE_BROUGHT_YOU_THE_ROD_OF_IVANDIS(1, "I have brought you the Rod of Ivandis!", IN_AID_OF_THE_MYREQUE),
         YES_I_VE_COME_TO_GIVE_THE_ROD_OF_IVANDIS_TO_YOU(1, "Yes, I've come to give the Rod of Ivandis to you!", IN_AID_OF_THE_MYREQUE),
-        OKTHANKSAID(1,"Ok, thanks.",IN_AID_OF_THE_MYREQUE),
+        OKTHANKSAID(1, "Ok, thanks.", IN_AID_OF_THE_MYREQUE),
         //endregion
 
         //region Priest in peri
-        TALKABOUT(1,"Talk about Priest in Peril.",PRIEST_IN_PERIL),
-        GREETRONALD(1,"Greet the king.",PRIEST_IN_PERIL),
-        KNOCK_DOOR(1,"Knock at the door.",PRIEST_IN_PERIL),
-        CHECKDERZEL(1,"Roald sent me to check on Drezel.",PRIEST_IN_PERIL),
-        YESPREIST(1,"Yes.",PRIEST_IN_PERIL);
+        TALKABOUT(1, "Talk about Priest in Peril.", PRIEST_IN_PERIL),
+        GREETRONALD(1, "Greet the king.", PRIEST_IN_PERIL),
+        KNOCK_DOOR(1, "Knock at the door.", PRIEST_IN_PERIL),
+        CHECKDERZEL(1, "Roald sent me to check on Drezel.", PRIEST_IN_PERIL),
+        YESPREIST(1, "Yes.", PRIEST_IN_PERIL);
         //endregion
 
 
@@ -910,6 +914,9 @@ public class Dialogs {
     }
 
     public static enum QuestInstruction {
+
+        //Ernest the Chicket
+        ERNEST_THE_CHICKEN_INSTRUCTION("Solve basement puzzle manually \r\n Bring Weapons to kill a level 15 skelly", ERNEST_THE_CHICKEN),
 
         ////Christmas Reunion
         CHRISTMAS_REUNION_INSTRUCTION("Have Christmas Village Teleport on Action Bar, Talk to Hunter NPC at the enterance of Citharede manual if you haven't done with before", CHRISTMAS_REUNION),
