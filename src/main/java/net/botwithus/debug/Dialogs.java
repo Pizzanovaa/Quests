@@ -295,7 +295,7 @@ public class Dialogs {
         Ive_been_sent_to_help_make_an_ointment_of_imbalance_for_Kaqemeex(1, "I've been sent to help make an ointment of imbalance for Kaqemeex.", DRUIDIC_RITUAL),
         Ok_Ill_do_that_then(1, "Ok, I'll do that then.", DRUIDIC_RITUAL),
         //endregion
-        //region Let Them Eat Pie (UNFINISHED)
+        //region Let Them Eat Pie
         Id_best_get_on_with_it_then(1, "I'd best get on with it then.", LET_THEM_EAT_PIE),
         SQUISHY_CRUST(1, "Squishy Crust Belly Filler", LET_THEM_EAT_PIE),
         I_think_Ive_had_enough_thanks(1, "I think I've had enough, thanks.", LET_THEM_EAT_PIE),
@@ -366,7 +366,11 @@ public class Dialogs {
         ABOUT_MYTHS_OF_THE_WHITE_LANDS(2, "About Myths of the White Lands...", MYTHS_OF_THE_WHITE_LANDS),
         CARRY_ON_WITH_THE_IMPS_PRANK(2, "Carry on with the imps' prank.", MYTHS_OF_THE_WHITE_LANDS),
         //endregion
-        //region Ernest the chicken (UNTESTED)
+        //region Ernest the chicken
+        YES_ERNEST(1, "Yes.", ERNEST_THE_CHICKEN),
+        LOOKING_FOR_ERNEST(1, "I'm looking for a guy called Ernest.", ERNEST_THE_CHICKEN),
+        ANYOPTION(2, "Change him back this instant!", ERNEST_THE_CHICKEN),
+
 
         //endregion
         //region Swept Away (UNFINISHED)
@@ -910,6 +914,9 @@ public class Dialogs {
     }
 
     public static enum QuestInstruction {
+
+        //Ernest the Chicket
+        ERNEST_THE_CHICKEN_INSTRUCTION("Solve basement puzzle manually \r\n Bring Weapons to kill a level 15 skelly", ERNEST_THE_CHICKEN),
 
         ////Christmas Reunion
         CHRISTMAS_REUNION_INSTRUCTION("Have Christmas Village Teleport on Action Bar, Talk to Hunter NPC at the enterance of Citharede manual if you haven't done with before", CHRISTMAS_REUNION),
