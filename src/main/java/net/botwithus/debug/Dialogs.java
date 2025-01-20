@@ -986,6 +986,8 @@ public class Dialogs {
         //region Buyers and Cellars
         WHAT_ARE_YOU_DOING_DOWN_HERE(1,"What are you doing down here?",BUYERS_AND_SELLERS),
         AND_WHAT_IS_IT_YOU_NEED_DONE(1,"And what is it you need done?",BUYERS_AND_SELLERS),
+        WHAT_ARE_YOU_DOING_DOWN_HERE_2(1,"What are you doing down here? (Skip speech.)",BUYERS_AND_SELLERS),
+        AND_WHAT_IS_IT_YOU_NEED_DONE_2(1,"And what is it you need done? (Skip speech)",BUYERS_AND_SELLERS),
         NO_I_THINK_I_VE_GOT_THE_HANG_OF_THIS(1,"No, I think I've got the hang of this.",BUYERS_AND_SELLERS),
         YES_BUYERS_AND_CELLARS(1,"Yes.",BUYERS_AND_SELLERS),
         I_M_ALWAYS_WILLING_TO_LEARN(1,"I'm always willing to learn.",BUYERS_AND_SELLERS),

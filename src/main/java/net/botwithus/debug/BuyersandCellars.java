@@ -40,8 +40,8 @@ import static net.botwithus.rs3.game.minimenu.actions.SelectableAction.SELECT_OB
 import static net.botwithus.debug.Dialogs.isDialogOpen;
 import static net.botwithus.debug.Dialogs.println;
 import static net.botwithus.rs3.script.Execution.delay;
-import net.botwithus.api.game.hud.inventories.Bank;
 
+import net.botwithus.api.game.hud.inventories.Bank;
 
 
 import net.botwithus.api.game.hud.inventories.Backpack;
@@ -70,7 +70,6 @@ public class BuyersandCellars {
         player = Client.getLocalPlayer().getServerCoordinate();
 
 
-
         if (isDialogOpen()) {
             return;
         }
@@ -88,135 +87,111 @@ public class BuyersandCellars {
         } else {
             switch (QuestVarp) {
                 case 5:
-                if(VarManager.getVarbitValue(9023) == 5) {
-                    talktoGuildmasterDarrenLightfinger();
-                }
-                else if(VarManager.getVarbitValue(9023) == 7) 
-                    {
-                        if(!chiefthiefrobinarea.contains(player)) {
+                    if (VarManager.getVarbitValue(9023) == 5) {
+                        talktoGuildmasterDarrenLightfinger();
+                    } else if (VarManager.getVarbitValue(9023) == 7) {
+                        if (!chiefthiefrobinarea.contains(player)) {
                             DebugScript.moveTo(chiefthiefrobin);
-                        }
-                        else {
+                        } else {
                             talktochiefthiefrobin();
                         }
-                    }
-                else if(VarManager.getVarbitValue(9023) == 10) {
-                    if(!fatherurhneyarea.contains(player)) {
-                        DebugScript.moveTo(fatherurhney);
-                    }
-                    else {
+                    } else if (VarManager.getVarbitValue(9023) == 10) {
+                        if (!fatherurhneyarea.contains(player)) {
+                            DebugScript.moveTo(fatherurhney);
+                        } else {
+                            talktofatherurhney();
+                        }
+                    } else if (VarManager.getVarbitValue(9023) == 15 && firestarted == false) {
+                        Movement.walkTo(3209, 3152, true);
+                        delay(RandomGenerator.nextInt(600, 800));
+                        if (Backpack.contains("Logs") && !Client.getLocalPlayer().isMoving()) {
+                            Backpack.interact("Logs", "Light");
+                            delay(RandomGenerator.nextInt(1800, 2400));
+                            firestarted = true;
+                        }
+                    } else if (VarManager.getVarbitValue(9023) == 15 && firestarted == true) {
                         talktofatherurhney();
-                    }
-                }
-                else if(VarManager.getVarbitValue(9023) == 15 && firestarted == false) {
-                    Movement.walkTo(3209,3152,true);
-                    delay(RandomGenerator.nextInt(600, 800));
-                    if(Backpack.contains("Logs") && !Client.getLocalPlayer().isMoving()) {
-                        Backpack.interact("Logs","Light");
-                        delay(RandomGenerator.nextInt(1800, 2400));
-                        firestarted = true;
-                    }
-                }
-                else if(VarManager.getVarbitValue(9023) == 15 && firestarted == true) 
-                {
-                    talktofatherurhney();
 
-                    Npc fatherurhney = NpcQuery.newQuery().name("Father Urhney").results().nearest();
-                    if(fatherurhney != null) {
-                        fatherurhney.interact("Pickpocket");
-                        delay(RandomGenerator.nextInt(600, 800));
+                        Npc fatherurhney = NpcQuery.newQuery().name("Father Urhney").results().nearest();
+                        if (fatherurhney != null) {
+                            fatherurhney.interact("Pickpocket");
+                            delay(RandomGenerator.nextInt(600, 800));
+                        }
+                    } else if (VarManager.getVarbitValue(9023) == 22) {
+                        println("Opening display case");
+                        SceneObject displaycase = SceneObjectQuery.newQuery().id(51651).option("Open").results().nearest();
+                        if (displaycase != null) {
+                            displaycase.interact("Open");
+                            delay(RandomGenerator.nextInt(600, 800));
+                        }
+                    } else if (VarManager.getVarbitValue(9023) == 25) {
+
+                        enterthiefguild();
                     }
-                }
-                else if(VarManager.getVarbitValue(9023) == 22)
-                {
-                    println("Opening display case");
-                    SceneObject displaycase = SceneObjectQuery.newQuery().id(51651).option("Open").results().nearest();
-                    if(displaycase != null) {
-                        displaycase.interact("Open");
-                        delay(RandomGenerator.nextInt(600, 800));
-                    }
-                }
-                else if(VarManager.getVarbitValue(9023) == 25)
-                {
-                       
-                    enterthiefguild();
-                }
-                
-                break;
+
+                    break;
                 case 10:
-                break;
+                    break;
             }
         }
     }
 
-    public static void initaltheifguild()
-    {
-        if(!trapdoorguildmasterarea.contains(player) && areareachedinitial == false) {
-            println("Entering thief guild and using Item"); 
+    public static void initaltheifguild() {
+        if (!trapdoorguildmasterarea.contains(player) && areareachedinitial == false) {
+            println("Entering thief guild and using Item");
             DebugScript.moveTo(trapdoorguildmaster);
             areareachedinitial = true;
-            
-        }
-        else if(areareachedinitial == true) 
-        {
-            println("Entering thief using trapdoor"); 
+
+        } else if (areareachedinitial == true) {
+            println("Entering thief using trapdoor");
             SceneObject trapdoor = SceneObjectQuery.newQuery().name("Trapdoor").option("Enter").results().nearest();
-            if(trapdoor != null) 
-            {
+            if (trapdoor != null) {
                 areareachedinitial = true;
                 trapdoor.interact("Enter");
                 delay(RandomGenerator.nextInt(600, 800));
 
-            }
-            else
-            {
+            } else {
                 talktoGuildmasterDarrenLightfinger();
             }
         }
     }
 
-    public static void enterthiefguild()
-    {
+    public static void enterthiefguild() {
 
-        if(!trapdoorguildmasterarea.contains(player) && areareached == false) {
-            println("Entering thief guild and using Item"); 
+        if (!trapdoorguildmasterarea.contains(player) && areareached == false) {
+            println("Entering thief guild and using Item");
             DebugScript.moveTo(trapdoorguildmaster);
             areareached = true;
-            
-        }
-        else if(areareached == true) 
-        {
-            println("Entering thief using trapdoor"); 
+
+        } else if (areareached == true) {
+            println("Entering thief using trapdoor");
             SceneObject trapdoor = SceneObjectQuery.newQuery().name("Trapdoor").option("Enter").results().nearest();
-            if(trapdoor != null) 
-            {
+            if (trapdoor != null) {
                 areareached = true;
                 trapdoor.interact("Enter");
                 delay(RandomGenerator.nextInt(600, 800));
 
-            }
-            else {
-                println("Using chalcedony"); 
-                    Item chalcedony = InventoryItemQuery.newQuery(93).ids(18648).results().first();
-                    Npc darrenlightfinger = NpcQuery.newQuery().name("Darren Lightfinger").results().first();
-                    if(chalcedony != null) {
-                        boolean chalceused = MiniMenu.interact(SelectableAction.SELECTABLE_COMPONENT.getType(), 0,chalcedony.getSlot(), 96534533);
+            } else {
+                println("Using chalcedony");
+                Item chalcedony = InventoryItemQuery.newQuery(93).ids(18648).results().first();
+                Npc darrenlightfinger = NpcQuery.newQuery().name("Darren Lightfinger").results().first();
+                if (chalcedony != null) {
+                    boolean chalceused = MiniMenu.interact(SelectableAction.SELECTABLE_COMPONENT.getType(), 0, chalcedony.getSlot(), 96534533);
+                    delay(RandomGenerator.nextInt(600, 800));
+                    if (chalceused == true) {
+                        MiniMenu.interact(SelectableAction.SELECT_NPC.getType(), darrenlightfinger.getId(), 0, 0);
                         delay(RandomGenerator.nextInt(600, 800));
-                        if(chalceused == true) {
-                            MiniMenu.interact(SelectableAction.SELECT_NPC.getType(), darrenlightfinger.getId(), 0, 0);
-                            delay(RandomGenerator.nextInt(600, 800));
-                            
-                        }
+
                     }
-                    
                 }
+
+            }
         }
-        
+
     }
 
 
-    public static void talktochiefthiefrobin()
-    {
+    public static void talktochiefthiefrobin() {
         Npc dimintheis = NpcQuery.newQuery().name("Chief Thief Robin").results().first();
         if (dimintheis != null) {
             dimintheis.interact(NPCAction.NPC1);
@@ -224,8 +199,7 @@ public class BuyersandCellars {
         }
     }
 
-    public static void talktofatherurhney()
-    {
+    public static void talktofatherurhney() {
         Npc dimintheis = NpcQuery.newQuery().name("Father Urhney").results().first();
         if (dimintheis != null) {
             dimintheis.interact(NPCAction.NPC1);
@@ -233,8 +207,7 @@ public class BuyersandCellars {
         }
     }
 
-    public static void talktoGuildmasterDarrenLightfinger()
-    {
+    public static void talktoGuildmasterDarrenLightfinger() {
         Npc dimintheis = NpcQuery.newQuery().name("Darren Lightfinger").results().first();
         if (dimintheis != null) {
             dimintheis.interact(NPCAction.NPC1);
