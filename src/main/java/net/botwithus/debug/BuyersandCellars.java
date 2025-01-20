@@ -83,7 +83,7 @@ public class BuyersandCellars {
         if (QuestVarp == 0) {
             ScriptConsole.println("Starting quest... Buyers and Cellars");
 
-            enterthiefguild();
+            initaltheifguild();
 
         } else {
             switch (QuestVarp) {
