@@ -1095,7 +1095,10 @@ public class Dialogs {
         THE_DARKNESS_OF_HALLOWVALE_INSTRUCTION("Have Items in inventory", THE_DARKNESS_OF_HALLOWVALE),
 
         //Legacy of Seergaze
-        LEGACY_OF_SEERGAZE_INSTRUCTION("Have Items in inventory. Burgh de Rott is required manual intervention. Maze required manual intervention", LEGACY_OF_SEERGAZE);
+        LEGACY_OF_SEERGAZE_INSTRUCTION("Have Items in inventory. Burgh de Rott is required manual intervention. Maze required manual intervention", LEGACY_OF_SEERGAZE),
+
+        //Temple of Ikov
+        TEMPLE_OF_IKOV_INSTRUCTION("Have no items in equipment slot expect bow. Lit candle in inventory and need to equip Lucient pendant manaually as soon you recieved it - Siding with Lucien", TEMPLE_OF_IKOV);
 
         private final String text;
         private final DebugScript.Quest quest;
